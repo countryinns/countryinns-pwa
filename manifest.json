@@ -1,7 +1,7 @@
 {
   "name": "Country Inns New Forest",
   "short_name": "Country Inns",
-  "start_url": "/",
+  "start_url": "https://sites.google.com/view/countryinnsnewforest/home",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4CAF50",
