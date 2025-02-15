@@ -1,0 +1,10 @@
+{
+  "name": "Country Inns New Forest",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "short_name": "Country Inns",
+  "description": "Country Inns Pub Family App",
+  "categories": [
+    "food"
+  ]
+}
