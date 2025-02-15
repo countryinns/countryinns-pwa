@@ -1,18 +1,16 @@
-// This is the "Offline copy of pages" service worker
-
-const CACHE = "pwabuilder-offline";
-
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
-
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
+self.addEventListener("install", (event) => {
+    console.log("Service Worker installing.");
+    event.waitUntil(
+        caches.open("pwa-cache").then((cache) => {
+            return cache.addAll(["/"]);
+        })
+    );
 });
 
-workbox.routing.registerRoute(
-  new RegExp('/*'),
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: CACHE
-  })
-);
+self.addEventListener("fetch", (event) => {
+    event.respondWith(
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+        })
+    );
+});
