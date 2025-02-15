@@ -1,11 +1,14 @@
 {
   "name": "Country Inns New Forest",
   "short_name": "Country Inns",
-  "start_url": "https://sites.google.com/view/countryinnsnewforest/home",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "theme_color": "#000000",
   "description": "Stay updated with events, offers, and news from our 7 pubs in the New Forest.",
+  "categories": [
+    "food"
+  ],
   "icons": [
     {
       "src": "icon-192x192.png",
