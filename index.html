@@ -8,5 +8,12 @@
 </head>
 <body>
     <p>If you are not redirected, <a href="https://sites.google.com/view/countryinnsnewforest/home">click here</a>.</p>
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/pwabuilder-sw.js')
+      .then((reg) => console.log('Service Worker Registered:', reg))
+      .catch((err) => console.log('Service Worker Registration Failed:', err));
+  }
+</script>
 </body>
 </html>
