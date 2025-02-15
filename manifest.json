@@ -1,10 +1,21 @@
 {
   "name": "Country Inns New Forest",
-  "theme_color": "#000000",
-  "background_color": "#000000",
   "short_name": "Country Inns",
-  "description": "Country Inns Pub Family App",
-  "categories": [
-    "food"
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "description": "Stay updated with events, offers, and news from our 7 pubs in the New Forest.",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }
