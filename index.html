@@ -3,17 +3,20 @@
 <head>
     <link rel="manifest" href="manifest.json">
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=https://sites.google.com/view/countryinnsnewforest/home">
-    <title>Redirecting...</title>
+    <meta name="theme-color" content="#000000">
+    <title>Country Inns New Forest</title>
+    <!-- You can add icons here -->
 </head>
 <body>
+    <h1>Welcome to Country Inns New Forest</h1>
+    <p>Stay updated with our events, offers, and more. This is the PWA for our 7 pubs in the New Forest.</p>
     <p>If you are not redirected, <a href="https://sites.google.com/view/countryinnsnewforest/home">click here</a>.</p>
     <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/pwabuilder-sw.js')
-      .then((reg) => console.log('Service Worker Registered:', reg))
-      .catch((err) => console.log('Service Worker Registration Failed:', err));
-  }
-</script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/pwabuilder-sw.js')
+          .then((reg) => console.log('Service Worker Registered:', reg))
+          .catch((err) => console.log('Service Worker Registration Failed:', err));
+      }
+    </script>
 </body>
 </html>
