@@ -1,0 +1,6 @@
+﻿Keep this file and signing.keystore in a safe place. You'll need these files if you want to upload future versions of your PWA to the Oculus Store.
+
+Key store file: signing.keystore
+Keystore password: 8935acc147c6439fabb0e097dfef9d17
+Key alias: oculuspwa
+Key password: 8935acc147c6439fabb0e097dfef9d17
