@@ -2,7 +2,7 @@
   "id": "countryinns-pwa",
   "name": "Country Inns New Forest",
   "short_name": "Country Inns",
-  "start_url":"https://countryinns.github.io/countryinns-pwa/",
+  "start_url":"/countryinns-pwa/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
