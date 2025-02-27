@@ -2,34 +2,34 @@
   "id": "countryinns-pwa",
   "name": "Country Inns New Forest",
   "short_name": "Country Inns",
-  "start_url": "https://sites.google.com/view/countryinns?nocache=true",
+  "start_url": "https://sites.google.com/view/countryinns/",
+  "scope": "https://sites.google.com/view/countryinns/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
   "description": "Stay updated with events, offers, and news from our 7 pubs in the New Forest.",
   "categories": ["food"],
   "orientation": "portrait",
-  "launch_handler": {},
   "icons": [
     {
-      "src": "icon-192x192.png",
+      "src": "https://YOUR_GITHUB_REPO_URL/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512x512.png",
+      "src": "https://YOUR_GITHUB_REPO_URL/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "screenshots": [
     {
-      "src": "screenshot1.png",
+      "src": "https://YOUR_GITHUB_REPO_URL/screenshot1.png",
       "sizes": "1080x1920",
       "type": "image/png"
     },
     {
-      "src": "screenshot2.png",
+      "src": "https://YOUR_GITHUB_REPO_URL/screenshot2.png",
       "sizes": "1080x1920",
       "type": "image/png"
     }
