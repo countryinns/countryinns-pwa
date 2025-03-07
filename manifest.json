@@ -2,9 +2,9 @@
   "id": "countryinns-pwa",
   "name": "Country Inns New Forest",
   "short_name": "Country Inns",
-  "start_url": "https://countryinns.github.io/countryinns-pwa/",
-"scope": "https://countryinns.github.io/countryinns-pwa/",
-  "display": "standalone",
+  "start_url": "/index.html",
+"scope": "/",
+"display": "standalone"
   "background_color": "#ffffff",
   "theme_color": "#000000",
   "description": "Stay updated with events, offers, and news from our 7 pubs in the New Forest.",
