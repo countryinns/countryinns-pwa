@@ -2,8 +2,8 @@
   "id": "countryinns-pwa",
   "name": "Country Inns New Forest",
   "short_name": "Country Inns",
-  "start_url": "/index.html",
-  "scope": "/",
+  "start_url": "/countryinns-pwa/index.html",
+  "scope": "/countryinns-pwa/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
@@ -12,24 +12,24 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://github.com/countryinns/countryinns-pwa/raw/main/icon-192x192.png",
+      "src": "/countryinns-pwa/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://github.com/countryinns/countryinns-pwa/raw/main/icon-512x512.png",
+      "src": "/countryinns-pwa/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "screenshots": [
     {
-      "src": "https://github.com/countryinns/countryinns-pwa/raw/main/screenshot1.png",
+      "src": "/countryinns-pwa/screenshot1.png",
       "sizes": "1080x1920",
       "type": "image/png"
     },
     {
-      "src": "https://github.com/countryinns/countryinns-pwa/raw/main/screenshot2.png",
+      "src": "/countryinns-pwa/screenshot2.png",
       "sizes": "1080x1920",
       "type": "image/png"
     }
