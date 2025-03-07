@@ -2,11 +2,11 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open('countryinns-cache').then((cache) => {
       return cache.addAll([
-        '/',
-        '/index.html',
-        '/manifest.json',
-        '/icon-192x192.png',
-        '/icon-512x512.png'
+        '/countryinns-pwa/',
+        '/countryinns-pwa/index.html',
+        '/countryinns-pwa/manifest.json',
+        '/countryinns-pwa/icon-192x192.png',
+        '/countryinns-pwa/icon-512x512.png'
       ]);
     })
   );
