@@ -1,6 +1,6 @@
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open('countryinns-cache-v1').then((cache) => {
+    caches.open('countryinns-cache').then((cache) => {
       return cache.addAll([
         '/',
         '/index.html',
