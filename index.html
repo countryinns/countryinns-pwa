@@ -4,24 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Country Inns App</title>
-    <link rel="icon" href="data:,"> <!-- Prevents favicon 404 error -->
 </head>
 <body>
     <h1>Welcome to Country Inns App</h1>
     <p>Stay updated with our events, offers, and more. This is the App for our 7 pubs in the New Forest.</p>
-    <p>If you are not redirected, <a id="redirect-link" href="app.html">click here</a>.</p>
 
     <script>
-        // Ensure the redirect works
-        document.getElementById('redirect-link').addEventListener('click', function(event) {
-            event.preventDefault();
-            window.location.href = 'app.html';
-        });
-
-        // Automatic redirect after 3 seconds
+        // Automatically redirect after 2 seconds
         setTimeout(function() {
-            window.location.href = 'app.html';
-        }, 3000);
+            window.location.href = "https://countryinns.github.io/countryinns-pwa/";
+        }, 2000);
     </script>
+
+    <p>If you are not redirected, <a href="https://countryinns.github.io/countryinns-pwa/">click here</a>.</p>
 </body>
 </html>
