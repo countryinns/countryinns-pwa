@@ -14,8 +14,12 @@
     <script>
   if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/countryinns-pwa/service-worker.js')
-    .then((reg) => console.log('Service Worker registered:', reg))
-    .catch((err) => console.error('Service Worker registration failed:', err));
+    .then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch((error) => {
+      console.error('Service Worker registration failed:', error);
+    });
 }
 </script>
 </body>
