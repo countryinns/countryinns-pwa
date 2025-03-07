@@ -2,7 +2,7 @@
   "id": "countryinns-pwa",
   "name": "Country Inns New Forest",
   "short_name": "Country Inns",
-  "start_url": "/countryinns-pwa/index.html",
+  "start_url": "/countryinns-pwa/",
   "scope": "/countryinns-pwa/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -12,24 +12,24 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/countryinns-pwa/icon-192x192.png",
+      "src": "icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/countryinns-pwa/icon-512x512.png",
+      "src": "icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "screenshots": [
     {
-      "src": "/countryinns-pwa/screenshot1.png",
+      "src": "screenshot1.png",
       "sizes": "1080x1920",
       "type": "image/png"
     },
     {
-      "src": "/countryinns-pwa/screenshot2.png",
+      "src": "screenshot2.png",
       "sizes": "1080x1920",
       "type": "image/png"
     }
