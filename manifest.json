@@ -4,7 +4,7 @@
   "short_name": "Country Inns",
   "start_url": "/index.html",
 "scope": "/",
-"display": "standalone"
+"display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
   "description": "Stay updated with events, offers, and news from our 7 pubs in the New Forest.",
