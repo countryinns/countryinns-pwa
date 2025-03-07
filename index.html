@@ -4,34 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Country Inns App</title>
-    <link rel="manifest" href="/countryinns-pwa/manifest.json">
-    <link rel="icon" href="/countryinns-pwa/icon-192x192.png" type="image/png">
-    <link rel="icon" href="data:,">
+    <link rel="icon" href="data:,"> <!-- Prevents favicon 404 error -->
 </head>
 <body>
     <h1>Welcome to Country Inns App</h1>
     <p>Stay updated with our events, offers, and more. This is the App for our 7 pubs in the New Forest.</p>
-    
-    <p>If you are not redirected, <a href="https://countryinns.github.io/countryinns-pwa/index.html" id="redirectLink">click here</a>.</p>
+    <p>If you are not redirected, <a id="redirect-link" href="app.html">click here</a>.</p>
 
     <script>
-        // Auto-redirect after 3 seconds (adjust if needed)
-        setTimeout(function() {
-            window.location.href = "https://countryinns.github.io/countryinns-pwa/index.html";
-        }, 3000);
-
-        // Ensure the "click here" link works
-        document.getElementById('redirectLink').addEventListener('click', function(event) {
+        // Ensure the redirect works
+        document.getElementById('redirect-link').addEventListener('click', function(event) {
             event.preventDefault();
-            window.location.href = "https://countryinns.github.io/countryinns-pwa/index.html";
+            window.location.href = 'app.html';
         });
 
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/countryinns-pwa/service-worker.js')
-            .then(reg => console.log('Service Worker registered!', reg))
-            .catch(err => console.error('Service Worker registration failed:', err));
-        }
+        // Automatic redirect after 3 seconds
+        setTimeout(function() {
+            window.location.href = 'app.html';
+        }, 3000);
     </script>
 </body>
 </html>
