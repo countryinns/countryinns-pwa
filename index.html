@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- redeploy -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,11 +19,6 @@
     
     <!-- Set theme color for the address bar on mobile -->
     <meta name="theme-color" content="#000000">
-    
-    <!-- Redirect users to Google Sites version -->
-    <script>
-      window.location.replace("https://sites.google.com/view/countryinnsnewforest/home");
-    </script>
 
     <!-- Dark Mode Styles -->
     <style>
@@ -40,9 +34,8 @@
             background-color: #121212;
             color: #ffffff;
         }
-        #dark-mode-toggle {
+        #dark-mode-toggle, #install-button {
             position: fixed;
-            bottom: 20px;
             right: 20px;
             background: #007bff;
             color: white;
@@ -52,30 +45,17 @@
             font-size: 16px;
             font-weight: bold;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
         }
-        /* Floating Install Button */
-        #install-button {
-            position: fixed;
-            bottom: 70px;
-            right: 20px;
-            background: #28a745;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            display: none; /* Hidden by default */
-        }
+        #dark-mode-toggle { bottom: 20px; }
+        #install-button { bottom: 70px; background: #28a745; display: none; }
     </style>
 </head>
 <body>
     <h1>Welcome to Country Inns App</h1>
     <p>Stay updated with our events, offers, and more. This is the App for our 7 pubs in the New Forest.</p>
     
-    <!-- If you prefer to embed Google Sites instead of redirecting, uncomment below -->
-    <!-- <iframe src="https://sites.google.com/view/countryinnsnewforest/home" width="100%" height="100%" style="border:none;"></iframe> -->
+    <p><a href="https://sites.google.com/view/countryinnsnewforest/home">Go to Google Sites Version</a></p>
 
     <!-- Dark Mode Toggle Button -->
     <button id="dark-mode-toggle">🌙 Dark Mode</button>
@@ -100,7 +80,7 @@
         document.getElementById("install-button").addEventListener("click", () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
+                deferredPrompt.userChoice.then(() => {
                     deferredPrompt = null;
                     document.getElementById("install-button").style.display = "none";
                 });
