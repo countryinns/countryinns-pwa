@@ -50,20 +50,26 @@
     <button id="install-button" style="display:none;">📲 Install App</button>
 
     <script>
-        // Dark Mode Toggle
-        document.getElementById("dark-mode-toggle").addEventListener("click", function() {
-            document.body.classList.toggle("dark-mode");
-            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
-        });
+        // Dark Mode Toggle with Icon Change
+        const darkModeToggle = document.getElementById("dark-mode-toggle");
 
-        // Preserve Dark Mode
-        if (localStorage.getItem("darkMode") === "enabled") {
+        // Check if the user has a saved preference
+        if (localStorage.getItem("dark-mode") === "enabled") {
             document.body.classList.add("dark-mode");
+            darkModeToggle.textContent = "☀️ Light Mode";
         }
 
-        // Open Google Sites in a new tab
-        document.getElementById("open-site").addEventListener("click", function() {
-            window.open("https://sites.google.com/view/countryinnsnewforest/home", "_blank");
+        darkModeToggle.addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+
+            // Update button text & save preference
+            if (document.body.classList.contains("dark-mode")) {
+                darkModeToggle.textContent = "☀️ Light Mode";
+                localStorage.setItem("dark-mode", "enabled");
+            } else {
+                darkModeToggle.textContent = "🌙 Dark Mode";
+                localStorage.setItem("dark-mode", "disabled");
+            }
         });
 
         // Install Prompt
