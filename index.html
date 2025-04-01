@@ -34,7 +34,7 @@
             background-color: #121212;
             color: #ffffff;
         }
-        #dark-mode-toggle, #install-button, #google-sites-link {
+        #dark-mode-toggle, #install-button {
             position: fixed;
             right: 20px;
             background: #007bff;
@@ -52,23 +52,11 @@
         }
         #dark-mode-toggle { bottom: 20px; }
         #install-button { bottom: 70px; background: #28a745; display: none; }
-        #google-sites-link { bottom: 120px; background: #ff9800; }
-        iframe {
-            width: 100%;
-            height: 90vh;
-            border: none;
-            display: none; /* Initially hidden */
-        }
     </style>
 </head>
 <body>
     <h1>Welcome to Country Inns App</h1>
     <p>Stay updated with our events, offers, and more. This is the App for our 7 pubs in the New Forest.</p>
-
-    <!-- Google Sites Embed (hidden until installed) -->
-    <iframe id="google-sites-frame" src="https://sites.google.com/view/countryinnsnewforest/home"></iframe>
-
-    <a id="google-sites-link" href="https://sites.google.com/view/countryinnsnewforest/home" target="_blank">🌐 Go to Google Sites Version</a>
 
     <!-- Dark Mode Toggle Button -->
     <button id="dark-mode-toggle">🌙 Dark Mode</button>
@@ -109,8 +97,7 @@
                     deferredPrompt = null;
                     document.getElementById("install-button").style.display = "none";
                     localStorage.setItem("app-installed", "true");
-                    document.getElementById("google-sites-link").style.display = "none"; // Hide after install
-                    document.getElementById("google-sites-frame").style.display = "block"; // Show iframe
+                    window.location.replace("https://sites.google.com/view/countryinnsnewforest/home");
                 });
             }
         });
@@ -118,14 +105,12 @@
         window.addEventListener("appinstalled", () => {
             document.getElementById("install-button").style.display = "none";
             localStorage.setItem("app-installed", "true");
-            document.getElementById("google-sites-link").style.display = "none"; // Hide Google Sites link
-            document.getElementById("google-sites-frame").style.display = "block"; // Show iframe
+            window.location.replace("https://sites.google.com/view/countryinnsnewforest/home");
         });
 
-        // Auto-load Google Sites if installed
+        // If app is installed, redirect immediately
         if (localStorage.getItem("app-installed") === "true") {
-            document.getElementById("google-sites-link").style.display = "none";
-            document.getElementById("google-sites-frame").style.display = "block";
+            window.location.replace("https://sites.google.com/view/countryinnsnewforest/home");
         }
     </script>
 </body>
