@@ -34,7 +34,7 @@
             background-color: #121212;
             color: #ffffff;
         }
-        #dark-mode-toggle, #install-button {
+        #dark-mode-toggle, #install-button, #google-sites-link {
             position: fixed;
             right: 20px;
             background: #007bff;
@@ -46,16 +46,20 @@
             font-weight: bold;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             border: none;
+            text-decoration: none;
+            display: block;
+            text-align: center;
         }
         #dark-mode-toggle { bottom: 20px; }
         #install-button { bottom: 70px; background: #28a745; display: none; }
+        #google-sites-link { bottom: 120px; background: #ff9800; }
     </style>
 </head>
 <body>
     <h1>Welcome to Country Inns App</h1>
     <p>Stay updated with our events, offers, and more. This is the App for our 7 pubs in the New Forest.</p>
     
-    <p><a href="https://sites.google.com/view/countryinnsnewforest/home">Go to Google Sites Version</a></p>
+    <a id="google-sites-link" href="https://sites.google.com/view/countryinnsnewforest/home" target="_blank">🌐 Go to Google Sites Version</a>
 
     <!-- Dark Mode Toggle Button -->
     <button id="dark-mode-toggle">🌙 Dark Mode</button>
@@ -64,9 +68,21 @@
     <button id="install-button">📲 Install App</button>
 
     <script>
-        // Dark Mode Toggle
+        // Dark Mode Toggle with Local Storage
+        function applyDarkMode() {
+            if (localStorage.getItem("dark-mode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+        }
+        applyDarkMode();
+        
         document.getElementById("dark-mode-toggle").addEventListener("click", function() {
             document.body.classList.toggle("dark-mode");
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("dark-mode", "enabled");
+            } else {
+                localStorage.setItem("dark-mode", "disabled");
+            }
         });
 
         // Install Prompt
@@ -83,13 +99,22 @@
                 deferredPrompt.userChoice.then(() => {
                     deferredPrompt = null;
                     document.getElementById("install-button").style.display = "none";
+                    localStorage.setItem("app-installed", "true");
+                    document.getElementById("google-sites-link").style.display = "none"; // Hide after install
                 });
             }
         });
 
         window.addEventListener("appinstalled", () => {
             document.getElementById("install-button").style.display = "none";
+            localStorage.setItem("app-installed", "true");
+            document.getElementById("google-sites-link").style.display = "none"; // Hide Google Sites link
         });
+
+        // Hide "Go to Google Sites" after install
+        if (localStorage.getItem("app-installed") === "true") {
+            document.getElementById("google-sites-link").style.display = "none";
+        }
     </script>
 </body>
 </html>
