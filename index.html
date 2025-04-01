@@ -72,6 +72,11 @@
             }
         });
 
+        // Open Google Sites
+        document.getElementById("open-site").addEventListener("click", function() {
+            window.location.href = "https://sites.google.com/view/countryinnsnewforest/home";
+        });
+
         // Install Prompt
         let deferredPrompt;
         window.addEventListener("beforeinstallprompt", (event) => {
