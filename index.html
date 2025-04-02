@@ -61,17 +61,24 @@
         <div class="spinner"></div>
     </div>
     
-    <h1>Welcome to the Country Inns App</h1>
+    <h1>Welcome to Country Inns</h1>
     <button id="dark-mode-toggle">🌙 Toggle Dark Mode</button>
     <button id="open-site">🌐 Open Web Version</button>
     <button id="install-button" style="display:none;">📲 Install App</button>
 
     <script>
+        const appURL = "https://sites.google.com/view/countryinnsnewforest";
+
+        // Skip landing page if the app is already installed
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            window.location.href = appURL;
+        }
+
         // Extend Loading Screen Duration (Fake Splash Screen)
         window.addEventListener("load", function() {
             setTimeout(() => {
                 document.getElementById("loading-screen").classList.add("fade-out");
-            }, 2000); // 2-second delay before fading out
+            }, 2000);
         });
 
         // Dark Mode Toggle
@@ -88,7 +95,7 @@
 
         // Open Web Version
         document.getElementById("open-site").addEventListener("click", function() {
-            window.location.href = "https://sites.google.com/view/countryinnsnewforest";
+            window.location.href = appURL;
         });
 
         // Install Prompt
@@ -98,7 +105,7 @@
             deferredPrompt = event;
             document.getElementById("install-button").style.display = "block";
         });
-        
+
         document.getElementById("install-button").addEventListener("click", () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
