@@ -67,12 +67,14 @@
     <button id="install-button" style="display:none;">📲 Install App</button>
 
     <script>
-        // Loading Screen Fade Out
+        // Extend Loading Screen Duration (Fake Splash Screen)
         window.addEventListener("load", function() {
-            document.getElementById("loading-screen").classList.add("fade-out");
+            setTimeout(() => {
+                document.getElementById("loading-screen").classList.add("fade-out");
+            }, 2000); // 2-second delay before fading out
         });
 
-        // Dark Mode Toggle with Icon Change
+        // Dark Mode Toggle
         const darkModeToggle = document.getElementById("dark-mode-toggle");
         if (localStorage.getItem("dark-mode") === "enabled") {
             document.body.classList.add("dark-mode");
@@ -86,7 +88,7 @@
 
         // Open Web Version
         document.getElementById("open-site").addEventListener("click", function() {
-            window.open("https://sites.google.com/view/countryinnsnewforest", "_blank");
+            window.location.href = "https://sites.google.com/view/countryinnsnewforest";
         });
 
         // Install Prompt
