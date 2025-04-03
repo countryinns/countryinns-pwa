@@ -15,44 +15,92 @@
     <meta name="theme-color" content="#000000">
 
     <style>
+        /* Root Variables for Consistency */
+        :root {
+            --primary-color: #007bff;
+            --text-color: #333;
+            --background-light: #ffffff;
+            --background-dark: #121212;
+            --button-bg: var(--primary-color);
+            --button-text: #fff;
+            --transition-speed: 0.3s;
+        }
+
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
             padding: 20px;
-            background-color: white;
-            color: black;
-            transition: opacity 0.5s ease;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
+
+        /* Dark Mode */
         .dark-mode {
-            background-color: black;
-            color: white;
+            background-color: var(--background-dark);
+            color: #fff;
         }
+
+        /* Loading Screen */
         .loading-screen {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: white;
+            background: var(--background-light);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+            transition: opacity var(--transition-speed);
+        }
+        .dark-mode .loading-screen {
+            background: var(--background-dark);
         }
         .loading-screen.fade-out {
             opacity: 0;
             pointer-events: none;
         }
+
+        /* Spinner */
         .spinner {
             width: 50px;
             height: 50px;
             border: 5px solid rgba(0,0,0,0.1);
-            border-top: 5px solid #007bff;
+            border-top: 5px solid var(--primary-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--button-text);
+            background-color: var(--button-bg);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+        }
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .dark-mode .button {
+            background-color: #2196F3;
+        }
+
+        /* Icons */
+        .icon {
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -62,14 +110,14 @@
     </div>
     
     <h1>Welcome to Country Inns</h1>
-    <button id="dark-mode-toggle">🌙 Toggle Dark Mode</button>
-    <button id="open-site">🌐 Open Web Version</button>
-    <button id="install-button" style="display:none;">📲 Install App</button>
+    <button id="dark-mode-toggle" class="button">🌙 Toggle Dark Mode</button>
+    <button id="open-site" class="button">🌐 Open Web Version</button>
+    <button id="install-button" class="button" style="display:none;">📲 Install App</button>
 
     <script>
         const appURL = "https://sites.google.com/view/countryinnsnewforest";
 
-        // Skip landing page if the app is already installed
+        // Redirect if App is Installed
         if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
             window.location.href = appURL;
         }
