@@ -1,1 +1,92 @@
+/* Reset */
+body, h1, p, a {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font and Base */
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #222;
+  background: #fefefe;
+  padding-bottom: 80px;
+}
+
+/* Header */
+.app-header {
+  background: #004225;
+  color: white;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.app-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header .logo {
+  height: 40px;
+}
+
+.app-header nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+}
+
+.app-header nav a:hover {
+  color: #ffd700;
+}
+
+/* Main Content */
+.content {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  background: #004225;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background: #006d3c;
+}
+
+/* Footer */
+.app-footer {
+  background: #eee;
+  color: #444;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
 
