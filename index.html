@@ -14,39 +14,66 @@
     <!-- Theme -->
     <meta name="theme-color" content="#000000">
 
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- App Styles -->
     <style>
-        /* Root Variables for Consistency */
+        /* Root Variables */
         :root {
-            --primary-color: #007bff;
-            --text-color: #333;
-            --background-light: #ffffff;
+            --primary-color: #d4af37; /* gold-like, fits "Country Inns" premium feel */
+            --secondary-color: #333;
+            --accent-color: #0056b3;
+            --background-light: #f9f9f9;
             --background-dark: #121212;
+            --text-light: #333;
+            --text-dark: #eee;
             --button-bg: var(--primary-color);
-            --button-text: #fff;
+            --button-hover: #c0982b;
             --transition-speed: 0.3s;
+            --border-radius: 12px;
         }
 
-        /* General Styles */
+        /* General Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', 'Arial', sans-serif;
             text-align: center;
-            padding: 20px;
+            min-height: 100vh;
+            padding: 30px 20px;
             background-color: var(--background-light);
-            color: var(--text-color);
+            color: var(--text-light);
             transition: background-color var(--transition-speed), color var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
         }
 
         /* Dark Mode */
         .dark-mode {
             background-color: var(--background-dark);
-            color: #fff;
+            color: var(--text-dark);
+        }
+        .dark-mode h1 {
+            color: var(--primary-color);
         }
 
         /* Loading Screen */
         .loading-screen {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            inset: 0;
             background: var(--background-light);
             display: flex;
             justify-content: center;
@@ -64,46 +91,65 @@
 
         /* Spinner */
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(0,0,0,0.1);
-            border-top: 5px solid var(--primary-color);
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(0,0,0,0.1);
+            border-top: 6px solid var(--primary-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Buttons */
         .button {
-            display: inline-block;
-            padding: 12px 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
             margin: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--button-text);
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
             background-color: var(--button-bg);
             border: none;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             cursor: pointer;
+            text-decoration: none;
             transition: background-color var(--transition-speed), transform var(--transition-speed);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
         }
         .dark-mode .button {
-            background-color: #2196F3;
+            background-color: var(--primary-color);
+            color: #121212;
         }
 
-        /* Icons */
-        .icon {
+        /* Icon inside Button */
+        .button .icon {
             margin-right: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .button {
+                width: 90%;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="loading-screen" id="loading-screen">
         <div class="spinner"></div>
