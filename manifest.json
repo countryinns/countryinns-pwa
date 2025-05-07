@@ -13,17 +13,17 @@
   "screenshots": [
     {
       "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot1.png",
-      "sizes": "540x720",
+      "sizes": "1080x1920",
       "type": "image/png"
     },
     {
       "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot2.png",
-      "sizes": "540x720",
+      "sizes": "1080x1920",
       "type": "image/png"
     },
     {
       "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot3.png",
-      "sizes": "540x720",
+      "sizes": "1080x1920",
       "type": "image/png"
     }
   ],
