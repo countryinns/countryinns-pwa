@@ -15,6 +15,16 @@
       "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot1.png",
       "sizes": "540x720",
       "type": "image/png"
+    },
+    {
+      "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot2.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    },
+    {
+      "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot3.png",
+      "sizes": "540x720",
+      "type": "image/png"
     }
   ],
   "icons": [
@@ -26,6 +36,12 @@
     {
       "src": "https://countryinns.github.io/countryinns-pwa/assets/icon-512x512.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://countryinns.github.io/countryinns-pwa/assets/icon-1024x1024.png",
+      "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any maskable"
     }
