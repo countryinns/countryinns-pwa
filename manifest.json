@@ -12,12 +12,12 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/countryinns-pwa/assets/icon-192x192.png",
+      "src": "assets/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/countryinns-pwa/assets/icon-512x512.png",
+      "src": "assets/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -25,17 +25,17 @@
   ],
   "screenshots": [
     {
-      "src": "/countryinns-pwa/assets/Screenshot1.png",
+      "src": "assets/Screenshot1.png",
       "sizes": "1080x1920",
       "type": "image/png"
     },
     {
-      "src": "/countryinns-pwa/assets/Screenshot2.png",
+      "src": "assets/Screenshot2.png",
       "sizes": "1080x1920",
       "type": "image/png"
     },
     {
-      "src": "/countryinns-pwa/assets/Screenshot3.png",
+      "src": "assets/Screenshot3.png",
       "sizes": "1080x1920",
       "type": "image/png"
     }
