@@ -1,49 +1,73 @@
 {
   "name": "Country Inns",
   "short_name": "Country Inns",
-  "start_url": "/",
+  "start_url": "/countryinns-pwa/",
+  "scope": "/countryinns-pwa/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#008080",
   "description": "Stay updated with events, menus, and promotions at our 7 Country Inns pubs.",
   "orientation": "portrait",
   "categories": ["food", "drink", "travel", "hospitality"],
-  "scope": "/",
   "app_id": "countryinns.pwa",
-  "screenshots": [
-    {
-      "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot1.png",
-      "sizes": "1080x1920",
-      "type": "image/png"
-    },
-    {
-      "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot2.png",
-      "sizes": "1080x1920",
-      "type": "image/png"
-    },
-    {
-      "src": "https://countryinns.github.io/countryinns-pwa/assets/screenshot3.png",
-      "sizes": "1080x1920",
-      "type": "image/png"
-    }
-  ],
   "icons": [
     {
-      "src": "https://countryinns.github.io/countryinns-pwa/assets/icon-192x192.png",
+      "src": "/countryinns-pwa/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/countryinns-pwa/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/countryinns-pwa/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/countryinns-pwa/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/countryinns-pwa/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/countryinns-pwa/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://countryinns.github.io/countryinns-pwa/assets/icon-512x512.png",
+      "src": "/countryinns-pwa/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/countryinns-pwa/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/countryinns-pwa/Screenshot1.png",
+      "sizes": "1080x1920",
+      "type": "image/png"
     },
     {
-      "src": "https://countryinns.github.io/countryinns-pwa/assets/icon-1024x1024.png",
-      "sizes": "1024x1024",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "/countryinns-pwa/Screenshot2.png",
+      "sizes": "1080x1920",
+      "type": "image/png"
+    },
+    {
+      "src": "/countryinns-pwa/Screenshot3.png",
+      "sizes": "1080x1920",
+      "type": "image/png"
     }
   ],
   "launch_handler": {
