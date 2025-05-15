@@ -254,8 +254,14 @@
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
             const query = encodeURIComponent(
-              "The Bold Forester Marchwood OR The Royal Oak Beaulieu Hilltop OR The Trusty Servant Inn Minstead OR The New Forest Inn Emery Down OR The Lamb Inn Nomansland OR The Woolpack Sopley OR The Fighting Cocks Godshill Fordingbridge"
-            );
+              "The Bold Forester" +
+  " OR The Royal Oak Beaulieu" +
+  " OR The Trusty Servant Inn Minstead" +
+  " OR The New Forest Inn Emery Down" +
+  " OR The Lamb Inn Nomansland" +
+  " OR The Fighting Cocks Godshill Fordingbridge" +
+  " OR The Woolpack Sopley"
+);
             const mapsUrl = `https://www.google.com/maps/search/${query}/@${lat},${lon},14z`;
             status.textContent = "Opening Google Maps...";
             window.open(mapsUrl, "_blank");
