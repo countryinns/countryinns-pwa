@@ -243,32 +243,59 @@
       }
     });
 
-    // 📍 Find Nearest Pub Feature
+    // Find Nearest Pub Feature
     document.getElementById("find-pub").addEventListener("click", function () {
       const status = document.getElementById("location-status");
       status.textContent = "Getting your location...";
 
+      const pubs = [
+        { name: "The Bold Forester, Marchwood", lat: 50.8685, lon: -1.4581 },
+        { name: "The Royal Oak, Beaulieu Hilltop", lat: 50.8183, lon: -1.4689 },
+        { name: "The Trusty Servant Inn, Minstead", lat: 50.8921, lon: -1.5963 },
+        { name: "The New Forest Inn, Emery Down", lat: 50.8751, lon: -1.5987 },
+        { name: "The Lamb Inn, Nomansland", lat: 50.9516, lon: -1.6439 },
+        { name: "The Fighting Cocks, Godshill Fordingbridge", lat: 50.9262, lon: -1.7490 },
+        { name: "The Woolpack, Sopley", lat: 50.7745, lon: -1.7502 },
+      ];
+
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const query = encodeURIComponent(
-              "The Bold Forester Marchwood" +
-  " OR The Royal Oak Beaulieu Hilltop" +
-  " OR The Trusty Servant Inn Minstead" +
-  " OR The New Forest Inn Emery Down" +
-  " OR The Lamb Inn Nomansland" +
-  " OR The Fighting Cocks Godshill Fordingbridge" +
-  " OR The Woolpack Sopley"
-);
-            const mapsUrl = `https://www.google.com/maps/search/${query}/@${lat},${lon},14z`;
-            status.textContent = "Opening Google Maps...";
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+
+            function getDistance(lat1, lon1, lat2, lon2) {
+              const toRad = x => (x * Math.PI) / 180;
+              const R = 6371;
+              const dLat = toRad(lat2 - lat1);
+              const dLon = toRad(lon2 - lon1);
+              const a =
+                Math.sin(dLat / 2) ** 2 +
+                Math.cos(toRad(lat1)) *
+                Math.cos(toRad(lat2)) *
+                Math.sin(dLon / 2) ** 2;
+              const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+              return R * c;
+            }
+
+            const nearestPub = pubs
+              .map(pub => ({
+                ...pub,
+                distance: getDistance(userLat, userLon, pub.lat, pub.lon)
+              }))
+              .sort((a, b) => a.distance - b.distance)[0];
+
+            const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(nearestPub.name)}&travelmode=driving`;
+
+            status.textContent = `Opening directions to ${nearestPub.name}...`;
             window.open(mapsUrl, "_blank");
-            setTimeout(() => { status.textContent = ""; }, 3000);
+
+            setTimeout(() => {
+              status.textContent = "";
+            }, 4000);
           },
           (error) => {
-            status.textContent = "Unable to get your location. Please allow location access.";
+            status.textContent = "Unable to get your location. Please allow location access in your browser settings.";
           }
         );
       } else {
