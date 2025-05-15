@@ -17,6 +17,7 @@
   <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- App Styles -->
   <style>
     :root {
       --primary-color: #d4af37;
@@ -90,14 +91,16 @@
     .spinner {
       width: 60px;
       height: 60px;
-      border: 6px solid rgba(0,0,0,0.1);
+      border: 6px solid rgba(0, 0, 0, 0.1);
       border-top: 6px solid var(--primary-color);
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .button {
@@ -115,7 +118,7 @@
       cursor: pointer;
       text-decoration: none;
       transition: background-color var(--transition-speed), transform var(--transition-speed);
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .button:hover {
@@ -135,16 +138,43 @@
     #location-status {
       margin-top: 10px;
       font-size: 0.95rem;
-      color: var(--accent-color);
+      font-style: italic;
+    }
+
+    .splash-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .splash-logo {
+      width: 160px;
+      height: auto;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     @media (max-width: 600px) {
       body {
         padding: 20px 10px;
       }
+
       h1 {
         font-size: 1.8rem;
       }
+
       .button {
         width: 90%;
         font-size: 1rem;
@@ -174,7 +204,7 @@
       window.location.href = appURL;
     }
 
-    window.addEventListener("load", function() {
+    window.addEventListener("load", function () {
       setTimeout(() => {
         document.getElementById("loading-screen").classList.add("fade-out");
       }, 2000);
@@ -186,13 +216,13 @@
       darkModeToggle.textContent = "☀️ Light Mode";
     }
 
-    darkModeToggle.addEventListener("click", function() {
+    darkModeToggle.addEventListener("click", function () {
       document.body.classList.toggle("dark-mode");
       darkModeToggle.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
       localStorage.setItem("dark-mode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
     });
 
-    document.getElementById("open-site").addEventListener("click", function() {
+    document.getElementById("open-site").addEventListener("click", function () {
       window.location.href = appURL;
     });
 
@@ -223,7 +253,9 @@
           (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            const query = encodeURIComponent("Country Inns pub");
+            const query = encodeURIComponent(
+              "The Bold Forester Marchwood OR The Royal Oak Beaulieu Hilltop OR The Trusty Servant Inn Minstead OR The New Forest Inn Emery Down OR The Lamb Inn Nomansland OR The Woolpack Sopley OR The Fighting Cocks Godshill Fordingbridge"
+            );
             const mapsUrl = `https://www.google.com/maps/search/${query}/@${lat},${lon},14z`;
             status.textContent = "Opening Google Maps...";
             window.open(mapsUrl, "_blank");
