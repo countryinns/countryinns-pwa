@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Country Inns Map (Leaflet)</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <title>Country Inns Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     html, body {
       margin: 0;
@@ -65,7 +65,7 @@
     <div id="map"></div>
   </div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     const pubs = [
       { name: "The Bold Forester", address: "Beaulieu Rd, Marchwood, Southampton SO40 4UQ", lat: 50.87494, lng: -1.46521 },
@@ -80,14 +80,15 @@
     const map = L.map('map').setView([50.8746, -1.5936], 11);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+      attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    const pubList = document.getElementById("pub-list");
+    const pubListDiv = document.getElementById("pub-list");
 
     pubs.forEach(pub => {
       const marker = L.marker([pub.lat, pub.lng]).addTo(map);
-      marker.bindPopup(`<strong>${pub.name}</strong><br>${pub.address}<br><a href="https://www.google.com/maps/dir/?destination=${pub.lat},${pub.lng}" target="_blank">🧭 Navigate</a>`);
+      const mapsLink = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(pub.address)}`;
+      marker.bindPopup(`<strong>${pub.name}</strong><br>${pub.address}<br><a href="${mapsLink}" target="_blank">🧭 Navigate</a>`);
 
       const listItem = document.createElement("div");
       listItem.className = "pub-item";
@@ -96,8 +97,7 @@
         map.setView([pub.lat, pub.lng], 14);
         marker.openPopup();
       });
-
-      pubList.appendChild(listItem);
+      pubListDiv.appendChild(listItem);
     });
   </script>
 </body>
