@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Country Inns Map (Leaflet)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+    }
+
+    #sidebar {
+      width: 300px;
+      overflow-y: auto;
+      padding: 15px;
+      background: #f9f9f9;
+      box-sizing: border-box;
+    }
+
+    #map {
+      flex: 1;
+    }
+
+    .pub-item {
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .pub-item:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      #sidebar {
+        width: 100%;
+        height: 40%;
+      }
+
+      #map {
+        height: 60%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="sidebar">
+      <h2>Find your nearest Country Inns Pub</h2>
+      <div id="pub-list"></div>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const pubs = [
+      { name: "The Bold Forester", address: "Beaulieu Rd, Marchwood, Southampton SO40 4UQ", lat: 50.87494, lng: -1.46521 },
+      { name: "The Royal Oak", address: "Hilltop, Beaulieu, Brockenhurst SO42 7YR", lat: 50.82664, lng: -1.43160 },
+      { name: "The Trusty Servant Inn", address: "Minstead, Lyndhurst SO43 7FY", lat: 50.89828, lng: -1.60107 },
+      { name: "The New Forest Inn", address: "Emery Down, Lyndhurst SO43 7DY", lat: 50.87432, lng: -1.59547 },
+      { name: "The Lamb Inn", address: "Forest Rd, Nomansland SP5 2BP", lat: 50.95469, lng: -1.64080 },
+      { name: "The Woolpack", address: "Ringwood Rd, Sopley BH23 7AX", lat: 50.77138, lng: -1.77875 },
+      { name: "The Fighting Cocks", address: "Godshill, Fordingbridge SP6 2LL", lat: 50.93376, lng: -1.75063 }
+    ];
+
+    const map = L.map('map').setView([50.8746, -1.5936], 11);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const pubList = document.getElementById("pub-list");
+
+    pubs.forEach(pub => {
+      const marker = L.marker([pub.lat, pub.lng]).addTo(map);
+      marker.bindPopup(`<strong>${pub.name}</strong><br>${pub.address}<br><a href="https://www.google.com/maps/dir/?destination=${pub.lat},${pub.lng}" target="_blank">🧭 Navigate</a>`);
+
+      const listItem = document.createElement("div");
+      listItem.className = "pub-item";
+      listItem.textContent = pub.name;
+      listItem.addEventListener("click", () => {
+        map.setView([pub.lat, pub.lng], 14);
+        marker.openPopup();
+      });
+
+      pubList.appendChild(listItem);
+    });
+  </script>
+</body>
+</html>
