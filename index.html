@@ -3,109 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Country Inns</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      transition: background 0.3s, color 0.3s;
-    }
-    header, main {
-      padding: 1em;
-      text-align: center;
-    }
-    #ticker {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #222;
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-      height: 2em;
-      line-height: 2em;
-      z-index: 999;
-      pointer-events: none; /* ✅ Allow interaction with app content underneath */
-    }
-    .scrolling-text {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll 15s linear infinite;
-      will-change: transform;
-    }
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-    #countdown-section {
-      text-align: center;
-      padding: 1em;
-      background: #ffe6cc;
-      margin-bottom: 1em;
-    }
-  </style>
+  <title>The Bold Forester</title>
+  <link rel="stylesheet" href="../../styles.css" />
 </head>
 <body>
+
+  <!-- 🔰 Main Content of the pub page -->
   <header>
-    <h1>Welcome to Country Inns</h1>
-    <p>Stay up to date with our latest pub events 🍻</p>
+    <h1>Welcome to The Bold Forester</h1>
+    <p>Your perfect local in Marchwood 🍻</p>
   </header>
 
-  <!-- Countdown Section -->
-  <section id="countdown-section">
-    <h2>Upcoming Event</h2>
-    <p>🔥 Father’s Day BBQ starts in: <span id="countdown"></span></p>
-  </section>
-
   <main>
-    <p>Explore menus, book tables, find offers and more using the navigation above.</p>
-    <!-- Your existing PWA links and content go here -->
+    <section>
+      <h2>What’s On</h2>
+      <p>Check below for announcements and event countdowns!</p>
+    </section>
   </main>
 
-  <!-- Scrolling Event Ticker -->
-  <div id="ticker">
-    <div class="scrolling-text">
-      🍻 Quiz Night this Friday &nbsp;&nbsp;|&nbsp;&nbsp; 🍕 Pizza Wednesdays &nbsp;&nbsp;|&nbsp;&nbsp; 🌞 Garden now open!
-    </div>
+  <!-- 📢 Scrolling Ticker Bar -->
+  <div id="pub-ticker">
+    <marquee behavior="scroll" direction="left">
+      🍻 Book NOW for Father’s Day 15th June| 🧀 All Things Cheese Week 16th June – 22nd June| 🍔Burger Week 17th July – 23rd July
+    </marquee>
   </div>
 
+  <!-- ⏳ Countdown Timer -->
+  <div id="countdown-timer-container">
+    <p id="countdown-message">🎉 Father’s Day Countdown: <span id="countdown"></span></p>
+  </div>
+
+  <!-- ⚙️ JavaScript for countdown + theme switcher -->
   <script>
-    // Countdown Timer
-    const eventDate = new Date("2025-06-16T20:00:00");
+    // 🕐 Countdown Timer – set event date/time
+    const eventDate = new Date("2025-06-15T12:00:00"); // Father’s Day at 12pm
+
     function updateCountdown() {
       const now = new Date();
-      const diff = eventDate - now;
+      const distance = eventDate - now;
 
-      if (diff <= 0) {
-        const section = document.getElementById("countdown-section");
-        if (section) section.style.display = "none";
-        return;
-      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hrs = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((distance % (1000 * 60)) / 1000);
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+      const output = distance > 0
+        ? `${days}d ${hrs}h ${mins}m ${secs}s`
+        : "🎉 It’s happening now!";
 
-      document.getElementById("countdown").textContent =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      document.getElementById("countdown").textContent = output;
     }
+
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Theme Switching
+    // 🌗 Theme switcher (time-based or system preference)
     function applyTheme() {
       const hour = new Date().getHours();
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (prefersDark || hour < 7 || hour >= 19) {
-        document.body.style.background = '#111';
-        document.body.style.color = 'white';
+      const autoDark = hour < 7 || hour >= 19;
+
+      if (prefersDark || autoDark) {
+        document.body.classList.add("dark-theme");
+        document.body.classList.remove("light-theme");
       } else {
-        document.body.style.background = 'white';
-        document.body.style.color = 'black';
+        document.body.classList.add("light-theme");
+        document.body.classList.remove("dark-theme");
       }
     }
+
     applyTheme();
   </script>
+
+  <!-- 🖌 CSS Styles -->
+  <style>
+    body.light-theme {
+      background: #ffffff;
+      color: #111;
+    }
+
+    body.dark-theme {
+      background: #121212;
+      color: #f5f5f5;
+    }
+
+    #pub-ticker {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #333;
+      color: #fff;
+      font-weight: bold;
+      padding: 6px;
+      z-index: 1000;
+    }
+
+    #pub-ticker marquee {
+      font-size: 1rem;
+    }
+
+    #countdown-timer-container {
+      text-align: center;
+      padding: 1rem;
+      margin-bottom: 40px; /* space for ticker */
+      font-size: 1.2rem;
+    }
+  </style>
+
 </body>
 </html>
