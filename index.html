@@ -25,6 +25,7 @@
       height: 2em;
       line-height: 2em;
       z-index: 999;
+      pointer-events: none; /* ✅ Allow interaction with app content underneath */
     }
     .scrolling-text {
       display: inline-block;
@@ -58,7 +59,7 @@
 
   <main>
     <p>Explore menus, book tables, find offers and more using the navigation above.</p>
-    <!-- Add your existing content here -->
+    <!-- Your existing PWA links and content go here -->
   </main>
 
   <!-- Scrolling Event Ticker -->
