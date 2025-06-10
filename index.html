@@ -46,46 +46,44 @@
       align-items: center;
       z-index: 9999;
       transition: opacity var(--transition-speed);
+      flex-direction: column;
     }
-
     .dark-mode .loading-screen {
       background: var(--background-dark);
     }
-
     .loading-screen.fade-out {
       opacity: 0;
       pointer-events: none;
     }
 
-    .splash-content {
+    .spinner-wrapper {
       position: relative;
       width: 100px;
       height: 100px;
     }
 
     .spinner-logo {
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .spinner-overlay {
+      width: 100px;
+      height: 100px;
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      border: 5px solid rgba(255, 255, 255, 0.2);
-      border-top: 5px solid var(--primary-color);
+    }
+
+    .spinner-ring {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      border: 4px solid #007bff;
+      border-top: 4px solid transparent;
       border-radius: 50%;
-      animation: spin 1.2s linear infinite;
-      z-index: 2;
-      pointer-events: none;
+      animation: spin 1s linear infinite;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      to { transform: rotate(360deg); }
     }
 
     /* Buttons */
@@ -117,9 +115,9 @@
 
   <!-- Splash -->
   <div class="loading-screen" id="loading-screen">
-    <div class="splash-content">
+    <div class="spinner-wrapper">
       <img src="icon-192x192.png" alt="Loading" class="spinner-logo" />
-      <div class="spinner-overlay"></div>
+      <div class="spinner-ring"></div>
     </div>
   </div>
 
@@ -179,7 +177,7 @@
       }
     });
 
-    // Optional: Register service worker
+    // Register Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/service-worker.js').catch(console.error);
     }
