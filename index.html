@@ -47,26 +47,45 @@
       z-index: 9999;
       transition: opacity var(--transition-speed);
     }
+
     .dark-mode .loading-screen {
       background: var(--background-dark);
     }
+
     .loading-screen.fade-out {
       opacity: 0;
       pointer-events: none;
     }
 
-    .spinner-logo {
+    .splash-content {
+      position: relative;
       width: 100px;
       height: 100px;
-      opacity: 0;
-      animation: fadeInOut 2s ease-in-out forwards;
     }
 
-    @keyframes fadeInOut {
-      0% { opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; }
+    .spinner-logo {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .spinner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      border-top: 5px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* Buttons */
@@ -98,7 +117,10 @@
 
   <!-- Splash -->
   <div class="loading-screen" id="loading-screen">
-    <img src="icon-192x192.png" alt="Loading" class="png" />
+    <div class="splash-content">
+      <img src="icon-192x192.png" alt="Loading" class="spinner-logo" />
+      <div class="spinner-overlay"></div>
+    </div>
   </div>
 
   <!-- Main UI -->
