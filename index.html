@@ -1,114 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Bold Forester</title>
-  <link rel="stylesheet" href="../../styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Inns App</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#000000">
+
+    <style>
+        /* Root Variables for Consistency */
+        :root {
+            --primary-color: #007bff;
+            --text-color: #333;
+            --background-light: #ffffff;
+            --background-dark: #121212;
+            --button-bg: var(--primary-color);
+            --button-text: #fff;
+            --transition-speed: 0.3s;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: var(--background-dark);
+            color: #fff;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--background-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity var(--transition-speed);
+        }
+        .dark-mode .loading-screen {
+            background: var(--background-dark);
+        }
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Spinner */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0,0,0,0.1);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--button-text);
+            background-color: var(--button-bg);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+        }
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .dark-mode .button {
+            background-color: #2196F3;
+        }
+
+        /* Icons */
+        .icon {
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body>
+    <div class="loading-screen" id="loading-screen">
+        <div class="spinner"></div>
+    </div>
+    
+    <h1>Welcome to Country Inns</h1>
+    <button id="dark-mode-toggle" class="button">🌙 Toggle Dark Mode</button>
+    <button id="open-site" class="button">🌐 Open Web Version</button>
+    <button id="install-button" class="button" style="display:none;">📲 Install App</button>
 
-  <!-- 🔰 Main Content of the pub page -->
-  <header>
-    <h1>Welcome to The Bold Forester</h1>
-    <p>Your perfect local in Marchwood 🍻</p>
-  </header>
+    <script>
+        const appURL = "https://sites.google.com/view/countryinnsnewforest";
 
-  <main>
-    <section>
-      <h2>What’s On</h2>
-      <p>Check below for announcements and event countdowns!</p>
-    </section>
-  </main>
+        // Redirect if App is Installed
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            window.location.href = appURL;
+        }
 
-  <!-- 📢 Scrolling Ticker Bar -->
-  <div id="pub-ticker">
-    <marquee behavior="scroll" direction="left">
-      🍻 Book NOW for Father’s Day 15th June| 🧀 All Things Cheese Week 16th June – 22nd June| 🍔Burger Week 17th July – 23rd July
-    </marquee>
-  </div>
+        // Extend Loading Screen Duration (Fake Splash Screen)
+        window.addEventListener("load", function() {
+            setTimeout(() => {
+                document.getElementById("loading-screen").classList.add("fade-out");
+            }, 2000);
+        });
 
-  <!-- ⏳ Countdown Timer -->
-  <div id="countdown-timer-container">
-    <p id="countdown-message">🎉 Father’s Day Countdown: <span id="countdown"></span></p>
-  </div>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById("dark-mode-toggle");
+        if (localStorage.getItem("dark-mode") === "enabled") {
+            document.body.classList.add("dark-mode");
+            darkModeToggle.textContent = "☀️ Light Mode";
+        }
+        darkModeToggle.addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+            darkModeToggle.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+            localStorage.setItem("dark-mode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
+        });
 
-  <!-- ⚙️ JavaScript for countdown + theme switcher -->
-  <script>
-    // 🕐 Countdown Timer – set event date/time
-    const eventDate = new Date("2025-06-15T12:00:00"); // Father’s Day at 12pm
+        // Open Web Version
+        document.getElementById("open-site").addEventListener("click", function() {
+            window.location.href = appURL;
+        });
 
-    function updateCountdown() {
-      const now = new Date();
-      const distance = eventDate - now;
+        // Install Prompt
+        let deferredPrompt;
+        window.addEventListener("beforeinstallprompt", (event) => {
+            event.preventDefault();
+            deferredPrompt = event;
+            document.getElementById("install-button").style.display = "block";
+        });
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hrs = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((distance % (1000 * 60)) / 1000);
-
-      const output = distance > 0
-        ? `${days}d ${hrs}h ${mins}m ${secs}s`
-        : "🎉 It’s happening now!";
-
-      document.getElementById("countdown").textContent = output;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // 🌗 Theme switcher (time-based or system preference)
-    function applyTheme() {
-      const hour = new Date().getHours();
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const autoDark = hour < 7 || hour >= 19;
-
-      if (prefersDark || autoDark) {
-        document.body.classList.add("dark-theme");
-        document.body.classList.remove("light-theme");
-      } else {
-        document.body.classList.add("light-theme");
-        document.body.classList.remove("dark-theme");
-      }
-    }
-
-    applyTheme();
-  </script>
-
-  <!-- 🖌 CSS Styles -->
-  <style>
-    body.light-theme {
-      background: #ffffff;
-      color: #111;
-    }
-
-    body.dark-theme {
-      background: #121212;
-      color: #f5f5f5;
-    }
-
-    #pub-ticker {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #333;
-      color: #fff;
-      font-weight: bold;
-      padding: 6px;
-      z-index: 1000;
-    }
-
-    #pub-ticker marquee {
-      font-size: 1rem;
-    }
-
-    #countdown-timer-container {
-      text-align: center;
-      padding: 1rem;
-      margin-bottom: 40px; /* space for ticker */
-      font-size: 1.2rem;
-    }
-  </style>
-
+        document.getElementById("install-button").addEventListener("click", () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(() => {
+                    deferredPrompt = null;
+                    document.getElementById("install-button").style.display = "none";
+                });
+            }
+        });
+    </script>
 </body>
 </html>
