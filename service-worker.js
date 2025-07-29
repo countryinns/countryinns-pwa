@@ -1,4 +1,5 @@
-const CACHE_NAME = 'countryinns-cache-v1'; // Version the cache to handle updates
+const CACHE_NAME = 'countryinns-cache-v1';
+
 const urlsToCache = [
   '/',
   '/index.html',
@@ -12,7 +13,7 @@ const urlsToCache = [
   '/styles.css',
   '/app.js',
 
-  // HTML menus
+  // Menus from external GitHub repo
   'https://countryinns.github.io/Pub-Food-Drink-Menus/html-menus/The-Bold-Forester/NEW-MENU-SPRING-SUMMER-2025.html',
   'https://countryinns.github.io/Pub-Food-Drink-Menus/html-menus/The-Bold-Forester/NEW-SUNDAY-MENU-SPRING-SUMMER-2025.html',
   'https://countryinns.github.io/Pub-Food-Drink-Menus/html-menus/The-Bold-Forester/New-Dessert-Menu-2025.html',
@@ -59,7 +60,7 @@ const urlsToCache = [
   'https://countryinns.github.io/Pub-Food-Drink-Menus/html-menus/The-Woolpack/summer-menu-2025.html'
 ];
 
-// Install the service worker and cache files
+// Install and cache assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -69,40 +70,48 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate the service worker and clean up old caches
+// Clean up old caches
 self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
+    caches.keys().then((cacheNames) => 
+      Promise.all(
         cacheNames.map((cacheName) => {
           if (!cacheWhitelist.includes(cacheName)) {
             return caches.delete(cacheName);
           }
         })
-      );
-    })
+      )
+    )
   );
 });
 
-// Fetch from network first, fallback to cache
+// Fetch with network-first, fallback to cache, plus offline banner
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request)
       .then((response) => {
         if (event.request.method === 'GET' && response.status === 200) {
-          const clonedResponse = response.clone();
+          const cloned = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, clonedResponse);
+            cache.put(event.request, cloned);
           });
         }
         return response;
       })
       .catch(() => {
-        return caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
-          } else if (event.request.url.includes('.html')) {
+        // Notify clients when offline
+        if (self.clients) {
+          self.clients.matchAll().then((clients) => {
+            clients.forEach((client) => {
+              client.postMessage({ type: 'OFFLINE' });
+            });
+          });
+        }
+
+        return caches.match(event.request).then((cached) => {
+          if (cached) return cached;
+          if (event.request.url.includes('.html')) {
             return caches.match('/index.html');
           }
         });
