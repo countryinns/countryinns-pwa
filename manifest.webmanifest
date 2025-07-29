@@ -1,13 +1,13 @@
 {
   "name": "Country Inns",
   "short_name": "Country Inns",
-  "start_url": "/countryinns-pwa/",
+  "description": "Stay updated with events, menus, and promotions at our 7 Country Inns pubs.",
+  "start_url": "/countryinns-pwa/?source=pwa",
   "scope": "/countryinns-pwa/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#008080",
-  "description": "Stay updated with events, menus, and promotions at our 7 Country Inns pubs.",
   "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#2d5016",
   "categories": ["food", "drink", "travel", "hospitality"],
   "app_id": "countryinns.pwa",
   "icons": [
