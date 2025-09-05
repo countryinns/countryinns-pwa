@@ -2,38 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Country Inns App</title>
+
+  <!-- PWA Setup -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="theme-color" content="#000000">
+
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #013220, #2e8b57); /* dark forest green to sea green */
-      --container-bg: rgba(0, 0, 0, 0.6);
-      --text-color: #fff;
-      --button-text: #013220;
-      --button-bg: #90ee90; /* light green */
-      --button-bg-hover: #77dd77; /* softer green */
-    }
-    [data-theme="light"] {
-      --bg-gradient: linear-gradient(135deg, #f4f9f4, #d0e8d0); /* pale greens */
-      --container-bg: rgba(255, 255, 255, 0.9);
-      --text-color: #013220;
+      --primary-color: #007bff;
+      --text-color: #333;
+      --background-light: #ffffff;
+      --background-dark: #121212;
+      --button-bg: var(--primary-color);
       --button-text: #fff;
-      --button-bg: #2e8b57; /* sea green */
-      --button-bg-hover: #246b45;
+      --transition-speed: 0.3s;
     }
+
     body {
-      margin: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: var(--background-light);
+      color: var(--text-color);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+
+    .dark-mode {
+      background-color: var(--background-dark);
+      color: #fff;
+    }
+
+    /* Splash Screen */
+    .loading-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: var(--background-light);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: var(--bg-gradient);
-      color: var(--text-color);
-      text-align: center;
-      transition: all 0.3s ease;
+      z-index: 9999;
+      transition: opacity var(--transition-speed);
+      flex-direction: column;
     }
-    .container {
+    .dark-mode .loading-screen {
+      background: var(--background-dark);
+    }
+    .loading-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner-wrapper {
+      position: relative;
+      width: 100px;
       max-width: 400px;
       background: var(--container-bg);
       padding: 2rem;
