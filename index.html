@@ -59,113 +59,6 @@
     .spinner-wrapper {
       position: relative;
       width: 100px;
-      max-width: 400px;
-      background: var(--container-bg);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      transition: all 0.3s ease;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      margin-bottom: 2rem;
-      line-height: 1.5;
-    }
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .btn {
-      padding: 0.9rem;
-      border-radius: 10px;
-      border: none;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn-install {
-      background: var(--button-bg);
-      color: var(--button-text);
-    }
-    .btn-install:hover {
-      background: var(--button-bg-hover);
-    }
-    .btn-web {
-      background: transparent;
-      border: 2px solid var(--text-color);
-      color: var(--text-color);
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-    }
-    .btn-web:hover {
-      background: rgba(255,255,255,0.1);
-    }
-    .mode-toggle {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Country Inns</h1>
-    <p>Stay connected with all our pubs, menus, and events.<br>
-    Install the app for the best experience or continue to the web version.</p>
-    <div class="buttons">
-      <button class="btn btn-install" id="installBtn" style="display:none;">📲 Install the App</button>
-      <a href="https://sites.google.com/view/countryinnsnewforest" class="btn btn-web">🌐 Continue to Web</a>
-    </div>
-    <div class="mode-toggle" id="modeToggle">Switch to Dark/Light Mode</div>
-  </div>
-
-  <script>
-    // ===== Theme persistence =====
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.body.setAttribute('data-theme', savedTheme);
-    }
-
-    const toggle = document.getElementById('modeToggle');
-    toggle.addEventListener('click', () => {
-      const currentTheme = document.body.getAttribute('data-theme');
-      if (currentTheme === 'light') {
-        document.body.removeAttribute('data-theme');
-        localStorage.setItem('theme', '');
-      } else {
-        document.body.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      }
-    });
-
-    // ===== PWA Install prompt =====
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'block';
-    });
-
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User choice: ${outcome}`);
-        deferredPrompt = null;
-      }
-    });
-  </script>
-</body>
-</html>
       height: 100px;
     }
 
@@ -289,7 +182,5 @@
       navigator.serviceWorker.register('/service-worker.js').catch(console.error);
     }
   </script>
-  <script src="/countryinns-pwa/app.js">
- </script>
 </body>
 </html>
