@@ -3,11 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Royal Oak</title>
+  <title>The Royal Oak – Country Inns</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #2e472e, #1e2b1e);
+      color: #f4f4f4;
+      text-align: center;
+    }
+
+    header {
+      background-color: rgba(34, 49, 34, 0.9);
+      padding: 1.5rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #e6d8b5;
+    }
+
+    .logo {
+      margin: 1rem auto;
+      max-width: 140px;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: url("images/lambinn.jpg") center/cover no-repeat;
+    }
+
+    .content {
+      padding: 1.5rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #e6d8b5;
+      margin-top: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .buttons a {
+      display: block;
+      background: #3c5a3c;
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .buttons a:hover {
+      background: #4f7c4f;
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.2);
+    }
+  </style>
 </head>
 <body>
-  <h1>The Royal Oak</h1>
-  <p>Welcome to The Royal Oak. Menus, events & promotions coming soon!</p>
-  <p><a href="home.html">← Back to Home</a></p>
+  <header>
+    <h1>The Lamb Inn</h1>
+    <img src="The Royal Oak.png" alt="The Royal Oak Logo" class="logo">
+  </header>
+
+  <div class="hero"></div>
+
+  <div class="content">
+    <p>Welcome to The Royal Oak, Beaulieu — a cosy country pub at the heart of the New Forest. Explore our menus, book a table, and see what’s on.</p>
+
+    <h2>Food Menus</h2>
+    <div class="buttons">
+      <a href="menus/lambinn-lunch.html">Lunch Menu</a>
+      <a href="menus/lambinn-dinner.html">Dinner Menu</a>
+      <a href="menus/lambinn-sunday.html">Sunday Roast Menu</a>
+    </div>
+
+    <h2>Drink Menus</h2>
+    <div class="buttons">
+      <a href="menus/lambinn-drinks.html">Drinks Menu</a>
+      <a href="menus/lambinn-wine.html">Wine List</a>
+    </div>
+
+    <h2>Extras</h2>
+    <div class="buttons">
+      <a href="events/lambinn.html">Events</a>
+      <a href="promotions/lambinn.html">Promotions</a>
+      <a href="social/lambinn.html">Social Media</a>
+      <a href="https://www.theroyaloakbeaulieu.co.uk/">Official Website</a>
+      <a href="home.html">⬅ Back to Home</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Country Inns – The Lamb Inn
+  </footer>
 </body>
 </html>
