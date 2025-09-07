@@ -1,241 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Country Inns Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Inns</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background-color: #f8f5e9;
-      color: #2e4631;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
     }
 
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(rgba(46,70,49,0.7), rgba(46,70,49,0.7)),
-                  url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
-      color: #f8f5e9;
+    header {
+      background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      color: white;
       text-align: center;
       padding: 80px 20px;
     }
-    .hero h1 {
+
+    header h1 {
       font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
+      margin: 0;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
     }
 
-    /* Sections */
+    header p {
+      font-size: 1.2em;
+      margin: 10px 0 0;
+    }
+
     section {
       padding: 40px 20px;
       text-align: center;
     }
-    section h2 {
+
+    h2 {
+      font-size: 2em;
       margin-bottom: 20px;
-      font-size: 1.8em;
     }
 
-    /* Events Grid */
-    .events {
+    /* Explore Inns */
+    .pubs {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      padding: 20px;
     }
-    .event-card {
+
+    .pub-card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .pub-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .pub-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .pub-card h3 {
+      margin: 15px 0 10px;
+    }
+
+    .pub-card p {
+      font-size: 0.9em;
+      padding: 0 10px 20px;
+    }
+
+    /* Featured at Every Pub */
+    .events-scroll {
       display: flex;
-      flex-direction: column;
-      text-align: left;
-      transition: transform 0.3s;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 20px;
     }
+
+    .events-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .event-card {
+      flex: 0 0 250px; /* same width as inns */
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      scroll-snap-align: start;
+      transition: transform 0.2s;
+    }
+
     .event-card:hover {
-      transform: scale(1.03);
+      transform: translateY(-5px);
     }
+
     .event-card img {
       width: 100%;
       height: 150px;
       object-fit: cover;
     }
+
     .event-card h3 {
-      margin: 10px;
-      font-size: 1.2em;
-      color: #2e4631;
-    }
-    .event-card p {
-      margin: 0 10px 15px;
-      font-size: 0.95em;
-      color: #333;
-    }
-    .event-card a {
-      align-self: start;
-      background: #2e4631;
-      color: #f8f5e9;
-      text-decoration: none;
-      padding: 8px 16px;
-      margin: 10px;
-      border-radius: 20px;
-      transition: background 0.3s;
-    }
-    .event-card a:hover {
-      background: #1f3022;
+      margin: 10px 0;
     }
 
-    /* Inns Grid */
-    .pubs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    .event-card p {
+      font-size: 0.9em;
+      padding: 0 10px 15px;
     }
-    .pub-tile {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
+
+    .event-card button {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: background 0.2s;
     }
-    .pub-tile:hover {
-      transform: scale(1.05);
-    }
-    .pub-tile img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      filter: brightness(70%);
-    }
-    .pub-tile span {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      color: #f8f5e9;
-      font-weight: bold;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+
+    .event-card button:hover {
+      background: #1b5e20;
     }
 
     /* Footer */
     footer {
-      background: #2e4631;
-      color: #f8f5e9;
-      padding: 20px;
+      background: #222;
+      color: white;
       text-align: center;
+      padding: 20px;
+      margin-top: 40px;
     }
+
     footer a {
-      color: #c9a66b;
-      margin: 0 8px;
+      color: #90caf9;
+      margin: 0 10px;
       text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <div class="hero">
-    <h1>Country Inns</h1>
-    <p>7 countryside pubs, 1 app – Food, Drinks, Rooms, Events & Promotions.</p>
-  </div>
+  <!-- Header -->
+  <header>
+    <h1>Welcome to Country Inns</h1>
+    <p>Discover our 7 pubs in the heart of the New Forest</p>
+  </header>
 
-  <!-- About -->
+  <!-- Explore Inns -->
   <section>
-    <div class="about">
-      <h2>Welcome to Country Inns</h2>
-      <p>Discover the charm of our 7 unique pubs across the New Forest. Each offers its own atmosphere, from rustic countryside inns to vibrant village hubs — all with a warm welcome, freshly homemade food, and great drinks.</p>
+    <h2>Explore Our Inns</h2>
+    <div class="pubs">
+      <div class="pub-card">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="The Lamb Inn">
+        <h3>The Lamb Inn</h3>
+        <p>Nomansland</p>
+      </div>
+      <div class="pub-card">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="The Royal Oak">
+        <h3>The Royal Oak</h3>
+        <p>Hilltop</p>
+      </div>
+      <!-- Repeat for the other 5 pubs -->
     </div>
   </section>
-  
-  <!-- Events -->
+
+  <!-- Featured at Every Pub -->
   <section>
     <h2>Featured at Every Pub</h2>
-    <div class="events">
-
-      <!-- Festive Feast -->
+    <div class="events-scroll">
       <div class="event-card">
         <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
         <h3>Festive Feast</h3>
-        <p>Available 1st–23rd December across all our pubs. Book before 31st October and save £5 per head!</p>
-        <a href="festive-feast.html">View</a>
+        <p>Book early & save £5 per head on our December feast menu.</p>
+        <button>Add to Calendar</button>
       </div>
-
-      <!-- Sunday Roasts -->
       <div class="event-card">
         <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Sunday Roast">
         <h3>Sunday Roasts</h3>
-        <p>Every Sunday, enjoy a traditional roast with all the trimmings at any Country Inns pub.</p>
-        <a href="sunday-roast.html">See More</a>
+        <p>Join us every Sunday for delicious home-cooked roasts.</p>
+        <button>Add to Calendar</button>
       </div>
-
-      <!-- Dog Friendly -->
       <div class="event-card">
-        <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=80" alt="Dog Friendly">
-        <h3>Dog Friendly</h3>
-        <p>All our pubs are dog-friendly, bring your four-legged friends along!</p>
-        <a href="dog-friendly.html">Learn More</a>
+        <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=800&q=80" alt="Live Music Nights">
+        <h3>Live Music Nights</h3>
+        <p>Enjoy local artists performing at our pubs every month.</p>
+        <button>Add to Calendar</button>
       </div>
-
-      <!-- Local Ales & Wines -->
       <div class="event-card">
-        <img src="https://images.unsplash.com/photo-1586425221220-9ac4c8b8f7f1?auto=format&fit=crop&w=800&q=80" alt="Local Ales">
-        <h3>Local Ales & Fine Wines</h3>
-        <p>Discover our carefully chosen local ales and wines, available across all Country Inns pubs.</p>
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80" alt="Seasonal Specials">
+        <h3>Seasonal Specials</h3>
+        <p>Freshly crafted menus inspired by the New Forest seasons.</p>
+        <button>Add to Calendar</button>
       </div>
-
-      <!-- Country Inns Experience -->
-      <div class="event-card">
-        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Cosy Pubs">
-        <h3>Country Inns Experience</h3>
-        <p>Cosy pubs, crackling fires, hearty meals, and a warm welcome wherever you visit.</p>
-        <a href="country-inns-experience.html">Explore</a>
-      </div>
-
     </div>
   </section>
 
-  <!-- Pubs -->
-  <section>
-    <h2>Explore Our Inns</h2>
-    <div class="pubs-grid">
-      <a class="pub-tile" href="boldforester.html">
-        <img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester">
-        <span>The Bold Forester</span>
-      </a>
-      <a class="pub-tile" href="lambinn.html">
-        <img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn">
-        <span>The Lamb Inn</span>
-      </a>
-      <a class="pub-tile" href="royaloak.html">
-        <img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak">
-        <span>The Royal Oak</span>
-      </a>
-      <a class="pub-tile" href="woolpack.html">
-        <img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack">
-        <span>The Woolpack</span>
-      </a>
-      <a class="pub-tile" href="fightingcocks.html">
-        <img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks">
-        <span>The Fighting Cocks</span>
-      </a>
-      <a class="pub-tile" href="trustyservant.html">
-        <img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant">
-        <span>The Trusty Servant</span>
-      </a>
-      <a class="pub-tile" href="newforestinn.html">
-        <img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn">
-        <span>The New Forest Inn</span>
-      </a>
-    </div>
-  </section>
-    
   <!-- Footer -->
   <footer>
-    <p>Country Inns – 7 unique pubs in the New Forest</p>
-    <p>Explore each pub above to find menus, events, rooms, and more.</p>
-    <p>&copy; 2025 Country Inns</p>
+    <p>&copy; 2025 Country Inns | Proudly serving the New Forest</p>
   </footer>
+
 </body>
 </html>
