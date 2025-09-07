@@ -26,25 +26,7 @@
     }
     .hero p {
       font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-    .hero .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    .hero button {
-      background: #c9a66b;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .hero button:hover {
-      background: #a07f4e;
+      margin-bottom: 0;
     }
 
     /* Sections */
@@ -57,44 +39,52 @@
       font-size: 1.8em;
     }
 
-    /* Events Scroll */
+    /* Events Snap Scroll */
     .events {
       display: flex;
-      gap: 20px;
+      gap: 15px;
       overflow-x: auto;
       padding-bottom: 10px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .events::-webkit-scrollbar {
+      display: none; /* hide scrollbar */
     }
     .event-card {
-      min-width: 250px;
+      flex: 1 1 180px;
+      max-width: 220px;
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       overflow: hidden;
-      flex: 0 0 auto;
+      scroll-snap-align: start;
     }
     .event-card img {
       width: 100%;
-      height: 150px;
+      height: 120px;
       object-fit: cover;
     }
     .event-card h3 {
-      margin: 10px;
-      font-size: 1.2em;
+      margin: 8px;
+      font-size: 1.1em;
     }
     .event-card p {
-      margin: 0 10px 15px;
-      font-size: 0.9em;
+      margin: 0 8px 12px;
+      font-size: 0.85em;
     }
-    .event-card button {
+    .event-card a {
+      display: inline-block;
       background: #2e4631;
       color: #f8f5e9;
-      border: none;
-      padding: 8px 16px;
-      margin-bottom: 15px;
       border-radius: 20px;
-      cursor: pointer;
+      padding: 6px 14px;
+      font-size: 0.85em;
+      text-decoration: none;
+      transition: background 0.3s;
+      margin-bottom: 12px;
     }
-    .event-card button:hover {
+    .event-card a:hover {
       background: #1f3022;
     }
 
@@ -129,35 +119,12 @@
       text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
     }
 
-    /* Loyalty Banner */
-    .loyalty {
-      background: #2e4631;
-      color: #f8f5e9;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .loyalty button {
-      background: #c9a66b;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      margin-top: 15px;
-      cursor: pointer;
-    }
-
     /* Footer */
     footer {
       background: #2e4631;
       color: #f8f5e9;
       padding: 20px;
       text-align: center;
-    }
-    footer a {
-      color: #c9a66b;
-      margin: 0 8px;
-      text-decoration: none;
     }
   </style>
 </head>
@@ -166,107 +133,103 @@
   <!-- Hero -->
   <div class="hero">
     <h1>Country Inns</h1>
-    <p>7 countryside pubs, 1 app - 
-      Food, Drinks, Rooms, Events & Promotions.</p>
-    </div>
+    <p>7 countryside pubs, 1 app – Food, Drinks, Rooms, Events & Promotions.</p>
   </div>
 
-    <!-- About -->
-<section>
-  <div class="about">
+  <!-- About -->
+  <section>
     <h2>Welcome to Country Inns</h2>
     <p>Discover the charm of our 7 unique pubs across the New Forest. Each offers its own atmosphere, from rustic countryside inns to vibrant village hubs — all with a warm welcome, freshly homemade food, and great drinks.</p>
-  </div>
-</section>
+  </section>
   
   <!-- Events -->
-<section>
-  <h2>Featured at Every Pub</h2>
-  <div class="events">
+  <section>
+    <h2>Featured at Every Pub</h2>
+    <div class="events">
 
-    <!-- Festive Feast -->
-    <div class="event-card">
-      <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
-      <h3>Festive Feast</h3>
-      <p>Available 1st–23rd December across all our pubs.Book before 31st October and save £5 per head!</p>
-      <a href="festive-feast.html" class="btn">View Details</a>
+      <!-- Festive Feast -->
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
+        <h3>Festive Feast</h3>
+        <p>Available 1st–23rd December across all our pubs. Book before 31st October and save £5 per head!</p>
+        <a href="festive-feast.html">View Details</a>
+      </div>
+
+      <!-- Sunday Roasts -->
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Sunday Roast">
+        <h3>Sunday Roasts</h3>
+        <p>Every Sunday, enjoy a traditional roast with all the trimmings at any Country Inns pub.</p>
+        <a href="sunday-roast.html">See More</a>
+      </div>
+
+      <!-- Dog Friendly -->
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=80" alt="Dog Friendly">
+        <h3>Dog Friendly</h3>
+        <p>All our pubs are dog-friendly, bring your four-legged friends along!</p>
+        <a href="dog-friendly.html">Learn More</a>
+      </div>
+
+      <!-- Local Ales & Wines -->
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1586425221220-9ac4c8b8f7f1?auto=format&fit=crop&w=800&q=80" alt="Local Ales">
+        <h3>Local Ales & Fine Wines</h3>
+        <p>Discover our carefully chosen local ales and wines, available across all Country Inns pubs.</p>
+      </div>
+
+      <!-- Country Inns Experience -->
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Cosy Pubs">
+        <h3>Country Inns Experience</h3>
+        <p>Cosy pubs, crackling fires, hearty meals, and a warm welcome wherever you visit.</p>
+        <a href="country-inns-experience.html">Explore</a>
+      </div>
+
     </div>
-
-    <!-- Sunday Roasts -->
-    <div class="event-card">
-      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Sunday Roast">
-      <h3>Sunday Roasts</h3>
-      <p>Every Sunday, enjoy a traditional roast, with all the trimmings at any Country Inns pub.</p>
-      <a href="sunday-roast.html" class="btn">See More</a>
-    </div>
-
-    <!-- Dog Friendly -->
-    <div class="event-card">
-      <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=80" alt="Dog Friendly">
-      <h3>Dog Friendly</h3>
-      <p>All our pubs are dog-friendly,bring your four-legged friends along!</p>
-      <a href="dog-friendly.html"
-    </div>
-
-    <!-- Local Ales & Wines -->
-    <div class="event-card">
-      <img src="https://images.unsplash.com/photo-1586425221220-9ac4c8b8f7f1?auto=format&fit=crop&w=800&q=80" alt="Local Ales">
-      <h3>Local Ales & Fine Wines</h3>
-      <p>Discover our carefully chosen local ales and wines,available across all Country Inns pubs.</p>
-    </div>
-
-    <!-- Country Inns Experience -->
-    <div class="event-card">
-      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Cosy Pubs">
-      <h3>Country Inns Experience</h3>
-      <p>Cosy pubs, crackling fires, hearty meals, and a warm welcome wherever you visit.</p>
-      <a href="country-inns-experience.html"
-    </div>
-
-  </div>
-</section>
+  </section>
 
   <!-- Pubs -->
   <section>
     <h2>Explore Our Inns</h2>
-<div class="pubs-grid">
-  <a class="pub-tile" href="boldforester.html">
-    <img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester">
-    <span>The Bold Forester</span>
-  </a>
-  <a class="pub-tile" href="lambinn.html">
-    <img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn">
-    <span>The Lamb Inn</span>
-  </a>
-  <a class="pub-tile" href="royaloak.html">
-    <img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak">
-    <span>The Royal Oak</span>
-  </a>
-  <a class="pub-tile" href="woolpack.html">
-    <img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack">
-    <span>The Woolpack</span>
-  </a>
-  <a class="pub-tile" href="fightingcocks.html">
-    <img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks">
-    <span>The Fighting Cocks</span>
-  </a>
-  <a class="pub-tile" href="trustyservant.html">
-    <img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant">
-    <span>The Trusty Servant</span>
-  </a>
-  <a class="pub-tile" href="newforestinn.html">
-    <img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn">
-    <span>The New Forest Inn</span>
-  </a>
-</div>
+    <div class="pubs-grid">
+      <a class="pub-tile" href="boldforester.html">
+        <img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester">
+        <span>The Bold Forester</span>
+      </a>
+      <a class="pub-tile" href="lambinn.html">
+        <img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn">
+        <span>The Lamb Inn</span>
+      </a>
+      <a class="pub-tile" href="royaloak.html">
+        <img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak">
+        <span>The Royal Oak</span>
+      </a>
+      <a class="pub-tile" href="woolpack.html">
+        <img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack">
+        <span>The Woolpack</span>
+      </a>
+      <a class="pub-tile" href="fightingcocks.html">
+        <img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks">
+        <span>The Fighting Cocks</span>
+      </a>
+      <a class="pub-tile" href="trustyservant.html">
+        <img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant">
+        <span>The Trusty Servant</span>
+      </a>
+      <a class="pub-tile" href="newforestinn.html">
+        <img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn">
+        <span>The New Forest Inn</span>
+      </a>
+    </div>
+  </section>
     
   <!-- Footer -->
-<footer>
-  <p>Country Inns – 7 unique pubs in the New Forest</p>
-  <p>Explore each pub above to find menus, events, rooms, and more.</p>
-  <p>&copy; 2025 Country Inns</p>
-</footer>
-
+  <footer>
+    <p>Country Inns – 7 unique pubs in the New Forest</p>
+    <p>Explore each pub above to find menus, events, rooms, and more.</p>
+    <p>&copy; 2025 Country Inns</p>
+  </footer>
 
 </body>
 </html>
