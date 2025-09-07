@@ -26,7 +26,7 @@
     }
     .hero p {
       font-size: 1.2em;
-      margin-bottom: 0;
+      margin-bottom: 30px;
     }
 
     /* Sections */
@@ -39,50 +39,50 @@
       font-size: 1.8em;
     }
 
-    /* Events Snap Scroll */
+    /* Events Grid */
     .events {
-      display: flex;
-      gap: 15px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-    .events::-webkit-scrollbar {
-      display: none; /* hide scrollbar */
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
     }
     .event-card {
-      flex: 1 1 180px;
-      max-width: 220px;
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       overflow: hidden;
-      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      transition: transform 0.3s;
+    }
+    .event-card:hover {
+      transform: scale(1.03);
     }
     .event-card img {
       width: 100%;
-      height: 120px;
+      height: 150px;
       object-fit: cover;
     }
     .event-card h3 {
-      margin: 8px;
-      font-size: 1.1em;
+      margin: 10px;
+      font-size: 1.2em;
+      color: #2e4631;
     }
     .event-card p {
-      margin: 0 8px 12px;
-      font-size: 0.85em;
+      margin: 0 10px 15px;
+      font-size: 0.95em;
+      color: #333;
     }
     .event-card a {
-      display: inline-block;
+      align-self: start;
       background: #2e4631;
       color: #f8f5e9;
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 0.85em;
       text-decoration: none;
+      padding: 8px 16px;
+      margin: 10px;
+      border-radius: 20px;
       transition: background 0.3s;
-      margin-bottom: 12px;
     }
     .event-card a:hover {
       background: #1f3022;
@@ -91,8 +91,8 @@
     /* Inns Grid */
     .pubs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
     .pub-tile {
       position: relative;
@@ -106,7 +106,7 @@
     }
     .pub-tile img {
       width: 100%;
-      height: 120px;
+      height: 160px;
       object-fit: cover;
       filter: brightness(70%);
     }
@@ -126,6 +126,11 @@
       padding: 20px;
       text-align: center;
     }
+    footer a {
+      color: #c9a66b;
+      margin: 0 8px;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -138,8 +143,10 @@
 
   <!-- About -->
   <section>
-    <h2>Welcome to Country Inns</h2>
-    <p>Discover the charm of our 7 unique pubs across the New Forest. Each offers its own atmosphere, from rustic countryside inns to vibrant village hubs — all with a warm welcome, freshly homemade food, and great drinks.</p>
+    <div class="about">
+      <h2>Welcome to Country Inns</h2>
+      <p>Discover the charm of our 7 unique pubs across the New Forest. Each offers its own atmosphere, from rustic countryside inns to vibrant village hubs — all with a warm welcome, freshly homemade food, and great drinks.</p>
+    </div>
   </section>
   
   <!-- Events -->
@@ -152,7 +159,7 @@
         <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
         <h3>Festive Feast</h3>
         <p>Available 1st–23rd December across all our pubs. Book before 31st October and save £5 per head!</p>
-        <a href="festive-feast.html">View Details</a>
+        <a href="festive-feast.html">View</a>
       </div>
 
       <!-- Sunday Roasts -->
@@ -230,6 +237,5 @@
     <p>Explore each pub above to find menus, events, rooms, and more.</p>
     <p>&copy; 2025 Country Inns</p>
   </footer>
-
 </body>
 </html>
