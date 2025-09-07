@@ -70,6 +70,67 @@
       background: #4f7c4f;
     }
 
+    /* Cards layout for Events, Promotions, Social */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      padding: 0 1rem;
+    }
+
+    .card {
+      background: #3c5a3c;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      max-width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      color: #e6d8b5;
+      margin: 0.5rem 0;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+    }
+
+    /* Social icons */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      display: inline-block;
+      background: #e6d8b5;
+      color: #2e472e;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #fff2cc;
+    }
+
     footer {
       margin-top: 2rem;
       padding: 1rem;
@@ -80,36 +141,72 @@
 </head>
 <body>
   <header>
-  <img src="The Bold Forester.jpg" alt="The Bold Forester Logo" class="logo">
-</header>
+    <img src="The Bold Forester.jpg" alt="The Bold Forester Logo" class="logo">
+  </header>
+
   <section>
-  <div class="about">
-    <p>Welcome to The Bold Forester, Marchwood — a cosy country pub at the heart of the New Forest. Explore our menus, book a table, and see what’s on</p>
+    <div class="about">
+      <p>Welcome to The Bold Forester, Marchwood — a cosy country pub at the heart of the New Forest. Explore our menus, book a table, and see what’s on</p>
+    </div>
+  </section>
+
+  <h2>Food Menus</h2>
+  <div class="buttons">
+    <a href="bold-forester-images/bold-forester-menus/main-menu/NEW-MENU-SPRING-SUMMER-2025.html">Menu</a>
+    <a href="bold-forester-images/bold-forester-menus/sunday-menu/NEW-SUNDAY-MENU-SPRING-SUMMER-2025.html">Sunday Menu</a>
+    <a href="bold-forester-images/bold-forester-menus/kids-menu/Tiny-Tums-Menu-2025.html">Kids Menu</a>
+    <a href="bold-forester-images/bold-forester-menus/desserts-menu/New-Dessert-Menu-2025.html">Desserts Menu</a>
   </div>
-</section>
-    <h2>Food Menus</h2>
-    <div class="buttons">
-      <a href="bold-forester-images/bold-forester-menus/main-menu/NEW-MENU-SPRING-SUMMER-2025.html">Menu</a>
-      <a href="bold-forester-images/bold-forester-menus/sunday-menu/NEW-SUNDAY-MENU-SPRING-SUMMER-2025.html">Sunday Menu</a>
-      <a href="bold-forester-images/bold-forester-menus/kids-menu/Tiny-Tums-Menu-2025.html">Kids Menu</a>
-      <a href="bold-forester-images/bold-forester-menus/desserts-menu/New-Dessert-Menu-2025.html">Desserts Menu</a>
-    </div>
 
-    <h2>Drink Menus</h2>
-    <div class="buttons">
-      <a href="bold-forester-images/bold-forester-menus/drinks-menu/updated-drinks-menu-25th-feb.html">Drinks Menu</a>
-      <a href="menus/lambinn-wine.html">Wine List</a>
-      <a href="bold-forester-images/bold-forester-menus/cocktail-menu/Cocktail-Menu-2025.html">Cocktail Menu</a>
-    </div>
+  <h2>Drink Menus</h2>
+  <div class="buttons">
+    <a href="bold-forester-images/bold-forester-menus/drinks-menu/updated-drinks-menu-25th-feb.html">Drinks Menu</a>
+    <a href="menus/lambinn-wine.html">Wine List</a>
+    <a href="bold-forester-images/bold-forester-menus/cocktail-menu/Cocktail-Menu-2025.html">Cocktail Menu</a>
+  </div>
 
-    <h2>Extras</h2>
-    <div class="buttons">
-      <a href="events/lambinn.html">Events</a>
-      <a href="promotions/lambinn.html">Promotions</a>
-      <a href="social/lambinn.html">Social Media</a>
-      <a href="https://www.theboldforesternewforest.co.uk/">Official Website</a>
-      <a href="home.html">⬅ Back to Home</a>
+  <!-- Events Section -->
+  <h2>Events</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="events/event1.jpg" alt="Quiz Night">
+      <h3>Quiz Night</h3>
+      <p>Join us for a fun evening of trivia every Thursday at 7:30pm.</p>
     </div>
+    <div class="card">
+      <img src="events/event2.jpg" alt="Live Music">
+      <h3>Live Music</h3>
+      <p>Enjoy local talent performing every last Friday of the month.</p>
+    </div>
+  </div>
+
+  <!-- Promotions Section -->
+  <h2>Promotions</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img src="promotions/promo1.jpg" alt="Burger Mondays">
+      <h3>Burger Mondays</h3>
+      <p>Buy any burger and get a free pint every Monday.</p>
+    </div>
+    <div class="card">
+      <img src="promotions/promo2.jpg" alt="Wine Wednesday">
+      <h3>Wine Wednesday</h3>
+      <p>20% off all bottles of wine, every Wednesday.</p>
+    </div>
+  </div>
+
+  <!-- Social Media Section -->
+  <h2>Follow Us</h2>
+  <div class="social-links">
+    <a href="https://www.facebook.com/theboldforester">Facebook</a>
+    <a href="https://www.instagram.com/theboldforester">Instagram</a>
+    <a href="https://www.tiktok.com/@theboldforester">TikTok</a>
+  </div>
+
+  <h2>Extras</h2>
+  <div class="buttons">
+    <a href="https://www.theboldforesternewforest.co.uk/">Official Website</a>
+    <a href="home.html">⬅ Back to Home</a>
   </div>
 
   <footer>
