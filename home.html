@@ -42,37 +42,38 @@
     }
 
     /* Explore Inns */
-    .pubs {
+    .pubs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
 
-    .pub-card {
+    .pub-tile {
       background: white;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: inherit;
       transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
     }
 
-    .pub-card:hover {
+    .pub-tile:hover {
       transform: translateY(-5px);
     }
 
-    .pub-card img {
+    .pub-tile img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
 
-    .pub-card h3 {
-      margin: 15px 0 10px;
-    }
-
-    .pub-card p {
-      font-size: 0.9em;
-      padding: 0 10px 20px;
+    .pub-tile span {
+      padding: 15px;
+      font-size: 1.1em;
+      font-weight: bold;
     }
 
     /* Featured at Every Pub */
@@ -89,7 +90,7 @@
     }
 
     .event-card {
-      flex: 0 0 250px; /* same width as inns */
+      flex: 0 0 250px;
       background: white;
       border-radius: 12px;
       overflow: hidden;
@@ -160,6 +161,37 @@
     <p>Discover our 7 pubs in the heart of the New Forest</p>
   </header>
 
+  <!-- Featured at Every Pub -->
+  <section>
+    <h2>Featured at Every Pub</h2>
+    <div class="events-scroll">
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
+        <h3>Festive Feast</h3>
+        <p>Book early & save £5 per head on our December feast menu.</p>
+        <button>Add to Calendar</button>
+      </div>
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Sunday Roast">
+        <h3>Sunday Roasts</h3>
+        <p>Join us every Sunday for delicious home-cooked roasts.</p>
+        <button>Add to Calendar</button>
+      </div>
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=800&q=80" alt="Live Music Nights">
+        <h3>Live Music Nights</h3>
+        <p>Enjoy local artists performing at our pubs every month.</p>
+        <button>Add to Calendar</button>
+      </div>
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80" alt="Seasonal Specials">
+        <h3>Seasonal Specials</h3>
+        <p>Freshly crafted menus inspired by the New Forest seasons.</p>
+        <button>Add to Calendar</button>
+      </div>
+    </div>
+  </section>
+
   <!-- Explore Inns -->
   <section>
     <h2>Explore Our Inns</h2>
@@ -192,37 +224,6 @@
         <img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn">
         <span>The New Forest Inn</span>
       </a>
-    </div>
-  </section>
-
-  <!-- Featured at Every Pub -->
-  <section>
-    <h2>Featured at Every Pub</h2>
-    <div class="events-scroll">
-      <div class="event-card">
-        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
-        <h3>Festive Feast</h3>
-        <p>Book early & save £5 per head on our December feast menu.</p>
-        <button>Add to Calendar</button>
-      </div>
-      <div class="event-card">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Sunday Roast">
-        <h3>Sunday Roasts</h3>
-        <p>Join us every Sunday for delicious home-cooked roasts.</p>
-        <button>Add to Calendar</button>
-      </div>
-      <div class="event-card">
-        <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=800&q=80" alt="Live Music Nights">
-        <h3>Live Music Nights</h3>
-        <p>Enjoy local artists performing at our pubs every month.</p>
-        <button>Add to Calendar</button>
-      </div>
-      <div class="event-card">
-        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80" alt="Seasonal Specials">
-        <h3>Seasonal Specials</h3>
-        <p>Freshly crafted menus inspired by the New Forest seasons.</p>
-        <button>Add to Calendar</button>
-      </div>
     </div>
   </section>
 
