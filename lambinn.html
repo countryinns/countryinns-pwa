@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Lamb Inn – Country Inns</title>
+  <title>The Bold Forester – Country Inns</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -70,6 +70,40 @@
       background: #4f7c4f;
     }
 
+    /* Social scroll */
+    .social-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .social-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .social-card {
+      flex: 0 0 auto;
+      min-width: 150px;
+      padding: 1rem;
+      text-align: center;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      scroll-snap-align: start;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .social-card:hover {
+      transform: translateY(-3px);
+      background: #ececec;
+    }
+
     footer {
       margin-top: 2rem;
       padding: 1rem;
@@ -80,35 +114,50 @@
 </head>
 <body>
   <header>
-  <img src="The Lamb Inn.png" alt="The Lamb Inn Logo" class="logo">
-</header>
-  <div class="hero"></div>
-  <div class="content">
-    <p>Welcome to The Lamb Inn, Nomansland — a cosy country pub at the heart of the New Forest. Explore our menus, book a table, and see what’s on.</p>
+    <img src="The Lamb Inn.png" alt="The Lamb Inn Logo" class="logo">
+  </header>
 
-    <h2>Food Menus</h2>
-    <div class="buttons">
-      <a href="menus/lambinnmenu.html">Menu</a>
-      <a href="menus/lambinn-sunday.html">Sunday Menu</a>
-      <a href="menus/lambinn-kids-menu.html">Kids Menu</a>
-      <a href="menus/lambinn-desserts-menu.html">Desserts Menu</a>
+  <section>
+    <div class="about">
+      <p>Welcome to The Lamb Inn, Nomansland — a cosy country pub at the heart of the New Forest. Explore our menus, book a table, and see what’s on</p>
     </div>
+  </section>
 
-    <h2>Drink Menus</h2>
-    <div class="buttons">
-      <a href="menus/lambinn-drinks.html">Drinks Menu</a>
-      <a href="menus/lambinn-wine.html">Wine List</a>
-      <a href="menus/lambinn-cocktail-menu.html">Cocktail Menu</a>
-    </div>
+  <h2>Food Menus</h2>
+  <div class="buttons">
+    <a href="Lamb-Inn-images/Lamb-Inn-Menus/main-menu/">Menu</a>
+    <a href="Lamb-Inn-images/Lamb-Inn-Menus/sunday-menu/Lamb-sunday-menu-dec-2024.html">Sunday Menu</a>
+    <a href="Lamb-Inn-images/Lamb-Inn-Menus/kids-menu/Lamb-Kids-Menu.html">Kids Menu</a>
+    <a href="Lamb-Inn-images/Lamb-Inn-Menus/desserts-menu/Dessert-menu-March-2024.html">Desserts Menu</a>
+    <a href="Lamb-Inn-images/Christmas/Lamb-Christmas.html">Christmas Menus 2025</a>
+  </div>
 
-    <h2>Extras</h2>
-    <div class="buttons">
-      <a href="events/lambinn.html">Events</a>
-      <a href="promotions/lambinn.html">Promotions</a>
-      <a href="social/lambinn.html">Social Media</a>
-      <a href="https://www.thelambnomansland.co.uk/">Official Website</a>
-      <a href="home.html">⬅ Back to Home</a>
-    </div>
+  <h2>Drink Menus</h2>
+  <div class="buttons">
+    <a href="bold-forester-images/bold-forester-menus/drinks-menu/updated-drinks.html">Drinks Menu</a>
+    <a href="menus/lambinn-wine.html">Wine List</a>
+    <a href="bold-forester-images/bold-forester-menus/cocktail-menu/Cocktail-Menu.html">Cocktail Menu</a>
+  </div>
+
+  <!-- Links to Events & Promotions -->
+  <h2>What’s On</h2>
+  <div class="buttons">
+    <a href="Lamb-Inn-images/Events-Promotions/events.html">View Events</a>
+    <a href="bold-forester-images/promotions.html">View Promotions</a>
+  </div>
+
+  <!-- Social Media Section -->
+  <h2>Follow Us</h2>
+  <div class="social-scroll">
+    <a href="https://www.facebook.com/thelambinn/" class="social-card">Facebook</a>
+    <a href="https://www.instagram.com/the.lambinn/" class="social-card">Instagram</a>
+    <a href="https://www.tiktok.com/@thelambnomansland" class="social-card">TikTok</a>
+  </div>
+
+  <h2>Extras</h2>
+  <div class="buttons">
+    <a href="https://www.thelambnomansland.co.uk//">Official Website</a>
+    <a href="home.html">⬅ Back to Home</a>
   </div>
 
   <footer>
