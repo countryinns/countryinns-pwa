@@ -5,6 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Bold Forester – Events</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #2e472e, #1e2b1e);
+      color: #f4f4f4;
+      text-align: center;
+    }
+
+    header {
+      padding: 1.5rem;
+      background: rgba(34, 49, 34, 0.9);
+      color: #e6d8b5;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .card {
+      background: #2e472e;
+      border-radius: 12px;
+      padding: 1rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+      color: #e6d8b5;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #f4f4f4;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem auto;
+      max-width: 300px;
+    }
+
+    .buttons a {
+      display: block;
+      background: #3c5a3c;
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .buttons a:hover {
+      background: #4f7c4f;
+    }
+  </style>
 </head>
 <body>
   <header>
