@@ -198,27 +198,48 @@
  <!-- Social Media Section -->
 <h2>Follow Us</h2>
 <div class="social-scroll">
-  <a href="https://www.facebook.com/p/The-Bold-Forester-New-Forest-100063726363407/" class="social-card">
-    <img src="icons/facebook.png" alt="Facebook">
-    <span>Facebook</span>
-  </a>
-  <a href="https://www.instagram.com/the_bold_forester/" class="social-card">
-    <img src="icons/instagram.png" alt="Instagram">
-    <span>Instagram</span>
-  </a>
-  <a href="https://www.tiktok.com/@theboldforester_" class="social-card">
-    <img src="icons/tiktok.png" alt="TikTok">
-    <span>TikTok</span>
-  </a>
-  <a href="https://twitter.com/ForesterBold" class="social-card">
-    <img src="icons/x.png" alt="X (Twitter)">
-    <span>X</span>
-  </a>
-  <a href="https://www.linkedin.com/company/the-bold-forester-new-forest/" class="social-card">
-    <img src="icons/linkedin.png" alt="LinkedIn">
-    <span>LinkedIn</span>
-  </a>
+  <a href="https://www.facebook.com/p/The-Bold-Forester-New-Forest-100063726363407/" class="social-card">Facebook</a>
+  <a href="https://www.instagram.com/the_bold_forester/" class="social-card">Instagram</a>
+  <a href="https://www.tiktok.com/@theboldforester_" class="social-card">TikTok</a>
+  <a href="https://twitter.com/ForesterBold" class="social-card">X</a>
+  <a href="https://www.linkedin.com/company/the-bold-forester-new-forest/" class="social-card">LinkedIn</a>
 </div>
+
+<style>
+  .social-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .social-scroll::-webkit-scrollbar {
+    display: none; /* hide scrollbar */
+  }
+
+  .social-card {
+    flex: 0 0 auto;
+    min-width: 150px;
+    padding: 1rem;
+    text-align: center;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    scroll-snap-align: start;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .social-card:hover {
+    transform: translateY(-3px);
+    background: #ececec;
+  }
+</style>
+
 
   <h2>Extras</h2>
   <div class="buttons">
