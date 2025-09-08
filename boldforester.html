@@ -48,26 +48,34 @@
       margin-top: 2rem;
     }
 
+    /* ✅ Unified button styles (The Royal Oak look) */
     .buttons {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 1rem;
-      margin-top: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
     }
 
     .buttons a {
-      display: block;
-      background: #3c5a3c;
-      color: #fff;
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #2c3e50; /* Dark background */
+      color: #ffffff;            /* White text */
       text-decoration: none;
-      padding: 1rem;
       border-radius: 8px;
       font-weight: bold;
-      transition: background 0.3s;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .buttons a:hover {
-      background: #4f7c4f;
+      background-color: #34495e; /* Hover lighter */
+      transform: translateY(-2px);
+    }
+
+    .buttons a:active {
+      background-color: #1a252f; /* Click darker */
+      transform: translateY(0);
     }
 
     /* Social scroll */
