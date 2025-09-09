@@ -27,18 +27,18 @@
 
     .card-grid {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1.5rem;
-      margin: 2rem 0;
+      margin: 2rem;
     }
 
     .card {
       background: #2e472e;
       border-radius: 12px;
       padding: 1rem;
-      max-width: 400px;
-      width: 100%;
+      max-width: 300px;
+      flex: 1 1 280px;
       text-align: center;
       transition: transform 0.2s ease;
     }
@@ -54,7 +54,7 @@
       margin-bottom: 1rem;
       display: block;
       margin-left: auto;
-      margin-right: auto; /* centers the image */
+      margin-right: auto;
     }
 
     .card h3 {
@@ -99,12 +99,58 @@
 
   <main>
     <div class="card-grid">
+      <!-- Card 1 -->
       <div class="card">
         <img src="berrys bakery-190x190.png" alt="Berry’s Bakery">
         <h3>🍰 Traditional & Handcrafted Bakes</h3>
         <p>
           Berry’s Bakery supplies us with delicious fresh cakes, perfect with a cuppa or as a sweet treat after your meal.
           Lovingly baked by hand and full of flavour, they’re a true local indulgence.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <img src="local-produce.jpg" alt="Local Produce">
+        <h3>🥕 Fresh from Local Farms</h3>
+        <p>
+          Our fruit and vegetables are sourced from nearby farms, ensuring freshness while supporting the community.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <img src="local-meat.jpg" alt="Butcher">
+        <h3>🥩 Quality Meats</h3>
+        <p>
+          We partner with trusted local butchers to bring you the best cuts, full of flavour and responsibly sourced.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <img src="local-dairy.jpg" alt="Dairy">
+        <h3>🧀 Dairy Goodness</h3>
+        <p>
+          Fresh milk, cream and artisan cheeses come from family-run dairies right here in Hampshire.
+        </p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <img src="local-brewery.jpg" alt="Brewery">
+        <h3>🍺 Crafted Beers</h3>
+        <p>
+          We proudly pour ales and lagers brewed just around the corner by passionate local brewers.
+        </p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <img src="local-distillery.jpg" alt="Distillery">
+        <h3>🥃 Distilled with Care</h3>
+        <p>
+          Spirits and gins from New Forest distilleries make our cocktails truly one-of-a-kind.
         </p>
       </div>
     </div>
