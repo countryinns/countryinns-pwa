@@ -118,19 +118,21 @@
       padding: 0 10px 15px;
     }
 
-    .event-card button {
-      background: #2e7d32;
-      color: white;
-      border: none;
-      padding: 10px 15px;
+    /* Button inside event cards */
+    .event-card .btn {
+      display: inline-block;
+      background-color: #2e7d32; /* green */
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
       margin-bottom: 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
+      transition: background-color 0.3s ease;
     }
 
-    .event-card button:hover {
-      background: #1b5e20;
+    .event-card .btn:hover {
+      background-color: #1b5e20; /* darker green on hover */
     }
 
     /* Footer */
@@ -161,50 +163,49 @@
     <p>Discover our 7 pubs in the heart of the New Forest</p>
   </header>
 
-<section>
-  <h2>Featured at Every Pub</h2>
-  <div class="events-scroll">
-    <div class="event-card">
-      <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
-      <h3>Festive Feast</h3>
-      <p>Book early (before the 31st of October) & save £5 per head on our December Festive Feast Menu.</p>
-    </div>
+  <!-- Featured at Every Pub -->
+  <section>
+    <h2>Featured at Every Pub</h2>
+    <div class="events-scroll">
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
+        <h3>Festive Feast</h3>
+        <p>Book early (before the 31st of October) & save £5 per head on our December Festive Feast Menu.</p>
+      </div>
 
-    <div class="event-card">
-      <img src="Seasonal Specials.png?auto=format&fit=crop&w=800&q=80" alt="Seasonal Specials">
-      <h3>Seasonal Specials</h3>
-      <p>Freshly crafted menus inspired by the New Forest seasons.</p>
-    </div>
+      <div class="event-card">
+        <img src="Seasonal Specials.png?auto=format&fit=crop&w=800&q=80" alt="Seasonal Specials">
+        <h3>Seasonal Specials</h3>
+        <p>Freshly crafted menus inspired by the New Forest seasons.</p>
+      </div>
 
-    <div class="event-card">
-      <img src="Roast Pork.jpg?auto=format&fit=crop&w=800&q=80" alt="Sunday Roast">
-      <h3>Sunday Roasts</h3>
-      <p>Join us every Sunday for delicious traditional home-cooked roasts, with all the trimmings.</p>
-    </div>
+      <div class="event-card">
+        <img src="Roast Pork.jpg?auto=format&fit=crop&w=800&q=80" alt="Sunday Roast">
+        <h3>Sunday Roasts</h3>
+        <p>Join us every Sunday for delicious traditional home-cooked roasts, with all the trimmings.</p>
+      </div>
 
-    <div class="event-card">
-      <img src="Dog Friendly.jpg?auto=format&fit=crop&w=800&q=80" alt="Dog Friendly">
-      <h3>Dog Friendly</h3>
-      <p>All our pubs are dog friendly, so bring your four legged friend(s) along.</p>
-    </div>
+      <div class="event-card">
+        <img src="Dog Friendly.jpg?auto=format&fit=crop&w=800&q=80" alt="Dog Friendly">
+        <h3>Dog Friendly</h3>
+        <p>All our pubs are dog friendly, so bring your four legged friend(s) along.</p>
+      </div>
 
-    <div class="event-card">
-      <img src="Local Ales & Fine Wines.png?auto=format&fit=crop&w=800&q=80" alt="Pouring Quality">
-      <h3>Pouring Quality</h3>
-      <p>Discover our fine local ales, and our carefully chosen wines, available across all Country Inns pubs.</p>
-    </div>
+      <div class="event-card">
+        <img src="Local Ales & Fine Wines.png?auto=format&fit=crop&w=800&q=80" alt="Pouring Quality">
+        <h3>Pouring Quality</h3>
+        <p>Discover our fine local ales, and our carefully chosen wines, available across all Country Inns pubs.</p>
+      </div>
 
-    <!-- New Proudly Local card -->
-    <div class="event-card">
-      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Proudly Local">
-      <h3>Proudly Local</h3>
-      <p>We proudly support local producers — from food to drinks — bringing the best of the New Forest to your table.</p>
-      <div class="buttons">
-        <a href="local.html" class="btn">Learn More</a>
+      <!-- New Proudly Local card -->
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Proudly Local">
+        <h3>Proudly Local</h3>
+        <p>We proudly support local producers, from food to drinks, bringing the best of the New Forest to your table.</p>
+        <a href="local.html" class="btn">Discover Our Local Partners</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Explore Our Pubs -->
   <section>
