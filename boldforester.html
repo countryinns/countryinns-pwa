@@ -87,6 +87,39 @@
     .opening-times a.email-link:hover {
       color: #e6d8b5;
     }
+/* Social scroll */
+.social-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.social-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.social-card {
+  flex: 0 0 auto;
+  min-width: 150px;
+  padding: 1rem;
+  text-align: center;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  scroll-snap-align: start;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.social-card:hover {
+  transform: translateY(-3px);
+  background: #ececec;
+}
 
     footer {
       margin-top: 2rem;
