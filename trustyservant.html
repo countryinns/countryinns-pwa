@@ -30,13 +30,6 @@
       max-width: 140px;
     }
 
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      background: url("images/lambinn.jpg") center/cover no-repeat;
-    }
-
     .content {
       padding: 1.5rem;
       max-width: 800px;
@@ -70,55 +63,11 @@
       background: #4f7c4f;
     }
 
-    .opening-times a.email-link {
-      color: #fff;               /* force white */
-      text-decoration: underline; /* keep underline for visibility */
-      font-weight: bold;          /* make it bold */
-    }
-
-    .opening-times a.email-link:hover {
-      color: #e6d8b5; /* subtle gold hover to match your theme */
-    }
-    
-    /* Social scroll */
-    .social-scroll {
-      display: flex;
-      overflow-x: auto;
-      gap: 1rem;
-      padding: 1rem 0;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .social-scroll::-webkit-scrollbar {
-      display: none;
-    }
-
-    .social-card {
-      flex: 0 0 auto;
-      min-width: 150px;
-      padding: 1rem;
-      text-align: center;
-      background: #f9f9f9;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      scroll-snap-align: start;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .social-card:hover {
-      transform: translateY(-3px);
-      background: #ececec;
-    }
-
- /* Opening Times Box */
+    /* Opening Times Box */
     .opening-times {
       margin: 2rem auto;
       max-width: 400px;
-      background: rgba(46, 71, 46, 0.9);
+      background: rgba(46, 71, 46, 0.95); /* slightly lighter so it stands out */
       padding: 1rem;
       border-radius: 12px;
       color: #f4f4f4;
@@ -128,7 +77,17 @@
       margin-top: 0;
       color: #e6d8b5;
     }
-    
+
+    .opening-times a.email-link {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .opening-times a.email-link:hover {
+      color: #e6d8b5;
+    }
+
     footer {
       margin-top: 2rem;
       padding: 1rem;
