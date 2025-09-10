@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Country Inns</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #2e472e, #1e2b1e);
+      color: #f4f4f4;
+      text-align: center;
+    }
+
+    header {
+      padding: 1.5rem;
+      background: rgba(34, 49, 34, 0.9);
+      color: #e6d8b5;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #2e472e;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-align: left;
+    }
+
+    .content h2 {
+      color: #e6d8b5;
+      margin-top: 0;
+    }
+
+    .content p {
+      line-height: 1.6;
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .value-card {
+      background: #3a5a3a;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .value-card h3 {
+      color: #e6d8b5;
+      margin-bottom: 0.5rem;
+    }
+
+    .value-card p {
+      font-size: 0.95rem;
+      color: #f4f4f4;
+    }
+
+    .buttons {
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .buttons a {
+      display: inline-block;
+      background: #3c5a3c;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .buttons a:hover {
+      background: #4f7c4f;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Country Inns</h1>
+  </header>
+
+  <main>
+    <div class="content">
+      <h2>Who We Are</h2>
+      <p>
+        Country Inns is a family of seven pubs in the heart of the New Forest.  
+        Each pub has its own charm and personality, but all share the same love of local produce, warm hospitality, and community spirit.
+      </p>
+
+      <p>
+        From cosy country inns to vibrant village pubs, our venues are the perfect place to enjoy locally sourced food and drink, celebrate special moments, or simply relax with friends and family.
+      </p>
+
+      <div class="values">
+        <div class="value-card">
+          <h3>🍽 Local Food</h3>
+          <p>We partner with New Forest farmers, bakers, and brewers to bring you fresh, seasonal flavours.</p>
+        </div>
+        <div class="value-card">
+          <h3>🍻 Community</h3>
+          <p>Our pubs are more than places to eat and drink — they’re a hub for local events and gatherings.</p>
+        </div>
+        <div class="value-card">
+          <h3>🌿 Heritage</h3>
+          <p>Rooted in tradition, each pub reflects the unique character and history of its village.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <a href="home.html">⬅ Back to Home</a>
+    </div>
+  </main>
+</body>
+</html>
