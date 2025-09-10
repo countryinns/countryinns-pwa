@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Festive Feast</title>
+  <style>
+    :root{--bg:#0f2f1f}
+    html,body{height:100%;margin:0}
+    body{
+      background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 8%), var(--bg);
+      display:flex;align-items:center;justify-content:center;padding:24px;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+    }
+    .card{
+      width:100%;max-width:900px;aspect-ratio:2/3; /* common poster ratio */
+      background:transparent;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 8px 30px rgba(0,0,0,0.45);border-radius:8px;overflow:hidden;
+    }
+    /* make image scale cleanly and remain sharp */
+    .card img{width:100%;height:100%;object-fit:cover;display:block;user-select:none}
+
+    /* smaller devices: allow taller poster */
+    @media (max-width:420px){
+      .card{max-width:420px;aspect-ratio:3/4}
+    }
+  </style>
+</head>
+<body>
+  <!--
+    This file expects the poster image to be located at the root and named exactly:
+    "£5 OFF.png"
+
+    Some servers/hosts don't like special characters in filenames. If you have issues
+    loading the image, try renaming it to: "pound-5-off.png" and update the src.
+  -->
+
+  <div class="card">
+    <!-- Using a URL-encoded filename to be safe. If your host prefers the raw name change to "/£5 OFF.png" -->
+    <img src="5POUNDSOFF.png" alt="Festive £5 off poster">
+  </div>
+</body>
+</html>
