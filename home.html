@@ -52,7 +52,7 @@
       padding: 14px 20px;
       font-size: 1.1rem;
       font-weight: bold;
-      display: none; /* auto-enabled by script */
+      display: none;
     }
 
     .promo-btn {
@@ -207,22 +207,21 @@
 </head>
 <body>
 
-  <!-- -------------------- HEADER -------------------- -->
+  <!-- HEADER -->
   <header>
     <h1>Welcome to Country Inns</h1>
     <h3>Discover our 7 pubs in the heart of the New Forest</h3>
   </header>
 
-  <!-- -------------------- PROMO BANNER (auto controlled) -------------------- -->
+  <!-- PROMO BANNER -->
   <div id="return-offer-banner" class="promo-banner">
-    <span id="promo-text"></span>
+    <span id="promo-text">Keep your receipt from any visit during December–March and enjoy <strong>25% OFF your food bill</strong> on your next visit. <em>Monday–Friday only.</em></span>
     <a href="promo-25.html" class="promo-btn">Learn More</a>
   </div>
 
-  <!-- -------------------- FEATURED SECTION -------------------- -->
+  <!-- FEATURED SECTION -->
   <section>
     <h2>Featured at Every Pub</h2>
-
     <div class="events-scroll">
 
       <!-- Festive Feast -->
@@ -280,7 +279,7 @@
     </div>
   </section>
 
-  <!-- -------------------- PUB GRID -------------------- -->
+  <!-- PUB GRID -->
   <section>
     <h2>Explore Our Pub Family</h2>
     <div class="pubs-grid">
@@ -328,36 +327,31 @@
     </div>
   </section>
 
-  <!-- -------------------- ABOUT SECTION -------------------- -->
+  <!-- ABOUT SECTION -->
   <section class="about-banner">
     <h2>About Country Inns</h2>
     <p>Country Inns is a family of traditional pubs in the New Forest, each with its own character but sharing a passion for great food, local produce, and warm hospitality.</p>
     <a href="about.html" class="about-btn">Read More</a>
   </section>
 
-  <!-- -------------------- FOOTER -------------------- -->
+  <!-- FOOTER -->
   <footer>
     <p>&copy; 2025 Country Inns | Proudly serving the New Forest</p>
   </footer>
 
-  <!-- -------------------- PROMO SCRIPT -------------------- -->
+  <!-- PROMO SCRIPT -->
   <script>
-    const today = new Date();
-    const month = today.getMonth() + 1;
-    const banner = document.getElementById("return-offer-banner");
-    const promoText = document.getElementById("promo-text");
+    (function() {
+      const today = new Date();
+      const month = today.getMonth() + 1; // 1–12
+      const day = today.getDay(); // 0 Sun–6 Sat
+      const banner = document.getElementById('return-offer-banner');
 
-    if (month >= 12 || month <= 3) {
-      banner.style.display = "block";
-
-      if (month === 12) {
-        promoText.textContent = "Keep your December receipt and enjoy 25% off your food bill on your next visit!";
+      // Show only Dec–Mar AND Mon–Fri
+      if ((month === 12 || month === 1 || month === 2 || month === 3) && day >= 1 && day <= 5) {
+        banner.style.display = 'block';
       }
-
-      if (month === 1 || month === 2 || month === 3) {
-        promoText.textContent = "Bring your receipt from any recent visit to get 25% off your food bill!";
-      }
-    }
+    })();
   </script>
 
 </body>
