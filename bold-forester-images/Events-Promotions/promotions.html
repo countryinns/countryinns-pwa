@@ -25,6 +25,33 @@
       font-size: 2rem;
     }
 
+    /* -------------------- PROMO BANNER -------------------- */
+    .promo-banner {
+      background: #2e7d32;
+      color: white;
+      padding: 14px 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin: 1rem auto;
+      max-width: 500px;
+    }
+
+    .promo-banner a {
+      display: inline-block;
+      margin-left: 10px;
+      background: #1b5e20;
+      padding: 6px 14px;
+      border-radius: 6px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .promo-banner a:hover {
+      background-color: #145016;
+    }
+
+    /* -------------------- CARD GRID -------------------- */
     .card-grid {
       display: flex;
       flex-direction: column;
@@ -65,6 +92,7 @@
       color: #f4f4f4;
     }
 
+    /* -------------------- BUTTONS -------------------- */
     .buttons {
       display: flex;
       flex-direction: column;
@@ -90,11 +118,22 @@
   </style>
 </head>
 <body>
+
   <header>
     <h1>Promotions</h1>
   </header>
 
   <main>
+
+    <!-- 25% Off Food Promo Banner -->
+    <div class="promo-banner">
+      Keep your receipt from any visit during December–March and enjoy 
+      <strong>25% OFF your food bill</strong> on your next visit. 
+      <em>Monday–Friday only.</em>
+      <a href="promo-25.html">Learn More</a>
+    </div>
+
+    <!-- Existing Card Grid -->
     <div class="card-grid">
       <div class="card">
         <img src="Bold Happy Hours.png" alt="Happy Hours">
@@ -102,10 +141,14 @@
         <p>Monday to Friday from 4pm till 6pm get 20% Off of all drinks.</p>
       </div>
     </div>
+
+    <!-- Navigation Buttons -->
+    <div class="buttons">
+      <a href="../../boldforester.html">⬅ Back to Pub Page</a>
+      <a href="../../home.html">⬅ Back to Home</a>
+    </div>
+
   </main>
 
-<div class="buttons">
-  <a href="../../boldforester.html">⬅ Back to Pub Page</a>
-  <a href="../../home.html">⬅ Back to Home</a>
-</div>
-
+</body>
+</html>
