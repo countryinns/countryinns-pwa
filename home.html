@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Country Inns</title>
   <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+
   <style>
+    /* -------------------- GLOBAL STYLES -------------------- */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -13,6 +15,17 @@
       color: #333;
     }
 
+    h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    /* -------------------- HEADER -------------------- */
     header {
       background: url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
       color: white;
@@ -26,22 +39,89 @@
       text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
     }
 
-    header p {
-      font-size: 1.2em;
-      margin: 10px 0 0;
+    header h3 {
+      font-size: 1.3em;
+      margin-top: 10px;
     }
 
-    section {
-      padding: 40px 20px;
+    /* -------------------- PROMO BANNER -------------------- */
+    .promo-banner {
+      background: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      display: none; /* auto-enabled by script */
+    }
+
+    .promo-btn {
+      display: inline-block;
+      margin-left: 10px;
+      background: #1b5e20;
+      padding: 6px 14px;
+      border-radius: 6px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+
+    .promo-btn:hover {
+      background-color: #145016;
+    }
+
+    /* -------------------- EVENTS CARDS -------------------- */
+    .events-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 20px;
+    }
+
+    .events-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .event-card {
+      flex: 0 0 250px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      scroll-snap-align: start;
+      transition: transform 0.2s;
       text-align: center;
     }
 
-    h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
+    .event-card:hover {
+      transform: translateY(-5px);
     }
 
-    /* Explore Inns */
+    .event-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .event-card .btn {
+      display: inline-block;
+      background-color: #2e7d32;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-bottom: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    .event-card .btn:hover {
+      background-color: #1b5e20;
+    }
+
+    /* -------------------- PUB GRID -------------------- */
     .pubs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -76,66 +156,46 @@
       font-weight: bold;
     }
 
-    /* Featured at Every Pub */
-    .events-scroll {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 20px;
-    }
-
-    .events-scroll::-webkit-scrollbar {
-      display: none;
-    }
-
-    .event-card {
-      flex: 0 0 250px;
-      background: white;
+    /* -------------------- ABOUT SECTION -------------------- */
+    .about-banner {
+      background: linear-gradient(135deg, #2e472e, #1e2b1e);
+      color: #f4f4f4;
+      text-align: center;
+      padding: 3rem 1.5rem;
       border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      scroll-snap-align: start;
-      transition: transform 0.2s;
+      margin: 2rem auto;
+      max-width: 1000px;
     }
 
-    .event-card:hover {
-      transform: translateY(-5px);
+    .about-banner h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #e6d8b5;
     }
 
-    .event-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
+    .about-banner p {
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
-    .event-card h3 {
-      margin: 10px 0;
-    }
-
-    .event-card p {
-      font-size: 0.9em;
-      padding: 0 10px 15px;
-    }
-
-    /* Button inside event cards */
-    .event-card .btn {
+    .about-btn {
       display: inline-block;
-      background-color: #2e7d32; /* green */
+      background-color: #2e7d32;
       color: #fff;
-      padding: 10px 18px;
+      padding: 12px 24px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      margin-bottom: 15px;
       transition: background-color 0.3s ease;
     }
 
-    .event-card .btn:hover {
-      background-color: #1b5e20; /* darker green on hover */
+    .about-btn:hover {
+      background-color: #1b5e20;
     }
 
-    /* Footer */
+    /* -------------------- FOOTER -------------------- */
     footer {
       background: #222;
       color: white;
@@ -143,183 +203,162 @@
       padding: 20px;
       margin-top: 40px;
     }
-
-    footer a {
-      color: #90caf9;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- -------------------- HEADER -------------------- -->
   <header>
     <h1>Welcome to Country Inns</h1>
     <h3>Discover our 7 pubs in the heart of the New Forest</h3>
   </header>
 
-<!-- Featured at Every Pub -->
-<section>
-  <h2>Featured at Every Pub</h2>
-
-  <div class="events-scroll">
-
-    <!-- Festive Feast -->
-    <div class="event-card">
-      <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
-      <h3>Festive Feast</h3>
-      <p><strong>Celebrate in style this December with our special Festive Feast Menu. Book early to unlock an exclusive offer!</strong></p>
-      <a href="festivefeast.html" class="btn">Find Out More</a>
-    </div>
-
-    <!-- Follow, Dine, Show – Save 25% -->
-    <div class="event-card">
-      <img src="25percentoff.jpeg" alt="Follow Dine Show Save 25%">
-      <h3>Follow, Dine, Show – Save 25%</h3>
-      <p><strong>Enjoy 25% off your food bill when you follow us on social media and return with your receipt in January, February, or March.</strong></p>
-      <a href="promo-25.html" class="btn">Learn More</a>
-    </div>
-
-    <!-- Seasonal Specials -->
-    <div class="event-card">
-      <img src="Seasonal Specials.png?auto=format&fit=crop&w=800&q=80" alt="Seasonal Specials">
-      <h3>Seasonal Specials</h3>
-      <p><strong>Freshly crafted menus inspired by the New Forest seasons.</strong></p>
-    </div>
-
-    <!-- Sunday Roasts -->
-    <div class="event-card">
-      <img src="Roast Pork.jpg?auto=format&fit=crop&w=800&q=80" alt="Sunday Roast">
-      <h3>Sunday Roasts</h3>
-      <p><strong>Join us every Sunday for delicious traditional home-cooked roasts, with all the trimmings.</strong></p>
-    </div>
-
-    <!-- Dog Friendly -->
-    <div class="event-card">
-      <img src="Dog Friendly.jpg?auto=format&fit=crop&w=800&q=80" alt="Dog Friendly">
-      <h3>Dog Friendly</h3>
-      <p><strong>All our pubs are dog friendly, so bring your four legged friend(s) along.</strong></p>
-    </div>
-
-    <!-- Pouring Quality -->
-    <div class="event-card">
-      <img src="Local Ales & Fine Wines.png?auto=format&fit=crop&w=800&q=80" alt="Pouring Quality">
-      <h3>Pouring Quality</h3>
-      <p><strong>Discover our fine local ales, and our carefully chosen wines, available across all our Country Inns pubs.</strong></p>
-    </div>
-
-    <!-- Proudly Local -->
-    <div class="event-card">
-      <img src="proudly local.png" alt="Proudly Local">
-      <h3>Proudly Local</h3>
-      <p><strong>We proudly support local producers, from food to drinks, bringing the best of the New Forest to your table.</strong></p>
-      <a href="local.html" class="btn">Discover Our Local Partners</a>
-    </div>
-
+  <!-- -------------------- PROMO BANNER (auto controlled) -------------------- -->
+  <div id="return-offer-banner" class="promo-banner">
+    <span id="promo-text"></span>
+    <a href="promo-25.html" class="promo-btn">Learn More</a>
   </div>
-</section>
 
-</section>
-  <!-- Explore Our Pubs -->
+  <!-- -------------------- FEATURED SECTION -------------------- -->
+  <section>
+    <h2>Featured at Every Pub</h2>
+
+    <div class="events-scroll">
+
+      <!-- Festive Feast -->
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Festive Feast">
+        <h3>Festive Feast</h3>
+        <p><strong>Celebrate in style this December with our special Festive Feast Menu. Book early to unlock an exclusive offer!</strong></p>
+        <a href="festivefeast.html" class="btn">Find Out More</a>
+      </div>
+
+      <!-- 25% Off Promo -->
+      <div class="event-card">
+        <img src="25percentoff.jpeg" alt="25% Off Promo">
+        <h3>Follow, Dine, Show – Save 25%</h3>
+        <p><strong>Keep your receipt from any visit and enjoy 25% off your food bill on your next visit.</strong></p>
+        <a href="promo-25.html" class="btn">Learn More</a>
+      </div>
+
+      <!-- Seasonal Specials -->
+      <div class="event-card">
+        <img src="Seasonal Specials.png" alt="Seasonal Specials">
+        <h3>Seasonal Specials</h3>
+        <p><strong>Freshly crafted menus inspired by the New Forest seasons.</strong></p>
+      </div>
+
+      <!-- Sunday Roasts -->
+      <div class="event-card">
+        <img src="Roast Pork.jpg" alt="Sunday Roast">
+        <h3>Sunday Roasts</h3>
+        <p><strong>Join us every Sunday for delicious traditional home-cooked roasts.</strong></p>
+      </div>
+
+      <!-- Dog Friendly -->
+      <div class="event-card">
+        <img src="Dog Friendly.jpg" alt="Dog Friendly">
+        <h3>Dog Friendly</h3>
+        <p><strong>All our pubs welcome you and your four-legged friends.</strong></p>
+      </div>
+
+      <!-- Pouring Quality -->
+      <div class="event-card">
+        <img src="Local Ales & Fine Wines.png" alt="Pouring Quality">
+        <h3>Pouring Quality</h3>
+        <p><strong>Enjoy our fine local ales and carefully selected wines.</strong></p>
+      </div>
+
+      <!-- Local Partners -->
+      <div class="event-card">
+        <img src="proudly local.png" alt="Proudly Local">
+        <h3>Proudly Local</h3>
+        <p><strong>We proudly support local producers across the New Forest.</strong></p>
+        <a href="local.html" class="btn">Discover Partners</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- -------------------- PUB GRID -------------------- -->
   <section>
     <h2>Explore Our Pub Family</h2>
     <div class="pubs-grid">
+
       <a class="pub-tile" href="boldforester.html">
         <img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester">
         <span>The Bold Forester</span>
       </a>
+
       <a class="pub-tile" href="lambinn.html">
         <img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn">
         <span>The Lamb Inn</span>
       </a>
+
       <a class="pub-tile" href="royaloak.html">
         <img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak">
         <span>The Royal Oak</span>
       </a>
+
       <a class="pub-tile" href="woolpack.html">
         <img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack">
         <span>The Woolpack</span>
       </a>
+
       <a class="pub-tile" href="fightingcocks.html">
         <img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks">
         <span>The Fighting Cocks</span>
       </a>
+
       <a class="pub-tile" href="trustyservant.html">
         <img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant">
         <span>The Trusty Servant</span>
       </a>
+
       <a class="pub-tile" href="newforestinn.html">
         <img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn">
         <span>The New Forest Inn</span>
       </a>
+
       <a class="pub-tile" href="find-us.html">
         <img src="find us.png" alt="Find our nearest Pub">
         <span>Find Our Nearest Pub</span>
       </a>
+
     </div>
   </section>
 
-  <!-- About Us Banner -->
-<section class="about-banner">
-  <div class="about-content">
+  <!-- -------------------- ABOUT SECTION -------------------- -->
+  <section class="about-banner">
     <h2>About Country Inns</h2>
-    <p>
-      Country Inns is a family of traditional pubs in the New Forest, each with its own character 
-      but sharing a love of local food, drink, and community.
-    </p>
+    <p>Country Inns is a family of traditional pubs in the New Forest, each with its own character but sharing a passion for great food, local produce, and warm hospitality.</p>
     <a href="about.html" class="about-btn">Read More</a>
-  </div>
-</section>
+  </section>
 
-<style>
-  .about-banner {
-    background: linear-gradient(135deg, #2e472e, #1e2b1e);
-    color: #f4f4f4;
-    text-align: center;
-    padding: 3rem 1.5rem;
-    border-radius: 12px;
-    margin: 2rem auto;
-    max-width: 1000px;
-  }
-
-  .about-banner h2 {
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    color: #e6d8b5;
-  }
-
-  .about-banner p {
-    max-width: 700px;
-    margin: 0 auto 1.5rem;
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-
-  .about-btn {
-    display: inline-block;
-    background-color: #2e7d32;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
-
-  .about-btn:hover {
-    background-color: #1b5e20;
-  }
-</style>
-
-  <!-- Footer -->
+  <!-- -------------------- FOOTER -------------------- -->
   <footer>
     <p>&copy; 2025 Country Inns | Proudly serving the New Forest</p>
   </footer>
+
+  <!-- -------------------- PROMO SCRIPT -------------------- -->
+  <script>
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const banner = document.getElementById("return-offer-banner");
+    const promoText = document.getElementById("promo-text");
+
+    if (month >= 12 || month <= 3) {
+      banner.style.display = "block";
+
+      if (month === 12) {
+        promoText.textContent = "Keep your December receipt and enjoy 25% off your food bill on your next visit!";
+      }
+
+      if (month === 1 || month === 2 || month === 3) {
+        promoText.textContent = "Bring your receipt from any recent visit to get 25% off your food bill!";
+      }
+    }
+  </script>
 
 </body>
 </html>
