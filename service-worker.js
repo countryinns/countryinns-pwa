@@ -1,3 +1,6 @@
+importScripts('https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js');
+
+
 const CACHE_VERSION = 'v4';
 const CACHE_NAME = `countryinns-cache-${CACHE_VERSION}`;
 const APP_SCOPE = '/countryinns-pwa/';
