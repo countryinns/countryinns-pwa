@@ -63,11 +63,10 @@
       background: #4f7c4f;
     }
 
-    /* Opening Times Box */
     .opening-times {
       margin: 2rem auto;
       max-width: 400px;
-      background: rgba(46, 71, 46, 0.95); /* slightly lighter so it stands out */
+      background: rgba(46, 71, 46, 0.95);
       padding: 1rem;
       border-radius: 12px;
       color: #f4f4f4;
@@ -87,39 +86,39 @@
     .opening-times a.email-link:hover {
       color: #e6d8b5;
     }
-/* Social scroll */
-.social-scroll {
-  display: flex;
-  overflow-x: auto;
-  gap: 1rem;
-  padding: 1rem 0;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
 
-.social-scroll::-webkit-scrollbar {
-  display: none;
-}
+    .social-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
 
-.social-card {
-  flex: 0 0 auto;
-  min-width: 150px;
-  padding: 1rem;
-  text-align: center;
-  background: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  scroll-snap-align: start;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
+    .social-scroll::-webkit-scrollbar {
+      display: none;
+    }
 
-.social-card:hover {
-  transform: translateY(-3px);
-  background: #ececec;
-}
+    .social-card {
+      flex: 0 0 auto;
+      min-width: 150px;
+      padding: 1rem;
+      text-align: center;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      scroll-snap-align: start;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .social-card:hover {
+      transform: translateY(-3px);
+      background: #ececec;
+    }
 
     footer {
       margin-top: 2rem;
@@ -137,7 +136,6 @@
   <section>
     <div class="about">
       <p>Welcome to The Bold Forester, Marchwood — A traditional country pub at the edge of the new forest, where great food, fine drinks & good company come together.
-        
         A lively and welcoming pub offering exceptional dining, a warm atmosphere & excellent drinks Explore our menus, book a table, and see what’s on.</p>
     </div>
   </section>
@@ -158,14 +156,12 @@
     <a href="bold-forester-images/bold-forester-menus/cocktail-menu/Cocktail-Menu-2025.html">Cocktail Menu</a>
   </div>
 
-<!-- Links to Events & Promotions -->
   <h2>What’s On</h2>
   <div class="buttons">
     <a href="bold-forester-images/Events-Promotions/events.html">View Events</a>
     <a href="bold-forester-images/Events-Promotions/promotions.html">View Promotions</a>
   </div>
 
-  <!-- Social Media Section -->
   <h2>Follow Us</h2>
   <div class="social-scroll">
     <a href="https://www.facebook.com/FightingCocksPub/" class="social-card">Facebook</a>
@@ -174,7 +170,7 @@
     <a href="https://x.com/ForesterBold" class="social-card">X</a>
     <a href="https://www.linkedin.com/company/70347145/admin/dashboard/" class="social-card">LinkedIn</a>
   </div>
-  
+
   <h2>Extras</h2>
   <div class="buttons">
     <a href="tel:02380175588">📞 Call Us</a>
@@ -202,5 +198,8 @@
   <footer>
     © 2025 Country Inns – The Bold Forester
   </footer>
+
+  <!-- Global app.js: offline banner + OneSignal -->
+  <script src="app.js"></script>
 </body>
 </html>
