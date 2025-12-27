@@ -1,7 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Royal Oak – Pub Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  background: #1e2b1e;
+  color: #f4f4f4;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  padding: 1rem;
+}
+
+.gallery img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
 <h1>Pub Gallery</h1>
 
 <div class="gallery">
-  <img src="ROB.jpg">
+  <img src="ROB.jpg" alt="Royal Oak pub">
 </div>
 
-<a href="./">← Back</a>
+<a href="./" style="color:#e6d8b5;">← Back to Gallery</a>
+
+</body>
+</html>
