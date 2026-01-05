@@ -23,13 +23,12 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      /* ❌ removed justify-content:center */
       padding:24px;
 
       font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
       color:#fff;
 
-      overflow-y:auto; /* ✅ allow scrolling */
+      overflow-y:auto;
     }
 
     .card {
@@ -50,7 +49,7 @@
     .card img {
       width:100%;
       height:100%;
-      object-fit:contain; /* ✅ ensures full poster visible */
+      object-fit:contain;
       display:block;
       user-select:none;
     }
@@ -60,6 +59,32 @@
         max-width:420px;
         aspect-ratio:3/4;
       }
+    }
+
+    .terms {
+      max-width:900px;
+      margin-top:20px;
+      background:rgba(255,255,255,0.05);
+      padding:16px 18px;
+      border-radius:8px;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .terms h3 {
+      margin-top:0;
+      margin-bottom:8px;
+      font-size:16px;
+      font-weight:600;
+    }
+
+    .terms ul {
+      padding-left:18px;
+      margin:0;
+    }
+
+    .terms li {
+      margin-bottom:6px;
     }
 
     .buttons {
@@ -90,6 +115,18 @@
       src="Trusty Copy jan Feb Mar Promo.png"
       alt="25% Off Promotion – valid across all Country Inns pubs"
     >
+  </div>
+
+  <!-- Terms & Conditions -->
+  <div class="terms">
+    <h3>Terms & Conditions</h3>
+    <ul>
+      <li>Offer valid Monday to Friday only.</li>
+      <li>Offer valid from 5th January until 27th March.</li>
+      <li>Not valid in conjunction with any other offer or promotion.</li>
+      <li>Discount applies to food items only; drinks are excluded.</li>
+      <li>Management reserves the right to amend or withdraw this offer at any time.</li>
+    </ul>
   </div>
 
   <!-- Back Button -->
