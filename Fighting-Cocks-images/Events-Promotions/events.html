@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Fighting Cocks – Valentine’s Weekend</title>
+  <title>The Fighting Cocks – Upcoming Events</title>
 
   <style>
     body {
@@ -27,8 +27,9 @@
 
     .card-grid {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column; /* stacked vertically */
+      align-items: center;    /* centred horizontally */
+      gap: 2rem;
       margin: 2rem 0;
     }
 
@@ -62,6 +63,11 @@
       font-size: 0.95rem;
       line-height: 1.5;
       margin: 0.6rem 0;
+    }
+
+    .card .highlight {
+      font-style: italic;
+      color: #e6d8b5;
     }
 
     .card-link {
@@ -113,78 +119,53 @@
 
   <main>
     <div class="card-grid">
-      <div class="card">
 
+      <!-- Valentine’s Weekend Card -->
+      <div class="card">
         <img src="Valentines Day Dinner Poster.png" alt="Valentine’s Weekend at The Fighting Cocks">
 
         <h3>Valentine’s Weekend</h3>
 
-        <p>
-          If you’ve loved us before… Valentine’s is the perfect excuse to come back ❤️
-        </p>
+        <p>If you’ve loved us before… Valentine’s is the perfect excuse to come back ❤️</p>
 
-        <p>
-          Enjoy a whole weekend of love with romantic specials alongside favourites from our regular menu.
-        </p>
+        <p>Enjoy a whole weekend of love with romantic specials alongside favourites from our regular menu.</p>
 
-        <p>
-          <strong>Friday 13th – Sunday 15th February 2026</strong>
-        </p>
+        <p><strong>Friday 13th – Sunday 15th February 2026</strong></p>
 
         <p>
           <a href="https://thefightingcockspub.co.uk/food/#restaurant_form"
-             class="card-link"
-             target="_blank">
+             class="card-link" target="_blank">
             Book your table now
           </a>
         </p>
 
+        <p>or call <strong>01425 655686</strong></p>
+      </div>
+
+      <!-- Mothering Sunday Card -->
+      <div class="card">
+        <img src="White Pink Floral Mother's Day Your Story.png" alt="Mothering Sunday at The Fighting Cocks">
+
+        <h3>Mothering Sunday</h3>
+
+        <p><strong>Sunday 15th March</strong></p>
+
+        <p>Celebrate Mum with great food & a relaxed day out — treat Mum to a delicious meal at The Fighting Cocks.</p>
+
+        <p>Enjoy our Mothering Sunday specials alongside favourites from our regular menu.</p>
+
+        <p class="highlight">A special day for Mum 🌸</p>
+        <p class="highlight">Tables fill fast – booking recommended 🌸</p>
+
         <p>
-          or call <strong>01425 655686</strong>
+          <a href="https://thefightingcockspub.co.uk/food/#restaurant_form"
+             class="card-link" target="_blank">
+            Book your table now
+          </a>
         </p>
 
+        <p>or call <strong>01425 655686</strong></p>
       </div>
-  <div class="card-grid">
-    <div class="card">
-
-    <img src="Mothering Sunday.png"
-         alt="Mothering Sunday at The Fighting Cocks">
-
-    <h3>Mothering Sunday</h3>
-
-    <p>
-      <strong>Sunday 15th March</strong>
-    </p>
-
-    <p>
-      Celebrate Mum with great food & a relaxed day out —  
-      treat Mum to a delicious meal at The Fighting Cocks.
-    </p>
-
-    <p>
-      Enjoy our Mothering Sunday specials alongside favourites from our regular menu.
-    </p>
-    <p> style="font-style: italic; color: #e6d8b5;">
-      A special day for Mum 🌸
-    </p>
-    <p> style="font-style: italic; color: #e6d8b5;">
-      Tables fill fast – booking recommended 🌸
-    </p>
-
-    <p>
-      <a href="https://thefightingcockspub.co.uk/food/#restaurant_form"
-         class="card-link"
-         target="_blank">
-        Book your table now
-      </a>
-    </p>
-
-    <p>
-      or call <strong>01425 655686</strong>
-    </p>
-
-  </div>
-</div>
 
     </div>
   </main>
