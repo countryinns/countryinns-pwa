@@ -66,12 +66,18 @@
       margin-bottom: 1rem;
     }
 
-    .card a {
-      display: inline-block;
+    /* Style for all card links (visited and unvisited) */
+    .card a:link,
+    .card a:visited {
       color: #e6d8b5;
       text-decoration: underline;
       font-weight: bold;
       margin-top: 0.5rem;
+      display: inline-block;
+    }
+
+    .card a:hover {
+      color: #fff;
     }
 
     .buttons {
