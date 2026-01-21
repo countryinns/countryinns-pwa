@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Bold Forester – Promotions</title>
-  <link rel="stylesheet" href="style.css">
+  <title>The New Forest Inn – Promotions</title>
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -25,6 +25,10 @@
       font-size: 2rem;
     }
 
+    main {
+      padding: 1rem;
+    }
+
     .card-grid {
       display: flex;
       flex-direction: column;
@@ -35,34 +39,43 @@
 
     .card {
       background: #2e472e;
-      border-radius: 12px;
-      padding: 1rem;
-      max-width: 400px;
+      border-radius: 14px;
+      padding: 1.25rem;
+      max-width: 420px;
       width: 100%;
       text-align: center;
-      transition: transform 0.2s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.35);
     }
 
     .card img {
       max-width: 100%;
       height: auto;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-bottom: 1rem;
     }
 
     .card h3 {
-      margin: 0.5rem 0;
+      margin: 0.5rem 0 0.75rem;
       color: #e6d8b5;
+      font-size: 1.3rem;
     }
 
     .card p {
       font-size: 0.95rem;
-      line-height: 1.5;
+      line-height: 1.6;
       color: #f4f4f4;
+    }
+
+    .card a {
+      color: #e6d8b5;
+      text-decoration: underline;
+      font-weight: 600;
     }
 
     .buttons {
@@ -70,7 +83,8 @@
       flex-direction: column;
       gap: 1rem;
       margin: 2rem auto;
-      max-width: 300px;
+      max-width: 320px;
+      padding-bottom: 2rem;
     }
 
     .buttons a {
@@ -79,9 +93,9 @@
       color: #fff;
       text-decoration: none;
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: bold;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
 
     .buttons a:hover {
@@ -89,40 +103,53 @@
     }
   </style>
 </head>
-<body>
-  <header>
-    <h1>Promotions</h1>
-  </header>
 
-  <main>
-    <div class="card-grid">
-  <div class="card">
-    <img src="Winter-Warmer-Room-Deal-2026.jpg" alt="Winter Warmer Room Deal">
-    <h3>Winter Warmer Room Deal</h3>
-    <p>
-      Did you know we have eight cosy rooms here at <strong>The New Forest Inn</strong>?<br><br>
-      Warm up this winter with our fantastic <strong>Winter Warmer</strong> offer – 
-      <strong>book for three nights and only pay for two!</strong><br><br>
-      This deal is valid <strong>seven days a week</strong> until <strong>26th March</strong>.<br><br>
-      Book direct on our website to grab this fabulous offer:<br>
-      <a href="https://www.thenewforestinn.co.uk/" target="_blank" style="color:#e6d8b5; text-decoration:underline;">
-        www.thenewforestinn.co.uk
-      </a><br>
-      or call <strong>02380 284690</strong>.
-    </p>
+<body>
+
+<header>
+  <h1>Current Promotions</h1>
+</header>
+
+<main>
+
+  <div class="card-grid">
+
+    <!-- Winter Warmer Room Deal -->
+    <div class="card">
+      <img src="Winter-Warmer-Room-Deal-2026.jpg" alt="Winter Warmer Room Deal">
+      <h3>Winter Warmer Room Deal</h3>
+      <p>
+        Did you know we have <strong>eight cosy rooms</strong> here at <strong>The New Forest Inn</strong>?<br><br>
+        Treat yourself to our fantastic <strong>Winter Warmer</strong> offer —
+        <strong>book for three nights and only pay for two!</strong><br><br>
+        Valid <strong>seven days a week</strong> until <strong>26th March</strong>.<br><br>
+        Book direct on our website to secure this deal:<br>
+        <a href="https://www.thenewforestinn.co.uk/" target="_blank" rel="noopener">
+          www.thenewforestinn.co.uk
+        </a><br><br>
+        Or call us on <strong>02380 284690</strong>.
+      </p>
     </div>
+
+    <!-- 25% Food Offer -->
+    <div class="card">
+      <img src="../../Trusty Copy jan Feb Mar Promo.png" alt="25% Off Food Promotion">
+      <h3>Follow, Dine & Save 25%</h3>
+      <p>
+        Dine with us between <strong>December and March</strong> and keep your receipt.<br><br>
+        Bring it back on your next visit and enjoy <strong>25% OFF your food bill</strong>.<br><br>
+        <em>Available Monday to Friday only.</em>
+      </p>
+    </div>
+
   </div>
 
-      <div class="card">
-        <img src="../../Trusty Copy jan Feb Mar Promo.png" alt="25% Off Food Promo">
-        <h3>Follow, Dine, Show – Save 25%</h3>
-        <p>Keep your receipt from any visit during December–March and enjoy <strong>25% off your food bill</strong> on your next visit. <em>Monday–Friday only.</em></p>
-        <a href="promo-25.html"></a>
-      </div>
-    </div>
-  </main>
+</main>
 
 <div class="buttons">
   <a href="../../newforestinn.html">⬅ Back to Pub Page</a>
   <a href="../../home.html">⬅ Back to Home</a>
 </div>
+
+</body>
+</html>
