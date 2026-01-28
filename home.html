@@ -44,6 +44,37 @@
       margin-top: 10px;
     }
 
+    /* -------------------- GLOBAL EVENT NOTICE -------------------- */
+    .global-notice {
+      background: linear-gradient(135deg, #8b1d3a, #b03052);
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .global-notice span {
+      display: block;
+      font-weight: normal;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .global-notice a {
+      display: inline-block;
+      margin-top: 8px;
+      background: rgba(255,255,255,0.15);
+      padding: 6px 14px;
+      border-radius: 6px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .global-notice a:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
     /* -------------------- PROMO BANNER -------------------- */
     .promo-banner {
       background: #2e7d32;
@@ -218,6 +249,13 @@
     <h3>Discover our 7 pubs in the heart of the New Forest</h3>
   </header>
 
+  <!-- GLOBAL VALENTINE'S NOTICE (change text for Mother's Day later) -->
+  <div class="global-notice">
+    ❤️ Valentine’s Weekend Across All Country Inns
+    <span>Friday 13th – Sunday 15th February</span>
+    <a href="valentines.html">View Menus & Book</a>
+  </div>
+
   <!-- PROMO BANNER -->
   <div class="promo-banner">
     Keep your receipt from any visit and enjoy <strong>25% OFF your food bill</strong> on your next visit
@@ -231,13 +269,21 @@
 
     <div class="events-scroll">
 
+      <!-- GLOBAL VALENTINE'S CARD -->
+      <div class="event-card">
+        <img src="valentines-global.jpg" alt="Valentine’s Weekend">
+        <h3>Valentine’s Weekend</h3>
+        <p><strong>
+          Celebrate love across all Country Inns with romantic specials and classic favourites.
+        </strong></p>
+        <a href="valentines.html" class="btn">Find Your Pub</a>
+      </div>
+
       <div class="event-card">
         <img src="Country Inns Voucher.jpg" alt="Vouchers">
         <h3>Gift Vouchers</h3>
         <p><strong>
-          The perfect gift to spend all year round!
-          These can be purchased and redeemed throughout all of our Country Inns sites!
-          Terms & Conditions apply!
+          The perfect gift to enjoy all year round at any Country Inns pub.
         </strong></p>
         <a href="Voucher.html" class="btn">Learn More</a>
       </div>
@@ -245,31 +291,31 @@
       <div class="event-card">
         <img src="Seasonal Specials.png" alt="Seasonal Specials">
         <h3>Seasonal Specials</h3>
-        <p><strong>Freshly crafted menus inspired by the New Forest seasons.</strong></p>
+        <p><strong>Menus inspired by the changing seasons of the New Forest.</strong></p>
       </div>
 
       <div class="event-card">
         <img src="Roast Pork.jpg" alt="Sunday Roast">
         <h3>Sunday Roasts</h3>
-        <p><strong>Traditional home-cooked roasts with all the trimmings.</strong></p>
+        <p><strong>Traditional roasts with all the trimmings, every Sunday.</strong></p>
       </div>
 
       <div class="event-card">
         <img src="Dog Friendly.jpg" alt="Dog Friendly">
         <h3>Dog Friendly</h3>
-        <p><strong>All our pubs are dog friendly – bring your four-legged friends.</strong></p>
+        <p><strong>Four-legged friends welcome at all our pubs.</strong></p>
       </div>
 
       <div class="event-card">
         <img src="Local Ales & Fine Wines.png" alt="Pouring Quality">
         <h3>Pouring Quality</h3>
-        <p><strong>Local ales and carefully selected wines across all pubs.</strong></p>
+        <p><strong>Local ales and carefully chosen wines at every pub.</strong></p>
       </div>
 
       <div class="event-card">
         <img src="proudly local.png" alt="Proudly Local">
         <h3>Proudly Local</h3>
-        <p><strong>Supporting local producers throughout the New Forest.</strong></p>
+        <p><strong>Supporting local producers across the New Forest.</strong></p>
         <a href="local.html" class="btn">Discover Our Partners</a>
       </div>
 
@@ -281,55 +327,23 @@
     <h2>Explore Our Pub Family</h2>
 
     <div class="pubs-grid">
-      <a class="pub-tile" href="boldforester.html">
-        <img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester">
-        <span>The Bold Forester</span>
-      </a>
-
-      <a class="pub-tile" href="lambinn.html">
-        <img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn">
-        <span>The Lamb Inn</span>
-      </a>
-
-      <a class="pub-tile" href="royaloak.html">
-        <img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak">
-        <span>The Royal Oak</span>
-      </a>
-
-      <a class="pub-tile" href="woolpack.html">
-        <img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack">
-        <span>The Woolpack</span>
-      </a>
-
-      <a class="pub-tile" href="fightingcocks.html">
-        <img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks">
-        <span>The Fighting Cocks</span>
-      </a>
-
-      <a class="pub-tile" href="trustyservant.html">
-        <img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant">
-        <span>The Trusty Servant</span>
-      </a>
-
-      <a class="pub-tile" href="newforestinn.html">
-        <img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn">
-        <span>The New Forest Inn</span>
-      </a>
-
-      <a class="pub-tile" href="find-us.html">
-        <img src="find us.png" alt="Find our nearest pub">
-        <span>Find Our Nearest Pub</span>
-      </a>
+      <a class="pub-tile" href="boldforester.html"><img src="bold-forester-images/Restaurant Images/boldforestermain.jpg"><span>The Bold Forester</span></a>
+      <a class="pub-tile" href="lambinn.html"><img src="Lamb-Inn-images/LambInn.jpg"><span>The Lamb Inn</span></a>
+      <a class="pub-tile" href="royaloak.html"><img src="Royal-Oak-images/The Royal Oak.jpeg"><span>The Royal Oak</span></a>
+      <a class="pub-tile" href="woolpack.html"><img src="Woolpack-images/Woolpack.jpg"><span>The Woolpack</span></a>
+      <a class="pub-tile" href="fightingcocks.html"><img src="Fighting-Cocks-images/fighting-coq-scaled.jpg"><span>The Fighting Cocks</span></a>
+      <a class="pub-tile" href="trustyservant.html"><img src="Trusty-Servant-images/Trusty.jpg"><span>The Trusty Servant</span></a>
+      <a class="pub-tile" href="newforestinn.html"><img src="New-Forest-Inn-images/NFI.jpg"><span>The New Forest Inn</span></a>
+      <a class="pub-tile" href="find-us.html"><img src="find us.png"><span>Find Our Nearest Pub</span></a>
     </div>
   </section>
 
-  <!-- ABOUT SECTION -->
+  <!-- ABOUT -->
   <section class="about-banner">
     <h2>About Country Inns</h2>
     <p>
-      Country Inns is a family of traditional pubs in the New Forest,
-      each with its own character but sharing a passion for great food,
-      local produce, and warm hospitality.
+      A family of welcoming pubs across the New Forest, sharing a passion for great food,
+      local produce and genuine hospitality.
     </p>
     <a href="about.html" class="about-btn">Read More</a>
   </section>
@@ -338,9 +352,7 @@
   <footer>
     <p>&copy; 2025 Country Inns | Proudly serving the New Forest</p>
   </footer>
- <!-- Global app.js: offline banner + OneSignal -->
+
   <script src="app.js"></script>
-</body>
-</html>
 </body>
 </html>
