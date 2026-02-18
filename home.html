@@ -1,11 +1,10 @@
-<!DOCTYPE html> 
+How to change the blog to look more like my PWA? This is my whole home.html '<!DOCTYPE html> 
 <html lang="en"> 
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>Country Inns</title> 
 <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png"> 
-
 <style> 
 body { 
 margin: 0; 
@@ -13,35 +12,29 @@ font-family: Arial, sans-serif;
 background-color: #f5f5f5; 
 color: #333; 
 } 
-
 h2 { 
 font-size: 2em; 
 margin-bottom: 20px; 
 } 
-
 section { 
 padding: 40px 20px; 
 text-align: center; 
 } 
-
 header { 
 background: url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat; 
 color: white; 
 text-align: center; 
 padding: 80px 20px; 
 } 
-
 header h1 { 
 font-size: 2.5em; 
 margin: 0; 
 text-shadow: 2px 2px 5px rgba(0,0,0,0.6); 
 } 
-
 header h3 { 
 font-size: 1.3em; 
 margin-top: 10px; 
 } 
-
 .global-notice { 
 background: linear-gradient(135deg, #8b1d3a, #b03052); 
 color: #fff; 
@@ -50,14 +43,12 @@ padding: 14px 20px;
 font-size: 1rem; 
 font-weight: bold; 
 } 
-
 .global-notice span { 
 display: block; 
 font-weight: normal; 
 font-size: 0.9rem; 
 margin-top: 4px; 
 } 
-
 .promo-banner { 
 background: #2e7d32; 
 color: white; 
@@ -66,14 +57,12 @@ padding: 14px 20px;
 font-size: 1.05rem; 
 font-weight: bold; 
 } 
-
 .promo-banner em { 
 display: block; 
 margin-top: 4px; 
 font-size: 0.95rem; 
 font-weight: normal; 
 } 
-
 .promo-btn { 
 display: inline-block; 
 margin-left: 10px; 
@@ -85,11 +74,9 @@ text-decoration: none;
 font-size: 0.95rem; 
 font-weight: bold; 
 } 
-
 .promo-btn:hover { 
 background-color: #145016; 
 } 
-
 .events-scroll { 
 display: flex; 
 gap: 20px; 
@@ -97,11 +84,9 @@ overflow-x: auto;
 scroll-snap-type: x mandatory; 
 padding-bottom: 20px; 
 } 
-
 .events-scroll::-webkit-scrollbar { 
 display: none; 
 } 
-
 .event-card { 
 flex: 0 0 250px; 
 background: white; 
@@ -112,27 +97,22 @@ scroll-snap-align: start;
 transition: transform 0.2s; 
 text-align: center; 
 } 
-
 .event-card:hover { 
 transform: translateY(-5px); 
 } 
-
 .event-card img { 
 width: 100%; 
 height: 150px; 
 object-fit: cover; 
 } 
-
 .event-card h3 { 
 margin: 15px 0 10px; 
 } 
-
 .event-card p { 
 padding: 0 15px 15px; 
 font-size: 0.95rem; 
 line-height: 1.4; 
 } 
-
 .event-card .btn { 
 display: inline-block; 
 background-color: #2e7d32; 
@@ -143,17 +123,14 @@ text-decoration: none;
 font-weight: bold; 
 margin-bottom: 15px; 
 } 
-
 .event-card .btn:hover { 
 background-color: #1b5e20; 
 } 
-
 .pubs-grid { 
 display: grid; 
 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
 gap: 20px; 
 } 
-
 .pub-tile { 
 background: white; 
 border-radius: 12px; 
@@ -165,38 +142,19 @@ transition: transform 0.2s;
 display: flex; 
 flex-direction: column; 
 } 
-
 .pub-tile:hover { 
 transform: translateY(-5px); 
 } 
-
 .pub-tile img { 
 width: 100%; 
 height: 180px; 
 object-fit: cover; 
 } 
-
 .pub-tile span { 
 padding: 15px; 
 font-size: 1.1em; 
 font-weight: bold; 
 } 
-
-.journal-wrapper {
-background: white;
-border-radius: 12px;
-box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-overflow: hidden;
-max-width: 1100px;
-margin: 0 auto;
-}
-
-.journal-wrapper iframe {
-width: 100%;
-height: 900px;
-border: none;
-}
-
 .about-banner { 
 background: linear-gradient(135deg, #2e472e, #1e2b1e); 
 color: #f4f4f4; 
@@ -206,20 +164,17 @@ border-radius: 12px;
 margin: 2rem auto; 
 max-width: 1000px; 
 } 
-
 .about-banner h2 { 
 margin-bottom: 1rem; 
 font-size: 2rem; 
 color: #e6d8b5; 
 } 
-
 .about-banner p { 
 max-width: 700px; 
 margin: 0 auto 1.5rem; 
 font-size: 1.1rem; 
 line-height: 1.6; 
 } 
-
 .about-btn { 
 display: inline-block; 
 background-color: #2e7d32; 
@@ -229,11 +184,9 @@ border-radius: 8px;
 text-decoration: none; 
 font-weight: bold; 
 } 
-
 .about-btn:hover { 
 background-color: #1b5e20; 
 } 
-
 footer { 
 background: #222; 
 color: white; 
@@ -243,42 +196,110 @@ margin-top: 40px;
 } 
 </style> 
 </head> 
-
 <body> 
-
 <header> 
 <h1>Welcome to Country Inns</h1> 
 <h3>Discover our 7 pubs in the heart of the New Forest</h3> 
 </header> 
-
 <div class="global-notice"> 
 🌷 Mother’s Day Across All Country Inns 
 <span>Sunday 15th March</span> 
 </div> 
-
 <div class="promo-banner"> 
 Keep your receipt from any visit and enjoy <strong>25% OFF your food bill</strong> on your next visit 
 <a href="promo-25.html" class="promo-btn">Learn More</a> 
 <em>Valid January – March | Monday to Friday only</em> 
 </div> 
-
+<section> 
+<h2>Featured at Every Pub</h2> 
+<div class="events-scroll"> 
+<div class="event-card"> 
+<img src="Mothers Day.png" alt="Mother’s Day"> 
+<h3>Mother’s Day</h3> 
+<p><strong> 
+Treat Mum to something special with a delicious Sunday roast, sweet treats and quality family time. 
+Tables fill fast, so book early to avoid missing out. 
+</strong></p> 
+</div> 
+<div class="event-card"> 
+<img src="Country Inns Voucher.jpg" alt="Gift Vouchers"> 
+<h3>Gift Vouchers</h3> 
+<p><strong> 
+The perfect gift to enjoy all year round at any Country Inns pub. 
+</strong></p> 
+<a href="Voucher.html" class="btn">Learn More</a> 
+</div> 
+<div class="event-card"> 
+<img src="Seasonal Specials.png" alt="Seasonal Specials"> 
+<h3>Seasonal Specials</h3> 
+<p><strong> 
+Menus inspired by the changing seasons of the New Forest. 
+</strong></p> 
+</div> 
+<div class="event-card"> 
+<img src="Roast Pork.jpg" alt="Sunday Roast"> 
+<h3>Sunday Roasts</h3> 
+<p><strong> 
+Traditional roasts with all the trimmings, every Sunday. 
+</strong></p> 
+</div> 
+<div class="event-card"> 
+<img src="Dog Friendly.jpg" alt="Dog Friendly"> 
+<h3>Dog Friendly</h3> 
+<p><strong> 
+Four-legged friends welcome at all our pubs. 
+</strong></p> 
+</div> 
+<div class="event-card"> 
+<img src="Local Ales & Fine Wines.png" alt="Pouring Quality"> 
+<h3>Pouring Quality</h3> 
+<p><strong> 
+Local ales and carefully chosen wines at every pub. 
+</strong></p> 
+</div> 
+<div class="event-card"> 
+<img src="proudly local.png" alt="Proudly Local"> 
+<h3>Proudly Local</h3> 
+<p><strong> 
+Supporting local producers across the New Forest. 
+</strong></p> 
+<a href="local.html" class="btn">Discover Our Partners</a> 
+</div> 
+</div> 
+</section> 
+<section> 
+<h2>Explore Our Pub Family</h2> 
+<div class="pubs-grid"> 
+<a class="pub-tile" href="boldforester.html"><img src="bold-forester-images/Restaurant Images/boldforestermain.jpg"><span>The Bold Forester</span></a> 
+<a class="pub-tile" href="lambinn.html"><img src="Lamb-Inn-images/LambInn.jpg"><span>The Lamb Inn</span></a> 
+<a class="pub-tile" href="royaloak.html"><img src="Royal-Oak-images/The Royal Oak.jpeg"><span>The Royal Oak</span></a> 
+<a class="pub-tile" href="woolpack.html"><img src="Woolpack-images/Woolpack.jpg"><span>The Woolpack</span></a> 
+<a class="pub-tile" href="fightingcocks.html"><img src="Fighting-Cocks-images/fighting-coq-scaled.jpg"><span>The Fighting Cocks</span></a> 
+<a class="pub-tile" href="trustyservant.html"><img src="Trusty-Servant-images/Trusty.jpg"><span>The Trusty Servant</span></a> 
+<a class="pub-tile" href="newforestinn.html"><img src="New-Forest-Inn-images/NFI.jpg"><span>The New Forest Inn</span></a> 
+<a class="pub-tile" href="find-us.html"><img src="find us.png"><span>Find Our Nearest Pub</span></a> 
+</div> 
+</section> 
 <section> 
 <h2>Country Inns Journal</h2> 
 <p>News & events across ALL our pubs.</p> 
-
-<div class="journal-wrapper">
-<iframe 
-src="https://countryinnsnewforest.blogspot.com/" 
-title="Country Inns Journal">
-</iframe>
-</div>
-
+<div class="journal-box"> 
+<a href="https://countryinnsnewforest.blogspot.com/" target="_self"> 
+Visit the Journal → 
+</a> 
+</div> 
 </section> 
-
+<section class="about-banner"> 
+<h2>About Country Inns</h2> 
+<p> 
+A family of welcoming pubs across the New Forest, sharing a passion for great food, 
+local produce and genuine hospitality. 
+</p> 
+<a href="about.html" class="about-btn">Read More</a> 
+</section> 
 <footer> 
 <p>&copy; 2025 Country Inns | Proudly serving the New Forest</p> 
 </footer> 
-
 <script src="app.js"></script> 
 </body> 
-</html>
+</html>', and ALL its subpages have the same look, while my blog as the look as in the picture attached
