@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Inns - Offline</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #013220, #2e8b57);
+      --container-bg: rgba(0, 0, 0, 0.6);
+      --text-color: #fff;
+    }
+    [data-theme="light"] {
+      --bg-gradient: linear-gradient(135deg, #f4f9f4, #d0e8d0);
+      --container-bg: rgba(255, 255, 255, 0.9);
+      --text-color: #013220;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .container {
+      max-width: 400px;
+      background: var(--container-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #2e8b57;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    a:hover {
+      background-color: #246b45;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Country Inns</h1>
+    <p>
+      You are currently offline.<br>
+      Some features may not be available.<br>
+      Please reconnect to continue accessing menus, events, and bookings.
+    </p>
+    <a href="index.html">🏠 Return to Home</a>
+  </div>
+
+  <script>
+    // ===== Dark/Light Mode Persistence =====
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>
