@@ -87,6 +87,11 @@
       cursor: pointer;
       text-decoration: underline;
     }
+    .install-note {
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      color: var(--text-color);
+    }
   </style>
 </head>
 <body>
@@ -98,48 +103,56 @@
   </p>
   <div class="buttons">
     <button class="btn btn-install" id="installBtn" style="display:none;">📲 Install the App</button>
+    <div class="install-note" id="installNote" style="display:none;">Add to Home Screen for full app experience.</div>
     <a href="home.html" class="btn btn-web">🌐 Continue to App</a>
   </div>
   <div class="mode-toggle" id="modeToggle">Switch to Dark/Light Mode</div>
 </div>
   
-  <script>
-    // ===== Theme persistence =====
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      document.body.setAttribute('data-theme', savedTheme);
+<script>
+  // ===== Theme persistence =====
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    document.body.setAttribute('data-theme', savedTheme);
+  }
+
+  const toggle = document.getElementById('modeToggle');
+  toggle.addEventListener('click', () => {
+    const currentTheme = document.body.getAttribute('data-theme');
+    if (currentTheme === 'light') {
+      document.body.removeAttribute('data-theme');
+      localStorage.setItem('theme', '');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
     }
+  });
 
-    const toggle = document.getElementById('modeToggle');
-    toggle.addEventListener('click', () => {
-      const currentTheme = document.body.getAttribute('data-theme');
-      if (currentTheme === 'light') {
-        document.body.removeAttribute('data-theme');
-        localStorage.setItem('theme', '');
-      } else {
-        document.body.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      }
-    });
+  // ===== PWA Install prompt =====
+  let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
+  const installNote = document.getElementById('installNote');
 
-    // ===== PWA Install prompt =====
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'block';
+    installNote.style.display = 'block';
+  });
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'block';
-    });
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User choice: ${outcome}`);
+      deferredPrompt = null;
+    }
+  });
 
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User choice: ${outcome}`);
-        deferredPrompt = null;
-      }
-    });
-  </script>
+  // ===== Offline detection =====
+  window.addEventListener('offline', () => {
+    alert("You are offline. Some features may not be available.");
+  });
+</script>
 </body>
 </html>
