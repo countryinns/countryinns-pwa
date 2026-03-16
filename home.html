@@ -191,34 +191,50 @@ font-size:1.1em;
 font-weight:bold;
 }
 
-/* JOURNAL SECTION */
+/* BLOG / JOURNAL */
 
-.journal-preview{
-background:#fff;
-padding:40px 20px;
+#blog-posts{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+max-width:900px;
+margin:auto;
 }
 
-.journal-card{
-background:#f9f9f9;
-max-width:500px;
-margin:auto;
-padding:25px;
+.blog-card{
+background:white;
+padding:20px;
 border-radius:10px;
 box-shadow:0 4px 8px rgba(0,0,0,0.1);
+text-align:left;
 }
 
-.journal-card a{
+.blog-card h3{
+margin-top:0;
+}
+
+.blog-card a{
+text-decoration:none;
+font-weight:bold;
+color:#2e7d32;
+}
+
+.blog-card a:hover{
+text-decoration:underline;
+}
+
+.journal-link{
 display:inline-block;
-margin-top:10px;
+margin-top:25px;
 background:#2e7d32;
-color:#fff;
-padding:10px 18px;
+color:white;
+padding:10px 20px;
 border-radius:8px;
 text-decoration:none;
 font-weight:bold;
 }
 
-.journal-card a:hover{
+.journal-link:hover{
 background:#1b5e20;
 }
 
@@ -412,21 +428,15 @@ Supporting local producers across the New Forest.
 
 </section>
 
-<section class="journal-preview">
+<section>
 
 <h2>Latest from Country Inns</h2>
 
-<div class="journal-card">
+<div id="blog-posts"></div>
 
-<h3>Discover What’s Happening Across Our Pubs</h3>
-
-<p>Latest News, Events, Promotions and more.</p>
-
-<a href="https://countryinnsnewforest.blogspot.com/" target="_blank">
-Read the Journal →
+<a class="journal-link" href="https://countryinnsnewforest.blogspot.com/" target="_blank">
+Visit the Country Inns Journal →
 </a>
-
-</div>
 
 </section>
 
@@ -450,6 +460,34 @@ local produce and genuine hospitality.
 </footer>
 
 <script src="app.js"></script>
+
+<script>
+
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://countryinnsnewforest.blogspot.com/feeds/posts/default")
+.then(response => response.json())
+.then(data => {
+
+const container=document.getElementById("blog-posts");
+
+data.items.slice(0,3).forEach(post=>{
+
+const card=document.createElement("div");
+
+card.className="blog-card";
+
+card.innerHTML=`
+<h3>${post.title}</h3>
+<p>${post.pubDate.substring(0,10)}</p>
+<a href="${post.link}" target="_blank">Read more →</a>
+`;
+
+container.appendChild(card);
+
+});
+
+});
+
+</script>
 
 </body>
 </html>
