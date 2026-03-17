@@ -1,61 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Country Inns</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country Inns</title>
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
 
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="/countryinns-pwa/manifest.webmanifest">
-  <meta name="theme-color" content="#2d5016">
-  <link rel="icon" type="image/png" sizes="192x192" href="/countryinns-pwa/icons/icon-192x192.png">
+<style>
 
-  <style>
-    body {
-      margin:0;
-      font-family:Arial,sans-serif;
-      background-color:#f5f5f5;
-      color:#333;
-      opacity:0;
-      transition:opacity 0.4s ease;
-    }
-    body.loaded { opacity:1; }
-    h2 { font-size:2em; margin-bottom:20px; }
-    section { padding:40px 20px; text-align:center; }
-    header { background:url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat; color:white; text-align:center; padding:80px 20px; }
-    header h1 { font-size:2.5em; margin:0; text-shadow:2px 2px 5px rgba(0,0,0,0.6); }
-    header h3 { font-size:1.3em; margin-top:10px; }
-    .global-notice{background:linear-gradient(135deg,#8b1d3a,#b03052);color:#fff;text-align:center;padding:14px 20px;font-size:1rem;font-weight:bold;}
-    .global-notice span{display:block;font-weight:normal;font-size:0.9rem;margin-top:4px;}
-    .promo-banner{background:#2e7d32;color:white;text-align:center;padding:14px 20px;font-size:1.05rem;font-weight:bold;}
-    .promo-banner em{display:block;margin-top:4px;font-size:0.95rem;}
-    .promo-btn{display:inline-block;margin-left:10px;background:#1b5e20;padding:6px 14px;border-radius:6px;color:#fff;text-decoration:none;font-size:0.95rem;font-weight:bold;}
-    .events-scroll{display:flex;gap:20px;overflow-x:auto;padding-bottom:20px;}
-    .event-card{flex:0 0 250px;background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,0.1);text-align:center;}
-    .event-card img{width:100%;height:150px;object-fit:cover;}
-    .event-card h3{margin:15px 0 10px;}
-    .event-card p{padding:0 15px 15px;}
-    .event-card .btn{display:inline-block;background:#2e7d32;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;margin-bottom:15px;}
-    .pubs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
-    .pub-tile{background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,0.1);text-decoration:none;color:inherit;display:flex;flex-direction:column;}
-    .pub-tile img{width:100%;height:180px;object-fit:cover;}
-    .pub-tile span{padding:15px;font-weight:bold;}
-    #blog-posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:900px;margin:auto;}
-    .blog-card{background:white;padding:20px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1);text-align:left;}
-    .blog-card a{color:#2e7d32;font-weight:bold;text-decoration:none;}
-    #blog-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:none;justify-content:center;align-items:center;z-index:9999;}
-    .modal-content{background:white;width:90%;max-width:800px;height:90%;border-radius:10px;overflow:hidden;position:relative;}
-    #close-modal{position:absolute;top:10px;right:10px;background:none;border:none;font-size:20px;cursor:pointer;}
-    #blog-frame{width:100%;height:100%;border:none;}
-    .journal-link{display:inline-block;margin-top:25px;background:#2e7d32;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold;}
-    footer{background:#222;color:white;text-align:center;padding:20px;margin-top:40px;}
-    .about-banner{background:linear-gradient(135deg,#2e472e,#1e2b1e);color:#f4f4f4;text-align:center;padding:3rem 1.5rem;border-radius:12px;margin:2rem auto;max-width:1000px;}
-    .about-banner h2{margin-bottom:1rem;font-size:2rem;color:#e6d8b5;}
-    .about-banner p{max-width:700px;margin:0 auto 1.5rem;font-size:1.1rem;line-height:1.6;}
-    .about-btn{display:inline-block;background-color:#2e7d32;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;}
-    .about-btn:hover{background-color:#1b5e20;}
-  </style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background-color:#f5f5f5;
+color:#333;
+}
+
+h2{
+font-size:2em;
+margin-bottom:20px;
+}
+
+section{
+padding:40px 20px;
+text-align:center;
+}
+
+header{
+background:url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
+color:white;
+text-align:center;
+padding:80px 20px;
+}
+
+header h1{
+font-size:2.5em;
+margin:0;
+text-shadow:2px 2px 5px rgba(0,0,0,0.6);
+}
+
+header h3{
+font-size:1.3em;
+margin-top:10px;
+}
+
+/* GLOBAL NOTICE */
+
+.global-notice{
+background:linear-gradient(135deg,#8b1d3a,#b03052);
+color:#fff;
+text-align:center;
+padding:14px 20px;
+font-size:1rem;
+font-weight:bold;
+}
+
+.global-notice span{
+display:block;
+font-weight:normal;
+font-size:0.9rem;
+margin-top:4px;
+}
+
+/* PROMO BANNER */
+
+.promo-banner{
+background:#2e7d32;
+color:white;
+text-align:center;
+padding:14px 20px;
+font-size:1.05rem;
+font-weight:bold;
+}
+
+.promo-banner em{
+display:block;
+margin-top:4px;
+font-size:0.95rem;
+font-weight:normal;
+}
+
+.promo-btn{
+display:inline-block;
+margin-left:10px;
+background:#1b5e20;
+padding:6px 14px;
+border-radius:6px;
+color:#fff;
+text-decoration:none;
+font-size:0.95rem;
+font-weight:bold;
+}
+
+.promo-btn:hover{
+background-color:#145016;
+}
+
+/* EVENT CARDS */
+
+.events-scroll{
+display:flex;
+gap:20px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+padding-bottom:20px;
+}
+
+.events-scroll::-webkit-scrollbar{
+display:none;
+}
+
+.event-card{
+flex:0 0 250px;
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 4px 8px rgba(0,0,0,0.1);
+scroll-snap-align:start;
+transition:transform 0.2s;
+text-align:center;
+}
+
+.event-card:hover{
+transform:translateY(-5px);
+}
+
+.event-card img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+.event-card h3{
+margin:15px 0 10px;
+}
+
+.event-card p{
+padding:0 15px 15px;
+font-size:0.95rem;
+line-height:1.4;
+}
+
+.event-card .btn{
+display:inline-block;
+background-color:#2e7d32;
+color:#fff;
+padding:10px 18px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.event-card .btn:hover{
+background-color:#1b5e20;
+}
+
+/* PUB GRID */
+
+.pubs-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.pub-tile{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 4px 8px rgba(0,0,0,0.1);
+text-decoration:none;
+color:inherit;
+transition:transform 0.2s;
+display:flex;
+flex-direction:column;
+}
+
+.pub-tile:hover{
+transform:translateY(-5px);
+}
+
+.pub-tile img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.pub-tile span{
+padding:15px;
+font-size:1.1em;
+font-weight:bold;
+}
+
+/* BLOG / JOURNAL */
+
+#blog-posts{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+max-width:900px;
+margin:auto;
+}
+
+.blog-card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 8px rgba(0,0,0,0.1);
+text-align:left;
+}
+
+.blog-card h3{
+margin-top:0;
+}
+
+.blog-card a{
+text-decoration:none;
+font-weight:bold;
+color:#2e7d32;
+}
+
+.blog-card a:hover{
+text-decoration:underline;
+}
+
+.journal-link{
+display:inline-block;
+margin-top:25px;
+background:#2e7d32;
+color:white;
+padding:10px 20px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.journal-link:hover{
+background:#1b5e20;
+}
+
+/* ABOUT */
+
+.about-banner{
+background:linear-gradient(135deg,#2e472e,#1e2b1e);
+color:#f4f4f4;
+text-align:center;
+padding:3rem 1.5rem;
+border-radius:12px;
+margin:2rem auto;
+max-width:1000px;
+}
+
+.about-banner h2{
+margin-bottom:1rem;
+font-size:2rem;
+color:#e6d8b5;
+}
+
+.about-banner p{
+max-width:700px;
+margin:0 auto 1.5rem;
+font-size:1.1rem;
+line-height:1.6;
+}
+
+.about-btn{
+display:inline-block;
+background-color:#2e7d32;
+color:#fff;
+padding:12px 24px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.about-btn:hover{
+background-color:#1b5e20;
+}
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+</style>
 </head>
+
 
 <body>
 
