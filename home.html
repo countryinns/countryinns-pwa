@@ -2,6 +2,8 @@
 
 <html lang="en">
 <head>
+<link rel="manifest" href="/countryinns-pwa/manifest.webmanifest">
+<meta name="theme-color" content="#2d5016">    
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Country Inns</title>
@@ -563,6 +565,14 @@ frame.src="";
 initPage();
 
 </script>
-
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/countryinns-pwa/service-worker.js')
+      .then(reg => console.log('Service Worker registered', reg))
+      .catch(err => console.log('Service Worker failed', err));
+  });
+}
+</script>
 </body>
 </html>
