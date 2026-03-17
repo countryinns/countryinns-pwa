@@ -462,31 +462,38 @@ local produce and genuine hospitality.
 <script src="app.js"></script>
 
 <script>
-
 fetch("https://api.rss2json.com/v1/api.json?rss_url=https://countryinnsnewforest.blogspot.com/feeds/posts/default")
 .then(response => response.json())
 .then(data => {
 
-const container=document.getElementById("blog-posts");
+const container = document.getElementById("blog-posts");
 
-data.items.slice(0,4).forEach(post=>{
+// 👇 Put your posts in the exact order you want
+const customOrder = [
+  "https://countryinnsnewforest.blogspot.com/2026/02/enjoy-25-off-your-food-bill-at-country.html",
+  "https://countryinnsnewforest.blogspot.com/2026/02/stay-longer-pay-less-our-exclusive-room.html",
+  "https://countryinnsnewforest.blogspot.com/2026/03/easter-weekend-in-new-forest-country.html",
+  "https://countryinnsnewforest.blogspot.com/2026/02/fathers-day-at-country-inns-pubs-sunday.html",
+  "https://countryinnsnewforest.blogspot.com/2026/03/halloween-weekend-in-new-forest-cosy.html"
+];
 
-const card=document.createElement("div");
+customOrder.forEach(url => {
+  const post = data.items.find(p => p.link === url);
+  if (post) {
+    const card = document.createElement("div");
+    card.className = "blog-card";
 
-card.className="blog-card";
+    card.innerHTML = `
+      <h3>${post.title}</h3>
+      <p>${post.pubDate.substring(0,10)}</p>
+      <a href="${post.link}" target="_blank">Read more →</a>
+    `;
 
-card.innerHTML=`
-<h3>${post.title}</h3>
-<p>${post.pubDate.substring(0,10)}</p>
-<a href="${post.link}" target="_blank">Read more →</a>
-`;
-
-container.appendChild(card);
-
+    container.appendChild(card);
+  }
 });
 
 });
-
 </script>
 
 </body>
