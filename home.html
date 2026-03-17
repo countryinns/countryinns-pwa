@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -13,6 +14,12 @@ margin:0;
 font-family:Arial,sans-serif;
 background-color:#f5f5f5;
 color:#333;
+opacity:0;
+transition:opacity 0.4s ease;
+}
+
+body.loaded{
+opacity:1;
 }
 
 h2{
@@ -43,8 +50,6 @@ font-size:1.3em;
 margin-top:10px;
 }
 
-/* GLOBAL NOTICE */
-
 .global-notice{
 background:linear-gradient(135deg,#8b1d3a,#b03052);
 color:#fff;
@@ -61,8 +66,6 @@ font-size:0.9rem;
 margin-top:4px;
 }
 
-/* PROMO BANNER */
-
 .promo-banner{
 background:#2e7d32;
 color:white;
@@ -76,7 +79,6 @@ font-weight:bold;
 display:block;
 margin-top:4px;
 font-size:0.95rem;
-font-weight:normal;
 }
 
 .promo-btn{
@@ -91,22 +93,11 @@ font-size:0.95rem;
 font-weight:bold;
 }
 
-.promo-btn:hover{
-background-color:#145016;
-}
-
-/* EVENT CARDS */
-
 .events-scroll{
 display:flex;
 gap:20px;
 overflow-x:auto;
-scroll-snap-type:x mandatory;
 padding-bottom:20px;
-}
-
-.events-scroll::-webkit-scrollbar{
-display:none;
 }
 
 .event-card{
@@ -115,13 +106,7 @@ background:white;
 border-radius:12px;
 overflow:hidden;
 box-shadow:0 4px 8px rgba(0,0,0,0.1);
-scroll-snap-align:start;
-transition:transform 0.2s;
 text-align:center;
-}
-
-.event-card:hover{
-transform:translateY(-5px);
 }
 
 .event-card img{
@@ -136,26 +121,17 @@ margin:15px 0 10px;
 
 .event-card p{
 padding:0 15px 15px;
-font-size:0.95rem;
-line-height:1.4;
 }
 
 .event-card .btn{
 display:inline-block;
-background-color:#2e7d32;
+background:#2e7d32;
 color:#fff;
 padding:10px 18px;
 border-radius:8px;
 text-decoration:none;
-font-weight:bold;
 margin-bottom:15px;
 }
-
-.event-card .btn:hover{
-background-color:#1b5e20;
-}
-
-/* PUB GRID */
 
 .pubs-grid{
 display:grid;
@@ -170,13 +146,8 @@ overflow:hidden;
 box-shadow:0 4px 8px rgba(0,0,0,0.1);
 text-decoration:none;
 color:inherit;
-transition:transform 0.2s;
 display:flex;
 flex-direction:column;
-}
-
-.pub-tile:hover{
-transform:translateY(-5px);
 }
 
 .pub-tile img{
@@ -187,11 +158,8 @@ object-fit:cover;
 
 .pub-tile span{
 padding:15px;
-font-size:1.1em;
 font-weight:bold;
 }
-
-/* BLOG / JOURNAL */
 
 #blog-posts{
 display:grid;
@@ -209,72 +177,49 @@ box-shadow:0 4px 8px rgba(0,0,0,0.1);
 text-align:left;
 }
 
-.blog-card h3{
-margin-top:0;
-}
-
 .blog-card a{
-text-decoration:none;
-font-weight:bold;
 color:#2e7d32;
-}
-
-.blog-card a:hover{
-text-decoration:underline;
-}
-
-.journal-link{
-display:inline-block;
-margin-top:25px;
-background:#2e7d32;
-color:white;
-padding:10px 20px;
-border-radius:8px;
-text-decoration:none;
 font-weight:bold;
-}
-
-.journal-link:hover{
-background:#1b5e20;
-}
-
-/* ABOUT */
-
-.about-banner{
-background:linear-gradient(135deg,#2e472e,#1e2b1e);
-color:#f4f4f4;
-text-align:center;
-padding:3rem 1.5rem;
-border-radius:12px;
-margin:2rem auto;
-max-width:1000px;
-}
-
-.about-banner h2{
-margin-bottom:1rem;
-font-size:2rem;
-color:#e6d8b5;
-}
-
-.about-banner p{
-max-width:700px;
-margin:0 auto 1.5rem;
-font-size:1.1rem;
-line-height:1.6;
-}
-
-.about-btn{
-display:inline-block;
-background-color:#2e7d32;
-color:#fff;
-padding:12px 24px;
-border-radius:8px;
 text-decoration:none;
-font-weight:bold;
 }
 
-.about-btn:hover{
-background-color:#1b5e20;
+#blog-modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.modal-content{
+background:white;
+width:90%;
+max-width:800px;
+height:90%;
+border-radius:10px;
+overflow:hidden;
+position:relative;
+}
+
+#close-modal{
+position:absolute;
+top:10px;
+right:10px;
+background:none;
+border:none;
+font-size:20px;
+cursor:pointer;
+}
+
+#blog-frame{
+width:100%;
+height:100%;
+border:none;
 }
 
 footer{
@@ -286,9 +231,12 @@ margin-top:40px;
 }
 
 </style>
+
 </head>
 
 <body>
+
+<div id="app">
 
 <header>
 <h1>Welcome to Country Inns</h1>
@@ -302,11 +250,9 @@ margin-top:40px;
 </div>
 
 <div class="promo-banner">
-Keep your receipt from any visit and enjoy <strong>25% OFF your food bill</strong> on your next visit
+Keep your receipt from any visit and enjoy <strong>25% OFF your food bill</strong>
 <a href="promo-25.html" class="promo-btn">Learn More</a>
-<em>Valid January – March | Monday to Friday only</em>
 </div>
-
 <section>
 
 <h2>Featured at Every Pub</h2>
@@ -401,9 +347,7 @@ Supporting local producers across the New Forest.
 </div>
 
 </section>
-
 <section>
-
 <h2>Explore Our Pub Family</h2>
 
 <div class="pubs-grid">
@@ -424,76 +368,126 @@ Supporting local producers across the New Forest.
 
 <a class="pub-tile" href="find-us.html"><img src="find us.png"><span>Find Our Nearest Pub</span></a>
 
-</div>
-
-</section>
+</div></section>
 
 <section>
-
 <h2>Latest from Country Inns</h2>
-
 <div id="blog-posts"></div>
-
-<a class="journal-link" href="https://countryinnsnewforest.blogspot.com/">
-Visit the Country Inns Journal →
-</a>
-
-</section>
-
-<section class="about-banner">
-
-<h2>About Country Inns</h2>
-
-<p>
-A family of welcoming pubs across the New Forest, sharing a passion for great food,
-local produce and genuine hospitality.
-</p>
-
-<a href="about.html" class="about-btn">Read More</a>
-
+<a href="https://countryinnsnewforest.blogspot.com/" class="journal-link">Visit Journal →</a>
 </section>
 
 <footer>
-
-<p>&copy; 2025 Country Inns | Proudly serving the New Forest</p>
-
+<p>&copy; 2025 Country Inns</p>
 </footer>
 
-<script src="app.js"></script>
+</div>
+
+<!-- MODAL -->
+
+<div id="blog-modal">
+<div class="modal-content">
+<button id="close-modal">✕</button>
+<iframe id="blog-frame"></iframe>
+</div>
+</div>
 
 <script>
+
+// FADE
+document.addEventListener("DOMContentLoaded",()=>{
+document.body.classList.add("loaded");
+});
+
+// SPA NAV
+function loadPage(url, push=true){
+document.body.classList.remove("loaded");
+
+fetch(url)
+.then(res=>res.text())
+.then(html=>{
+const doc=new DOMParser().parseFromString(html,"text/html");
+const newContent=doc.querySelector("#app").innerHTML;
+
+setTimeout(()=>{
+document.querySelector("#app").innerHTML=newContent;
+if(push) history.pushState({}, "", url);
+window.scrollTo(0,0);
+initPage();
+document.body.classList.add("loaded");
+},300);
+
+});
+}
+
+document.addEventListener("click",e=>{
+const link=e.target.closest("a");
+if(!link) return;
+
+const href=link.getAttribute("href");
+
+if(href && !href.startsWith("http") && !href.startsWith("#")){
+e.preventDefault();
+loadPage(href);
+}
+});
+
+window.addEventListener("popstate",()=>{
+loadPage(location.pathname,false);
+});
+
+// INIT PAGE
+function initPage(){
+
+const container=document.getElementById("blog-posts");
+
+if(container){
 fetch("https://api.rss2json.com/v1/api.json?rss_url=https://countryinnsnewforest.blogspot.com/feeds/posts/default")
-.then(response => response.json())
-.then(data => {
+.then(res=>res.json())
+.then(data=>{
 
-const container = document.getElementById("blog-posts");
+container.innerHTML="";
 
-// 👇 Put your posts in the exact order you want
-const customOrder = [
-  "https://countryinnsnewforest.blogspot.com/2026/02/enjoy-25-off-your-food-bill-at-country.html",
-  "https://countryinnsnewforest.blogspot.com/2026/02/stay-longer-pay-less-our-exclusive-room.html",
-  "https://countryinnsnewforest.blogspot.com/2026/03/easter-weekend-in-new-forest-country.html",
-  "https://countryinnsnewforest.blogspot.com/2026/02/fathers-day-at-country-inns-pubs-sunday.html",
-  "https://countryinnsnewforest.blogspot.com/2026/03/halloween-weekend-in-new-forest-cosy.html"
+const order=[
+"https://countryinnsnewforest.blogspot.com/2026/02/enjoy-25-off-your-food-bill-at-country.html",
+"https://countryinnsnewforest.blogspot.com/2026/02/stay-longer-pay-less-our-exclusive-room.html",
+"https://countryinnsnewforest.blogspot.com/2026/03/easter-weekend-in-new-forest-country.html"
 ];
 
-customOrder.forEach(url => {
-  const post = data.items.find(p => p.link === url);
-  if (post) {
-    const card = document.createElement("div");
-    card.className = "blog-card";
+order.forEach(url=>{
+const post=data.items.find(p=>p.link===url);
+if(post){
+container.innerHTML+=`
+<div class="blog-card">
+<h3>${post.title}</h3>
+<p>${post.pubDate.substring(0,10)}</p>
+<a href="${post.link}" class="blog-link">Read more →</a>
+</div>`;
+}
+});
+});
+}
 
-    card.innerHTML = `
-      <h3>${post.title}</h3>
-      <p>${post.pubDate.substring(0,10)}</p>
-      <a href="${post.link}">Read more →</a>
-    `;
+// MODAL
+const modal=document.getElementById("blog-modal");
+const frame=document.getElementById("blog-frame");
 
-    container.appendChild(card);
-  }
+document.querySelectorAll(".blog-link").forEach(link=>{
+link.onclick=e=>{
+e.preventDefault();
+frame.src=link.href;
+modal.style.display="flex";
+};
 });
 
-});
+document.getElementById("close-modal").onclick=()=>{
+modal.style.display="none";
+frame.src="";
+};
+
+}
+
+initPage();
+
 </script>
 
 </body>
