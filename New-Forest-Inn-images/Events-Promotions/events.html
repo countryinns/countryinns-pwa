@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The New Forest Inn – Events</title>
-  <link rel="stylesheet" href="style.css">
+  <title>The Fighting Cocks – Upcoming Events</title>
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -25,20 +25,20 @@
       font-size: 2rem;
     }
 
-    main section {
+    .card-grid {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
+      flex-direction: column; /* stacked vertically */
+      align-items: center;    /* centred horizontally */
+      gap: 2rem;
       margin: 2rem 0;
     }
 
     .card {
       background: #2e472e;
       border-radius: 12px;
-      padding: 1rem;
-      max-width: 400px;
-      width: 100%;
+      padding: 1.2rem;
+      max-width: 420px;
+      width: 90%;
       text-align: center;
       transition: transform 0.2s ease;
     }
@@ -62,22 +62,28 @@
     .card p {
       font-size: 0.95rem;
       line-height: 1.5;
-      color: #f4f4f4;
-      margin-bottom: 1rem;
+      margin: 0.6rem 0;
     }
 
-    /* Style for all card links (visited and unvisited) */
-    .card a:link,
-    .card a:visited {
+    .card .highlight {
+      font-style: italic;
       color: #e6d8b5;
-      text-decoration: underline;
-      font-weight: bold;
-      margin-top: 0.5rem;
-      display: inline-block;
     }
 
-    .card a:hover {
-      color: #fff;
+    .card-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.3rem;
+      background: #e6d8b5;
+      color: #2e472e;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .card-link:hover {
+      background: #f2e6c8;
     }
 
     .buttons {
@@ -110,32 +116,7 @@
   </header>
 
   <main>
-    <section>
-  <!-- Great British Pie Week at The New Forest Inn -->
-<div class="card">
-  <img src="NFI British Pie Week 2026.jpg" alt="Great British Pie Week at The New Forest Inn, Emery Down">
-
-  <h3>Great British Pie Week at The New Forest Inn</h3>
-
-  <p>
-    Join us for <strong>Great British Pie Week</strong> at 
-    <strong>The New Forest Inn, Emery Down</strong> and tuck into a delicious 
-    selection of homemade British pies, served in true country pub style.<br><br>
-
-    <strong>2nd – 8th March</strong><br><br>
-
-    Expect golden pastry, hearty fillings, proper chips, and seasonal vegetables – 
-    the perfect excuse for a cosy lunch or dinner in the heart of the New Forest.<br><br>
-
-    <strong>Try a delicious selection of homemade British pies!</strong><br>
-
-    Book your table now at<br>
-    <a href="https://www.thenewforestinn.co.uk/food/#restaurant_form" target="_blank" style="color:#e6d8b5; text-decoration:underline;">
-      www.thenewforestinn.co.uk
-    </a><br>
-    or call <strong>02380 284690</strong>.
-  </p>
-</div>    
+    <section> 
       <div class="card">
   <img src="NFI March Quiz Night.jpg" alt="Quiz Night at The New Forest Inn, Emery Down">
   <h3>Quiz Night – Emery Down</h3>
@@ -160,7 +141,6 @@
     or call <strong>02380 284690</strong>.
   </p>
 </div>
-
       <div class="card">
         <img src="Mothers-Day-2026.jpg" alt="Mother's Day 2026 at The New Forest Inn">
         <h3>Mother's Day 2026</h3>
