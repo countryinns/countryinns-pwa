@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Lamb Inn – Events</title>
-  <link rel="stylesheet" href="style.css">
+  <title>The Fighting Cocks – Upcoming Events</title>
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -27,18 +27,18 @@
 
     .card-grid {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
+      flex-direction: column; /* stacked vertically */
+      align-items: center;    /* centred horizontally */
+      gap: 2rem;
       margin: 2rem 0;
     }
 
     .card {
       background: #2e472e;
       border-radius: 12px;
-      padding: 1rem;
-      max-width: 400px;
-      width: 100%;
+      padding: 1.2rem;
+      max-width: 420px;
+      width: 90%;
       text-align: center;
       transition: transform 0.2s ease;
     }
@@ -62,7 +62,28 @@
     .card p {
       font-size: 0.95rem;
       line-height: 1.5;
-      color: #f4f4f4;
+      margin: 0.6rem 0;
+    }
+
+    .card .highlight {
+      font-style: italic;
+      color: #e6d8b5;
+    }
+
+    .card-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.3rem;
+      background: #e6d8b5;
+      color: #2e472e;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .card-link:hover {
+      background: #f2e6c8;
     }
 
     .buttons {
