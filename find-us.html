@@ -17,7 +17,6 @@ html, body {
   color: #f4f4f4;
 }
 
-/* HEADER */
 header {
   padding: 1.5rem;
   background: rgba(46, 71, 46, 0.92);
@@ -65,7 +64,7 @@ header h1 {
   flex: 1;
 }
 
-/* PUB LIST */
+/* LIST */
 .pub-item {
   cursor: pointer;
   margin-bottom: 10px;
@@ -112,21 +111,6 @@ header h1 {
   font-weight:bold;
 }
 
-/* BACK BUTTON */
-.buttons {
-  text-align: center;
-  margin: 1rem;
-}
-
-.buttons a {
-  background: #4f7c4f;
-  color: #fff;
-  text-decoration: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  font-weight: bold;
-}
-
 /* MOBILE */
 @media (max-width: 768px) {
   .container {
@@ -165,22 +149,18 @@ header h1 {
 
 </div>
 
-<div class="buttons">
-<a href="home.html">⬅ Back to Home</a>
-</div>
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 
 const pubs = [
-  { name: "The Bold Forester", lat: 50.87494, lng: -1.46521, phone:"02380175588", bookingUrl:"https://www.theboldforesternewforest.co.uk/food/#restaurant_form" target="_blank" },
+  { name: "The Bold Forester", lat: 50.87494, lng: -1.46521, phone:"02380175588", bookingUrl:"https://www.theboldforesternewforest.co.uk/food/#restaurant_form" target="_blank" } ,
   { name: "The Royal Oak", lat: 50.82664, lng: -1.43160, phone:"01590612228", bookingUrl:"https://www.theroyaloakbeaulieu.co.uk/food/#restaurant_form" target="_blank" },
   { name: "The Trusty Servant", lat: 50.89828, lng: -1.60107, phone:"02380812137", bookingUrl:"https://www.thetrustyservant.co.uk/food/#restaurant_form" target="_blank" },
   { name: "The New Forest Inn", lat: 50.87432, lng: -1.59547, phone:"02380284690", bookingUrl:"https://www.thenewforestinn.co.uk/food/#_restaurant_form" target="_blank" },
   { name: "The Lamb Inn", lat: 50.95469, lng: -1.64080, phone:"01794331331", bookingUrl:"https://www.thelambnomansland.co.uk/food/#restaurant_form" target="_blank" },
   { name: "The Woolpack", lat: 50.77138, lng: -1.77875, phone:"01425672252", bookingUrl:"https://www.thewoolpacksopley.co.uk/food/#restaurant_form" target="_blank" },
-  { name: "The Fighting Cocks", lat: 50.93376, lng: -1.75063, phone:"01425655686", bookingUrl:"https://thefightingcockspub.co.uk/food/#restaurant_form" target="_blank" }
+  { name: "The Fighting Cocks", lat: 50.93376, lng: -1.75063, phone:"01425655686", bookingUrl:"https://thefightingcockspub.co.uk/food/#restaurant_form" target="_blank"}
 ];
 
 // MAP
@@ -188,7 +168,7 @@ const map = L.map('map').setView([50.8746, -1.5936], 11);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-// LIST
+// PUB LIST
 const pubListDiv = document.getElementById("pub-list");
 
 pubs.forEach(pub => {
@@ -197,10 +177,7 @@ pubs.forEach(pub => {
 
   const mapsLink = `https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}`;
 
-  marker.bindPopup(`
-    <strong>${pub.name}</strong><br>
-    <a href="${mapsLink}" target="_blank">Directions</a>
-  `);
+  marker.bindPopup(`<strong>${pub.name}</strong><br><a href="${mapsLink}" target="_blank">Directions</a>`);
 
   const listItem = document.createElement("div");
   listItem.className = "pub-item";
@@ -214,7 +191,7 @@ pubs.forEach(pub => {
   pubListDiv.appendChild(listItem);
 });
 
-// DISTANCE (miles)
+// DISTANCE IN MILES
 function getDistance(lat1, lon1, lat2, lon2){
   const R = 6371;
   const dLat = (lat2-lat1) * Math.PI/180;
@@ -229,7 +206,7 @@ function getDistance(lat1, lon1, lat2, lon2){
   return km * 0.621371;
 }
 
-// DRIVE TIME ESTIMATE
+// DRIVE TIME (30mph average)
 function getDriveTimeMinutes(miles){
   return Math.round((miles / 30) * 60);
 }
@@ -237,10 +214,10 @@ function getDriveTimeMinutes(miles){
 // FORMAT
 function formatDriveTime(miles){
   const mins = getDriveTimeMinutes(miles);
-  return mins <= 1 ? "1 min drive" : `${mins} min drive`;
+  return mins <= 1 ? "1 min" : `${mins} min`;
 }
 
-// BADGES
+// BADGE
 function getBadge(mins){
   if (mins <= 5) return `<span class="badge green">🟢 Very Close</span>`;
   if (mins <= 12) return `<span class="badge yellow">🟡 Nearby</span>`;
@@ -252,7 +229,7 @@ function getLocation(){
   navigator.geolocation.getCurrentPosition(showNearest);
 }
 
-// SHOW RESULTS
+// SHOW NEAREST
 function showNearest(position){
 
   const userLat = position.coords.latitude;
@@ -271,7 +248,7 @@ function showNearest(position){
   pubs.sort((a,b)=>a.distance-b.distance);
 
   const container = document.getElementById("nearest-list");
-  container.innerHTML="";
+  container.innerHTML = "";
 
   pubs.forEach(pub=>{
     const mins = getDriveTimeMinutes(pub.distance);
@@ -284,12 +261,12 @@ function showNearest(position){
         <strong>${pub.name}</strong>
 
         <p>
-          📍 ${pub.distance.toFixed(1)} miles • 🚗 ${formatDriveTime(pub.distance)}
+          📍 ${pub.distance.toFixed(1)} miles • 🚗 ${formatDriveTime(pub.distance)} drive
         </p>
 
         <div class="pub-actions">
           <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}" target="_blank">Directions</a>
-          ${pub.phone ? `<a href="tel:${pub.phone}">Call</a>` : ""}
+          <a href="tel:${pub.phone}">Call</a>
           <a href="${pub.bookingUrl}" target="_blank">Book</a>
         </div>
 
@@ -303,7 +280,7 @@ window.addEventListener("load", ()=>{
   navigator.geolocation.getCurrentPosition(showNearest);
 });
 
-// MAP FIX
+// FIX MAP
 setTimeout(()=>map.invalidateSize(),300);
 window.addEventListener("resize",()=>map.invalidateSize());
 
