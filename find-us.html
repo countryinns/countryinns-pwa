@@ -193,7 +193,7 @@ pubs.forEach(pub => {
   pubListDiv.appendChild(listItem);
 });
 
-// LOCATION FUNCTIONS
+// LOCATION
 
 function getLocation(){
   if(navigator.geolocation){
@@ -214,8 +214,10 @@ function handleLocationError(){
   `;
 }
 
+// DISTANCE IN MILES
 function getDistance(lat1, lon1, lat2, lon2){
   const R = 6371;
+
   const dLat = (lat2-lat1) * Math.PI/180;
   const dLon = (lon2-lon1) * Math.PI/180;
 
@@ -224,7 +226,19 @@ function getDistance(lat1, lon1, lat2, lon2){
     Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180) *
     Math.sin(dLon/2)**2;
 
-  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+  const km = R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+
+  return km * 0.621371;
+}
+
+// SMART FORMATTER
+function formatMiles(miles){
+  if (miles < 0.1) return "Very close";
+
+  const rounded = Math.round(miles * 10) / 10;
+
+  if (rounded === 1) return "1 mile";
+  return `${rounded} miles`;
 }
 
 function showNearest(position){
@@ -232,8 +246,8 @@ function showNearest(position){
   const userLat = position.coords.latitude;
   const userLon = position.coords.longitude;
 
-  // show user on map
   map.setView([userLat, userLon], 12);
+
   L.marker([userLat, userLon]).addTo(map)
     .bindPopup("You are here")
     .openPopup();
@@ -251,7 +265,7 @@ function showNearest(position){
     container.innerHTML += `
       <div class="pub-card">
         <strong>${pub.name}</strong>
-        <p>${pub.distance.toFixed(1)} km away</p>
+        <p>${formatMiles(pub.distance)} away</p>
         <div class="pub-actions">
           <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}">Directions</a>
           ${pub.phone ? `<a href="tel:${pub.phone}">Call</a>` : ""}
@@ -262,7 +276,7 @@ function showNearest(position){
   });
 }
 
-// AUTO LOAD LOCATION
+// AUTO LOAD
 window.addEventListener("load", ()=>{
   if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(
@@ -273,7 +287,7 @@ window.addEventListener("load", ()=>{
   }
 });
 
-// FIX MAP RENDER
+// FIX MAP
 setTimeout(()=>map.invalidateSize(),300);
 window.addEventListener("resize",()=>map.invalidateSize());
 
