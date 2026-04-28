@@ -17,6 +17,7 @@ html, body {
   color: #f4f4f4;
 }
 
+/* HEADER */
 header {
   padding: 1.5rem;
   background: rgba(46, 71, 46, 0.92);
@@ -42,38 +43,6 @@ header h1 {
   display:block;
 }
 
-/* CARDS */
-.pub-card{
-  background:#fff;
-  color:#333;
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:8px;
-  box-shadow:0 2px 4px rgba(0,0,0,0.15);
-}
-
-/* PROXIMITY BADGE */
-.badge{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:6px;
-  font-size:0.75rem;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-.green{ background:#d1fae5; color:#065f46; }
-.yellow{ background:#fef3c7; color:#92400e; }
-.red{ background:#fee2e2; color:#991b1b; }
-
-.pub-actions a{
-  margin-right:10px;
-  font-size:0.85rem;
-  text-decoration:none;
-  color:#2e7d32;
-  font-weight:bold;
-}
-
 /* LAYOUT */
 .container {
   display: flex;
@@ -96,6 +65,7 @@ header h1 {
   flex: 1;
 }
 
+/* PUB LIST */
 .pub-item {
   cursor: pointer;
   margin-bottom: 10px;
@@ -109,6 +79,40 @@ header h1 {
   background: #66a066;
 }
 
+/* CARD */
+.pub-card{
+  background:#fff;
+  color:#333;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:8px;
+  box-shadow:0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* BADGES */
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:0.75rem;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.green{ background:#d1fae5; color:#065f46; }
+.yellow{ background:#fef3c7; color:#92400e; }
+.red{ background:#fee2e2; color:#991b1b; }
+
+/* ACTIONS */
+.pub-actions a{
+  margin-right:10px;
+  font-size:0.85rem;
+  text-decoration:none;
+  color:#2e7d32;
+  font-weight:bold;
+}
+
+/* BACK BUTTON */
 .buttons {
   text-align: center;
   margin: 1rem;
@@ -170,13 +174,13 @@ header h1 {
 <script>
 
 const pubs = [
-  { name: "The Bold Forester", lat: 50.87494, lng: -1.46521, phone:"02380175588" },
-  { name: "The Royal Oak", lat: 50.82664, lng: -1.43160, phone:"01590612228" },
-  { name: "The Trusty Servant", lat: 50.89828, lng: -1.60107, phone:"02380812137" },
-  { name: "The New Forest Inn", lat: 50.87432, lng: -1.59547, phone:"02380284690" },
-  { name: "The Lamb Inn", lat: 50.95469, lng: -1.64080, phone:"01794331331" },
-  { name: "The Woolpack", lat: 50.77138, lng: -1.77875, phone:"01425672252" },
-  { name: "The Fighting Cocks", lat: 50.93376, lng: -1.75063, phone:"01425655686" }
+  { name: "The Bold Forester", lat: 50.87494, lng: -1.46521, phone:"02380175588", bookingUrl:"https://boldforester.co.uk/book" },
+  { name: "The Royal Oak", lat: 50.82664, lng: -1.43160, phone:"01590612228", bookingUrl:"https://royaloak.co.uk/book" },
+  { name: "The Trusty Servant", lat: 50.89828, lng: -1.60107, phone:"02380812137", bookingUrl:"https://trustyservant.co.uk/book" },
+  { name: "The New Forest Inn", lat: 50.87432, lng: -1.59547, phone:"02380284690", bookingUrl:"https://newforestinn.co.uk/book" },
+  { name: "The Lamb Inn", lat: 50.95469, lng: -1.64080, phone:"01794331331", bookingUrl:"https://lambinn.co.uk/book" },
+  { name: "The Woolpack", lat: 50.77138, lng: -1.77875, phone:"01425672252", bookingUrl:"https://woolpack.co.uk/book" },
+  { name: "The Fighting Cocks", lat: 50.93376, lng: -1.75063, phone:"01425655686", bookingUrl:"https://thefightingcockspub.co.uk/food/#restaurant_form" }
 ];
 
 // MAP
@@ -193,7 +197,10 @@ pubs.forEach(pub => {
 
   const mapsLink = `https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}`;
 
-  marker.bindPopup(`<strong>${pub.name}</strong><br><a href="${mapsLink}" target="_blank">Directions</a>`);
+  marker.bindPopup(`
+    <strong>${pub.name}</strong><br>
+    <a href="${mapsLink}" target="_blank">Directions</a>
+  `);
 
   const listItem = document.createElement("div");
   listItem.className = "pub-item";
@@ -207,11 +214,6 @@ pubs.forEach(pub => {
   pubListDiv.appendChild(listItem);
 });
 
-// LOCATION
-function getLocation(){
-  navigator.geolocation.getCurrentPosition(showNearest);
-}
-
 // DISTANCE (miles)
 function getDistance(lat1, lon1, lat2, lon2){
   const R = 6371;
@@ -224,26 +226,30 @@ function getDistance(lat1, lon1, lat2, lon2){
     Math.sin(dLon/2)**2;
 
   const km = R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
-
   return km * 0.621371;
 }
 
-// DRIVE TIME
+// DRIVE TIME ESTIMATE
 function getDriveTimeMinutes(miles){
   return Math.round((miles / 30) * 60);
 }
 
-// FORMAT TIME
+// FORMAT
 function formatDriveTime(miles){
   const mins = getDriveTimeMinutes(miles);
   return mins <= 1 ? "1 min drive" : `${mins} min drive`;
 }
 
-// BADGE SYSTEM
+// BADGES
 function getBadge(mins){
   if (mins <= 5) return `<span class="badge green">🟢 Very Close</span>`;
   if (mins <= 12) return `<span class="badge yellow">🟡 Nearby</span>`;
   return `<span class="badge red">🔴 Further</span>`;
+}
+
+// LOCATION
+function getLocation(){
+  navigator.geolocation.getCurrentPosition(showNearest);
 }
 
 // SHOW RESULTS
@@ -278,13 +284,13 @@ function showNearest(position){
         <strong>${pub.name}</strong>
 
         <p>
-          📍 ${pub.distance.toFixed(1)} miles away • 🚗 ${formatDriveTime(pub.distance)}
+          📍 ${pub.distance.toFixed(1)} miles • 🚗 ${formatDriveTime(pub.distance)}
         </p>
 
         <div class="pub-actions">
-          <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}">Directions</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}" target="_blank">Directions</a>
           ${pub.phone ? `<a href="tel:${pub.phone}">Call</a>` : ""}
-          <a href="booking.html">Book</a>
+          <a href="${pub.bookingUrl}" target="_blank">Book</a>
         </div>
 
       </div>
