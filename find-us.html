@@ -30,7 +30,7 @@ header h1 {
   color: #e6d8b5;
 }
 
-/* NEW GPS BUTTON */
+/* BUTTON */
 .loc-btn{
   background:#2e7d32;
   color:#fff;
@@ -42,7 +42,7 @@ header h1 {
   display:block;
 }
 
-/* NEAREST PUB CARDS */
+/* NEAREST CARDS */
 .pub-card{
   background:#fff;
   color:#333;
@@ -60,10 +60,11 @@ header h1 {
   font-weight:bold;
 }
 
+/* LAYOUT */
 .container {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 140px);
   margin: 1rem;
   border-radius: 12px;
   overflow: hidden;
@@ -71,7 +72,7 @@ header h1 {
 }
 
 #sidebar {
-  width: 300px;
+  width: 320px;
   overflow-y: auto;
   padding: 15px;
   background: #3c5a3c;
@@ -108,16 +109,17 @@ header h1 {
   font-weight: bold;
 }
 
+/* MOBILE */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
   }
   #sidebar {
     width: 100%;
-    height: 45%;
+    height: 50%;
   }
   #map {
-    height: 55%;
+    height: 50%;
   }
 }
 </style>
@@ -129,7 +131,6 @@ header h1 {
 <h1>Find Your Nearest Country Inns Pub</h1>
 </header>
 
-<!-- GPS BUTTON -->
 <button onclick="getLocation()" class="loc-btn">📍 Use My Location</button>
 
 <div class="container">
@@ -138,10 +139,8 @@ header h1 {
 <h2>Pubs</h2>
 <div id="pub-list"></div>
 
-<!-- NEW: NEAREST RESULTS -->
 <h2>Nearest to You</h2>
 <div id="nearest-list"></div>
-
 </div>
 
 <div id="map"></div>
@@ -166,10 +165,12 @@ const pubs = [
   { name: "The Fighting Cocks", lat: 50.93376, lng: -1.75063, phone:"01425655686" }
 ];
 
+// MAP
 const map = L.map('map').setView([50.8746, -1.5936], 11);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+// SIDEBAR LIST
 const pubListDiv = document.getElementById("pub-list");
 
 pubs.forEach(pub => {
@@ -192,14 +193,25 @@ pubs.forEach(pub => {
   pubListDiv.appendChild(listItem);
 });
 
-/* GPS FEATURE */
+// LOCATION FUNCTIONS
 
 function getLocation(){
   if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(showNearest);
-  } else {
-    alert("Location not supported");
+    navigator.geolocation.getCurrentPosition(
+      showNearest,
+      handleLocationError,
+      { enableHighAccuracy:true, timeout:5000 }
+    );
   }
+}
+
+function handleLocationError(){
+  document.getElementById("nearest-list").innerHTML = `
+    <div class="pub-card">
+      <strong>Location not available</strong>
+      <p>Please tap "Use My Location"</p>
+    </div>
+  `;
 }
 
 function getDistance(lat1, lon1, lat2, lon2){
@@ -219,6 +231,12 @@ function showNearest(position){
 
   const userLat = position.coords.latitude;
   const userLon = position.coords.longitude;
+
+  // show user on map
+  map.setView([userLat, userLon], 12);
+  L.marker([userLat, userLon]).addTo(map)
+    .bindPopup("You are here")
+    .openPopup();
 
   pubs.forEach(pub=>{
     pub.distance = getDistance(userLat,userLon,pub.lat,pub.lng);
@@ -242,10 +260,20 @@ function showNearest(position){
       </div>
     `;
   });
-
 }
 
-/* FIX MAP */
+// AUTO LOAD LOCATION
+window.addEventListener("load", ()=>{
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(
+      showNearest,
+      handleLocationError,
+      { enableHighAccuracy:true, timeout:5000 }
+    );
+  }
+});
+
+// FIX MAP RENDER
 setTimeout(()=>map.invalidateSize(),300);
 window.addEventListener("resize",()=>map.invalidateSize());
 
