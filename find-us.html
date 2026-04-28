@@ -124,6 +124,35 @@ header h1 {
     height: 50%;
   }
 }
+
+/* BOOKING MODAL */
+#bookingModal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  z-index:9999;
+}
+
+#bookingFrame{
+  width:90%;
+  height:90%;
+  margin:5% auto;
+  display:block;
+  border:none;
+  border-radius:12px;
+}
+
+#closeModal{
+  position:absolute;
+  top:15px;
+  right:20px;
+  background:#fff;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:bold;
+}
 </style>
 </head>
 
@@ -149,18 +178,24 @@ header h1 {
 
 </div>
 
+<!-- BOOKING MODAL -->
+<div id="bookingModal">
+  <button id="closeModal" onclick="closeBooking()">Close ✕</button>
+  <iframe id="bookingFrame"></iframe>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 
 const pubs = [
-  { name: "The Bold Forester", lat: 50.87494, lng: -1.46521, phone:"02380175588", bookingUrl:"https://www.theboldforesternewforest.co.uk/food/#restaurant_form" target="_blank" } ,
-  { name: "The Royal Oak", lat: 50.82664, lng: -1.43160, phone:"01590612228", bookingUrl:"https://www.theroyaloakbeaulieu.co.uk/food/#restaurant_form" target="_blank" },
-  { name: "The Trusty Servant", lat: 50.89828, lng: -1.60107, phone:"02380812137", bookingUrl:"https://www.thetrustyservant.co.uk/food/#restaurant_form" target="_blank" },
-  { name: "The New Forest Inn", lat: 50.87432, lng: -1.59547, phone:"02380284690", bookingUrl:"https://www.thenewforestinn.co.uk/food/#_restaurant_form" target="_blank" },
-  { name: "The Lamb Inn", lat: 50.95469, lng: -1.64080, phone:"01794331331", bookingUrl:"https://www.thelambnomansland.co.uk/food/#restaurant_form" target="_blank" },
-  { name: "The Woolpack", lat: 50.77138, lng: -1.77875, phone:"01425672252", bookingUrl:"https://www.thewoolpacksopley.co.uk/food/#restaurant_form" target="_blank" },
-  { name: "The Fighting Cocks", lat: 50.93376, lng: -1.75063, phone:"01425655686", bookingUrl:"https://thefightingcockspub.co.uk/food/#restaurant_form" target="_blank"}
+  { name: "The Bold Forester", lat: 50.87494, lng: -1.46521, phone:"02380175588", bookingUrl:"https://www.theboldforesternewforest.co.uk/food/#restaurant_form" },
+  { name: "The Royal Oak", lat: 50.82664, lng: -1.43160, phone:"01590612228", bookingUrl:"https://www.theroyaloakbeaulieu.co.uk/food/#restaurant_form" },
+  { name: "The Trusty Servant", lat: 50.89828, lng: -1.60107, phone:"02380812137", bookingUrl:"https://www.thetrustyservant.co.uk/food/#restaurant_form" },
+  { name: "The New Forest Inn", lat: 50.87432, lng: -1.59547, phone:"02380284690", bookingUrl:"https://www.thenewforestinn.co.uk/food/#_restaurant_form" },
+  { name: "The Lamb Inn", lat: 50.95469, lng: -1.64080, phone:"01794331331", bookingUrl:"https://www.thelambnomansland.co.uk/food/#restaurant_form" },
+  { name: "The Woolpack", lat: 50.77138, lng: -1.77875, phone:"01425672252", bookingUrl:"https://www.thewoolpacksopley.co.uk/food/#restaurant_form" },
+  { name: "The Fighting Cocks", lat: 50.93376, lng: -1.75063, phone:"01425655686", bookingUrl:"https://thefightingcockspub.co.uk/food/#restaurant_form"}
 ];
 
 // MAP
@@ -191,7 +226,7 @@ pubs.forEach(pub => {
   pubListDiv.appendChild(listItem);
 });
 
-// DISTANCE IN MILES
+// DISTANCE (miles)
 function getDistance(lat1, lon1, lat2, lon2){
   const R = 6371;
   const dLat = (lat2-lat1) * Math.PI/180;
@@ -206,15 +241,14 @@ function getDistance(lat1, lon1, lat2, lon2){
   return km * 0.621371;
 }
 
-// DRIVE TIME (30mph average)
+// DRIVE TIME
 function getDriveTimeMinutes(miles){
   return Math.round((miles / 30) * 60);
 }
 
-// FORMAT
-function formatDriveTime(miles){
+function formatDrive(miles){
   const mins = getDriveTimeMinutes(miles);
-  return mins <= 1 ? "1 min" : `${mins} min`;
+  return `${miles.toFixed(1)} miles • ${mins} min drive`;
 }
 
 // BADGE
@@ -260,14 +294,12 @@ function showNearest(position){
 
         <strong>${pub.name}</strong>
 
-        <p>
-          📍 ${pub.distance.toFixed(1)} miles • 🚗 ${formatDriveTime(pub.distance)} drive
-        </p>
+        <p>${formatDrive(pub.distance)}</p>
 
         <div class="pub-actions">
-          <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}" target="_blank">Directions</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}">Directions</a>
           <a href="tel:${pub.phone}">Call</a>
-          <a href="${pub.bookingUrl}" target="_blank">Book</a>
+          <a href="#" onclick="openBooking('${pub.bookingUrl}')">Book</a>
         </div>
 
       </div>
@@ -275,12 +307,23 @@ function showNearest(position){
   });
 }
 
+// BOOKING MODAL
+function openBooking(url){
+  document.getElementById("bookingFrame").src = url;
+  document.getElementById("bookingModal").style.display = "block";
+}
+
+function closeBooking(){
+  document.getElementById("bookingModal").style.display = "none";
+  document.getElementById("bookingFrame").src = "";
+}
+
 // AUTO LOAD
 window.addEventListener("load", ()=>{
   navigator.geolocation.getCurrentPosition(showNearest);
 });
 
-// FIX MAP
+// MAP FIX
 setTimeout(()=>map.invalidateSize(),300);
 window.addEventListener("resize",()=>map.invalidateSize());
 
