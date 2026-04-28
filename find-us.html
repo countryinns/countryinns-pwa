@@ -42,7 +42,7 @@ header h1 {
   display:block;
 }
 
-/* NEAREST CARDS */
+/* CARDS */
 .pub-card{
   background:#fff;
   color:#333;
@@ -51,6 +51,20 @@ header h1 {
   border-radius:8px;
   box-shadow:0 2px 4px rgba(0,0,0,0.15);
 }
+
+/* PROXIMITY BADGE */
+.badge{
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:0.75rem;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.green{ background:#d1fae5; color:#065f46; }
+.yellow{ background:#fef3c7; color:#92400e; }
+.red{ background:#fee2e2; color:#991b1b; }
 
 .pub-actions a{
   margin-right:10px;
@@ -170,7 +184,7 @@ const map = L.map('map').setView([50.8746, -1.5936], 11);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-// SIDEBAR LIST
+// LIST
 const pubListDiv = document.getElementById("pub-list");
 
 pubs.forEach(pub => {
@@ -194,30 +208,13 @@ pubs.forEach(pub => {
 });
 
 // LOCATION
-
 function getLocation(){
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(
-      showNearest,
-      handleLocationError,
-      { enableHighAccuracy:true, timeout:5000 }
-    );
-  }
+  navigator.geolocation.getCurrentPosition(showNearest);
 }
 
-function handleLocationError(){
-  document.getElementById("nearest-list").innerHTML = `
-    <div class="pub-card">
-      <strong>Location not available</strong>
-      <p>Please tap "Use My Location"</p>
-    </div>
-  `;
-}
-
-// DISTANCE IN MILES
+// DISTANCE (miles)
 function getDistance(lat1, lon1, lat2, lon2){
   const R = 6371;
-
   const dLat = (lat2-lat1) * Math.PI/180;
   const dLon = (lon2-lon1) * Math.PI/180;
 
@@ -231,16 +228,25 @@ function getDistance(lat1, lon1, lat2, lon2){
   return km * 0.621371;
 }
 
-// SMART FORMATTER
-function formatMiles(miles){
-  if (miles < 0.1) return "Very close";
-
-  const rounded = Math.round(miles * 10) / 10;
-
-  if (rounded === 1) return "1 mile";
-  return `${rounded} miles`;
+// DRIVE TIME
+function getDriveTimeMinutes(miles){
+  return Math.round((miles / 30) * 60);
 }
 
+// FORMAT TIME
+function formatDriveTime(miles){
+  const mins = getDriveTimeMinutes(miles);
+  return mins <= 1 ? "1 min drive" : `${mins} min drive`;
+}
+
+// BADGE SYSTEM
+function getBadge(mins){
+  if (mins <= 5) return `<span class="badge green">🟢 Very Close</span>`;
+  if (mins <= 12) return `<span class="badge yellow">🟡 Nearby</span>`;
+  return `<span class="badge red">🔴 Further</span>`;
+}
+
+// SHOW RESULTS
 function showNearest(position){
 
   const userLat = position.coords.latitude;
@@ -262,15 +268,25 @@ function showNearest(position){
   container.innerHTML="";
 
   pubs.forEach(pub=>{
+    const mins = getDriveTimeMinutes(pub.distance);
+
     container.innerHTML += `
       <div class="pub-card">
+
+        ${getBadge(mins)}
+
         <strong>${pub.name}</strong>
-        <p>${formatMiles(pub.distance)} away</p>
+
+        <p>
+          📍 ${pub.distance.toFixed(1)} miles away • 🚗 ${formatDriveTime(pub.distance)}
+        </p>
+
         <div class="pub-actions">
           <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}">Directions</a>
           ${pub.phone ? `<a href="tel:${pub.phone}">Call</a>` : ""}
           <a href="booking.html">Book</a>
         </div>
+
       </div>
     `;
   });
@@ -278,16 +294,10 @@ function showNearest(position){
 
 // AUTO LOAD
 window.addEventListener("load", ()=>{
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(
-      showNearest,
-      handleLocationError,
-      { enableHighAccuracy:true, timeout:5000 }
-    );
-  }
+  navigator.geolocation.getCurrentPosition(showNearest);
 });
 
-// FIX MAP
+// MAP FIX
 setTimeout(()=>map.invalidateSize(),300);
 window.addEventListener("resize",()=>map.invalidateSize());
 
