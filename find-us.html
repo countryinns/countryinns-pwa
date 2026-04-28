@@ -124,35 +124,6 @@ header h1 {
     height: 50%;
   }
 }
-
-/* BOOKING MODAL */
-#bookingModal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  display:none;
-  z-index:9999;
-}
-
-#bookingFrame{
-  width:90%;
-  height:90%;
-  margin:5% auto;
-  display:block;
-  border:none;
-  border-radius:12px;
-}
-
-#closeModal{
-  position:absolute;
-  top:15px;
-  right:20px;
-  background:#fff;
-  border:none;
-  padding:10px 15px;
-  border-radius:8px;
-  font-weight:bold;
-}
 </style>
 </head>
 
@@ -176,12 +147,6 @@ header h1 {
 
 <div id="map"></div>
 
-</div>
-
-<!-- BOOKING MODAL -->
-<div id="bookingModal">
-  <button id="closeModal" onclick="closeBooking()">Close ✕</button>
-  <iframe id="bookingFrame"></iframe>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -212,7 +177,10 @@ pubs.forEach(pub => {
 
   const mapsLink = `https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}`;
 
-  marker.bindPopup(`<strong>${pub.name}</strong><br><a href="${mapsLink}" target="_blank">Directions</a>`);
+  marker.bindPopup(`
+    <strong>${pub.name}</strong><br>
+    <a href="${mapsLink}" target="_blank">Directions</a>
+  `);
 
   const listItem = document.createElement("div");
   listItem.className = "pub-item";
@@ -246,9 +214,10 @@ function getDriveTimeMinutes(miles){
   return Math.round((miles / 30) * 60);
 }
 
-function formatDrive(miles){
+// FORMAT TIME
+function formatDriveTime(miles){
   const mins = getDriveTimeMinutes(miles);
-  return `${miles.toFixed(1)} miles • ${mins} min drive`;
+  return mins <= 1 ? "1 min" : `${mins} min`;
 }
 
 // BADGE
@@ -294,28 +263,19 @@ function showNearest(position){
 
         <strong>${pub.name}</strong>
 
-        <p>${formatDrive(pub.distance)}</p>
+        <p>
+          📍 ${pub.distance.toFixed(1)} miles • 🚗 ${formatDriveTime(pub.distance)} drive
+        </p>
 
         <div class="pub-actions">
-          <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}">Directions</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${pub.lat},${pub.lng}" target="_blank">Directions</a>
           <a href="tel:${pub.phone}">Call</a>
-          <a href="#" onclick="openBooking('${pub.bookingUrl}')">Book</a>
+          <a href="${pub.bookingUrl}">Book</a>
         </div>
 
       </div>
     `;
   });
-}
-
-// BOOKING MODAL
-function openBooking(url){
-  document.getElementById("bookingFrame").src = url;
-  document.getElementById("bookingModal").style.display = "block";
-}
-
-function closeBooking(){
-  document.getElementById("bookingModal").style.display = "none";
-  document.getElementById("bookingFrame").src = "";
 }
 
 // AUTO LOAD
