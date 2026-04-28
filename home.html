@@ -18,6 +18,7 @@ color:#333;
 opacity:0;
 transition:opacity 0.3s ease;
 padding-bottom:80px;
+-webkit-overflow-scrolling: touch;
 }
 
 body.loaded{
@@ -78,7 +79,7 @@ margin-top:4px;
 display:flex;
 gap:20px;
 overflow-x:auto;
-scroll-snap-type:x mandatory;
+scroll-snap-type:x proximity;
 padding-bottom:20px;
 }
 
@@ -91,9 +92,11 @@ flex:0 0 250px;
 background:white;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 4px 8px rgba(0,0,0,0.1);
+box-shadow:0 2px 4px rgba(0,0,0,0.08);
 scroll-snap-align:start;
 transition:transform 0.2s;
+transform:translateZ(0);
+will-change:transform;
 }
 
 .event-card:active{
@@ -142,12 +145,14 @@ gap:20px;
 background:white;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 4px 8px rgba(0,0,0,0.1);
+box-shadow:0 2px 4px rgba(0,0,0,0.08);
 text-decoration:none;
 color:inherit;
 transition:transform 0.2s;
 display:flex;
 flex-direction:column;
+transform:translateZ(0);
+will-change:transform;
 }
 
 .pub-tile:active{
@@ -180,7 +185,7 @@ margin:auto;
 background:white;
 padding:20px;
 border-radius:10px;
-box-shadow:0 4px 8px rgba(0,0,0,0.1);
+box-shadow:0 2px 4px rgba(0,0,0,0.08);
 text-align:left;
 }
 
@@ -226,9 +231,12 @@ width:100%;
 background:#fff;
 display:flex;
 justify-content:space-around;
-box-shadow:0 -2px 10px rgba(0,0,0,0.1);
+box-shadow:0 -2px 6px rgba(0,0,0,0.08);
 padding:8px 0;
 z-index:1000;
+transform:translateZ(0);
+will-change:transform;
+backface-visibility:hidden;
 }
 
 .bottom-nav a{
@@ -255,8 +263,11 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:1.5rem;
-box-shadow:0 4px 10px rgba(0,0,0,0.3);
+box-shadow:0 2px 6px rgba(0,0,0,0.15);
 text-decoration:none;
+transform:translateZ(0);
+will-change:transform;
+backface-visibility:hidden;
 }
 
 </style>
@@ -273,7 +284,7 @@ text-decoration:none;
 
 <div class="global-notice">
 Father's Day at Country Inns
-<span>Celebrate with great food & drinks across all pubs</span>
+<span>Celebrate Father's Day with delicious food, traditional roasts, seasonal specials and quality time with family and friends at your local Country Inns pub.</span>
 <span><strong>Sunday 21st June</strong></span>
 </div>
 
@@ -281,7 +292,6 @@ Father's Day at Country Inns
 <h2>Featured at Every Pub</h2>
 
 <div class="events-scroll">
-
 <div class="event-card">
 <img src="Father's Day.png" alt="Father's Day" loading="lazy">
 
@@ -364,14 +374,12 @@ Supporting local producers across the New Forest.
 <a href="local.html" class="btn">Discover Our Partners</a>
 
 </div>
-
 </div>
-
 </section>
+
 <section>
 <h2>Explore Our Pub Family</h2>
 <div class="pubs-grid">
-
 <a class="pub-tile" href="boldforester.html"><img src="bold-forester-images/Restaurant Images/boldforestermain.jpg"><span>The Bold Forester</span></a>
 
 <a class="pub-tile" href="lambinn.html"><img src="Lamb-Inn-images/LambInn.jpg"><span>The Lamb Inn</span></a>
@@ -386,7 +394,7 @@ Supporting local producers across the New Forest.
 
 <a class="pub-tile" href="newforestinn.html"><img src="New-Forest-Inn-images/NFI.jpg"><span>The New Forest Inn</span></a>
 
-<a class="pub-tile" href="find-us.html"><img src="find us.png" loading="lazy"><span>Find Our Nearest Pub</span></a> 
+<a class="pub-tile" href="find-us.html"><img src="find us.png" loading="lazy"><span>Find Our Nearest Pub</span></a>
 </div>
 </section>
 
@@ -408,10 +416,8 @@ Supporting local producers across the New Forest.
 
 </div>
 
-<!-- FAB -->
 <a href="booking.html" class="fab">🍽️</a>
 
-<!-- NAV -->
 <nav class="bottom-nav">
 <a href="home.html">🏠<span>Home</span></a>
 <a href="find-us.html">📍<span>Pubs</span></a>
@@ -433,12 +439,16 @@ document.querySelectorAll("a, button").forEach(el=>{
   });
 });
 
-// PULL REFRESH
+// ✅ FIXED PULL REFRESH (PASSIVE)
 let startY=0;
-window.addEventListener("touchstart",e=>startY=e.touches[0].clientY);
-window.addEventListener("touchend",e=>{
-  if(e.changedTouches[0].clientY-startY>100) location.reload();
-});
+
+window.addEventListener("touchstart", e=>{
+  startY = e.touches[0].clientY;
+}, { passive: true });
+
+window.addEventListener("touchend", e=>{
+  if(e.changedTouches[0].clientY - startY > 100) location.reload();
+}, { passive: true });
 
 // INSTALL PROMPT
 let deferredPrompt;
