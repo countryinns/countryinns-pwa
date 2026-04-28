@@ -18,6 +18,7 @@ color:#333;
 opacity:0;
 transition:opacity 0.3s ease;
 padding-bottom:80px;
+-webkit-overflow-scrolling: touch;
 }
 
 body.loaded{
@@ -41,6 +42,8 @@ background:url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
 color:white;
 text-align:center;
 padding:80px 20px;
+background-attachment:scroll;
+will-change:transform;
 }
 
 header h1{
@@ -78,8 +81,9 @@ margin-top:4px;
 display:flex;
 gap:20px;
 overflow-x:auto;
-scroll-snap-type:x mandatory;
+scroll-snap-type:x proximity;
 padding-bottom:20px;
+-webkit-overflow-scrolling: touch;
 }
 
 .events-scroll::-webkit-scrollbar{
@@ -91,43 +95,21 @@ flex:0 0 250px;
 background:white;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 4px 8px rgba(0,0,0,0.1);
+box-shadow:0 2px 4px rgba(0,0,0,0.08);
 scroll-snap-align:start;
 transition:transform 0.2s;
+will-change:transform;
+transform:translateZ(0);
 }
 
 .event-card:active{
 transform:scale(0.97);
 }
 
-.event-card:hover{
-transform:translateY(-5px);
-}
-
 .event-card img{
 width:100%;
 height:150px;
 object-fit:cover;
-}
-
-.event-card h3{
-margin:15px 0 10px;
-}
-
-.event-card p{
-padding:0 15px 15px;
-font-size:0.95rem;
-}
-
-.event-card .btn{
-display:inline-block;
-background-color:#2e7d32;
-color:#fff;
-padding:10px 18px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-bottom:15px;
 }
 
 /* PUB GRID */
@@ -142,12 +124,13 @@ gap:20px;
 background:white;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 4px 8px rgba(0,0,0,0.1);
+box-shadow:0 2px 4px rgba(0,0,0,0.08);
 text-decoration:none;
 color:inherit;
-transition:transform 0.2s;
 display:flex;
 flex-direction:column;
+will-change:transform;
+transform:translateZ(0);
 }
 
 .pub-tile:active{
@@ -158,12 +141,6 @@ transform:scale(0.97);
 width:100%;
 height:180px;
 object-fit:cover;
-}
-
-.pub-tile span{
-padding:15px;
-font-size:1.1em;
-font-weight:bold;
 }
 
 /* BLOG */
@@ -180,19 +157,7 @@ margin:auto;
 background:white;
 padding:20px;
 border-radius:10px;
-box-shadow:0 4px 8px rgba(0,0,0,0.1);
-text-align:left;
-}
-
-.journal-link{
-display:inline-block;
-margin-top:25px;
-background:#2e7d32;
-color:white;
-padding:10px 20px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
+box-shadow:0 2px 4px rgba(0,0,0,0.08);
 }
 
 /* ABOUT */
@@ -226,9 +191,11 @@ width:100%;
 background:#fff;
 display:flex;
 justify-content:space-around;
-box-shadow:0 -2px 10px rgba(0,0,0,0.1);
+box-shadow:0 -2px 6px rgba(0,0,0,0.08);
 padding:8px 0;
 z-index:1000;
+transform:translateZ(0);
+backface-visibility:hidden;
 }
 
 .bottom-nav a{
@@ -255,8 +222,10 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:1.5rem;
-box-shadow:0 4px 10px rgba(0,0,0,0.3);
+box-shadow:0 2px 6px rgba(0,0,0,0.2);
 text-decoration:none;
+transform:translateZ(0);
+backface-visibility:hidden;
 }
 
 </style>
@@ -283,136 +252,52 @@ Father's Day at Country Inns
 <div class="events-scroll">
 
 <div class="event-card">
-<img src="Father's Day.png" alt="Father's Day" loading="lazy">
-
+<img src="Father's Day.png" loading="lazy">
 <h3>Father's Day</h3>
-
-<p><strong>
-Celebrate Father's Day with delicious food, traditional roasts, seasonal specials and quality time with family and friends at your local Country Inns pub.
-</strong></p>
-
- <a href="booking.html" class="btn">🍽️ Book Now!</a>
-
+<p><strong>Celebrate with family & traditional roasts.</strong></p>
+<a href="booking.html" class="btn">Book Now</a>
 </div>
 
 <div class="event-card">
-<img src="Country Inns Voucher.jpg" alt="Gift Vouchers" loading="lazy">
-
+<img src="Country Inns Voucher.jpg" loading="lazy">
 <h3>Gift Vouchers</h3>
-
-<p><strong>
-The perfect gift to enjoy all year round at any Country Inns pub.
-</strong></p>
-
+<p><strong>The perfect gift all year round.</strong></p>
 <a href="Voucher.html" class="btn">Learn More</a>
-
 </div>
 
-<div class="event-card">
-<img src="Seasonal Specials.png" alt="Seasonal Specials" loading="lazy">
-
-<h3>Seasonal Specials</h3>
-
-<p><strong>
-Menus inspired by the changing seasons of the New Forest.
-</strong></p>
-
-</div>
-
-<div class="event-card">
-<img src="Roast Pork.jpg" alt="Sunday Roast" loading="lazy">
-
-<h3>Sunday Roasts</h3>
-
-<p><strong>
-Traditional roasts with all the trimmings, every Sunday.
-</strong></p>
-
-</div>
-
-<div class="event-card">
-<img src="Dog Friendly.jpg" alt="Dog Friendly" loading="lazy">
-
-<h3>Dog Friendly</h3>
-
-<p><strong>
-Four-legged friends welcome at all our pubs.
-</strong></p>
-
-</div>
-
-<div class="event-card">
-<img src="Local Ales & Fine Wines.png" alt="Pouring Quality" loading="lazy">
-
-<h3>Pouring Quality</h3>
-
-<p><strong>
-Local ales and carefully chosen wines at every pub.
-</strong></p>
-
-</div>
-
-<div class="event-card">
-<img src="proudly local.png" alt="Proudly Local" loading="lazy">
-
-<h3>Proudly Local</h3>
-
-<p><strong>
-Supporting local producers across the New Forest.
-</strong></p>
-
-<a href="local.html" class="btn">Discover Our Partners</a>
-
-</div>
 </div>
 
 <h2>Explore Our Pub Family</h2>
+
 <div class="pubs-grid">
-
-<a class="pub-tile" href="boldforester.html"><img src="bold-forester-images/Restaurant Images/boldforestermain.jpg"><span>The Bold Forester</span></a>
-
-<a class="pub-tile" href="lambinn.html"><img src="Lamb-Inn-images/LambInn.jpg"><span>The Lamb Inn</span></a>
-
-<a class="pub-tile" href="royaloak.html"><img src="Royal-Oak-images/The Royal Oak.jpeg"><span>The Royal Oak</span></a>
-
-<a class="pub-tile" href="woolpack.html"><img src="Woolpack-images/Woolpack.jpg"><span>The Woolpack</span></a>
-
 <a class="pub-tile" href="fightingcocks.html"><img src="Fighting-Cocks-images/fighting-coq-scaled.jpg"><span>The Fighting Cocks</span></a>
-
-<a class="pub-tile" href="trustyservant.html"><img src="Trusty-Servant-images/Trusty.jpg"><span>The Trusty Servant</span></a>
-
-<a class="pub-tile" href="newforestinn.html"><img src="New-Forest-Inn-images/NFI.jpg"><span>The New Forest Inn</span></a>
-
 </div>
+
 </section>
 
 <section>
 <h2>Latest Updates</h2>
 <div id="blog-posts"></div>
-<a class="journal-link" href="https://countryinnsnewforest.blogspot.com/">Read Latest Updates</a>
 </section>
 
 <section class="about-banner">
 <h2>About Country Inns</h2>
-<p>Welcoming pubs across the New Forest, serving great food & local produce.</p>
-<a href="about.html" class="journal-link">Read More</a>
+<p>Welcoming pubs across the New Forest.</p>
 </section>
 
 <footer>
-<p>&copy; 2025 Country Inns. Proudly serving The New Forest</p>
+<p>&copy; 2025 Country Inns</p>
 </footer>
 
 </div>
 
-<!-- FAB -->
 <a href="booking.html" class="fab">🍽️</a>
 
-<!-- NAV -->
 <nav class="bottom-nav">
 <a href="home.html">🏠<span>Home</span></a>
 <a href="find-us.html">📍<span>Pubs</span></a>
 <a href="booking.html">📅<span>Book</span></a>
-<a href="https://countryinnsnewforest.blogspot.com/">🎉<span>Events</span></a>
+<a href="#">🎉<span>Events</span></a>
 </nav>
 
 <script>
@@ -422,33 +307,16 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("loaded");
 });
 
-// HAPTIC
-document.querySelectorAll("a, button").forEach(el=>{
-  el.addEventListener("click", ()=>{
-    if(navigator.vibrate) navigator.vibrate(10);
-  });
-});
-
-// PULL REFRESH
+// PASSIVE TOUCH (FIXES STUTTER)
 let startY=0;
-window.addEventListener("touchstart",e=>startY=e.touches[0].clientY);
-window.addEventListener("touchend",e=>{
-  if(e.changedTouches[0].clientY-startY>100) location.reload();
-});
 
-// INSTALL PROMPT
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', e=>{
-  e.preventDefault();
-  deferredPrompt=e;
-  const btn=document.createElement("button");
-  btn.innerText="📲 Install App";
-  btn.style.position="fixed";
-  btn.style.top="10px";
-  btn.style.right="10px";
-  document.body.appendChild(btn);
-  btn.onclick=()=>deferredPrompt.prompt();
-});
+window.addEventListener("touchstart", e=>{
+  startY=e.touches[0].clientY;
+},{passive:true});
+
+window.addEventListener("touchend", e=>{
+  if(e.changedTouches[0].clientY-startY>100) location.reload();
+},{passive:true});
 
 // SERVICE WORKER
 if('serviceWorker' in navigator){
