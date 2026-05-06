@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Country Inns Analytics</title>
+<title>Country Inns Analytics Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   margin: 0;
   background: #f5f5f5;
   padding: 20px;
@@ -15,35 +17,48 @@ body {
 
 h1 {
   text-align: center;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
 }
 
 .card {
   background: white;
   padding: 15px;
-  margin: 10px 0;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .metric {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
+canvas {
+  max-height: 250px;
+}
+
 button {
-  padding: 10px;
   margin-top: 10px;
+  padding: 10px;
   border: none;
   border-radius: 8px;
   background: #2e7d32;
   color: white;
+  cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📊 Country Inns Dashboard</h1>
+<h1>📊 Country Inns Analytics Dashboard V2</h1>
+
+<div class="grid">
 
 <div class="card">
   <div class="metric" id="opens">0</div>
@@ -60,28 +75,113 @@ button {
   <div>Install Clicks 📲</div>
 </div>
 
+</div>
+
+<br>
+
+<div class="grid">
+
+<div class="card">
+  <h3>📈 Activity Overview</h3>
+  <canvas id="eventsChart"></canvas>
+</div>
+
+<div class="card">
+  <h3>🍺 Pub Engagement</h3>
+  <canvas id="pubChart"></canvas>
+</div>
+
+</div>
+
 <button onclick="clearData()">Clear Data</button>
 
 <script>
 
-function loadData() {
-  const data = JSON.parse(localStorage.getItem("ci_analytics") || "[]");
+/* ======================
+   LOAD ANALYTICS DATA
+====================== */
+function getData() {
+  return JSON.parse(localStorage.getItem("ci_analytics") || "[]");
+}
 
-  const opens = data.filter(x => x.event === "app_open").length;
-  const bookings = data.filter(x => x.event === "booking_click").length;
-  const installs = data.filter(x => x.event === "install_click").length;
+/* ======================
+   COUNT METRICS
+====================== */
+function countEvents(data, type) {
+  return data.filter(x => x.event === type).length;
+}
+
+/* ======================
+   INIT DASHBOARD
+====================== */
+function init() {
+  const data = getData();
+
+  const opens = countEvents(data, "app_open");
+  const bookings = countEvents(data, "booking_click");
+  const installs = countEvents(data, "install_click");
 
   document.getElementById("opens").innerText = opens;
   document.getElementById("bookings").innerText = bookings;
   document.getElementById("installs").innerText = installs;
+
+  renderCharts(data);
 }
 
+/* ======================
+   CHART 1 - EVENT OVERVIEW
+====================== */
+function renderCharts(data) {
+
+  const eventCounts = {
+    app_open: countEvents(data, "app_open"),
+    booking_click: countEvents(data, "booking_click"),
+    install_click: countEvents(data, "install_click"),
+    pub_visit: countEvents(data, "pub_visit")
+  };
+
+  new Chart(document.getElementById("eventsChart"), {
+    type: "bar",
+    data: {
+      labels: Object.keys(eventCounts),
+      datasets: [{
+        label: "Events",
+        data: Object.values(eventCounts)
+      }]
+    }
+  });
+
+  /* ======================
+     PUB BREAKDOWN
+  ====================== */
+  const pubs = {};
+
+  data.filter(x => x.event === "pub_visit").forEach(e => {
+    const name = e.data.pub || "Unknown";
+    pubs[name] = (pubs[name] || 0) + 1;
+  });
+
+  new Chart(document.getElementById("pubChart"), {
+    type: "pie",
+    data: {
+      labels: Object.keys(pubs),
+      datasets: [{
+        label: "Pub Visits",
+        data: Object.values(pubs)
+      }]
+    }
+  });
+}
+
+/* ======================
+   CLEAR DATA
+====================== */
 function clearData() {
   localStorage.removeItem("ci_analytics");
-  loadData();
+  location.reload();
 }
 
-loadData();
+init();
 
 </script>
 
