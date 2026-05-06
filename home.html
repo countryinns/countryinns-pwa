@@ -4,278 +4,212 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Country Inns</title>
+
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
 
 <style>
 
-/* BASE */
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background-color:#f5f5f5;
-color:#333;
-opacity:0;
-transition:opacity 0.3s ease;
-padding-bottom:80px;
--webkit-overflow-scrolling: touch;
+/* GLOBAL OPTIMISATIONS */
+html {
+  scroll-behavior: smooth;
 }
 
-body.loaded{
-opacity:1;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding-bottom: 80px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
-h2{
-font-size:2em;
-margin-bottom:20px;
+body.loaded {
+  opacity: 1;
 }
 
-section{
-padding:40px 20px;
-text-align:center;
+/* TEXT */
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+section {
+  padding: 40px 20px;
+  text-align: center;
 }
 
 /* HEADER */
-
-header{
-background:url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
-color:white;
-text-align:center;
-padding:80px 20px;
+header {
+  background: url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
 }
 
-header h1{
-font-size:2.5em;
-margin:0;
-text-shadow:2px 2px 5px rgba(0,0,0,0.6);
+header h1 {
+  font-size: 2.5em;
+  margin: 0;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
 }
 
-header h3{
-font-size:1.3em;
-margin-top:10px;
+header h3 {
+  font-size: 1.3em;
+  margin-top: 10px;
 }
 
-/* GLOBAL NOTICE */
-
-.global-notice{
-background:linear-gradient(135deg,#8b1d3a,#b03052);
-color:#fff;
-text-align:center;
-padding:14px 20px;
-font-size:1rem;
-font-weight:bold;
+/* NOTICE */
+.global-notice {
+  background: linear-gradient(135deg,#8b1d3a,#b03052);
+  color: #fff;
+  text-align: center;
+  padding: 14px;
+  font-weight: bold;
 }
 
-.global-notice span{
-display:block;
-font-weight:normal;
-font-size:0.9rem;
-margin-top:4px;
+/* EVENTS */
+.events-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 20px;
 }
 
-/* EVENT CARDS */
-
-.events-scroll{
-display:flex;
-gap:20px;
-overflow-x:auto;
-scroll-snap-type:x proximity;
-padding-bottom:20px;
+.events-scroll::-webkit-scrollbar {
+  display: none;
 }
 
-.events-scroll::-webkit-scrollbar{
-display:none;
+.event-card {
+  flex: 0 0 250px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  scroll-snap-align: start;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
-.event-card{
-flex:0 0 250px;
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
-scroll-snap-align:start;
-transition:transform 0.2s;
-transform:translateZ(0);
-will-change:transform;
+.event-card:active {
+  transform: scale(0.97);
 }
 
-.event-card:active{
-transform:scale(0.97);
+.event-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
 
-.event-card:hover{
-transform:translateY(-5px);
-}
-
-.event-card img{
-width:100%;
-height:150px;
-object-fit:cover;
-}
-
-.event-card h3{
-margin:15px 0 10px;
-}
-
-.event-card p{
-padding:0 15px 15px;
-font-size:0.95rem;
-}
-
-.event-card .btn{
-display:inline-block;
-background-color:#2e7d32;
-color:#fff;
-padding:10px 18px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-bottom:15px;
+.event-card .btn {
+  display: inline-block;
+  background: #2e7d32;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 /* PUB GRID */
-
-.pubs-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+.pubs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
 }
 
-.pub-tile{
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
-text-decoration:none;
-color:inherit;
-transition:transform 0.2s;
-display:flex;
-flex-direction:column;
-transform:translateZ(0);
-will-change:transform;
+.pub-tile {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  transform: translateZ(0);
 }
 
-.pub-tile:active{
-transform:scale(0.97);
+.pub-tile:active {
+  transform: scale(0.97);
 }
 
-.pub-tile img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.pub-tile span{
-padding:15px;
-font-size:1.1em;
-font-weight:bold;
+.pub-tile img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
 /* BLOG */
-
-#blog-posts{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-max-width:900px;
-margin:auto;
+#blog-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
 }
 
-.blog-card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
-text-align:left;
-}
-
-.journal-link{
-display:inline-block;
-margin-top:25px;
-background:#2e7d32;
-color:white;
-padding:10px 20px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-}
-
-/* ABOUT */
-
-.about-banner{
-background:linear-gradient(135deg,#2e472e,#1e2b1e);
-color:#f4f4f4;
-padding:3rem 1.5rem;
-border-radius:12px;
-margin:2rem auto;
-max-width:1000px;
+.blog-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 /* FOOTER */
-
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
 
 /* BOTTOM NAV */
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#fff;
-display:flex;
-justify-content:space-around;
-box-shadow:0 -2px 6px rgba(0,0,0,0.08);
-padding:8px 0;
-z-index:1000;
-transform:translateZ(0);
-will-change:transform;
-backface-visibility:hidden;
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.08);
+  padding: 8px 0;
 }
 
-.bottom-nav a{
-text-decoration:none;
-color:#333;
-font-size:0.8rem;
-display:flex;
-flex-direction:column;
-align-items:center;
+.bottom-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* FAB */
-
-.fab{
-position:fixed;
-bottom:70px;
-right:20px;
-background:#2e7d32;
-color:white;
-width:60px;
-height:60px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:1.5rem;
-box-shadow:0 2px 6px rgba(0,0,0,0.15);
-text-decoration:none;
-transform:translateZ(0);
-will-change:transform;
-backface-visibility:hidden;
+.fab {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background: #2e7d32;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  text-decoration: none;
 }
 
 </style>
 </head>
 
 <body>
-
-<div id="app">
 
 <header>
 <h1>Welcome to Country Inns</h1>
@@ -375,6 +309,7 @@ Supporting local producers across the New Forest.
 
 </div>
 </div>
+
 </section>
 
 <section>
@@ -395,26 +330,20 @@ Supporting local producers across the New Forest.
 <a class="pub-tile" href="newforestinn.html"><img src="New-Forest-Inn-images/NFI.jpg"><span>The New Forest Inn</span></a>
 
 <a class="pub-tile" href="find-us.html"><img src="find us.png" loading="lazy"><span>Find Our Nearest Pub</span></a>
+
 </div>
 </section>
 
 <section>
 <h2>Latest Updates</h2>
-<div id="blog-posts"></div>
-<a class="journal-link" href="https://countryinnsnewforest.blogspot.com/">Read Latest Updates</a>
-</section>
-
-<section class="about-banner">
-<h2>About Country Inns</h2>
-<p>Welcoming pubs across the New Forest, serving great food & local produce.</p>
-<a href="about.html" class="journal-link">Read More</a>
+<div id="blog-posts">
+  <div class="blog-card">Loading latest updates...</div>
+</div>
 </section>
 
 <footer>
-<p>&copy; 2025 Country Inns. Proudly serving The New Forest</p>
+<p>© 2025 Country Inns. Proudly serving The New Forest.</p>
 </footer>
-
-</div>
 
 <a href="booking.html" class="fab">🍽️</a>
 
@@ -422,51 +351,47 @@ Supporting local producers across the New Forest.
 <a href="home.html">🏠<span>Home</span></a>
 <a href="find-us.html">📍<span>Pubs</span></a>
 <a href="booking.html">📅<span>Book</span></a>
-<a href="https://countryinnsnewforest.blogspot.com/">🎉<span>Events</span></a>
 </nav>
 
 <script>
 
-// FADE IN
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("loaded");
 });
 
-// HAPTIC
-document.querySelectorAll("a, button").forEach(el=>{
-  el.addEventListener("click", ()=>{
-    if(navigator.vibrate) navigator.vibrate(10);
-  });
+/* PREFETCH NAV */
+document.querySelectorAll(".pub-tile").forEach(el => {
+  el.addEventListener("mouseenter", () => fetch(el.href));
 });
 
-// ✅ FIXED PULL REFRESH (PASSIVE)
-let startY=0;
-
-window.addEventListener("touchstart", e=>{
-  startY = e.touches[0].clientY;
-}, { passive: true });
-
-window.addEventListener("touchend", e=>{
-  if(e.changedTouches[0].clientY - startY > 100) location.reload();
-}, { passive: true });
-
-// INSTALL PROMPT
+/* INSTALL BANNER */
 let deferredPrompt;
-window.addEventListener('beforeinstallprompt', e=>{
+
+window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
-  deferredPrompt=e;
-  const btn=document.createElement("button");
-  btn.innerText="📲 Install App";
-  btn.style.position="fixed";
-  btn.style.top="10px";
-  btn.style.right="10px";
-  document.body.appendChild(btn);
-  btn.onclick=()=>deferredPrompt.prompt();
+  deferredPrompt = e;
+
+  setTimeout(() => {
+    const banner = document.createElement("div");
+    banner.innerHTML = `
+      <div style="position:fixed;bottom:90px;left:10px;right:10px;
+      background:#2e7d32;color:white;padding:12px;border-radius:10px;
+      display:flex;justify-content:space-between;align-items:center;">
+        <span>Install Country Inns App</span>
+        <button id="installBtn">Install</button>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    document.getElementById("installBtn").onclick = () => {
+      deferredPrompt.prompt();
+    };
+  }, 5000);
 });
 
-// SERVICE WORKER
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('/countryinns-pwa/service-worker.js');
+/* SW */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/countryinns-pwa/service-worker.js');
 }
 
 </script>
