@@ -430,6 +430,7 @@ Supporting local producers across the New Forest.
 window.addEventListener("error", () => {
   document.body.classList.add("loaded");
 });
+
 /* =========================
    CLOUD ANALYTICS (ENTERPRISE)
 ========================= */
@@ -443,28 +444,27 @@ function getParam(name) {
 
 const Analytics = {
   log(event, data = {}) {
-    fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        event,
-        pub: data.pub || getParam("pub") || "home",
-        source: getParam("src") || "direct",
-        device: navigator.userAgent,
-        screen: window.innerWidth + "x" + window.innerHeight,
-        data
-      })
-    }).catch(() => {});
-  }
-};
+    try {
+      fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          event,
+          pub: data.pub || getParam("pub") || "home",
+          source: getParam("src") || "direct",
+          device: navigator.userAgent,
+          screen: window.innerWidth + "x" + window.innerHeight,
+          data
+        })
+      }).catch(() => {});
     } catch (err) {
       console.log("Analytics error:", err);
     }
-
   }
 };
+
 /* =========================
    APP INIT
 ========================= */
@@ -482,16 +482,14 @@ document.addEventListener("DOMContentLoaded", () => {
 ========================= */
 function setupTracking() {
 
-  /* booking clicks */
   document.querySelectorAll('a[href*="booking"]').forEach(btn => {
     btn.addEventListener("click", () => {
       Analytics.log("booking_click", {
-  pub: getParam("pub") || "global"
-});
+        pub: getParam("pub") || "global"
+      });
     });
   });
 
-  /* pub clicks */
   document.querySelectorAll(".pub-tile").forEach(pub => {
     pub.addEventListener("click", () => {
       Analytics.log("pub_visit", {
@@ -499,7 +497,6 @@ function setupTracking() {
       });
     });
   });
-
 }
 
 /* =========================
@@ -545,11 +542,8 @@ function setupPrefetch() {
 /* =========================
    SERVICE WORKER
 ========================= */
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/countryinns-pwa/service-worker.js');
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/countryinns-pwa/service-worker.js");
 }
-
 </script>
-
-</body>
-</html>
+  
