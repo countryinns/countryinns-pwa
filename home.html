@@ -446,11 +446,19 @@ const Analytics = {
 
     try {
       fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    event,
+    pub: data.pub || getParam("pub") || "home",
+    source: getParam("src") || "direct",
+    device: navigator.userAgent,
+    screen: window.innerWidth + "x" + window.innerHeight,
+    data
+  })
+})
           event: event,
           pub: data.pub || getParam("pub") || "home",
           source: getParam("src") || "direct",
