@@ -443,22 +443,22 @@ function getParam(name) {
 
 const Analytics = {
   log(event, data = {}) {
-
-    try {
-      fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          event,
-          pub: data.pub || getParam("pub") || "home",
-          source: getParam("src") || "direct",
-          device: navigator.userAgent,
-          screen: window.innerWidth + "x" + window.innerHeight,
-          data
-        })
-      }).catch(() => {});
+    fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        event,
+        pub: data.pub || getParam("pub") || "home",
+        source: getParam("src") || "direct",
+        device: navigator.userAgent,
+        screen: window.innerWidth + "x" + window.innerHeight,
+        data
+      })
+    }).catch(() => {});
+  }
+};
     } catch (err) {
       console.log("Analytics error:", err);
     }
