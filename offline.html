@@ -1,78 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Country Inns - Offline</title>
-  <style>
-    :root {
-      --bg-gradient: linear-gradient(135deg, #013220, #2e8b57);
-      --container-bg: rgba(0, 0, 0, 0.6);
-      --text-color: #fff;
-    }
-    [data-theme="light"] {
-      --bg-gradient: linear-gradient(135deg, #f4f9f4, #d0e8d0);
-      --container-bg: rgba(255, 255, 255, 0.9);
-      --text-color: #013220;
-    }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: var(--bg-gradient);
-      color: var(--text-color);
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .container {
-      max-width: 400px;
-      background: var(--container-bg);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      margin-bottom: 2rem;
-      line-height: 1.5;
-    }
-    a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.8rem 1.2rem;
-      border-radius: 10px;
-      text-decoration: none;
-      color: #fff;
-      background-color: #2e8b57;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    a:hover {
-      background-color: #246b45;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Country Inns</h1>
-    <p>
-      You are currently offline.<br>
-      Some features may not be available.<br>
-      Please reconnect to continue accessing menus, events, and bookings.
-    </p>
-    <a href="index.html">🏠 Return to Home</a>
-  </div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country Inns - Offline</title>
 
-  <script>
-    // ===== Dark/Light Mode Persistence =====
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
-  </script>
+<style>
+:root {
+  --bg: linear-gradient(135deg, #013220, #2e8b57);
+  --card: rgba(0,0,0,0.55);
+  --text: #ffffff;
+  --button: #ffffff;
+  --button-text: #2e8b57;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+}
+
+.container {
+  max-width: 420px;
+  padding: 24px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+p {
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: var(--button);
+  color: var(--button-text);
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>You're Offline</h1>
+  <p>
+    Some features of Country Inns aren’t available right now.<br>
+    Please check your internet connection and try again.
+  </p>
+
+  <button class="button" onclick="location.reload()">
+    🔄 Try Again
+  </button>
+
+  <br>
+
+  <a class="button" href="home.html" style="display:inline-block;margin-top:10px;">
+    🏠 Go Home
+  </a>
+</div>
+
+<script>
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  document.documentElement.setAttribute('data-theme', savedTheme);
+}
+</script>
+
 </body>
 </html>
