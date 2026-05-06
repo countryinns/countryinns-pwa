@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Country Inns Analytics Dashboard</title>
+<title>Country Inns Executive Dashboard</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -11,13 +11,19 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: #f5f5f5;
+  background: #f4f6f8;
   padding: 20px;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.sub {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
 }
 
 .grid {
@@ -30,16 +36,31 @@ h1 {
   background: white;
   padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .metric {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: bold;
 }
 
 canvas {
-  max-height: 250px;
+  max-height: 260px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+th {
+  background: #f0f0f0;
 }
 
 button {
@@ -50,13 +71,20 @@ button {
   background: #2e7d32;
   color: white;
   cursor: pointer;
+  margin-right: 10px;
+}
+
+.actions {
+  text-align: center;
+  margin: 20px 0;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📊 Country Inns Analytics Dashboard V2</h1>
+<h1>📊 Executive Dashboard V3</h1>
+<div class="sub">Country Inns Performance Overview (Live from PWA data)</div>
 
 <div class="grid">
 
@@ -72,7 +100,12 @@ button {
 
 <div class="card">
   <div class="metric" id="installs">0</div>
-  <div>Install Clicks 📲</div>
+  <div>Installs 📲</div>
+</div>
+
+<div class="card">
+  <div class="metric" id="pubs">0</div>
+  <div>Pub Interactions 🍺</div>
 </div>
 
 </div>
@@ -82,78 +115,118 @@ button {
 <div class="grid">
 
 <div class="card">
-  <h3>📈 Activity Overview</h3>
-  <canvas id="eventsChart"></canvas>
+  <h3>📈 Weekly Activity Trend</h3>
+  <canvas id="trendChart"></canvas>
 </div>
 
 <div class="card">
-  <h3>🍺 Pub Engagement</h3>
-  <canvas id="pubChart"></canvas>
+  <h3>📊 Event Breakdown</h3>
+  <canvas id="eventChart"></canvas>
 </div>
 
 </div>
 
-<button onclick="clearData()">Clear Data</button>
+<br>
+
+<div class="grid">
+
+<div class="card">
+  <h3>🏆 Pub Leaderboard</h3>
+  <table id="leaderboard">
+    <tr><th>Pub</th><th>Visits</th></tr>
+  </table>
+</div>
+
+</div>
+
+<div class="actions">
+<button onclick="exportCSV()">📤 Export CSV</button>
+<button onclick="clearData()">🗑️ Reset Data</button>
+</div>
 
 <script>
 
-/* ======================
-   LOAD ANALYTICS DATA
-====================== */
+/* =========================
+   LOAD DATA
+========================= */
 function getData() {
   return JSON.parse(localStorage.getItem("ci_analytics") || "[]");
 }
 
-/* ======================
-   COUNT METRICS
-====================== */
-function countEvents(data, type) {
-  return data.filter(x => x.event === type).length;
+/* =========================
+   METRICS
+========================= */
+function count(data, event) {
+  return data.filter(x => x.event === event).length;
 }
 
-/* ======================
-   INIT DASHBOARD
-====================== */
+/* =========================
+   INIT
+========================= */
 function init() {
   const data = getData();
 
-  const opens = countEvents(data, "app_open");
-  const bookings = countEvents(data, "booking_click");
-  const installs = countEvents(data, "install_click");
+  const opens = count(data, "app_open");
+  const bookings = count(data, "booking_click");
+  const installs = count(data, "install_click");
+  const pubVisits = data.filter(x => x.event === "pub_visit").length;
 
   document.getElementById("opens").innerText = opens;
   document.getElementById("bookings").innerText = bookings;
   document.getElementById("installs").innerText = installs;
+  document.getElementById("pubs").innerText = pubVisits;
 
   renderCharts(data);
+  renderLeaderboard(data);
 }
 
-/* ======================
-   CHART 1 - EVENT OVERVIEW
-====================== */
+/* =========================
+   EVENT CHART
+========================= */
 function renderCharts(data) {
 
-  const eventCounts = {
-    app_open: countEvents(data, "app_open"),
-    booking_click: countEvents(data, "booking_click"),
-    install_click: countEvents(data, "install_click"),
-    pub_visit: countEvents(data, "pub_visit")
-  };
+  const events = ["app_open","booking_click","install_click","pub_visit"];
 
-  new Chart(document.getElementById("eventsChart"), {
+  new Chart(document.getElementById("eventChart"), {
     type: "bar",
     data: {
-      labels: Object.keys(eventCounts),
+      labels: events,
       datasets: [{
         label: "Events",
-        data: Object.values(eventCounts)
+        data: events.map(e => count(data, e))
       }]
     }
   });
 
-  /* ======================
-     PUB BREAKDOWN
-  ====================== */
+  /* WEEKLY TREND (last 7 days) */
+  const days = [...Array(7)].map((_,i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    return d.toDateString();
+  }).reverse();
+
+  const trendData = days.map(day =>
+    data.filter(x => new Date(x.time).toDateString() === day).length
+  );
+
+  new Chart(document.getElementById("trendChart"), {
+    type: "line",
+    data: {
+      labels: days.map(d => d.split(" ").slice(0,3).join(" ")),
+      datasets: [{
+        label: "Daily Activity",
+        data: trendData,
+        tension: 0.3
+      }]
+    }
+  });
+}
+
+/* =========================
+   PUB LEADERBOARD
+========================= */
+function renderLeaderboard(data) {
+
   const pubs = {};
 
   data.filter(x => x.event === "pub_visit").forEach(e => {
@@ -161,21 +234,41 @@ function renderCharts(data) {
     pubs[name] = (pubs[name] || 0) + 1;
   });
 
-  new Chart(document.getElementById("pubChart"), {
-    type: "pie",
-    data: {
-      labels: Object.keys(pubs),
-      datasets: [{
-        label: "Pub Visits",
-        data: Object.values(pubs)
-      }]
-    }
+  const sorted = Object.entries(pubs).sort((a,b) => b[1]-a[1]);
+
+  const table = document.getElementById("leaderboard");
+
+  sorted.forEach(([pub,count]) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${pub}</td><td>${count}</td>`;
+    table.appendChild(row);
   });
 }
 
-/* ======================
-   CLEAR DATA
-====================== */
+/* =========================
+   EXPORT CSV
+========================= */
+function exportCSV() {
+  const data = getData();
+
+  let csv = "event,time,data\n";
+
+  data.forEach(e => {
+    csv += `${e.event},${e.time},${JSON.stringify(e.data)}\n`;
+  });
+
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "country-inns-analytics.csv";
+  a.click();
+}
+
+/* =========================
+   RESET
+========================= */
 function clearData() {
   localStorage.removeItem("ci_analytics");
   location.reload();
