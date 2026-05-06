@@ -8,271 +8,200 @@
 
 <style>
 
-/* GLOBAL OPTIMISATIONS */
+/* GLOBAL */
 html {
   scroll-behavior: smooth;
 }
 
-/* BASE */
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background-color:#f5f5f5;
-color:#333;
-opacity:0;
-transition:opacity 0.3s ease;
-padding-bottom:80px;
--webkit-overflow-scrolling: touch;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding-bottom: 80px;
+  -webkit-overflow-scrolling: touch;
 }
 
-body.loaded{
-opacity:1;
+body.loaded {
+  opacity: 1;
 }
 
-h2{
-font-size:2em;
-margin-bottom:20px;
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
-section{
-padding:40px 20px;
-text-align:center;
+section {
+  padding: 40px 20px;
+  text-align: center;
 }
 
 /* HEADER */
-
-header{
-background:url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
-color:white;
-text-align:center;
-padding:80px 20px;
+header {
+  background: url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
 }
 
-header h1{
-font-size:2.5em;
-margin:0;
-text-shadow:2px 2px 5px rgba(0,0,0,0.6);
+header h1 {
+  font-size: 2.5em;
+  margin: 0;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
 }
 
-header h3{
-font-size:1.3em;
-margin-top:10px;
+header h3 {
+  font-size: 1.3em;
+  margin-top: 10px;
 }
 
-/* GLOBAL NOTICE */
-
-.global-notice{
-background:linear-gradient(135deg,#8b1d3a,#b03052);
-color:#fff;
-text-align:center;
-padding:14px 20px;
-font-size:1rem;
-font-weight:bold;
+/* NOTICE */
+.global-notice {
+  background: linear-gradient(135deg,#8b1d3a,#b03052);
+  color: #fff;
+  text-align: center;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
-.global-notice span{
-display:block;
-font-weight:normal;
-font-size:0.9rem;
-margin-top:4px;
+/* EVENTS */
+.events-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 20px;
 }
 
-/* EVENT CARDS */
-
-.events-scroll{
-display:flex;
-gap:20px;
-overflow-x:auto;
-scroll-snap-type:x proximity;
-padding-bottom:20px;
+.events-scroll::-webkit-scrollbar {
+  display: none;
 }
 
-.events-scroll::-webkit-scrollbar{
-display:none;
+.event-card {
+  flex: 0 0 250px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  scroll-snap-align: start;
 }
 
-.event-card{
-flex:0 0 250px;
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
-scroll-snap-align:start;
-transition:transform 0.2s;
-transform:translateZ(0);
-will-change:transform;
+.event-card:active {
+  transform: scale(0.97);
 }
 
-.event-card:active{
-transform:scale(0.97);
+.event-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
 
-.event-card:hover{
-transform:translateY(-5px);
+.event-card .btn {
+  display: inline-block;
+  background: #2e7d32;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
-.event-card img{
-width:100%;
-height:150px;
-object-fit:cover;
+/* PUBS */
+.pubs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
 }
 
-.event-card h3{
-margin:15px 0 10px;
+.pub-tile {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
 }
 
-.event-card p{
-padding:0 15px 15px;
-font-size:0.95rem;
+.pub-tile img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
-.event-card .btn{
-display:inline-block;
-background-color:#2e7d32;
-color:#fff;
-padding:10px 18px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-bottom:15px;
-}
-
-/* PUB GRID */
-
-.pubs-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.pub-tile{
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
-text-decoration:none;
-color:inherit;
-transition:transform 0.2s;
-display:flex;
-flex-direction:column;
-transform:translateZ(0);
-will-change:transform;
-}
-
-.pub-tile:active{
-transform:scale(0.97);
-}
-
-.pub-tile img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.pub-tile span{
-padding:15px;
-font-size:1.1em;
-font-weight:bold;
+.pub-tile span {
+  padding: 15px;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
 /* BLOG */
-
-#blog-posts{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-max-width:900px;
-margin:auto;
+#blog-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
 }
 
-.blog-card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
-text-align:left;
-}
-
-.journal-link{
-display:inline-block;
-margin-top:25px;
-background:#2e7d32;
-color:white;
-padding:10px 20px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-}
-
-/* ABOUT */
-
-.about-banner{
-background:linear-gradient(135deg,#2e472e,#1e2b1e);
-color:#f4f4f4;
-padding:3rem 1.5rem;
-border-radius:12px;
-margin:2rem auto;
-max-width:1000px;
+.blog-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 /* FOOTER */
-
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
 }
 
-/* BOTTOM NAV */
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#fff;
-display:flex;
-justify-content:space-around;
-box-shadow:0 -2px 6px rgba(0,0,0,0.08);
-padding:8px 0;
-z-index:1000;
-transform:translateZ(0);
-will-change:transform;
-backface-visibility:hidden;
+/* NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.08);
+  padding: 8px 0;
+  z-index: 1000;
 }
 
-.bottom-nav a{
-text-decoration:none;
-color:#333;
-font-size:0.8rem;
-display:flex;
-flex-direction:column;
-align-items:center;
+.bottom-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* FAB */
-
-.fab{
-position:fixed;
-bottom:70px;
-right:20px;
-background:#2e7d32;
-color:white;
-width:60px;
-height:60px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:1.5rem;
-box-shadow:0 2px 6px rgba(0,0,0,0.15);
-text-decoration:none;
-transform:translateZ(0);
-will-change:transform;
-backface-visibility:hidden;
+.fab {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background: #2e7d32;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  text-decoration: none;
 }
 
 </style>
@@ -291,6 +220,7 @@ Father's Day at Country Inns
 <span>Celebrate with great food & drinks across all Country Inns Pubs</span>
 <span><strong>Sunday 21st June</strong></span>
 </div>
+
 
 <section>
 <h2>Featured at Every Pub</h2>
@@ -381,7 +311,6 @@ Supporting local producers across the New Forest.
 </div>
 
 </section>
-
 <section>
 <h2>Explore Our Pub Family</h2>
 <div class="pubs-grid">
@@ -403,13 +332,11 @@ Supporting local producers across the New Forest.
 
 </div>
 </section>
-
 <section>
 <h2>Latest Updates</h2>
 <div id="blog-posts"></div>
 <a class="journal-link" href="https://countryinnsnewforest.blogspot.com/">Read Latest Updates</a>
 </section>
-
 <footer>
 <p>© 2025 Country Inns. Proudly serving The New Forest.</p>
 </footer>
@@ -424,41 +351,98 @@ Supporting local producers across the New Forest.
 
 <script>
 
+/* =========================
+   ANALYTICS SYSTEM
+========================= */
+const Analytics = {
+  log(event, data = {}) {
+    const logs = JSON.parse(localStorage.getItem("ci_analytics") || "[]");
+
+    logs.push({
+      event,
+      data,
+      time: new Date().toISOString()
+    });
+
+    localStorage.setItem("ci_analytics", JSON.stringify(logs));
+  }
+};
+
+/* APP OPEN */
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("loaded");
+  Analytics.log("app_open");
+
+  setupTracking();
+  setupInstallPrompt();
+  setupPrefetch();
 });
 
-/* PREFETCH NAV */
-document.querySelectorAll(".pub-tile").forEach(el => {
-  el.addEventListener("mouseenter", () => fetch(el.href));
-});
+/* =========================
+   TRACKING (SAFE INIT)
+========================= */
+function setupTracking() {
 
-/* INSTALL BANNER */
+  /* booking clicks */
+  document.querySelectorAll('a[href*="booking"]').forEach(btn => {
+    btn.addEventListener("click", () => {
+      Analytics.log("booking_click");
+    });
+  });
+
+  /* pub clicks */
+  document.querySelectorAll(".pub-tile").forEach(pub => {
+    pub.addEventListener("click", () => {
+      Analytics.log("pub_visit", {
+        pub: pub.innerText.trim()
+      });
+    });
+  });
+}
+
+/* =========================
+   INSTALL PROMPT
+========================= */
 let deferredPrompt;
 
-window.addEventListener("beforeinstallprompt", e => {
-  e.preventDefault();
-  deferredPrompt = e;
+function setupInstallPrompt() {
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    deferredPrompt = e;
 
-  setTimeout(() => {
-    const banner = document.createElement("div");
-    banner.innerHTML = `
-      <div style="position:fixed;bottom:90px;left:10px;right:10px;
-      background:#2e7d32;color:white;padding:12px;border-radius:10px;
-      display:flex;justify-content:space-between;align-items:center;">
-        <span>Install Country Inns App</span>
-        <button id="installBtn">Install</button>
-      </div>
-    `;
-    document.body.appendChild(banner);
+    setTimeout(() => {
+      const banner = document.createElement("div");
+      banner.innerHTML = `
+        <div style="position:fixed;bottom:90px;left:10px;right:10px;
+        background:#2e7d32;color:white;padding:12px;border-radius:10px;
+        display:flex;justify-content:space-between;align-items:center;">
+          <span>Install Country Inns App</span>
+          <button id="installBtn">Install</button>
+        </div>
+      `;
+      document.body.appendChild(banner);
 
-    document.getElementById("installBtn").onclick = () => {
-      deferredPrompt.prompt();
-    };
-  }, 5000);
-});
+      document.getElementById("installBtn").onclick = () => {
+        Analytics.log("install_click");
+        deferredPrompt.prompt();
+      };
 
-/* SW */
+    }, 5000);
+  });
+}
+
+/* =========================
+   PREFETCH NAV
+========================= */
+function setupPrefetch() {
+  document.querySelectorAll(".pub-tile").forEach(el => {
+    el.addEventListener("mouseenter", () => fetch(el.href));
+  });
+}
+
+/* =========================
+   SERVICE WORKER
+========================= */
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/countryinns-pwa/service-worker.js');
 }
