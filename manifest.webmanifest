@@ -1,14 +1,17 @@
 {
   "name": "Country Inns",
   "short_name": "Country Inns",
-  "description": "Pubs, events and bookings across the New Forest.",
+  "description": "Discover pubs, events, menus and bookings across the New Forest.",
   "start_url": "/countryinns-pwa/home.html?source=pwa",
   "scope": "/countryinns-pwa/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#2e7d32",
-  "orientation": "portrait",
-  "categories": ["food", "drink", "travel"],
+  "categories": ["food", "drink", "lifestyle", "travel"],
+  "prefer_related_applications": false,
+
   "icons": [
     {
       "src": "/countryinns-pwa/icons/icon-72x72.png",
