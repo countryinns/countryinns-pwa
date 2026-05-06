@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country Inns Analytics</title>
+
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.metric {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+button {
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #2e7d32;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📊 Country Inns Dashboard</h1>
+
+<div class="card">
+  <div class="metric" id="opens">0</div>
+  <div>App Opens</div>
+</div>
+
+<div class="card">
+  <div class="metric" id="bookings">0</div>
+  <div>Booking Clicks 🍽️</div>
+</div>
+
+<div class="card">
+  <div class="metric" id="installs">0</div>
+  <div>Install Clicks 📲</div>
+</div>
+
+<button onclick="clearData()">Clear Data</button>
+
+<script>
+
+function loadData() {
+  const data = JSON.parse(localStorage.getItem("ci_analytics") || "[]");
+
+  const opens = data.filter(x => x.event === "app_open").length;
+  const bookings = data.filter(x => x.event === "booking_click").length;
+  const installs = data.filter(x => x.event === "install_click").length;
+
+  document.getElementById("opens").innerText = opens;
+  document.getElementById("bookings").innerText = bookings;
+  document.getElementById("installs").innerText = installs;
+}
+
+function clearData() {
+  localStorage.removeItem("ci_analytics");
+  loadData();
+}
+
+loadData();
+
+</script>
+
+</body>
+</html>
