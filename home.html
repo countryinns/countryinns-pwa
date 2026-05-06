@@ -422,7 +422,9 @@ Supporting local producers across the New Forest.
 </nav>
 
 <script>
-
+window.addEventListener("error", () => {
+  document.body.classList.add("loaded");
+});
 /* =========================
    CLOUD ANALYTICS (ENTERPRISE)
 ========================= */
@@ -464,8 +466,7 @@ const Analytics = {
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("loaded");
 
-  Analytics.log("app_open");
-
+  setTimeout(() => Analytics.log("app_open"), 100);
   setupTracking();
   setupInstallPrompt();
   setupPrefetch();
