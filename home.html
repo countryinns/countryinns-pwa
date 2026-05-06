@@ -442,7 +442,7 @@ const Analytics = {
       body: JSON.stringify({
         event,
         pub: data.pub || getParam("pub") || "home"
-        source: getParam("src") || "direct",
+        source: getParam("src") || document.referrer || "direct"
         device: navigator.userAgent,
         data
       })
@@ -474,7 +474,9 @@ function setupTracking() {
   /* booking clicks */
   document.querySelectorAll('a[href*="booking"]').forEach(btn => {
     btn.addEventListener("click", () => {
-      Analytics.log("booking_click");
+      Analytics.log("booking_click", {
+  pub: getParam("pub") || "global"
+});
     });
   });
 
