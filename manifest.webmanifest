@@ -1,15 +1,14 @@
 {
   "name": "Country Inns",
   "short_name": "Country Inns",
-  "description": "Stay updated with events, menus, and promotions at our 7 Country Inns pubs.",
-  "start_url": "/countryinns-pwa/?source=pwa",
+  "description": "Pubs, events and bookings across the New Forest.",
+  "start_url": "/countryinns-pwa/home.html?source=pwa",
   "scope": "/countryinns-pwa/",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#2d5016",
-  "categories": ["food", "drink", "travel", "hospitality"],
-  "app_id": "countryinns.pwa",
+  "theme_color": "#2e7d32",
+  "orientation": "portrait",
+  "categories": ["food", "drink", "travel"],
   "icons": [
     {
       "src": "/countryinns-pwa/icons/icon-72x72.png",
