@@ -7,7 +7,7 @@ const OFFLINE_PAGE = `${APP_SCOPE}offline.html`;
 const STATIC_ASSETS = [
   `${APP_SCOPE}home.html`,
   `${APP_SCOPE}index.html`,
-  `${APP_SCOPE}offline.htnml`,
+  `${APP_SCOPE}offline.html`,
   `${APP_SCOPE}styles.css`,
   `${APP_SCOPE}app.js`,
   `${APP_SCOPE}manifest.webmanifest`,
