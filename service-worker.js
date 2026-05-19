@@ -14,8 +14,6 @@ const STATIC_ASSETS = [
   `${APP_SCOPE}favicon.ico`
 ];
 
-const OFFLINE_PAGE = `${APP_SCOPE}offline.html`;
-
 /* INSTALL */
 self.addEventListener('install', event => {
   self.skipWaiting();
