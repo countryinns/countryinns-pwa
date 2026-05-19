@@ -89,7 +89,12 @@ We’ll reconnect you as soon as you’re back online.<br>
 <script>
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
-  document.documentElement.setAttribute('data-theme', savedTheme);
+  [data-theme="light"] {
+  --bg: linear-gradient(135deg, #f4f9f4, #d0e8d0);
+  --card: rgba(255,255,255,0.92);
+  --text: #013220;
+  --button: #2e8b57;
+  --button-text: #ffffff;
 }
 </script>
 
