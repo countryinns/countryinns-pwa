@@ -287,6 +287,78 @@ will-change:transform;
 backface-visibility:hidden;
 }
 
+/* INSTALL CARD */
+
+.install-card{
+position:fixed;
+bottom:90px;
+left:50%;
+transform:translateX(-50%);
+width:calc(100% - 30px);
+max-width:360px;
+background:white;
+border-radius:18px;
+padding:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.18);
+display:flex;
+gap:14px;
+align-items:center;
+z-index:9999;
+animation:slideUp 0.35s ease;
+}
+
+.install-icon{
+width:64px;
+height:64px;
+border-radius:14px;
+flex-shrink:0;
+}
+
+.install-content h3{
+margin:0 0 6px;
+font-size:1rem;
+}
+
+.install-content p{
+margin:0 0 12px;
+font-size:0.88rem;
+line-height:1.4;
+color:#555;
+}
+
+.install-btn{
+background:#2e7d32;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+width:100%;
+}
+
+.install-close{
+position:absolute;
+top:10px;
+right:10px;
+background:none;
+border:none;
+font-size:1rem;
+cursor:pointer;
+color:#888;
+}
+
+@keyframes slideUp{
+from{
+opacity:0;
+transform:translate(-50%,20px);
+}
+to{
+opacity:1;
+transform:translate(-50%,0);
+}
+}
+  
 </style>
 
 
@@ -513,37 +585,91 @@ function setupTracking() {
   });
 }
 
-/* =========================
-   INSTALL PROMPT
-========================= */
 let deferredPrompt;
 
 function setupInstallPrompt() {
+
+  // Don't show again if dismissed
+  if (localStorage.getItem("installDismissed")) {
+    return;
+  }
+
+  // Don't show if already installed
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    return;
+  }
+
   window.addEventListener("beforeinstallprompt", e => {
+
     e.preventDefault();
     deferredPrompt = e;
 
     setTimeout(() => {
-      const banner = document.createElement("div");
-      banner.innerHTML = `
-        <div style="position:fixed;bottom:90px;left:10px;right:10px;
-        background:#2e7d32;color:white;padding:12px;border-radius:10px;
-        display:flex;justify-content:space-between;align-items:center;">
-          <span>Install Country Inns App</span>
-          <button id="installBtn">Install</button>
+
+      // Prevent duplicates
+      if (document.getElementById("installCard")) return;
+
+      const card = document.createElement("div");
+
+      card.id = "installCard";
+
+      card.innerHTML = `
+        <div class="install-card">
+
+          <button class="install-close" id="closeInstall">
+            ✕
+          </button>
+
+          <img src="icons/icon-192x192.png"
+               alt="Country Inns"
+               class="install-icon">
+
+          <div class="install-content">
+            <h3>Install Country Inns</h3>
+
+            <p>
+              Faster bookings, quick pub access,
+              events & offers directly from your home screen.
+            </p>
+
+            <button class="install-btn" id="installBtn">
+              📲 Install App
+            </button>
+          </div>
+
         </div>
       `;
-      document.body.appendChild(banner);
 
-      document.getElementById("installBtn").onclick = () => {
+      document.body.appendChild(card);
+
+      // Install click
+      document.getElementById("installBtn").onclick = async () => {
+
         Analytics.log("install_click");
+
         deferredPrompt.prompt();
+
+        const { outcome } = await deferredPrompt.userChoice;
+
+        if (outcome === "accepted") {
+          card.remove();
+        }
+
+        deferredPrompt = null;
       };
 
-    }, 5000);
+      // Close button
+      document.getElementById("closeInstall").onclick = () => {
+
+        card.remove();
+
+        localStorage.setItem("installDismissed", "true");
+      };
+
+    }, 8000);
+
   });
 }
-
 /* =========================
    PREFETCH
 ========================= */
