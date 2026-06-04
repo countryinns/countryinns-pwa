@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Royal Oak – Events</title>
-  <link rel="stylesheet" href="style.css">
+
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: "Segoe UI", sans-serif;
       margin: 0;
       background: linear-gradient(180deg, #2e472e, #1e2b1e);
       color: #f4f4f4;
@@ -27,19 +27,18 @@
 
     .card-grid {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-      margin: 2rem 0;
+      justify-content: center;
+      padding: 2rem 1rem;
     }
 
     .card {
       background: #2e472e;
       border-radius: 12px;
-      padding: 1rem;
-      max-width: 400px;
+      padding: 1.5rem;
+      max-width: 500px;
       width: 100%;
-      text-align: center;
+      box-sizing: border-box;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
       transition: transform 0.2s ease;
     }
 
@@ -48,21 +47,35 @@
     }
 
     .card img {
-      max-width: 100%;
+      width: 100%;
       height: auto;
       border-radius: 8px;
       margin-bottom: 1rem;
     }
 
     .card h3 {
-      margin: 0.5rem 0;
       color: #e6d8b5;
+      margin-top: 0;
     }
 
     .card p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #f4f4f4;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .card-link {
+      display: inline-block;
+      background: #3c5a3c;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .card-link:hover {
+      background: #4f7c4f;
     }
 
     .buttons {
@@ -71,6 +84,7 @@
       gap: 1rem;
       margin: 2rem auto;
       max-width: 300px;
+      padding: 0 1rem 2rem;
     }
 
     .buttons a {
@@ -81,7 +95,7 @@
       padding: 1rem;
       border-radius: 8px;
       font-weight: bold;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
 
     .buttons a:hover {
@@ -90,6 +104,7 @@
   </style>
 </head>
 <body>
+
   <header>
     <h1>Upcoming Events</h1>
   </header>
@@ -97,10 +112,48 @@
   <main>
     <div class="card-grid">
 
+      <div class="card">
+        <img src="ROB Quiz-night-June-2026.png" alt="Quiz Night at The Royal Oak, Beaulieu">
+
+        <h3>QUIZ NIGHT AT THE ROYAL OAK</h3>
+
+        <p>
+          Looking for a fun night out? Join us for our Quiz Night at The Royal Oak, Beaulieu!
+        </p>
+
+        <p>
+          <strong>⏰ Starts from 7:30pm</strong><br>
+          <strong>👥 Teams of up to 6 people</strong><br>
+          <strong>💷 £2 per person</strong>
+        </p>
+
+        <p>
+          <strong>Cash prizes to be won!</strong>
+        </p>
+
+        <p>
+          Gather your team, put your knowledge to the test, and enjoy a great evening with us.
+        </p>
+
+        <p>
+          <a href="https://www.theroyaloakbeaulieu.co.uk/food/#_restaurant_form"
+             class="card-link">
+            Book Your Table Now
+          </a>
+        </p>
+
+        <p>
+          Or call <strong>01590 612228</strong>
+        </p>
+      </div>
+
     </div>
   </main>
 
-<div class="buttons">
-  <a href="../../royaloak.html">⬅ Back to Pub Page</a>
-  <a href="../../home.html">⬅ Back to Home</a>
-</div>
+  <div class="buttons">
+    <a href="../../royaloak.html">⬅ Back to Pub Page</a>
+    <a href="../../home.html">⬅ Back to Home</a>
+  </div>
+
+</body>
+</html>
