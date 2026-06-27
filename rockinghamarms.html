@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Rockingham Arms – Country Inns</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicons/The Rockingham Arms Logo 1 favicon.png" />
+
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #2e472e, #1e2b1e);
+      color: #f4f4f4;
+      text-align: center;
+    }
+
+    header {
+      background-color: rgba(34, 49, 34, 0.9);
+      padding: 1.5rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #e6d8b5;
+    }
+
+    .logo {
+      margin: 1rem auto;
+      max-width: 140px;
+    }
+
+    .content {
+      padding: 1.5rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #e6d8b5;
+      margin-top: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .buttons a {
+      display: block;
+      background: #3c5a3c;
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .buttons a:hover {
+      background: #4f7c4f;
+    }
+
+    .opening-times {
+      margin: 2rem auto;
+      max-width: 400px;
+      background: rgba(46, 71, 46, 0.95);
+      padding: 1rem;
+      border-radius: 12px;
+      color: #f4f4f4;
+    }
+
+    .opening-times h3 {
+      margin-top: 0;
+      color: #e6d8b5;
+    }
+
+    .opening-times a.email-link {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .opening-times a.email-link:hover {
+      color: #e6d8b5;
+    }
+
+    .social-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .social-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .social-card {
+      flex: 0 0 auto;
+      min-width: 150px;
+      padding: 1rem;
+      text-align: center;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      scroll-snap-align: start;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .social-card:hover {
+      transform: translateY(-3px);
+      background: #ececec;
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+  <header>
+    <img src="The Bold Forester.jpg" alt="The Bold Forester Logo" class="logo">
+  </header>
+
+  <section>
+    <div class="about">
+      <p>Welcome to The Rockingham Arms, West Wellow — A charming country pub nestled in the peaceful hamlet of Canada, on the edge of the New Forest, where exceptional food, fine drinks & genuine hospitality come together.
+        A beautifully restored former chapel offering delicious seasonal dining, a cosy atmosphere, welcoming gardens overlooking Canada Common & a warm welcome for walkers, cyclists, families and dogs alike. Explore our menus, book a table, and discover what's on.</p>
+    </div>
+  </section>
+
+  <h2>Food Menus</h2>
+  <div class="buttons">
+    <a href="bold-forester-images/bold-forester-menus/brunch-menu/Bold-Brunch-Menu-2026.html">Brunch Menu</a>
+    <a href="bold-forester-images/bold-forester-menus/main-menu/spring-menu-2026.html">Main Menu</a>
+    <a href="bold-forester-images/bold-forester-menus/sunday-menu/Sunday-Menu-26.html">Sunday Menu</a>
+    <a href="bold-forester-images/bold-forester-menus/kids-menu/Kids-Menu-26.html">Kids Menu</a>
+    <a href="bold-forester-images/bold-forester-menus/desserts-menu/Spring-Dessert-Menu-26.html">Desserts Menu</a>
+    <a href="https://www.theboldforesternewforest.co.uk/the-bold-forester-chefs-daily-specials/">Chef's Daily Specials</a>
+  </div>
+
+  <h2>Gallery</h2>
+  <div class="buttons">
+    <a href="bold-forester-images/Gallery/">Gallery</a>
+  </div>
+
+  <h2>Drink Menus</h2>
+  <div class="buttons">
+    <a href="bold-forester-images/bold-forester-menus/drinks-menu/updated-drinks-menu-25th-feb.html">Drinks Menu</a>
+    <a href="bold-forester-images/bold-forester-menus/wine-list/wine list-Apr24.html">Wine List</a>
+    <a href="bold-forester-images/bold-forester-menus/cocktail-menu/Cocktail-Menu-2025.html">Cocktail Menu</a>
+  </div>
+
+  <h2>What’s On</h2>
+  <div class="buttons">
+    <a href="bold-forester-images/Events-Promotions/events.html">View Events</a>
+    <a href="bold-forester-images/Events-Promotions/promotions.html">View Promotions</a>
+  </div>
+
+  <h2>Follow Us</h2>
+  <div class="social-scroll">
+    <a href="https://www.facebook.com/FightingCocksPub/" class="social-card">Facebook</a>
+    <a href="https://www.instagram.com/the_bold_forester/" class="social-card">Instagram</a>
+    <a href="https://www.tiktok.com/@theboldforester_" class="social-card">TikTok</a>
+    <a href="https://x.com/ForesterBold" class="social-card">X</a>
+    <a href="https://www.linkedin.com/company/70347145/admin/dashboard/" class="social-card">LinkedIn</a>
+  </div>
+
+  <h2>Extras</h2>
+  <div class="buttons">
+    <a href="tel:02380175588">📞 Call Us</a>
+    <a href="https://www.theboldforesternewforest.co.uk/food/#restaurant_form">Book a Table</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSckozcIPcgbZOX8rvyeqh8QfqzyPjQdQHpapFvzACa3P2rKTg/viewform?usp=pp_url&entry.136569618=The+Bold+Forester" target="_blank">Leave Feedback</a>
+    <a href="https://www.theboldforesternewforest.co.uk/">Official Website</a>
+    <a href="home.html">⬅ Back to Home</a>
+  </div>
+
+  <div class="opening-times">
+    <h3>Opening Times</h3>
+    <p><strong>Pub</strong><br>
+      Monday – Saturday: 11:00 – 23:00<br>
+      Sunday: 11:00 – 22:30
+    </p>
+    <p><strong>Food</strong><br>
+      Monday – Saturday: 11:30 – 21:30<br>
+      Sunday: 11:30 – 21:00
+    </p>
+    <p>
+      📧 <a href="mailto:info@theboldforesternewforest.co.uk" class="email-link"><strong>Email us</strong></a>
+    </p>
+  </div>
+ </div>
+  <footer>
+    © 2025 Country Inns – The Bold Forester
+  </footer>
+    
+
+  <!-- Global app.js: offline banner + OneSignal -->
+  <script src="app.js"></script>
+</body>
+</html>
