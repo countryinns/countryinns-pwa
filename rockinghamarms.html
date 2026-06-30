@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" href="assets/favicons/The Rockingham Arms Logo 1 favicon.png" />
 
   <link rel="stylesheet" href="style.css" />
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -40,20 +41,30 @@
       margin: auto;
     }
 
+    .about {
+      max-width: 800px;
+      margin: auto;
+      padding: 1.5rem;
+    }
+
     h2 {
       color: #e6d8b5;
       margin-top: 2rem;
     }
 
+    /* RESPONSIVE BUTTON GRID (MATCH LAMB INN) */
     .buttons {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
       margin-top: 1rem;
     }
 
     .buttons a {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60px;
       background: #3c5a3c;
       color: #fff;
       text-decoration: none;
@@ -61,12 +72,27 @@
       border-radius: 8px;
       font-weight: bold;
       transition: background 0.3s;
+      text-align: center;
+      box-sizing: border-box;
     }
 
     .buttons a:hover {
       background: #4f7c4f;
     }
 
+    @media (max-width: 600px) {
+      .buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* OPENING TIMES */
     .opening-times {
       margin: 2rem auto;
       max-width: 400px;
@@ -91,6 +117,7 @@
       color: #e6d8b5;
     }
 
+    /* SOCIAL SCROLL */
     .social-scroll {
       display: flex;
       overflow-x: auto;
@@ -132,19 +159,22 @@
     }
   </style>
 </head>
+
 <body>
-  <div id="app">
+
   <header>
     <img src="assets/favicons/The Rockingham Arms Logo 1.png" alt="The Rockingham Arms Logo" class="logo">
   </header>
 
   <section>
     <div class="about">
-      <p>Welcome to The Rockingham Arms, West Wellow — A charming country pub nestled in the peaceful hamlet of Canada, on the edge of the New Forest, where exceptional food, fine drinks & genuine hospitality come together.
-        A beautifully restored former chapel offering delicious seasonal dining, a cosy atmosphere, welcoming gardens overlooking Canada Common & a warm welcome for walkers, cyclists, families and dogs alike. Explore our menus, book a table, and discover what's on.</p>
+      <p>
+        Welcome to The Rockingham Arms, West Wellow — A charming country pub nestled in the peaceful hamlet of Canada, on the edge of the New Forest, where exceptional food, fine drinks & genuine hospitality come together. A beautifully restored former chapel offering delicious seasonal dining, a cosy atmosphere, welcoming gardens overlooking Canada Common & a warm welcome for walkers, cyclists, families and dogs alike. Explore our menus, book a table, and discover what's on.
+      </p>
     </div>
   </section>
 
+  <!-- FOOD MENUS -->
   <h2>Food Menus</h2>
   <div class="buttons">
     <a href="Rockingham-Arms-images/Rockingham-Arms-Menus/main-menu/Rockingham Arms 2026 main menu.html">Main Menu</a>
@@ -154,11 +184,7 @@
     <a href="https://www.rockinghamarms.co.uk/daily-specials/">Chef's Daily Specials</a>
   </div>
 
-  <h2>Gallery</h2>
-  <div class="buttons">
-    <a href="Rockingham-Arms-images/Gallery/">Gallery</a>
-  </div>
-
+  <!-- DRINK MENUS -->
   <h2>Drink Menus</h2>
   <div class="buttons">
     <a href="bold-forester-images/bold-forester-menus/drinks-menu/.html">Drinks Menu</a>
@@ -166,12 +192,15 @@
     <a href="bold-forester-images/bold-forester-menus/cocktail-menu.html">Cocktail Menu</a>
   </div>
 
-  <h2>What’s On</h2>
+  <!-- EXPLORE -->
+  <h2>Explore</h2>
   <div class="buttons">
-    <a href="Rockingham-Arms-images/Events-Promotions/events.html">View Events</a>
-    <a href="Rockingham-Arms-images/Events-Promotions/promotions.html">View Promotions</a>
+    <a href="Rockingham-Arms-images/Gallery/">📸 Gallery</a>
+    <a href="Rockingham-Arms-images/Events-Promotions/events.html">🎉 Events</a>
+    <a href="Rockingham-Arms-images/Events-Promotions/promotions.html">🏷 Promotions</a>
   </div>
 
+  <!-- SOCIAL -->
   <h2>Follow Us</h2>
   <div class="social-scroll">
     <a href="https://www.facebook.com/FightingCocksPub/" class="social-card">Facebook</a>
@@ -181,36 +210,40 @@
     <a href="https://www.linkedin.com/company/70347145/admin/dashboard/" class="social-card">LinkedIn</a>
   </div>
 
+  <!-- EXTRAS -->
   <h2>Extras</h2>
   <div class="buttons">
     <a href="tel:01794324798">📞 Call Us</a>
     <a href="https://www.rockinghamarms.co.uk/food/#restaurant_form">Book a Table</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSckozcIPcgbZOX8rvyeqh8QfqzyPjQdQHpapFvzACa3P2rKTg/viewform?usp=pp_url&entry.136569618=The+Rockingham+Arms" target="_blank">Leave Feedback</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSckozcIPcgbZOX8rvyeqh8QfqzyPjQdQHpapFvzACa3P2rKTg/viewform?usp=pp_url&entry.136569618=The+Rockingham+Arms">Leave Feedback</a>
     <a href="https://www.rockinghamarms.co.uk/">Official Website</a>
     <a href="home.html">⬅ Back to Home</a>
   </div>
 
+  <!-- OPENING TIMES -->
   <div class="opening-times">
     <h3>Opening Times</h3>
-    <p><strong>Pub</strong><br>
+
+    <p>
+      <strong>Pub</strong><br>
       Monday – Saturday: 11:00 – 23:00<br>
       Sunday: 11:00 – 22:30
     </p>
-    <p><strong>Food</strong><br>
+
+    <p>
+      <strong>Food</strong><br>
       Monday – Saturday: 11:30 – 21:30<br>
       Sunday: 11:30 – 21:00
     </p>
+
     <p>
       📧 <a href="mailto:info@rockinghamarms.co.uk" class="email-link"><strong>Email us</strong></a>
     </p>
   </div>
- </div>
+
   <footer>
     © 2025 Country Inns – The Rockingham Arms
   </footer>
-    
 
-  <!-- Global app.js: offline banner + OneSignal -->
-  <script src="app.js"></script>
 </body>
 </html>
