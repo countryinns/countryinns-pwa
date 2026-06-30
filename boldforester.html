@@ -45,15 +45,19 @@
       margin-top: 2rem;
     }
 
+    /* UPDATED BUTTON GRID */
     .buttons {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
       margin-top: 1rem;
     }
 
     .buttons a {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60px;
       background: #3c5a3c;
       color: #fff;
       text-decoration: none;
@@ -61,10 +65,18 @@
       border-radius: 8px;
       font-weight: bold;
       transition: background 0.3s;
+      text-align: center;
+      box-sizing: border-box;
     }
 
     .buttons a:hover {
       background: #4f7c4f;
+    }
+
+    @media (max-width: 600px) {
+      .buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .opening-times {
@@ -134,84 +146,103 @@
 </head>
 <body>
   <div id="app">
-  <header>
-    <img src="The Bold Forester.jpg" alt="The Bold Forester Logo" class="logo">
-  </header>
 
-  <section>
-    <div class="about">
-      <p>Welcome to The Bold Forester, Marchwood — A traditional country pub at the edge of the New Forest, where great food, fine drinks & good company come together.
-        A lively and welcoming pub offering exceptional dining, a warm atmosphere & excellent drinks. Explore our menus, book a table, and see what’s on.</p>
+    <header>
+      <img src="The Bold Forester.jpg" alt="The Bold Forester Logo" class="logo">
+    </header>
+
+    <section>
+      <div class="about">
+        <p>
+          Welcome to The Bold Forester, Marchwood — A traditional country pub at the edge of the New Forest, where great food, fine drinks & good company come together.
+          A lively and welcoming pub offering exceptional dining, a warm atmosphere & excellent drinks. Explore our menus, book a table, and see what’s on.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOD MENUS -->
+    <h2>Food Menus</h2>
+    <div class="buttons">
+      <a href="bold-forester-images/bold-forester-menus/brunch-menu/Bold-Brunch-Menu-2026.html">Brunch Menu</a>
+      <a href="bold-forester-images/bold-forester-menus/main-menu/spring-menu-2026.html">Main Menu</a>
+      <a href="bold-forester-images/bold-forester-menus/sunday-menu/Sunday-Menu-26.html">Sunday Menu</a>
+      <a href="bold-forester-images/bold-forester-menus/kids-menu/Kids-Menu-26.html">Kids Menu</a>
+      <a href="bold-forester-images/bold-forester-menus/desserts-menu/Spring-Dessert-Menu-26.html">Desserts Menu</a>
+      <a href="https://www.theboldforesternewforest.co.uk/the-bold-forester-chefs-daily-specials/">Chef's Daily Specials</a>
     </div>
-  </section>
 
-  <h2>Food Menus</h2>
-  <div class="buttons">
-    <a href="bold-forester-images/bold-forester-menus/brunch-menu/Bold-Brunch-Menu-2026.html">Brunch Menu</a>
-    <a href="bold-forester-images/bold-forester-menus/main-menu/spring-menu-2026.html">Main Menu</a>
-    <a href="bold-forester-images/bold-forester-menus/sunday-menu/Sunday-Menu-26.html">Sunday Menu</a>
-    <a href="bold-forester-images/bold-forester-menus/kids-menu/Kids-Menu-26.html">Kids Menu</a>
-    <a href="bold-forester-images/bold-forester-menus/desserts-menu/Spring-Dessert-Menu-26.html">Desserts Menu</a>
-    <a href="https://www.theboldforesternewforest.co.uk/the-bold-forester-chefs-daily-specials/">Chef's Daily Specials</a>
+    <!-- SEASONAL MENUS -->
+    <h2>Seasonal Menus</h2>
+    <div class="buttons">
+      <a href="christmas-party-menu.html">🎄 Christmas Party Menu</a>
+      <a href="christmas-day-menu.html">🎅 Christmas Day Menu</a>
+    </div>
+
+    <!-- EXPLORE -->
+    <h2>Explore</h2>
+    <div class="buttons">
+      <a href="bold-forester-images/Gallery/">📸 Gallery</a>
+      <a href="bold-forester-images/Events-Promotions/events.html">🎉 Events</a>
+      <a href="bold-forester-images/Events-Promotions/promotions.html">🏷 Promotions</a>
+    </div>
+
+    <!-- DRINK MENUS -->
+    <h2>Drink Menus</h2>
+    <div class="buttons">
+      <a href="bold-forester-images/bold-forester-menus/drinks-menu/updated-drinks-menu-25th-feb.html">Drinks Menu</a>
+      <a href="bold-forester-images/bold-forester-menus/wine-list/wine list-Apr24.html">Wine List</a>
+      <a href="bold-forester-images/bold-forester-menus/cocktail-menu/Cocktail-Menu-2025.html">Cocktail Menu</a>
+    </div>
+
+    <!-- FOLLOW US -->
+    <h2>Follow Us</h2>
+    <div class="social-scroll">
+      <a href="https://www.facebook.com/FightingCocksPub/" class="social-card">Facebook</a>
+      <a href="https://www.instagram.com/the_bold_forester/" class="social-card">Instagram</a>
+      <a href="https://www.tiktok.com/@theboldforester_" class="social-card">TikTok</a>
+      <a href="https://x.com/ForesterBold" class="social-card">X</a>
+      <a href="https://www.linkedin.com/company/70347145/admin/dashboard/" class="social-card">LinkedIn</a>
+    </div>
+
+    <!-- EXTRAS -->
+    <h2>Extras</h2>
+    <div class="buttons">
+      <a href="tel:02380175588">📞 Call Us</a>
+      <a href="https://www.theboldforesternewforest.co.uk/food/#restaurant_form">Book a Table</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSckozcIPcgbZOX8rvyeqh8QfqzyPjQdQHpapFvzACa3P2rKTg/viewform?usp=pp_url&entry.136569618=The+Bold+Forester" target="_blank">Leave Feedback</a>
+      <a href="https://www.theboldforesternewforest.co.uk/">Official Website</a>
+      <a href="home.html">⬅ Back to Home</a>
+    </div>
+
+    <!-- OPENING TIMES -->
+    <div class="opening-times">
+      <h3>Opening Times</h3>
+
+      <p>
+        <strong>Pub</strong><br>
+        Monday – Saturday: 11:00 – 23:00<br>
+        Sunday: 11:00 – 22:30
+      </p>
+
+      <p>
+        <strong>Food</strong><br>
+        Monday – Saturday: 11:30 – 21:30<br>
+        Sunday: 11:30 – 21:00
+      </p>
+
+      <p>
+        📧 <a href="mailto:info@theboldforesternewforest.co.uk" class="email-link"><strong>Email us</strong></a>
+      </p>
+    </div>
+
   </div>
 
-  <h2>Gallery</h2>
-  <div class="buttons">
-    <a href="bold-forester-images/Gallery/">Gallery</a>
-  </div>
-
-  <h2>Drink Menus</h2>
-  <div class="buttons">
-    <a href="bold-forester-images/bold-forester-menus/drinks-menu/updated-drinks-menu-25th-feb.html">Drinks Menu</a>
-    <a href="bold-forester-images/bold-forester-menus/wine-list/wine list-Apr24.html">Wine List</a>
-    <a href="bold-forester-images/bold-forester-menus/cocktail-menu/Cocktail-Menu-2025.html">Cocktail Menu</a>
-  </div>
-
-  <h2>What’s On</h2>
-  <div class="buttons">
-    <a href="bold-forester-images/Events-Promotions/events.html">View Events</a>
-    <a href="bold-forester-images/Events-Promotions/promotions.html">View Promotions</a>
-  </div>
-
-  <h2>Follow Us</h2>
-  <div class="social-scroll">
-    <a href="https://www.facebook.com/FightingCocksPub/" class="social-card">Facebook</a>
-    <a href="https://www.instagram.com/the_bold_forester/" class="social-card">Instagram</a>
-    <a href="https://www.tiktok.com/@theboldforester_" class="social-card">TikTok</a>
-    <a href="https://x.com/ForesterBold" class="social-card">X</a>
-    <a href="https://www.linkedin.com/company/70347145/admin/dashboard/" class="social-card">LinkedIn</a>
-  </div>
-
-  <h2>Extras</h2>
-  <div class="buttons">
-    <a href="tel:02380175588">📞 Call Us</a>
-    <a href="https://www.theboldforesternewforest.co.uk/food/#restaurant_form">Book a Table</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSckozcIPcgbZOX8rvyeqh8QfqzyPjQdQHpapFvzACa3P2rKTg/viewform?usp=pp_url&entry.136569618=The+Bold+Forester" target="_blank">Leave Feedback</a>
-    <a href="https://www.theboldforesternewforest.co.uk/">Official Website</a>
-    <a href="home.html">⬅ Back to Home</a>
-  </div>
-
-  <div class="opening-times">
-    <h3>Opening Times</h3>
-    <p><strong>Pub</strong><br>
-      Monday – Saturday: 11:00 – 23:00<br>
-      Sunday: 11:00 – 22:30
-    </p>
-    <p><strong>Food</strong><br>
-      Monday – Saturday: 11:30 – 21:30<br>
-      Sunday: 11:30 – 21:00
-    </p>
-    <p>
-      📧 <a href="mailto:info@theboldforesternewforest.co.uk" class="email-link"><strong>Email us</strong></a>
-    </p>
-  </div>
- </div>
   <footer>
     © 2025 Country Inns – The Bold Forester
   </footer>
-    
 
   <!-- Global app.js: offline banner + OneSignal -->
   <script src="app.js"></script>
+
 </body>
 </html>
