@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Trusty Servant Inn – Country Inns</title>
   <link rel="stylesheet" href="style.css" />
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -41,15 +42,19 @@
       margin-top: 2rem;
     }
 
+    /* UPDATED RESPONSIVE BUTTON GRID */
     .buttons {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
       margin-top: 1rem;
     }
 
     .buttons a {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60px;
       background: #3c5a3c;
       color: #fff;
       text-decoration: none;
@@ -57,17 +62,25 @@
       border-radius: 8px;
       font-weight: bold;
       transition: background 0.3s;
+      text-align: center;
+      box-sizing: border-box;
     }
 
     .buttons a:hover {
       background: #4f7c4f;
     }
 
+    @media (max-width: 600px) {
+      .buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     /* Opening Times Box */
     .opening-times {
       margin: 2rem auto;
       max-width: 400px;
-      background: rgba(46, 71, 46, 0.95); /* slightly lighter so it stands out */
+      background: rgba(46, 71, 46, 0.95);
       padding: 1rem;
       border-radius: 12px;
       color: #f4f4f4;
@@ -89,38 +102,39 @@
     }
 
     /* Social scroll */
-.social-scroll {
-  display: flex;
-  overflow-x: auto;
-  gap: 1rem;
-  padding: 1rem 0;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
+    .social-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding: 1rem 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
 
-.social-scroll::-webkit-scrollbar {
-  display: none;
-}
+    .social-scroll::-webkit-scrollbar {
+      display: none;
+    }
 
-.social-card {
-  flex: 0 0 auto;
-  min-width: 150px;
-  padding: 1rem;
-  text-align: center;
-  background: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  scroll-snap-align: start;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
+    .social-card {
+      flex: 0 0 auto;
+      min-width: 150px;
+      padding: 1rem;
+      text-align: center;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      scroll-snap-align: start;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
 
-.social-card:hover {
-  transform: translateY(-3px);
-  background: #ececec;
-}
+    .social-card:hover {
+      transform: translateY(-3px);
+      background: #ececec;
+    }
+
     footer {
       margin-top: 2rem;
       padding: 1rem;
@@ -129,33 +143,42 @@
     }
   </style>
 </head>
+
 <body>
+
   <header>
     <img src="The Trusty Servant.png" alt="The Trusty Servant Inn Logo" class="logo">
   </header>
 
   <section>
     <div class="about">
-      <p>Welcome to The Trusty Servant Inn, Minstead — A historically village pub with heart, character & award-winning food.
-A charming 16th century pub in Minstead, offering a warm welcome, fine ales, and locally inspired dishes</p>
+      <p>
+        Welcome to The Trusty Servant Inn, Minstead — A historic village pub with heart, character & award-winning food.
+        A charming 16th century pub in Minstead, offering a warm welcome, fine ales, and locally inspired dishes.
+      </p>
     </div>
   </section>
 
+  <!-- FOOD MENUS -->
   <h2>Food Menus</h2>
   <div class="buttons">
     <a href="Trusty-Servant-images/Trusty-Servant-Menus/breakfast-menu/Breakfast-Menu-2026.html">Breakfast Menu</a>
     <a href="Trusty-Servant-images/Trusty-Servant-Menus/light-lunch-menu/Trusty Light Lunch Menu 2026.html">Light Lunch Menu</a>
-    <a href="Trusty-Servant-images/Trusty-Servant-Menus/main-menu/Spring-Summer-2026-menu.html">Menu</a>
+    <a href="Trusty-Servant-images/Trusty-Servant-Menus/main-menu/Spring-Summer-2026-menu.html">Main Menu</a>
     <a href="Trusty-Servant-images/Trusty-Servant-Menus/sunday-menu/Summer-Sunday-Menu-26.html">Sunday Menu</a>
     <a href="Trusty-Servant-images/Trusty-Servant-Menus/kids-menu/Tiny-tums-menu-spring-26.html">Kids Menu</a>
     <a href="Trusty-Servant-images/Trusty-Servant-Menus/desserts-menu/Spring-Summer-26-Dessert-Menu.html">Desserts Menu</a>
     <a href="https://www.thetrustyservant.co.uk/daily-specials/">Chef's Daily Specials</a>
   </div>
 
-   <h2>Gallery</h2>
+  <!-- SEASONAL MENUS -->
+  <h2>Seasonal Menus</h2>
   <div class="buttons">
-    <a href="Trusty-Servant-images/Gallery/">Gallery</a>
-    
+    <a href="Trusty-Servant-images/Trusty-Servant-Menus/christmas-menu/Christmas-Party-Dinner-Menu-2026.html">🎄 Christmas Party Menu</a>
+    <a href="Trusty-Servant-images/Trusty-Servant-Menus/christmas-menu/Christmas-Dinner-Menu-2026.html">🎅 Christmas Day Menu</a>
+  </div>
+
+  <!-- DRINK MENUS -->
   <h2>Drink Menus</h2>
   <div class="buttons">
     <a href="bold-forester-images/bold-forester-menus/drinks-menu/updated-drinks-menu-feb.html">Drinks Menu</a>
@@ -163,14 +186,15 @@ A charming 16th century pub in Minstead, offering a warm welcome, fine ales, and
     <a href="Cocktail-Menu-2025.html">Cocktail Menu</a>
   </div>
 
-  <!-- Links to Events & Promotions -->
-  <h2>What’s On</h2>
+  <!-- EXPLORE -->
+  <h2>Explore</h2>
   <div class="buttons">
-    <a href="Trusty-Servant-images/Events-Promotions/events.html">View Events</a>
-    <a href="Trusty-Servant-images/Events-Promotions/promotions.html">View Promotions</a>
+    <a href="Trusty-Servant-images/Gallery/">📸 Gallery</a>
+    <a href="Trusty-Servant-images/Events-Promotions/events.html">🎉 Events</a>
+    <a href="Trusty-Servant-images/Events-Promotions/promotions.html">🏷 Promotions</a>
   </div>
 
-  <!-- Social Media Section -->
+  <!-- SOCIAL MEDIA -->
   <h2>Follow Us</h2>
   <div class="social-scroll">
     <a href="https://www.facebook.com/trustyservantinn/" class="social-card">Facebook</a>
@@ -179,35 +203,41 @@ A charming 16th century pub in Minstead, offering a warm welcome, fine ales, and
     <a href="https://x.com/TrustyServant1" class="social-card">X</a>
   </div>
 
+  <!-- EXTRAS -->
   <h2>Extras</h2>
-<div class="buttons">
-  <a href="tel:02380812137">📞 Call Us</a>
-  <a href="https://www.thetrustyservant.co.uk/food/#restaurant_form">Book a Table</a>
-  <a href="https://web-bookings.hotels.uk.com/#/booking/46270/items/availability?k=8NvS5v6pFtbqgO4xncljzOBc2NDYyNzA%3D&r=1757526495346&a=2&c=">Book a Room</a>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSckozcIPcgbZOX8rvyeqh8QfqzyPjQdQHpapFvzACa3P2rKTg/viewform?usp=pp_url&entry.136569618=The+Trusty+Servant+Inn" target="_blank">Leave Feedback</a>
-  <a href="https://www.thetrustyservant.co.uk/">Official Website</a>
-  <a href="home.html">⬅ Back to Home</a>
-</div>
+  <div class="buttons">
+    <a href="tel:02380812137">📞 Call Us</a>
+    <a href="https://www.thetrustyservant.co.uk/food/#restaurant_form">Book a Table</a>
+    <a href="https://web-bookings.hotels.uk.com/#/booking/46270/items/availability?k=8NvS5v6pFtbqgO4xncljzOBc2NDYyNzA%3D&r=1757526495346&a=2&c=">Book a Room</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSckozcIPcgbZOX8rvyeqh8QfqzyPjQdQHpapFvzACa3P2rKTg/viewform?usp=pp_url&entry.136569618=The+Trusty+Servant+Inn" target="_blank">Leave Feedback</a>
+    <a href="https://www.thetrustyservant.co.uk/">Official Website</a>
+    <a href="home.html">⬅ Back to Home</a>
+  </div>
 
-<div class="opening-times">
-  <h3>Opening Times</h3>
-  <p><strong>Pub</strong><br>
-    Monday – Saturday: 08:30 – 23:00<br>
-    Sunday: 08:30 – 22:00
-  </p>
-  <p><strong>Food</strong><br>
-    Monday – Saturday: 11:30 – 21:30<br>
-    Sunday: 12:00 – 21:00
-  </p>
+  <!-- OPENING TIMES -->
+  <div class="opening-times">
+    <h3>Opening Times</h3>
 
-  <p>
-    📧 <a href="mailto:info@thetrustyservant.co.uk" class="email-link"><strong>Email us</strong></a>
-  </p>
-</div>
+    <p>
+      <strong>Pub</strong><br>
+      Monday – Saturday: 08:30 – 23:00<br>
+      Sunday: 08:30 – 22:00
+    </p>
+
+    <p>
+      <strong>Food</strong><br>
+      Monday – Saturday: 11:30 – 21:30<br>
+      Sunday: 12:00 – 21:00
+    </p>
+
+    <p>
+      📧 <a href="mailto:info@thetrustyservant.co.uk" class="email-link"><strong>Email us</strong></a>
+    </p>
+  </div>
 
   <footer>
     © 2025 Country Inns – The Trusty Servant Inn
   </footer>
+
 </body>
 </html>
-    
