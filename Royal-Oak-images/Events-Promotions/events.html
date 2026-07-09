@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Royal Oak – Events</title>
+  <title>The Royal Oak – Upcoming Events</title>
 
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       background: linear-gradient(180deg, #2e472e, #1e2b1e);
       color: #f4f4f4;
@@ -27,18 +27,19 @@
 
     .card-grid {
       display: flex;
-      justify-content: center;
-      padding: 2rem 1rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      margin: 2rem 0;
     }
 
     .card {
       background: #2e472e;
       border-radius: 12px;
-      padding: 1.5rem;
-      max-width: 500px;
-      width: 100%;
-      box-sizing: border-box;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      padding: 1.8rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
       transition: transform 0.2s ease;
     }
 
@@ -47,37 +48,23 @@
     }
 
     .card img {
-      width: 100%;
+      max-width: 100%;
       height: auto;
       border-radius: 8px;
       margin-bottom: 1rem;
     }
 
     .card h3 {
+      margin: 0.5rem 0;
       color: #e6d8b5;
-      margin-top: 0;
+      font-size: 1.6rem;
     }
 
     .card p {
+      font-size: 1rem;
       line-height: 1.6;
-      margin-bottom: 1rem;
+      margin: 0.8rem 0;
     }
-
-    .card-link {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.75rem 1.3rem;
-  background: #e6d8b5;
-  color: #2e472e;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.card-link:hover {
-  background: #f2e6c8;
-}
 
     .buttons {
       display: flex;
@@ -85,7 +72,6 @@
       gap: 1rem;
       margin: 2rem auto;
       max-width: 300px;
-      padding: 0 1rem 2rem;
     }
 
     .buttons a {
@@ -96,7 +82,7 @@
       padding: 1rem;
       border-radius: 8px;
       font-weight: bold;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
 
     .buttons a:hover {
@@ -104,52 +90,39 @@
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Upcoming Events</h1>
-  </header>
+<header>
+  <h1>Upcoming Events</h1>
+</header>
 
-  <main>
-    <div class="card-grid">
+<main>
 
-      <div class="card">
-        <img src="ROB Quiz-night-June-2026.png" alt="Quiz Night at The Royal Oak, Beaulieu">
+<div class="card-grid">
 
-        <h3>QUIZ NIGHT AT THE ROYAL OAK</h3>
+<div class="card">
 
-        <p>
-          Looking for a fun night out? Join us for our Quiz Night at The Royal Oak, Beaulieu!
-        </p>
+<img src="The Royal Oak Pic.jpg" alt="The Royal Oak">
+<h3>Stay Tuned!</h3>
 
-        <p>
-          <strong>⏰ Starts from 7:30pm</strong><br>
-          <strong>👥 Teams of up to 6 people</strong><br>
-          <strong>💷 £2 per person</strong>
-        </p>
+<p>
+We're busy planning an exciting programme of events, themed evenings, seasonal celebrations and exclusive offers at <strong>The Rockingham Arms</strong>.
+</p>
 
-        <p>
-          <strong>Cash prizes to be won!</strong>
-        </p>
+<p>
+Keep checking back as we'll be announcing our upcoming events very soon.
+</p>
 
-        <p>
-          Gather your team, put your knowledge to the test, and enjoy a great evening with us.
-        </p>
+<p>
+We look forward to welcoming you!
+</p>
 
-        <p>
-          <a href="https://www.theroyaloakbeaulieu.co.uk/food/#_restaurant_form"
-             class="card-link">
-            Book Your Table Now
-          </a>
-        </p>
+</div>
 
-        <p>
-          Or call <strong>01590 612228</strong>
-        </p>
-      </div>
+</div>
 
-    </div>
-  </main>
+</main>
 
   <div class="buttons">
     <a href="../../royaloak.html">⬅ Back to Pub Page</a>
