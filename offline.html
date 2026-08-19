@@ -88,8 +88,9 @@ We’ll reconnect you as soon as you’re back online.<br>
 
 <script>
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-  [data-theme="light"] {
+if (savedTheme === 'light') {
+  document.body.setAttribute('data-theme', 'light');
+}
   --bg: linear-gradient(135deg, #f4f9f4, #d0e8d0);
   --card: rgba(255,255,255,0.92);
   --text: #013220;
