@@ -34,12 +34,88 @@ background-color:#f5f5f5;
 color:#333;
 opacity:0;
 transition:opacity 0.3s ease;
-padding-bottom:80px;
--webkit-overflow-scrolling: touch;
+padding-top:env(safe-area-inset-top);
+padding-bottom:calc(80px + env(safe-area-inset-bottom));
+-webkit-overflow-scrolling:touch;
 }
 
 body.loaded{
 opacity:1;
+}
+
+/* APP SPLASH / LOADING SCREEN */
+#app-splash{
+position:fixed;
+inset:0;
+z-index:20000;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#013220,#2e8b57);
+color:#fff;
+text-align:center;
+transition:opacity 0.45s ease, visibility 0.45s ease;
+}
+#app-splash.hidden{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
+.splash-content{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+animation:splashFadeIn 0.45s ease;
+}
+.splash-logo{
+width:88px;
+height:88px;
+object-fit:contain;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,0.25);
+margin-bottom:18px;
+}
+.splash-title{
+font-size:1.8rem;
+font-weight:700;
+letter-spacing:0.08em;
+margin:0;
+}
+.splash-subtitle{
+font-size:0.85rem;
+margin-top:8px;
+opacity:0.9;
+letter-spacing:0.08em;
+}
+.splash-loader{
+width:42px;
+height:3px;
+margin-top:24px;
+border-radius:99px;
+background:rgba(255,255,255,0.3);
+overflow:hidden;
+}
+.splash-loader::after{
+content:"";
+display:block;
+width:45%;
+height:100%;
+background:#fff;
+border-radius:99px;
+animation:splashLoad 0.8s ease-in-out infinite;
+}
+@keyframes splashFadeIn{
+from{opacity:0;transform:scale(0.97);}
+to{opacity:1;transform:scale(1);}
+}
+@keyframes splashLoad{
+0%{transform:translateX(-100%);}
+100%{transform:translateX(230%);}
+}
+@media (prefers-reduced-motion:reduce){
+#app-splash,.splash-content{animation:none!important;transition:none!important;}
+.splash-loader::after{animation:none!important;}
 }
 
 h2{
@@ -58,7 +134,7 @@ header{
 background:url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
 color:white;
 text-align:center;
-padding:80px 20px;
+padding:calc(80px + env(safe-area-inset-top)) 20px 80px;
 }
 
 header h1{
@@ -109,7 +185,7 @@ flex:0 0 250px;
 background:white;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
+box-shadow:0 6px 18px rgba(0,0,0,0.10);
 scroll-snap-align:start;
 transition:transform 0.2s;
 transform:translateZ(0);
@@ -162,7 +238,7 @@ gap:20px;
 background:white;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
+box-shadow:0 6px 18px rgba(0,0,0,0.10);
 text-decoration:none;
 color:inherit;
 transition:
@@ -209,7 +285,7 @@ margin:auto;
 background:white;
 padding:20px;
 border-radius:10px;
-box-shadow:0 2px 4px rgba(0,0,0,0.08);
+box-shadow:0 6px 18px rgba(0,0,0,0.10);
 text-align:left;
 }
 
@@ -255,9 +331,11 @@ width:100%;
 background:#fff;
 display:flex;
 justify-content:space-around;
-box-shadow:0 -2px 6px rgba(0,0,0,0.08);
-padding:8px 0;
+box-shadow:0 -4px 16px rgba(0,0,0,0.10);
+padding:8px 0 calc(8px + env(safe-area-inset-bottom));
 z-index:1000;
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
 transform:translateZ(0);
 will-change:transform;
 backface-visibility:hidden;
@@ -272,26 +350,45 @@ flex-direction:column;
 align-items:center;
 }
 
-/* FAB */
-
+/* FAB - BOOK */
 .fab{
 position:fixed;
-bottom:70px;
-right:20px;
+bottom:calc(72px + env(safe-area-inset-bottom));
+right:18px;
 background:#2e7d32;
 color:white;
-width:60px;
-height:60px;
+width:62px;
+height:62px;
 border-radius:50%;
 display:flex;
+flex-direction:column;
 align-items:center;
 justify-content:center;
-font-size:1.5rem;
-box-shadow:0 2px 6px rgba(0,0,0,0.15);
+gap:1px;
+font-size:1.35rem;
+box-shadow:0 8px 20px rgba(0,0,0,0.22);
 text-decoration:none;
 transform:translateZ(0);
 will-change:transform;
 backface-visibility:hidden;
+z-index:1100;
+transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fab:active{
+transform:scale(0.94);
+}
+.fab:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 24px rgba(0,0,0,0.26);
+}
+.fab-icon{
+line-height:1;
+}
+.fab-label{
+font-size:0.62rem;
+font-weight:700;
+line-height:1;
+letter-spacing:0.02em;
 }
 
 /* INSTALL CARD */
@@ -306,7 +403,8 @@ max-width:360px;
 background:white;
 border-radius:18px;
 padding:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.18);
+box-shadow:0 14px 34px rgba(0,0,0,0.22);
+border:1px solid rgba(0,0,0,0.05);
 display:flex;
 gap:14px;
 align-items:center;
@@ -355,6 +453,10 @@ cursor:pointer;
 color:#888;
 }
 
+@media (prefers-reduced-motion:reduce){
+.event-card,.pub-tile,.fab{transition:none!important;}
+}
+
 @keyframes slideUp{
 from{
 opacity:0;
@@ -373,10 +475,21 @@ transform:translate(-50%,0);
 
 <body>
 
+<!-- APP SPLASH -->
+<div id="app-splash" aria-hidden="true">
+  <div class="splash-content">
+    <img class="splash-logo" src="/countryinns-pwa/icons/icon-192x192.png" alt="">
+    <p class="splash-title">COUNTRY INNS</p>
+    <p class="splash-subtitle">THE NEW FOREST</p>
+    <div class="splash-loader" aria-hidden="true"></div>
+  </div>
+</div>
+
 <header>
-<h1>Your New Forest Pubs</h1>
+<h1>Your New Forest pubs</h1>
 <h2>Great food • Great drinks • Great places</h2>
-<h3>8 Pubs • New Forest • Hampshire</h3>  
+<h3>8 Pubs • New Forest • Hampshire</h3>
+
 </header>
 
 <div class="global-notice">
@@ -508,7 +621,7 @@ Supporting local producers across the New Forest.
 <p>© 2025 Country Inns. Proudly serving The New Forest.</p>
 </footer>
 
-<a href="booking.html" class="fab">🍽️</a>
+<a href="booking.html" class="fab" aria-label="Book a Table"><span class="fab-icon">📅</span><span class="fab-label">Book</span></a>
 
 <nav class="bottom-nav">
 <a href="home.html">🏠<span>Home</span></a>
@@ -561,6 +674,11 @@ const Analytics = {
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("loaded");
 
+  // Give the branded splash screen a short, polished moment before revealing the app.
+  setTimeout(() => {
+    document.getElementById("app-splash")?.classList.add("hidden");
+  }, 650);
+
   setTimeout(() => Analytics.log("app_open"), 100);
   setupTracking();
   setupInstallPrompt();
@@ -603,76 +721,122 @@ function setupInstallPrompt() {
     return;
   }
 
+  // Count app/page visits. The prompt can appear after the user's second page visit.
+  const pageVisits = Number(localStorage.getItem("countryInnsPageVisits") || "0") + 1;
+  localStorage.setItem("countryInnsPageVisits", String(pageVisits));
+
+  let deferredPrompt;
+  let hasInteracted = false;
+  let installShown = false;
+  let interactionTimer = null;
+
+  const showInstallPrompt = () => {
+    if (installShown || !deferredPrompt) return;
+    if (localStorage.getItem("installDismissed")) return;
+
+    installShown = true;
+
+    if (interactionTimer) {
+      clearTimeout(interactionTimer);
+      interactionTimer = null;
+    }
+
+    if (document.getElementById("installCard")) return;
+
+    const card = document.createElement("div");
+
+    card.id = "installCard";
+
+    card.innerHTML = `
+      <div class="install-card">
+
+        <button class="install-close" id="closeInstall" aria-label="Close install prompt">
+          ✕
+        </button>
+
+        <img src="/countryinns-pwa/icons/icon-192x192.png"
+             alt="Country Inns"
+             class="install-icon">
+
+        <div class="install-content">
+          <h3>Install Country Inns</h3>
+
+          <p>
+            Faster bookings, quick pub access,
+            events & offers directly from your home screen.
+          </p>
+
+          <button class="install-btn" id="installBtn">
+            📲 Install App
+          </button>
+        </div>
+
+      </div>
+    `;
+
+    document.body.appendChild(card);
+
+    document.getElementById("installBtn").onclick = async () => {
+
+      Analytics.log("install_click");
+
+      deferredPrompt.prompt();
+
+      const { outcome } = await deferredPrompt.userChoice;
+
+      if (outcome === "accepted") {
+        card.remove();
+      }
+
+      deferredPrompt = null;
+    };
+
+    document.getElementById("closeInstall").onclick = () => {
+
+      card.remove();
+
+      localStorage.setItem("installDismissed", "true");
+    };
+  };
+
+  // Capture the browser's install event, but don't interrupt the user immediately.
   window.addEventListener("beforeinstallprompt", e => {
 
     e.preventDefault();
     deferredPrompt = e;
 
-    setTimeout(() => {
-
-      // Prevent duplicates
-      if (document.getElementById("installCard")) return;
-
-      const card = document.createElement("div");
-
-      card.id = "installCard";
-
-      card.innerHTML = `
-        <div class="install-card">
-
-          <button class="install-close" id="closeInstall">
-            ✕
-          </button>
-
-          <img src="/countryinns-pwa/icons/icon-192x192.png"
-               alt="Country Inns"
-               class="install-icon">
-
-          <div class="install-content">
-            <h3>Install Country Inns</h3>
-
-            <p>
-              Faster bookings, quick pub access,
-              events & offers directly from your home screen.
-            </p>
-
-            <button class="install-btn" id="installBtn">
-              📲 Install App
-            </button>
-          </div>
-
-        </div>
-      `;
-
-      document.body.appendChild(card);
-
-      // Install click
-      document.getElementById("installBtn").onclick = async () => {
-
-        Analytics.log("install_click");
-
-        deferredPrompt.prompt();
-
-        const { outcome } = await deferredPrompt.userChoice;
-
-        if (outcome === "accepted") {
-          card.remove();
-        }
-
-        deferredPrompt = null;
-      };
-
-      // Close button
-      document.getElementById("closeInstall").onclick = () => {
-
-        card.remove();
-
-        localStorage.setItem("installDismissed", "true");
-      };
-
-    }, 8000);
-
+    // On the second page visit, the prompt can appear without waiting another 20 seconds.
+    if (pageVisits >= 2) {
+      setTimeout(() => {
+        showInstallPrompt();
+      }, 1500);
+    }
   });
+
+  // "Interaction" means the visitor has actually started using the app.
+  const registerInteraction = () => {
+
+    if (hasInteracted) return;
+
+    hasInteracted = true;
+
+    // Show approximately 20 seconds after the first meaningful interaction.
+    interactionTimer = setTimeout(() => {
+      showInstallPrompt();
+    }, 20000);
+
+    // Once the listener has done its job, remove it.
+    ["pointerdown", "touchstart", "keydown", "scroll"].forEach(eventName => {
+      window.removeEventListener(eventName, registerInteraction, { passive: true });
+    });
+  };
+
+  ["pointerdown", "touchstart", "keydown", "scroll"].forEach(eventName => {
+    window.addEventListener(eventName, registerInteraction, { passive: true });
+  });
+
+  // If the visitor reaches a second page, give the install prompt a chance to appear
+  // after they have interacted there. This avoids an intrusive prompt on first load.
 }
 /* =========================
    PREFETCH
@@ -691,4 +855,3 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/countryinns-pwa/service-worker.js");
 }
 </script>
-  
