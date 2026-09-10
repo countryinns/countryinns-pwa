@@ -1,136 +1,1579 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>Book a Table | Country Inns</title>
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description"
+        content="Choose your Country Inns pub to explore food, drinks and menus across the New Forest.">
+
+  <meta name="theme-color" content="#2d5016">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Country Inns">
+
+  <link rel="manifest" href="/countryinns-pwa/manifest.webmanifest">
+
+  <link rel="apple-touch-icon"
+        href="/countryinns-pwa/icons/icon-192x192.png">
+
+  <link rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="android-chrome-192x192.png">
+
+  <title>Food &amp; Drink | Country Inns</title>
+
 
   <style>
-    :root { --bg:#0f2f1f }
 
-    html, body {
-      height:100%;
-      margin:0;
+    :root {
+      --green: #2d5016;
+      --green-dark: #17350e;
+      --green-light: #3d6b20;
+      --cream: #f6f2e8;
+      --cream-dark: #ebe5d5;
+      --ink: #263026;
+      --muted: #667064;
+      --gold: #b08a45;
+      --white: #ffffff;
+      --shadow: 0 8px 24px rgba(25,40,20,.12);
+      --radius: 18px;
     }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
 
     body {
-      background: radial-gradient(
-        circle at 10% 10%,
-        rgba(255,255,255,0.02),
-        transparent 8%
-      ), var(--bg);
+      margin: 0;
 
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding:24px;
+      min-height: 100vh;
 
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
-      color:#fff;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-      overflow-y:auto;
+      background: #f4f5f2;
+
+      color: var(--ink);
+
+      padding-top: env(safe-area-inset-top);
+
+      padding-bottom:
+        calc(
+          78px +
+          env(safe-area-inset-bottom)
+        );
+
+      opacity: 0;
+
+      transition: opacity .3s ease;
     }
 
-    h1 {
-      margin:10px 0 5px;
-      font-size:1.8rem;
-      color:#e6d8b5;
-      text-align:center;
+
+    body.loaded {
+      opacity: 1;
     }
 
-    h2 {
-      margin:0 0 20px;
-      font-weight:normal;
-      text-align:center;
+
+    a {
+      color: inherit;
     }
 
-    .card {
-      width:100%;
-      max-width:900px;
-      padding:30px;
 
-      background:#1e3a2a;
-      border-radius:10px;
-
-      box-shadow:0 8px 30px rgba(0,0,0,0.45);
+    button,
+    a {
+      touch-action: manipulation;
     }
+
+
+    /* =========================
+       SPLASH SCREEN
+    ========================= */
+
+    #app-splash {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 20000;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green-dark),
+          var(--green-light)
+        );
+
+      color: #fff;
+
+      text-align: center;
+
+      transition:
+        opacity .45s ease,
+        visibility .45s ease;
+    }
+
+
+    .splash-content {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      animation:
+        splashFadeIn .45s ease;
+    }
+
+
+    .splash-logo {
+
+      width: 82px;
+
+      height: 82px;
+
+      object-fit: contain;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
+
+      margin-bottom: 18px;
+    }
+
+
+    .splash-title {
+
+      font-size: 1.65rem;
+
+      font-weight: 700;
+
+      letter-spacing: .08em;
+
+      margin: 0;
+    }
+
+
+    .splash-subtitle {
+
+      font-size: .82rem;
+
+      margin-top: 8px;
+
+      opacity: .9;
+
+      letter-spacing: .08em;
+    }
+
+
+    .splash-loader {
+
+      width: 42px;
+
+      height: 3px;
+
+      margin-top: 24px;
+
+      border-radius: 99px;
+
+      background:
+        rgba(255,255,255,.3);
+
+      overflow: hidden;
+    }
+
+
+    .splash-loader::after {
+
+      content: "";
+
+      display: block;
+
+      width: 45%;
+
+      height: 100%;
+
+      background: #fff;
+
+      border-radius: 99px;
+
+      animation:
+        splashLoad .8s ease-in-out infinite;
+    }
+
+
+    .hidden {
+
+      opacity: 0 !important;
+
+      visibility: hidden !important;
+
+      pointer-events: none !important;
+    }
+
+
+    @keyframes splashFadeIn {
+
+      from {
+
+        opacity: 0;
+
+        transform: scale(.97);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: scale(1);
+
+      }
+
+    }
+
+
+    @keyframes splashLoad {
+
+      0% {
+
+        transform: translateX(-100%);
+
+      }
+
+      100% {
+
+        transform: translateX(230%);
+
+      }
+
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+
+      position: relative;
+
+      min-height: 330px;
+
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: center;
+
+      text-align: center;
+
+      color: #fff;
+
+      padding: 70px 20px 42px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,.08),
+          rgba(0,0,0,.72)
+        ),
+        url('andy-newton-Od9W1_kbX8s-unsplash.jpg')
+        center / cover no-repeat;
+    }
+
+
+    .hero-inner {
+
+      max-width: 800px;
+
+      margin: auto;
+    }
+
+
+    .hero-kicker {
+
+      display: inline-block;
+
+      margin-bottom: 12px;
+
+      padding: 7px 13px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.55);
+
+      border-radius: 999px;
+
+      background:
+        rgba(0,0,0,.22);
+
+      font-size: .78rem;
+
+      font-weight: 700;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+    }
+
+
+    header h1 {
+
+      margin: 0;
+
+      font-size:
+        clamp(
+          2.2rem,
+          6vw,
+          3.8rem
+        );
+
+      line-height: 1.05;
+
+      text-shadow:
+        2px 2px 8px
+        rgba(0,0,0,.55);
+    }
+
+
+    header p {
+
+      max-width: 650px;
+
+      margin: 15px auto 0;
+
+      font-size:
+        clamp(
+          1rem,
+          2.5vw,
+          1.2rem
+        );
+
+      line-height: 1.5;
+
+      color: #fff;
+
+      opacity: .96;
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      width: 100%;
+    }
+
+
+    .section {
+
+      padding: 42px 20px;
+    }
+
+
+    .section-inner {
+
+      width: 100%;
+
+      max-width: 1200px;
+
+      margin: 0 auto;
+    }
+
+
+    .section-heading {
+
+      text-align: center;
+
+      margin-bottom: 28px;
+    }
+
+
+    .section-heading h2 {
+
+      margin: 0 0 8px;
+
+      font-size:
+        clamp(
+          1.8rem,
+          4vw,
+          2.35rem
+        );
+
+      color: var(--green);
+    }
+
+
+    .section-heading p {
+
+      max-width: 720px;
+
+      margin: 0 auto;
+
+      color: var(--muted);
+
+      line-height: 1.55;
+
+      font-size: .98rem;
+    }
+
+
+    /* =========================
+       PUB GRID
+    ========================= */
+
+    .pubs-section {
+
+      background: var(--cream);
+    }
+
 
     .pubs-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-      gap:15px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 20px;
     }
+
 
     .pub-tile {
-      display:block;
-      text-align:center;
-      text-decoration:none;
-      color:#fff;
 
-      background:#2c5f3e;
-      padding:18px;
-      border-radius:8px;
+      display: flex;
 
-      font-weight:bold;
-      transition:all 0.25s ease;
+      flex-direction: column;
 
-      box-shadow:0 2px 6px rgba(0,0,0,0.3);
+      background: var(--white);
+
+      border-radius: var(--radius);
+
+      overflow: hidden;
+
+      text-decoration: none;
+
+      border:
+        1px solid
+        rgba(45,80,22,.08);
+
+      box-shadow: var(--shadow);
+
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease;
     }
+
 
     .pub-tile:hover {
-      background:#3d7f55;
-      transform:translateY(-3px);
+
+      transform:
+        translateY(-5px);
+
+      box-shadow:
+        0 14px 32px
+        rgba(25,40,20,.17);
     }
 
-    .buttons {
-      margin:24px 0 12px;
-      text-align:center;
+
+    .pub-tile:active {
+
+      transform:
+        translateY(-1px);
     }
 
-    .buttons a {
-      text-decoration:none;
-      color:#fff;
-      background:#2c5f3e;
-      padding:10px 18px;
-      border-radius:6px;
-      transition:background 0.3s;
-      display:inline-block;
+
+    .pub-image-wrap {
+
+      position: relative;
+
+      width: 100%;
+
+      height: 190px;
+
+      overflow: hidden;
     }
 
-    .buttons a:hover {
-      background:#3d7f55;
+
+    .pub-tile img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+
+      transition:
+        transform .35s ease;
+    }
+
+
+    .pub-tile:hover img {
+
+      transform: scale(1.04);
+    }
+
+
+    .pub-copy {
+
+      padding: 17px 17px 18px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      flex: 1;
+    }
+
+
+    .pub-copy strong {
+
+      font-size: 1.08rem;
+
+      line-height: 1.25;
+
+      color: var(--ink);
+    }
+
+
+    .pub-copy small {
+
+      display: block;
+
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: .88rem;
+    }
+
+
+    .view-pub {
+
+      display: inline-block;
+
+      margin-top: 13px;
+
+      color: var(--green);
+
+      font-size: .86rem;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       INFORMATION PANEL
+    ========================= */
+
+    .info-section {
+
+      background: #fff;
+    }
+
+
+    .info-card {
+
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      padding: 28px;
+
+      border-radius: var(--radius);
+
+      background:
+        linear-gradient(
+          135deg,
+          #eef3ea,
+          #ffffff
+        );
+
+      border:
+        1px solid
+        rgba(45,80,22,.10);
+
+      box-shadow: var(--shadow);
+
+      text-align: center;
+    }
+
+
+    .info-card h2 {
+
+      margin:
+        0 0 10px;
+
+      color: var(--green);
+    }
+
+
+    .info-card p {
+
+      max-width: 720px;
+
+      margin:
+        0 auto;
+
+      color: var(--muted);
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .back-section {
+
+      padding:
+        12px 20px 30px;
+
+      background: #fff;
+
+      text-align: center;
+    }
+
+
+    .back-button {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      padding:
+        12px 20px;
+
+      border-radius: 10px;
+
+      background: var(--green);
+
+      color: #fff;
+
+      text-decoration: none;
+
+      font-weight: 700;
+
+      box-shadow:
+        0 5px 14px
+        rgba(25,40,20,.15);
+
+      transition:
+        background .2s ease,
+        transform .2s ease;
+    }
+
+
+    .back-button:hover {
+
+      background:
+        var(--green-light);
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+
+      background: #222;
+
+      color: #fff;
+
+      text-align: center;
+
+      padding:
+        25px 20px;
+
+      font-size: .88rem;
+    }
+
+
+    .footer-links {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 20px;
+
+      flex-wrap: wrap;
+
+      margin-bottom: 10px;
+    }
+
+
+    .footer-links a {
+
+      color: #fff;
+
+      text-decoration: none;
+
+      opacity: .9;
+    }
+
+
+    .footer-links a:hover {
+
+      opacity: 1;
+
+      text-decoration: underline;
+    }
+
+
+    footer p {
+
+      margin: 0;
+
+      opacity: .85;
+    }
+
+
+    /* =========================
+       BOTTOM NAV
+    ========================= */
+
+    .bottom-nav {
+
+      position: fixed;
+
+      left: 0;
+
+      bottom: 0;
+
+      width: 100%;
+
+      z-index: 1000;
+
+      display: flex;
+
+      justify-content:
+        space-around;
+
+      background:
+        rgba(255,255,255,.96);
+
+      box-shadow:
+        0 -4px 16px
+        rgba(0,0,0,.10);
+
+      padding:
+        8px 0
+        calc(
+          8px +
+          env(safe-area-inset-bottom)
+        );
+
+      backdrop-filter:
+        blur(10px);
+
+      -webkit-backdrop-filter:
+        blur(10px);
+    }
+
+
+    .bottom-nav a {
+
+      min-width: 64px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 2px;
+
+      color: #333;
+
+      text-decoration: none;
+
+      font-size: .76rem;
+
+      font-weight: 600;
+    }
+
+
+    .bottom-nav a span:first-child {
+
+      font-size: 1.3rem;
+
+      line-height: 1.1;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1000px) {
+
+      .pubs-grid {
+
+        grid-template-columns:
+          repeat(3, 1fr);
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      header {
+
+        min-height: 330px;
+
+        padding:
+          65px 18px 38px;
+      }
+
+
+      .section {
+
+        padding:
+          34px 16px;
+      }
+
+
+      .pubs-grid {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+        gap: 14px;
+      }
+
+
+      .pub-image-wrap {
+
+        height: 150px;
+      }
+
+
+      .pub-copy {
+
+        padding:
+          14px 14px 16px;
+      }
+
+
+      .pub-copy strong {
+
+        font-size: .98rem;
+      }
+
+
+      .pub-copy small {
+
+        font-size: .82rem;
+      }
+
+
+      .view-pub {
+
+        font-size: .8rem;
+      }
+
+
+      .info-card {
+
+        padding: 23px 18px;
+      }
+
+    }
+
+
+    @media (max-width: 430px) {
+
+      .pubs-grid {
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .pub-image-wrap {
+
+        height: 185px;
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        scroll-behavior: auto !important;
+
+        transition: none !important;
+
+        animation: none !important;
+      }
+
     }
 
   </style>
+
 </head>
+
 
 <body>
 
-  <h1>Select your Pub</h1>
 
-  <div class="card">
-    <div class="pubs-grid">
-<section class="pubs-section" id="pubs"><div class="section-inner"><div class="section-heading"><h2>Our Country Inns</h2><p>Eight welcoming pubs across the New Forest and Hampshire.</p></div><div class="pubs-grid">
-<a class="pub-tile" href="boldforester.html?pub=BoldForester"><img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester"><div class="pub-copy"><strong>The Bold Forester</strong><small>Marchwood</small></div></a>
-<a class="pub-tile" href="lambinn.html?pub=LambInn"><img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn"><div class="pub-copy"><strong>The Lamb Inn</strong><small>Nomansland</small></div></a>
-<a class="pub-tile" href="royaloak.html?pub=RoyalOak"><img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak"><div class="pub-copy"><strong>The Royal Oak</strong><small>Beaulieu</small></div></a>
-<a class="pub-tile" href="woolpack.html?pub=Woolpack"><img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack"><div class="pub-copy"><strong>The Woolpack</strong><small>Sopley</small></div></a>
-<a class="pub-tile" href="fightingcocks.html?pub=FightingCocks"><img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks"><div class="pub-copy"><strong>The Fighting Cocks</strong><small>Godshill</small></div></a>
-<a class="pub-tile" href="trustyservant.html?pub=TrustyServant"><img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant"><div class="pub-copy"><strong>The Trusty Servant</strong><small>Minstead</small></div></a>
-<a class="pub-tile" href="newforestinn.html?pub=NewForestInn"><img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn"><div class="pub-copy"><strong>The New Forest Inn</strong><small>Emery Down</small></div></a>
-<a class="pub-tile" href="rockinghamarms.html?pub=Rockingham%20Arms"><img src="Rockingham-Arms-images/Rockingham-Arms-1.jpg" alt="The Rockingham Arms"><div class="pub-copy"><strong>The Rockingham Arms</strong><small>West Wellow</small></div></a>
+  <!-- =========================
+       APP SPLASH
+  ========================= -->
+
+  <div id="app-splash" aria-hidden="true">
+
+    <div class="splash-content">
+
+      <img
+        class="splash-logo"
+        src="/countryinns-pwa/icons/icon-192x192.png"
+        alt=""
+      >
+
+      <p class="splash-title">
+        COUNTRY INNS
+      </p>
+
+      <p class="splash-subtitle">
+        THE NEW FOREST
+      </p>
+
+      <div
+        class="splash-loader"
+        aria-hidden="true">
+      </div>
+
     </div>
 
   </div>
 
-  <div class="buttons">
-    <a href="home.html">⬅ Back to Home</a>
-  </div>
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <header>
+
+    <div class="hero-inner">
+
+      <div class="hero-kicker">
+        8 pubs • New Forest • Hampshire
+      </div>
+
+      <h1>
+        Food &amp; Drink
+      </h1>
+
+      <p>
+        Every Country Inns pub has its own menus,
+        dishes and drinks selection.
+        Choose your pub below to explore what's
+        available at your local.
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+
+    <!-- =========================
+         PUB SELECTION
+    ========================= -->
+
+    <section class="section pubs-section">
+
+      <div class="section-inner">
+
+        <div class="section-heading">
+
+          <h2>
+            Choose Your Pub
+          </h2>
+
+          <p>
+            Select a Country Inns pub to discover
+            its food and drinks menus.
+          </p>
+
+        </div>
+
+
+        <div class="pubs-grid">
+
+
+          <!-- THE BOLD FORESTER -->
+
+          <a
+            class="pub-tile"
+            href="boldforester.html?pub=BoldForester"
+          >
+
+            <div class="pub-image-wrap">
+
+              <img
+                src="bold-forester-images/Restaurant Images/boldforestermain.jpg"
+                alt="The Bold Forester, Marchwood"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="pub-copy">
+
+              <strong>
+                The Bold Forester
+              </strong>
+
+              <small>
+                Marchwood
+              </small>
+
+              <span class="view-pub">
+                View Food &amp; Drink →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- THE LAMB INN -->
+
+          <a
+            class="pub-tile"
+            href="lambinn.html?pub=LambInn"
+          >
+
+            <div class="pub-image-wrap">
+
+              <img
+                src="Lamb-Inn-images/LambInn.jpg"
+                alt="The Lamb Inn, Nomansland"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="pub-copy">
+
+              <strong>
+                The Lamb Inn
+              </strong>
+
+              <small>
+                Nomansland
+              </small>
+
+              <span class="view-pub">
+                View Food &amp; Drink →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- THE ROYAL OAK -->
+
+          <a
+            class="pub-tile"
+            href="royaloak.html?pub=RoyalOak"
+          >
+
+            <div class="pub-image-wrap">
+
+              <img
+                src="Royal-Oak-images/The Royal Oak.jpeg"
+                alt="The Royal Oak, Beaulieu"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="pub-copy">
+
+              <strong>
+                The Royal Oak
+              </strong>
+
+              <small>
+                Beaulieu
+              </small>
+
+              <span class="view-pub">
+                View Food &amp; Drink →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- THE WOOLPACK -->
+
+          <a
+            class="pub-tile"
+            href="woolpack.html?pub=Woolpack"
+          >
+
+            <div class="pub-image-wrap">
+
+              <img
+                src="Woolpack-images/Woolpack.jpg"
+                alt="The Woolpack, Sopley"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="pub-copy">
+
+              <strong>
+                The Woolpack
+              </strong>
+
+              <small>
+                Sopley
+              </small>
+
+              <span class="view-pub">
+                View Food &amp; Drink →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- THE FIGHTING COCKS -->
+
+          <a
+            class="pub-tile"
+            href="fightingcocks.html?pub=FightingCocks"
+          >
+
+            <div class="pub-image-wrap">
+
+              <img
+                src="Fighting-Cocks-images/fighting-coq-scaled.jpg"
+                alt="The Fighting Cocks, Godshill"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="pub-copy">
+
+              <strong>
+                The Fighting Cocks
+              </strong>
+
+              <small>
+                Godshill
+              </small>
+
+              <span class="view-pub">
+                View Food &amp; Drink →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- THE TRUSTY SERVANT -->
+
+          <a
+            class="pub-tile"
+            href="trustyservant.html?pub=TrustyServant"
+          >
+
+            <div class="pub-image-wrap">
+
+              <img
+                src="Trusty-Servant-images/Trusty.jpg"
+                alt="The Trusty Servant, Minstead"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="pub-copy">
+
+              <strong>
+                The Trusty Servant
+              </strong>
+
+              <small>
+                Minstead
+              </small>
+
+              <span class="view-pub">
+                View Food &amp; Drink →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- THE NEW FOREST INN -->
+
+          <a
+            class="pub-tile"
+            href="newforestinn.html?pub=NewForestInn"
+          >
+
+            <div class="pub-image-wrap">
+
+              <img
+                src="New-Forest-Inn-images/NFI.jpg"
+                alt="The New Forest Inn, Emery Down"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="pub-copy">
+
+              <strong>
+                The New Forest Inn
+              </strong>
+
+              <small>
+                Emery Down
+              </small>
+
+              <span class="view-pub">
+                View Food &amp; Drink →
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- THE ROCKINGHAM ARMS -->
+
+          <a
+            class="pub-tile"
+            href="rockinghamarms.html?pub=Rockingham%20Arms"
+          >
+
+            <div class="pub-image-wrap">
+
+              <img
+                src="Rockingham-Arms-images/Rockingham-Arms-1.jpg"
+                alt="The Rockingham Arms, West Wellow"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="pub-copy">
+
+              <strong>
+                The Rockingham Arms
+              </strong>
+
+              <small>
+                West Wellow
+              </small>
+
+              <span class="view-pub">
+                View Food &amp; Drink →
+              </span>
+
+            </div>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         INFORMATION
+    ========================= -->
+
+    <section class="section info-section">
+
+      <div class="section-inner">
+
+        <div class="info-card">
+
+          <h2>
+            Your Pub, Your Menus
+          </h2>
+
+          <p>
+            Menus vary between our pubs, so once you
+            choose your Country Inn you'll find the
+            food and drinks available at that
+            particular pub — including the different
+            menus and seasonal choices they offer.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         BACK TO HOME
+    ========================= -->
+
+    <section class="back-section">
+
+      <a
+        href="home.html"
+        class="back-button"
+      >
+        ⬅ Back to Country Inns
+      </a>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="footer-links">
+
+      <a href="home.html">
+        Home
+      </a>
+
+      <a href="find-us.html">
+        Find a Pub
+      </a>
+
+      <a href="booking.html">
+        Book
+      </a>
+
+      <a href="feedback.html">
+        Feedback
+      </a>
+
+      <a href="https://countryinnsnewforest.blogspot.com/">
+        Journal
+      </a>
+
+    </div>
+
+    <p>
+      © <span id="current-year">2026</span>
+      Country Inns.
+      Proudly serving the New Forest.
+    </p>
+
+  </footer>
+
+
+  <!-- =========================
+       BOTTOM NAVIGATION
+  ========================= -->
+
+  <nav
+    class="bottom-nav"
+    aria-label="App navigation"
+  >
+
+    <a href="home.html">
+      <span>🏠</span>
+      <span>Home</span>
+    </a>
+
+    <a href="chooseyourpub.html">
+      <span>🍺</span>
+      <span>Food &amp; Drink</span>
+    </a>
+
+    <a href="find-us.html">
+      <span>📍</span>
+      <span>Find a Pub</span>
+    </a>
+
+    <a href="booking.html">
+      <span>📅</span>
+      <span>Book</span>
+    </a>
+
+  </nav>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        /*
+         * Show the page
+         */
+
+        document.body.classList.add("loaded");
+
+
+        /*
+         * Update footer year
+         */
+
+        const year =
+          document.getElementById(
+            "current-year"
+          );
+
+        if (year) {
+
+          year.textContent =
+            new Date().getFullYear();
+
+        }
+
+
+        /*
+         * Hide splash screen
+         */
+
+        setTimeout(() => {
+
+          const splash =
+            document.getElementById(
+              "app-splash"
+            );
+
+          if (splash) {
+
+            splash.classList.add(
+              "hidden"
+            );
+
+          }
+
+        }, 700);
+
+
+        /*
+         * Small app-style transition
+         * when opening a pub
+         */
+
+        document
+          .querySelectorAll(".pub-tile")
+          .forEach(tile => {
+
+            tile.addEventListener(
+              "click",
+              () => {
+
+                document.body.style.opacity =
+                  "0";
+
+              }
+            );
+
+          });
+
+      }
+
+    );
+
+
+    /*
+     * Make sure the page is still
+     * visible if an error occurs.
+     */
+
+    window.addEventListener(
+      "error",
+      () => {
+
+        document.body.classList.add(
+          "loaded"
+        );
+
+      }
+    );
+
+
+    /*
+     * Register Country Inns service worker
+     */
+
+    if ("serviceWorker" in navigator) {
+
+      navigator.serviceWorker.register(
+        "/countryinns-pwa/service-worker.js"
+      );
+
+    }
+
+  </script>
+
 
 </body>
+
 </html>
-
-
-
-  
