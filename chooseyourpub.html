@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Book a Table | Country Inns</title>
+
+  <style>
+    :root { --bg:#0f2f1f }
+
+    html, body {
+      height:100%;
+      margin:0;
+    }
+
+    body {
+      background: radial-gradient(
+        circle at 10% 10%,
+        rgba(255,255,255,0.02),
+        transparent 8%
+      ), var(--bg);
+
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:24px;
+
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      color:#fff;
+
+      overflow-y:auto;
+    }
+
+    h1 {
+      margin:10px 0 5px;
+      font-size:1.8rem;
+      color:#e6d8b5;
+      text-align:center;
+    }
+
+    h2 {
+      margin:0 0 20px;
+      font-weight:normal;
+      text-align:center;
+    }
+
+    .card {
+      width:100%;
+      max-width:900px;
+      padding:30px;
+
+      background:#1e3a2a;
+      border-radius:10px;
+
+      box-shadow:0 8px 30px rgba(0,0,0,0.45);
+    }
+
+    .pubs-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:15px;
+    }
+
+    .pub-tile {
+      display:block;
+      text-align:center;
+      text-decoration:none;
+      color:#fff;
+
+      background:#2c5f3e;
+      padding:18px;
+      border-radius:8px;
+
+      font-weight:bold;
+      transition:all 0.25s ease;
+
+      box-shadow:0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .pub-tile:hover {
+      background:#3d7f55;
+      transform:translateY(-3px);
+    }
+
+    .buttons {
+      margin:24px 0 12px;
+      text-align:center;
+    }
+
+    .buttons a {
+      text-decoration:none;
+      color:#fff;
+      background:#2c5f3e;
+      padding:10px 18px;
+      border-radius:6px;
+      transition:background 0.3s;
+      display:inline-block;
+    }
+
+    .buttons a:hover {
+      background:#3d7f55;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Select your Pub</h1>
+
+  <div class="card">
+    <div class="pubs-grid">
+<section class="pubs-section" id="pubs"><div class="section-inner"><div class="section-heading"><h2>Our Country Inns</h2><p>Eight welcoming pubs across the New Forest and Hampshire.</p></div><div class="pubs-grid">
+<a class="pub-tile" href="boldforester.html?pub=BoldForester"><img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester"><div class="pub-copy"><strong>The Bold Forester</strong><small>Marchwood</small></div></a>
+<a class="pub-tile" href="lambinn.html?pub=LambInn"><img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn"><div class="pub-copy"><strong>The Lamb Inn</strong><small>Nomansland</small></div></a>
+<a class="pub-tile" href="royaloak.html?pub=RoyalOak"><img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak"><div class="pub-copy"><strong>The Royal Oak</strong><small>Beaulieu</small></div></a>
+<a class="pub-tile" href="woolpack.html?pub=Woolpack"><img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack"><div class="pub-copy"><strong>The Woolpack</strong><small>Sopley</small></div></a>
+<a class="pub-tile" href="fightingcocks.html?pub=FightingCocks"><img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks"><div class="pub-copy"><strong>The Fighting Cocks</strong><small>Godshill</small></div></a>
+<a class="pub-tile" href="trustyservant.html?pub=TrustyServant"><img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant"><div class="pub-copy"><strong>The Trusty Servant</strong><small>Minstead</small></div></a>
+<a class="pub-tile" href="newforestinn.html?pub=NewForestInn"><img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn"><div class="pub-copy"><strong>The New Forest Inn</strong><small>Emery Down</small></div></a>
+<a class="pub-tile" href="rockinghamarms.html?pub=Rockingham%20Arms"><img src="Rockingham-Arms-images/Rockingham-Arms-1.jpg" alt="The Rockingham Arms"><div class="pub-copy"><strong>The Rockingham Arms</strong><small>West Wellow</small></div></a>
+    </div>
+
+  </div>
+
+  <div class="buttons">
+    <a href="home.html">⬅ Back to Home</a>
+  </div>
+
+</body>
+</html>
+
+
+
+  
