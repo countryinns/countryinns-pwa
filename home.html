@@ -3,803 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Country Inns – Discover pubs, menus, events and bookings across the New Forest.">
-<title>Country Inns</title>
-
-<link rel="manifest" href="/countryinns-pwa/manifest.webmanifest">
-  
-<meta name="theme-color" content="#2e7d32">
-
+<meta name="description" content="Country Inns – Discover pubs, menus, events, bookings and stays across the New Forest.">
+<meta name="theme-color" content="#2d5016">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Country Inns">
-
+<link rel="manifest" href="/countryinns-pwa/manifest.webmanifest">
 <link rel="apple-touch-icon" href="/countryinns-pwa/icons/icon-192x192.png">
-
 <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-
+<title>Country Inns | New Forest Pubs</title>
 <style>
-
-/* GLOBAL OPTIMISATIONS */
-html {
-  scroll-behavior: smooth;
-}
-
-/* BASE */
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background-color:#f5f5f5;
-color:#333;
-opacity:0;
-transition:opacity 0.3s ease;
-padding-top:env(safe-area-inset-top);
-padding-bottom:calc(80px + env(safe-area-inset-bottom));
--webkit-overflow-scrolling:touch;
-}
-
-body.loaded{
-opacity:1;
-}
-
-/* APP SPLASH / LOADING SCREEN */
-#app-splash{
-position:fixed;
-inset:0;
-z-index:20000;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#013220,#2e8b57);
-color:#fff;
-text-align:center;
-transition:opacity 0.45s ease, visibility 0.45s ease;
-}
-#app-splash.hidden{
-opacity:0;
-visibility:hidden;
-pointer-events:none;
-}
-.splash-content{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-animation:splashFadeIn 0.45s ease;
-}
-.splash-logo{
-width:88px;
-height:88px;
-object-fit:contain;
-border-radius:20px;
-box-shadow:0 8px 25px rgba(0,0,0,0.25);
-margin-bottom:18px;
-}
-.splash-title{
-font-size:1.8rem;
-font-weight:700;
-letter-spacing:0.08em;
-margin:0;
-}
-.splash-subtitle{
-font-size:0.85rem;
-margin-top:8px;
-opacity:0.9;
-letter-spacing:0.08em;
-}
-.splash-loader{
-width:42px;
-height:3px;
-margin-top:24px;
-border-radius:99px;
-background:rgba(255,255,255,0.3);
-overflow:hidden;
-}
-.splash-loader::after{
-content:"";
-display:block;
-width:45%;
-height:100%;
-background:#fff;
-border-radius:99px;
-animation:splashLoad 0.8s ease-in-out infinite;
-}
-@keyframes splashFadeIn{
-from{opacity:0;transform:scale(0.97);}
-to{opacity:1;transform:scale(1);}
-}
-@keyframes splashLoad{
-0%{transform:translateX(-100%);}
-100%{transform:translateX(230%);}
-}
-@media (prefers-reduced-motion:reduce){
-#app-splash,.splash-content{animation:none!important;transition:none!important;}
-.splash-loader::after{animation:none!important;}
-}
-
-h2{
-font-size:2em;
-margin-bottom:20px;
-}
-
-section{
-padding:40px 20px;
-text-align:center;
-}
-
-/* HEADER */
-
-header{
-background:url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;
-color:white;
-text-align:center;
-padding:calc(80px + env(safe-area-inset-top)) 20px 80px;
-}
-
-header h1{
-font-size:2.5em;
-margin:0;
-text-shadow:2px 2px 5px rgba(0,0,0,0.6);
-}
-
-header h3{
-font-size:1.3em;
-margin-top:10px;
-}
-
-/* GLOBAL NOTICE */
-
-.global-notice{
-background:linear-gradient(135deg,#8b1d3a,#b03052);
-color:#fff;
-text-align:center;
-padding:14px 20px;
-font-size:1rem;
-font-weight:bold;
-}
-
-.global-notice span{
-display:block;
-font-weight:normal;
-font-size:0.9rem;
-margin-top:4px;
-}
-
-/* EVENT CARDS */
-
-.events-scroll{
-display:flex;
-gap:20px;
-overflow-x:auto;
-scroll-snap-type:x proximity;
-padding-bottom:20px;
-}
-
-.events-scroll::-webkit-scrollbar{
-display:none;
-}
-
-.event-card{
-flex:0 0 250px;
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 6px 18px rgba(0,0,0,0.10);
-scroll-snap-align:start;
-transition:transform 0.2s;
-transform:translateZ(0);
-will-change:transform;
-}
-
-.event-card:active{
-transform:scale(0.97);
-}
-
-.event-card:hover{
-transform:translateY(-5px);
-}
-
-.event-card img{
-width:100%;
-height:150px;
-object-fit:cover;
-}
-
-.event-card h3{
-margin:15px 0 10px;
-}
-
-.event-card p{
-padding:0 15px 15px;
-font-size:0.95rem;
-}
-
-.event-card .btn{
-display:inline-block;
-background-color:#2e7d32;
-color:#fff;
-padding:10px 18px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-margin-bottom:15px;
-}
-  
-/* PUB GRID */
-
-.pubs-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.pub-tile{
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 6px 18px rgba(0,0,0,0.10);
-text-decoration:none;
-color:inherit;
-transition:
-  transform 0.2s ease,
-  box-shadow 0.2s ease;
-display:flex;
-flex-direction:column;
-transform:translateZ(0);
-will-change:transform;
-}
-
-.pub-tile:active{
-transform:scale(0.97);
-}
-
-.pub-tile:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
-}
-  
-.pub-tile img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.pub-tile span{
-padding:15px;
-font-size:1.1em;
-font-weight:bold;
-}
-
-/* ACCOMMODATION */
-
-.rooms-section{
-  padding:40px 20px;
-  text-align:center;
-  background:#eef3ee;
-}
-
-.rooms-section h2{
-  margin-bottom:10px;
-}
-
-.rooms-intro{
-  max-width:750px;
-  margin:0 auto 28px;
-  color:#555;
-  line-height:1.5;
-  font-size:1rem;
-}
-
-.rooms-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  max-width:1000px;
-  margin:auto;
-}
-
-.room-card{
-  background:#fff;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 6px 18px rgba(0,0,0,0.10);
-  text-align:center;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.room-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 10px 20px rgba(0,0,0,0.12);
-}
-
-.room-card img{
-  width:100%;
-  height:190px;
-  object-fit:cover;
-}
-
-.room-card-content{
-  padding:20px;
-}
-
-.room-card h3{
-  margin:0 0 10px;
-  font-size:1.3rem;
-}
-
-.room-card p{
-  margin:0 0 18px;
-  color:#555;
-  line-height:1.5;
-  font-size:0.95rem;
-}
-
-.rooms-btn{
-  display:inline-block;
-  background:#2e7d32;
-  color:#fff;
-  padding:11px 20px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
-  transition:background 0.2s ease;
-}
-
-.rooms-btn:hover{
-  background:#256b29;
-}
-  
-/* BLOG */
-
-#blog-posts{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-max-width:900px;
-margin:auto;
-}
-
-.blog-card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 6px 18px rgba(0,0,0,0.10);
-text-align:left;
-}
-
-.journal-link{
-display:inline-block;
-margin-top:25px;
-background:#2e7d32;
-color:white;
-padding:10px 20px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-}
-
-/* ABOUT */
-
-.about-banner{
-background:linear-gradient(135deg,#2e472e,#1e2b1e);
-color:#f4f4f4;
-padding:3rem 1.5rem;
-border-radius:12px;
-margin:2rem auto;
-max-width:1000px;
-}
-
-/* FOOTER */
-
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#fff;
-display:flex;
-justify-content:space-around;
-box-shadow:0 -4px 16px rgba(0,0,0,0.10);
-padding:8px 0 calc(8px + env(safe-area-inset-bottom));
-z-index:1000;
-backdrop-filter:blur(10px);
--webkit-backdrop-filter:blur(10px);
-transform:translateZ(0);
-will-change:transform;
-backface-visibility:hidden;
-}
-
-.bottom-nav a{
-text-decoration:none;
-color:#333;
-font-size:0.8rem;
-display:flex;
-flex-direction:column;
-align-items:center;
-}
-
-/* FAB - BOOK */
-.fab{
-position:fixed;
-bottom:calc(72px + env(safe-area-inset-bottom));
-right:18px;
-background:#2e7d32;
-color:white;
-width:62px;
-height:62px;
-border-radius:50%;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:1px;
-font-size:1.35rem;
-box-shadow:0 8px 20px rgba(0,0,0,0.22);
-text-decoration:none;
-transform:translateZ(0);
-will-change:transform;
-backface-visibility:hidden;
-z-index:1100;
-transition:transform 0.2s ease, box-shadow 0.2s ease;
-}
-.fab:active{
-transform:scale(0.94);
-}
-.fab:hover{
-transform:translateY(-2px);
-box-shadow:0 10px 24px rgba(0,0,0,0.26);
-}
-.fab-icon{
-line-height:1;
-}
-.fab-label{
-font-size:0.62rem;
-font-weight:700;
-line-height:1;
-letter-spacing:0.02em;
-}
-
-/* INSTALL CARD */
-
-.install-card{
-position:fixed;
-bottom:90px;
-left:50%;
-transform:translateX(-50%);
-width:calc(100% - 30px);
-max-width:360px;
-background:white;
-border-radius:18px;
-padding:16px;
-box-shadow:0 14px 34px rgba(0,0,0,0.22);
-border:1px solid rgba(0,0,0,0.05);
-display:flex;
-gap:14px;
-align-items:center;
-z-index:9999;
-animation:slideUp 0.35s ease;
-}
-
-.install-icon{
-width:64px;
-height:64px;
-border-radius:14px;
-flex-shrink:0;
-}
-
-.install-content h3{
-margin:0 0 6px;
-font-size:1rem;
-}
-
-.install-content p{
-margin:0 0 12px;
-font-size:0.88rem;
-line-height:1.4;
-color:#555;
-}
-
-.install-btn{
-background:#2e7d32;
-color:white;
-border:none;
-padding:10px 16px;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-width:100%;
-}
-
-.install-close{
-position:absolute;
-top:10px;
-right:10px;
-background:none;
-border:none;
-font-size:1rem;
-cursor:pointer;
-color:#888;
-}
-
-@media (prefers-reduced-motion:reduce){
-.event-card,.pub-tile,.fab{transition:none!important;}
-}
-
-@keyframes slideUp{
-from{
-opacity:0;
-transform:translate(-50%,20px);
-}
-to{
-opacity:1;
-transform:translate(-50%,0);
-}
-}
-  
+:root{--green:#2d5016;--green2:#3d6b20;--cream:#f6f2e8;--ink:#263026;--muted:#667064;--gold:#b08a45;--card:#fff;--shadow:0 8px 24px rgba(25,40,20,.10);--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,sans-serif;background:#f4f5f2;color:var(--ink);opacity:0;transition:opacity .3s ease;padding-top:env(safe-area-inset-top);padding-bottom:calc(86px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}body.loaded{opacity:1}
+a{color:inherit}button,a{touch-action:manipulation}
+#app-splash{position:fixed;inset:0;z-index:20000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#17350e,#3d6b20);color:#fff;text-align:center;transition:opacity .45s ease,visibility .45s ease}.splash-content{display:flex;flex-direction:column;align-items:center;animation:splashFadeIn .45s ease}.splash-logo{width:88px;height:88px;object-fit:contain;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.25);margin-bottom:18px}.splash-title{font-size:1.8rem;font-weight:700;letter-spacing:.08em;margin:0}.splash-subtitle{font-size:.85rem;margin-top:8px;opacity:.9;letter-spacing:.08em}.splash-loader{width:42px;height:3px;margin-top:24px;border-radius:99px;background:rgba(255,255,255,.3);overflow:hidden}.splash-loader:after{content:"";display:block;width:45%;height:100%;background:#fff;border-radius:99px;animation:splashLoad .8s ease-in-out infinite}.hidden{opacity:0!important;visibility:hidden!important;pointer-events:none!important}@keyframes splashFadeIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}@keyframes splashLoad{0%{transform:translateX(-100%)}100%{transform:translateX(230%)}}
+header{position:relative;min-height:430px;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.72)),url('andy-newton-Od9W1_kbX8s-unsplash.jpg') center/cover no-repeat;color:#fff;text-align:center;padding:80px 20px 48px}header .hero-inner{max-width:900px}header h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05;margin:0;text-shadow:2px 2px 8px rgba(0,0,0,.55)}header h2{font-size:clamp(1.1rem,2.6vw,1.55rem);margin:14px 0 8px;font-weight:500}header h3{font-size:1rem;margin:0;opacity:.95;font-weight:600}.hero-kicker{display:inline-block;margin-bottom:12px;padding:7px 12px;border:1px solid rgba(255,255,255,.55);border-radius:999px;background:rgba(0,0,0,.22);font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.global-notice{background:linear-gradient(135deg,#7f1936,#a72d4d);color:#fff;text-align:center;padding:15px 20px;font-size:1rem;font-weight:700}.global-notice span{display:inline-block;margin:3px 7px 0;font-weight:400;font-size:.9rem}
+section{padding:42px 20px}.section-inner{max-width:1200px;margin:auto}.section-heading{text-align:center;margin:0 0 24px}.section-heading h2{font-size:clamp(1.8rem,4vw,2.3rem);margin:0 0 8px}.section-heading p{max-width:720px;margin:0 auto;color:var(--muted);line-height:1.55}
+.actions-section{padding-top:30px;background:var(--cream)}.actions-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;max-width:1200px;margin:auto}.action-card{min-height:128px;padding:20px 12px;background:#fff;border:1px solid rgba(45,80,22,.10);border-radius:16px;box-shadow:0 5px 16px rgba(25,40,20,.08);text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:transform .2s,box-shadow .2s}.action-card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(25,40,20,.13)}.action-icon{font-size:2rem;line-height:1;margin-bottom:11px}.action-card strong{font-size:.98rem}.action-card small{display:block;margin-top:5px;color:var(--muted);font-size:.78rem;line-height:1.3}
+.feature-section{background:#f4f5f2}.events-scroll{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 4px 20px}.events-scroll::-webkit-scrollbar{display:none}.event-card{flex:0 0 270px;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);scroll-snap-align:start;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}.event-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(25,40,20,.14)}.event-card img{width:100%;height:165px;object-fit:cover}.event-card-body{padding:18px;display:flex;flex-direction:column;flex:1}.event-card h3{margin:0 0 8px;font-size:1.18rem}.event-card p{margin:0 0 15px;color:#4e584f;line-height:1.5;font-size:.94rem}.event-card .btn{margin-top:auto;display:inline-block;background:var(--green);color:#fff;padding:11px 14px;border-radius:9px;text-decoration:none;font-weight:700;text-align:center}.event-card .btn:hover{background:var(--green2)}
+.pubs-section{background:#fff}.pubs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.pub-tile{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;display:flex;flex-direction:column;border:1px solid rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s}.pub-tile:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(25,40,20,.14)}.pub-tile img{width:100%;height:185px;object-fit:cover}.pub-tile .pub-copy{padding:15px 16px 17px}.pub-tile strong{font-size:1.05rem}.pub-tile small{display:block;color:var(--muted);margin-top:5px}
+.utility-row{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:18px}.utility-card{min-height:120px;border-radius:16px;padding:24px;background:linear-gradient(135deg,#eef3ea,#fff);display:flex;align-items:center;gap:18px;text-decoration:none;border:1px solid rgba(45,80,22,.10);box-shadow:var(--shadow)}.utility-card .icon{font-size:2.2rem}.utility-card strong{font-size:1.1rem}.utility-card p{margin:5px 0 0;color:var(--muted);font-size:.9rem}
+.rooms-section{background:#eef3ee}.rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:auto}.room-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);text-align:center}.room-card img{width:100%;height:195px;object-fit:cover}.room-card-content{padding:20px}.room-card h3{margin:0 0 9px;font-size:1.25rem}.room-card p{margin:0 0 18px;color:#555;line-height:1.5;font-size:.94rem}.rooms-btn{display:inline-block;background:var(--green);color:#fff;padding:11px 18px;border-radius:9px;text-decoration:none;font-weight:700}
+.journal-section{background:#fff}.journal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1050px;margin:auto}.blog-card{background:#f7f8f5;border-radius:16px;padding:22px;text-align:left;border:1px solid rgba(0,0,0,.05);box-shadow:var(--shadow)}.blog-card h3{margin:0 0 8px;font-size:1.15rem}.blog-card .blog-date{font-size:.78rem;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.04em}.blog-card p{color:#555;line-height:1.5;margin:12px 0}.blog-card a{font-weight:700;color:var(--green);text-decoration:none}.journal-link{display:inline-block;margin-top:26px;background:var(--green);color:#fff;padding:11px 20px;border-radius:9px;text-decoration:none;font-weight:700}.journal-wrap{text-align:center}
+.about-banner{background:linear-gradient(135deg,#2e472e,#1e2b1e);color:#f4f4f4;padding:46px 25px;border-radius:18px;margin:0 auto;max-width:1200px;text-align:center}.about-banner p{max-width:720px;margin:0 auto 20px;line-height:1.6}.about-banner .journal-link{background:#fff;color:var(--green);margin-top:0}
+footer{background:#222;color:#fff;text-align:center;padding:24px 20px;margin-top:0;font-size:.9rem}.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:10px}.footer-links a{color:#fff;text-decoration:none;opacity:.9}
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:rgba(255,255,255,.96);display:flex;justify-content:space-around;box-shadow:0 -4px 16px rgba(0,0,0,.10);padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:1000;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.bottom-nav a{text-decoration:none;color:#333;font-size:.76rem;display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:600;min-width:64px}.bottom-nav a span:first-child{font-size:1.3rem}.fab{position:fixed;bottom:calc(76px + env(safe-area-inset-bottom));right:18px;background:var(--green);color:#fff;width:64px;height:64px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:1.35rem;box-shadow:0 8px 20px rgba(0,0,0,.22);text-decoration:none;z-index:1100}.fab-label{font-size:.62rem;font-weight:700}
+.install-card{position:fixed;bottom:92px;left:50%;transform:translateX(-50%);width:calc(100% - 30px);max-width:380px;background:#fff;border-radius:18px;padding:16px;box-shadow:0 14px 34px rgba(0,0,0,.22);border:1px solid rgba(0,0,0,.05);display:flex;gap:14px;align-items:center;z-index:9999}.install-icon{width:64px;height:64px;border-radius:14px;flex-shrink:0}.install-content h3{margin:0 0 6px;font-size:1rem}.install-content p{margin:0 0 12px;font-size:.88rem;line-height:1.4;color:#555}.install-btn{background:var(--green);color:#fff;border:none;padding:10px 16px;border-radius:10px;font-weight:bold;cursor:pointer;width:100%}.install-close{position:absolute;top:10px;right:10px;background:none;border:none;font-size:1rem;cursor:pointer;color:#888}
+@media(max-width:1000px){.actions-grid{grid-template-columns:repeat(3,1fr)}.pubs-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){header{min-height:390px;padding-bottom:38px}.actions-grid{grid-template-columns:repeat(2,1fr);gap:12px}.action-card{min-height:112px}.pubs-grid{grid-template-columns:repeat(2,1fr)}.pub-tile img{height:150px}.rooms-grid,.journal-grid{grid-template-columns:1fr}.utility-row{grid-template-columns:1fr}section{padding:34px 16px}.global-notice span{display:block}.fab{right:14px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 </style>
-
-
 </head>
-
 <body>
-
-<!-- APP SPLASH -->
-<div id="app-splash" aria-hidden="true">
-  <div class="splash-content">
-    <img class="splash-logo" src="/countryinns-pwa/icons/icon-192x192.png" alt="">
-    <p class="splash-title">COUNTRY INNS</p>
-    <p class="splash-subtitle">THE NEW FOREST</p>
-    <div class="splash-loader" aria-hidden="true"></div>
-  </div>
-</div>
-
-<header>
-<h1>Your New Forest Pubs</h1>
-<h2>Great food • Great drinks • Great places</h2>
-<h3>8 Pubs • New Forest • Hampshire</h3>
-
-</header>
-
-<div class="global-notice">
-Christmas Time at Country Inns
-<span>Celebrate with great food & drinks across all Country Inns Pubs</span>
-<span><strong>1st Dec - 24th Dec</strong></span>
-</div>
-
-
-<section>
-    <h2>Featured at Every Pub</h2>
-
-    <div class="events-scroll">
-    <div class="event-card">
-    <img src="Christmas-2026.png" alt="Christmas at Your Local" loading="lazy">
-    <p><strong>
-    Join us this Christmas for festive menus, hearty roasts, seasonal specials, and a warm welcome. Make unforgettable memories with family and friends at your local Country Inns pub.
-    </strong></p>
-    <a href="booking.html" class="btn">🎅 Book Your Christmas Table Now!</a>
-  </div>
-
-<div class="event-card">
-<img src="Country Inns Voucher.jpg" alt="Gift Vouchers" loading="lazy">
-
-<h3>Gift Vouchers</h3>
-
-<p><strong>
-The perfect gift to enjoy all year round at any Country Inns pub.
-</strong></p>
-
-<a href="Voucher.html" class="btn">Learn More</a>
-
-</div>
-
-<div class="event-card">
-<img src="Seasonal Specials.png" alt="Seasonal Specials" loading="lazy">
-
-<h3>Seasonal Specials</h3>
-
-<p><strong>
-Menus inspired by the changing seasons of the New Forest.
-</strong></p>
-
-</div>
-
-<div class="event-card">
-<img src="Roast Pork.jpg" alt="Sunday Roast" loading="lazy">
-
-<h3>Sunday Roasts</h3>
-
-<p><strong>
-Traditional roasts with all the trimmings, every Sunday.
-</strong></p>
-
-</div>
-
-<div class="event-card">
-<img src="Dog Friendly.jpg" alt="Dog Friendly" loading="lazy">
-
-<h3>Dog Friendly</h3>
-
-<p><strong>
-Four-legged friends welcome at all our pubs.
-</strong></p>
-
-</div>
-
-<div class="event-card">
-<img src="Local Ales & Fine Wines.png" alt="Pouring Quality" loading="lazy">
-
-<h3>Pouring Quality</h3>
-
-<p><strong>
-Local ales and carefully chosen wines at every pub.
-</strong></p>
-
-</div>
-
-<div class="event-card">
-<img src="proudly local.png" alt="Proudly Local" loading="lazy">
-
-<h3>Proudly Local</h3>
-
-<p><strong>
-Supporting local producers across the New Forest.
-</strong></p>
-
-<a href="local.html" class="btn">Discover Our Partners</a>
-
-</div>
-</div>
-
-</section>
-<section>
-<h2>Explore Our Pub Family</h2>
-<div class="pubs-grid">
-<a class="pub-tile" href="boldforester.html?pub=BoldForester"><img src="bold-forester-images/Restaurant Images/boldforestermain.jpg"><span>The Bold Forester</span></a>
-
-<a class="pub-tile" href="lambinn.html?pub=LambInn"><img src="Lamb-Inn-images/LambInn.jpg"><span>The Lamb Inn</span></a>
-
-<a class="pub-tile" href="royaloak.html?pub=RoyalOak"><img src="Royal-Oak-images/The Royal Oak.jpeg"><span>The Royal Oak</span></a>
-
-<a class="pub-tile" href="woolpack.html?pub=Woolpack"><img src="Woolpack-images/Woolpack.jpg"><span>The Woolpack</span></a>
-
-<a class="pub-tile" href="fightingcocks.html?pub=FightingCocks"><img src="Fighting-Cocks-images/fighting-coq-scaled.jpg"><span>The Fighting Cocks</span></a>
-
-<a class="pub-tile" href="trustyservant.html?pub=TrustyServant"><img src="Trusty-Servant-images/Trusty.jpg"><span>The Trusty Servant</span></a>
-
-<a class="pub-tile" href="newforestinn.html?pub=NewForestInn"><img src="New-Forest-Inn-images/NFI.jpg"><span>The New Forest Inn</span></a>
-
-<a class="pub-tile" href="rockinghamarms.html?pub=Rockingham Arms"><img src="Rockingham-Arms-images/Rockingham-Arms-1.jpg"><span>The Rockingham Arms</span></a>
-
-<a class="pub-tile" href="feedback.html"><img src="Feedback.png" alt="Feedback" loading="lazy"><span>Give Us Your Feedback</span></a>
-
-<a class="pub-tile" href="find-us.html"><img src="find us.png" loading="lazy"><span>Find Our Nearest Pub</span></a>
-
-</div>
-</section>
-<section>
-
-<section class="rooms-section">
-
-  <h2>Stay with Us</h2>
-
-  <p class="rooms-intro">
-    <p><strong>Make your New Forest visit even more special with a stay at one of our
-    pubs offering comfortable accommodation, great food and a warm country
-    pub welcome.<p><strong>
-    <p><strong>Book direct and enjoy 10% off your stay — our little thank you for booking with us.<p><strong>
-  </p>
-
-  <div class="rooms-grid">
-
-    <!-- The New Forest Inn -->
-
-    <div class="room-card">
-      <img src="New-Forest-Inn-images/NFI.jpg"
-           alt="The New Forest Inn"
-           loading="lazy">
-
-      <div class="room-card-content">
-
-        <h3>The New Forest Inn</h3>
-
-        <p>
-          Stay in the heart of the New Forest, with great food, drinks
-          and comfortable accommodation right on your doorstep.
-        </p>
-
-        <a href="https://web-bookings.hotels.uk.com/#/booking/46267/items/availability?k=Pz3vpXoBrwIroy0WsnQ3AMu2JNDYyNjc%3D&r=1788463933007?pub=NewForestInn#rooms"
-           class="rooms-btn">
-          🛏️ Book a Room
-        </a>
-
-      </div>
-    </div>
-
-    <!-- The Trusty Servant Inn -->
-
-    <div class="room-card">
-      <img src="Trusty-Servant-images/Trusty.jpg"
-           alt="The Trusty Servant Inn"
-           loading="lazy">
-
-      <div class="room-card-content">
-
-        <h3>The Trusty Servant Inn</h3>
-
-        <p>
-          Enjoy a relaxing New Forest stay at this traditional country inn,
-          with great food, drinks and comfortable accommodation.
-        </p>
-
-        <a href="https://web-bookings.hotels.uk.com/#/booking/46270/items/availability?k=8NvS5v6pFtbqgO4xncljzOBc2NDYyNzA%3D&r=1788464084358&a=2&c=?pub=TrustyServant#rooms"
-           class="rooms-btn">
-          🛏️ Book a Room
-        </a>
-
-      </div>
-    </div>
-
-    <!-- The Fighting Cocks -->
-
-    <div class="room-card">
-      <img src="Fighting-Cocks-images/fighting-coq-scaled.jpg"
-           alt="The Fighting Cocks"
-           loading="lazy">
-
-      <div class="room-card-content">
-
-        <h3>The Fighting Cocks</h3>
-
-        <p>
-          Stay in the beautiful New Forest and enjoy a welcoming country pub,
-          great food and comfortable accommodation.
-        </p>
-
-        <a href="https://web-bookings.hotels.uk.com/#/booking/51730/items/availability?k=XbkHpDevv1inahpI6xTpMVzFxNTE3MzA%3D&r=1788464130858&a=2&u=1?pub=FightingCocks#rooms"
-           class="rooms-btn">
-          🛏️ Book a Room
-        </a>
-
-      </div>
-    </div>
-
-  </div>
-
-</section>
-  
-<h2>Latest Updates</h2>
-<div id="blog-posts"></div>
-<a class="journal-link" href="https://countryinnsnewforest.blogspot.com/">Read Latest Updates</a>
-</section>
-  <section class="about-banner"> 
-    <h2>About Country Inns</h2> 
-    <p>Welcoming pubs across the New Forest, serving great food & local produce.</p> 
-    <a href="about.html" class="journal-link">Read More</a> </section>  
-<footer>
-<p>© 2025 Country Inns. Proudly serving The New Forest.</p>
-</footer>
-
+<div id="app-splash" aria-hidden="true"><div class="splash-content"><img class="splash-logo" src="/countryinns-pwa/icons/icon-192x192.png" alt=""><p class="splash-title">COUNTRY INNS</p><p class="splash-subtitle">THE NEW FOREST</p><div class="splash-loader" aria-hidden="true"></div></div></div>
+<header><div class="hero-inner"><div class="hero-kicker">8 pubs • New Forest • Hampshire</div><h1>Your New Forest Pubs</h1><h2>Great food • Great drinks • Great places</h2><h3>Discover your local Country Inn</h3></div></header>
+<div class="global-notice">Christmas Time at Country Inns <span>Celebrate with great food &amp; drinks across all Country Inns pubs</span><span><strong>1st Dec - 24th Dec</strong></span></div>
+
+<section class="actions-section" id="actions"><div class="section-inner"><div class="section-heading"><h2>What would you like to do?</h2><p>Everything you need for your next visit, all in one place.</p></div><div class="actions-grid">
+<a class="action-card" href="booking.html"><span class="action-icon">🍽️</span><strong>Book a Table</strong><small>Reserve your next meal</small></a>
+<a class="action-card" href="find-us.html"><span class="action-icon">📍</span><strong>Find a Pub</strong><small>Discover your nearest</small></a>
+<a class="action-card" href="#whats-on"><span class="action-icon">🎉</span><strong>What's On</strong><small>Events &amp; promotions</small></a>
+<a class="action-card" href="#food-drink"><span class="action-icon">🍺</span><strong>Food &amp; Drink</strong><small>Menus &amp; seasonal specials</small></a>
+<a class="action-card" href="#stay"><span class="action-icon">🛏️</span><strong>Stay With Us</strong><small>New Forest accommodation</small></a>
+<a class="action-card" href="Voucher.html"><span class="action-icon">🎁</span><strong>Gift Vouchers</strong><small>A gift for any occasion</small></a>
+<a class="action-card" href="https://countryinnsnewforest.blogspot.com/"><span class="action-icon">📰</span><strong>Country Inns Journal</strong><small>Food • pubs • people • places</small></a>
+<a class="action-card" href="feedback.html"><span class="action-icon">💬</span><strong>Give Feedback</strong><small>Tell us what you think</small></a>
+</div></div></section>
+
+<section class="feature-section" id="whats-on"><div class="section-inner"><div class="section-heading"><h2>What's On at Country Inns</h2><p>Highlights and seasonal reasons to visit your local pub.</p></div><div class="events-scroll">
+<div class="event-card"><img src="Christmas-2026.png" alt="Christmas at Country Inns" loading="lazy"><div class="event-card-body"><h3>Christmas at Country Inns</h3><p>Join us for festive menus, hearty roasts, seasonal specials and a warm welcome this Christmas.</p><a href="booking.html" class="btn">🎅 Book Your Christmas Table</a></div></div>
+<div class="event-card"><img src="Country Inns Voucher.jpg" alt="Country Inns Gift Vouchers" loading="lazy"><div class="event-card-body"><h3>Gift Vouchers</h3><p>The perfect gift to enjoy all year round at any Country Inns pub.</p><a href="Voucher.html" class="btn">Learn More</a></div></div>
+<div class="event-card"><img src="Seasonal Specials.png" alt="Seasonal Specials" loading="lazy"><div class="event-card-body"><h3>Seasonal Specials</h3><p>Menus inspired by the changing seasons of the New Forest.</p><a href="#food-drink" class="btn">Explore Food &amp; Drink</a></div></div>
+<div class="event-card"><img src="Roast Pork.jpg" alt="Sunday Roast" loading="lazy"><div class="event-card-body"><h3>Sunday Roasts</h3><p>Traditional roasts with all the trimmings, every Sunday.</p><a href="booking.html" class="btn">Book Sunday Lunch</a></div></div>
+<div class="event-card"><img src="Dog Friendly.jpg" alt="Dog Friendly Country Inns" loading="lazy"><div class="event-card-body"><h3>Dog Friendly</h3><p>Four-legged friends are welcome at all our pubs.</p><a href="#pubs" class="btn">Find Your Pub</a></div></div>
+<div class="event-card"><img src="Local Ales & Fine Wines.png" alt="Local ales and fine wines" loading="lazy"><div class="event-card-body"><h3>Pouring Quality</h3><p>Local ales and carefully chosen wines at every pub.</p><a href="#food-drink" class="btn">Food &amp; Drink</a></div></div>
+<div class="event-card"><img src="proudly local.png" alt="Proudly Local" loading="lazy"><div class="event-card-body"><h3>Proudly Local</h3><p>Supporting local producers across the New Forest.</p><a href="local.html" class="btn">Discover Our Partners</a></div></div>
+</div></div></section>
+
+<section class="pubs-section" id="pubs"><div class="section-inner"><div class="section-heading"><h2>Our Country Inns</h2><p>Eight welcoming pubs across the New Forest and Hampshire.</p></div><div class="pubs-grid">
+<a class="pub-tile" href="boldforester.html?pub=BoldForester"><img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester"><div class="pub-copy"><strong>The Bold Forester</strong><small>Marchwood</small></div></a>
+<a class="pub-tile" href="lambinn.html?pub=LambInn"><img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn"><div class="pub-copy"><strong>The Lamb Inn</strong><small>Nomansland</small></div></a>
+<a class="pub-tile" href="royaloak.html?pub=RoyalOak"><img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak"><div class="pub-copy"><strong>The Royal Oak</strong><small>North Gorley</small></div></a>
+<a class="pub-tile" href="woolpack.html?pub=Woolpack"><img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack"><div class="pub-copy"><strong>The Woolpack</strong><small>Totton</small></div></a>
+<a class="pub-tile" href="fightingcocks.html?pub=FightingCocks"><img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks"><div class="pub-copy"><strong>The Fighting Cocks</strong><small>Godshill</small></div></a>
+<a class="pub-tile" href="trustyservant.html?pub=TrustyServant"><img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant"><div class="pub-copy"><strong>The Trusty Servant</strong><small>Minstead</small></div></a>
+<a class="pub-tile" href="newforestinn.html?pub=NewForestInn"><img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn"><div class="pub-copy"><strong>The New Forest Inn</strong><small>Emery Down</small></div></a>
+<a class="pub-tile" href="rockinghamarms.html?pub=Rockingham%20Arms"><img src="Rockingham-Arms-images/Rockingham-Arms-1.jpg" alt="The Rockingham Arms"><div class="pub-copy"><strong>The Rockingham Arms</strong><small>West Wellow</small></div></a>
+</div><div class="utility-row"><a class="utility-card" href="find-us.html"><span class="icon">📍</span><div><strong>Find Our Nearest Pub</strong><p>Let the app help you discover the Country Inn closest to you.</p></div></a><a class="utility-card" href="feedback.html"><span class="icon">💬</span><div><strong>Give Us Your Feedback</strong><p>Tell us about your Country Inns experience.</p></div></a></div></div></section>
+
+<section id="food-drink" class="feature-section"><div class="section-inner"><div class="section-heading"><h2>Food &amp; Drink</h2><p>Good food, Sunday roasts, seasonal specials, local ales and carefully chosen wines.</p></div><div class="utility-row"><a class="utility-card" href="booking.html"><span class="icon">🍽️</span><div><strong>Explore &amp; Book</strong><p>Choose your pub, browse its menus and book your table.</p></div></a><a class="utility-card" href="local.html"><span class="icon">🌿</span><div><strong>Proudly Local</strong><p>Discover the local producers and partners behind Country Inns.</p></div></a></div></div></section>
+
+<section class="rooms-section" id="stay"><div class="section-inner"><div class="section-heading"><h2>Stay With Us</h2><p>Make your New Forest visit even more special with comfortable accommodation, great food and a warm country pub welcome. <strong>Book direct and enjoy 10% off your stay.</strong></p></div><div class="rooms-grid">
+<div class="room-card"><img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn" loading="lazy"><div class="room-card-content"><h3>The New Forest Inn</h3><p>Stay in the heart of the New Forest, with great food, drinks and comfortable accommodation.</p><a href="https://web-bookings.hotels.uk.com/#/booking/46267/items/availability?k=Pz3vpXoBrwIroy0WsnQ3AMu2JNDYyNjc%3D&r=1788463933007?pub=NewForestInn#rooms" class="rooms-btn">🛏️ Book a Room</a></div></div>
+<div class="room-card"><img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant Inn" loading="lazy"><div class="room-card-content"><h3>The Trusty Servant Inn</h3><p>Enjoy a relaxing New Forest stay at this traditional country inn.</p><a href="https://web-bookings.hotels.uk.com/#/booking/46270/items/availability?k=8NvS5v6pFtbqgO4xncljzOBc2NDYyNzA%3D&r=1788464084358&a=2&c=?pub=TrustyServant#rooms" class="rooms-btn">🛏️ Book a Room</a></div></div>
+<div class="room-card"><img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks" loading="lazy"><div class="room-card-content"><h3>The Fighting Cocks</h3><p>Stay in the beautiful New Forest and enjoy a welcoming country pub.</p><a href="https://web-bookings.hotels.uk.com/#/booking/51730/items/availability?k=XbkHpDevv1inahpI6xTpMVzFxNTE3MzA%3D&r=1788464130858&a=2&u=1?pub=FightingCocks#rooms" class="rooms-btn">🛏️ Book a Room</a></div></div>
+</div></div></section>
+
+<section class="journal-section" id="journal"><div class="section-inner"><div class="section-heading"><h2>From the Country Inns Journal</h2><p>Food • Pubs • People • Places • New Forest</p></div><div id="blog-posts" class="journal-grid"><div class="blog-card"><h3>Loading the latest stories…</h3><p>Discover the latest from Country Inns.</p></div></div><div class="journal-wrap"><a class="journal-link" href="https://countryinnsnewforest.blogspot.com/">Read the Country Inns Journal →</a></div></div></section>
+
+<section><div class="about-banner"><h2>About Country Inns</h2><p>Welcoming pubs across the New Forest, sharing a passion for great food, local produce and genuine hospitality.</p><a href="about.html" class="journal-link">Read More</a></div></section>
+<footer><div class="footer-links"><a href="about.html">About</a><a href="find-us.html">Find a Pub</a><a href="booking.html">Book</a><a href="feedback.html">Feedback</a><a href="https://countryinnsnewforest.blogspot.com/">Journal</a></div><p>© <span id="current-year">2026</span> Country Inns. Proudly serving the New Forest.</p></footer>
 <a href="booking.html" class="fab" aria-label="Book a Table"><span class="fab-icon">📅</span><span class="fab-label">Book</span></a>
+<nav class="bottom-nav" aria-label="App navigation"><a href="home.html"><span>🏠</span><span>Home</span></a><a href="#pubs"><span>🍴</span><span>Pubs</span></a><a href="#whats-on"><span>🎉</span><span>What's On</span></a><a href="booking.html"><span>📅</span><span>Book</span></a></nav>
 
-<nav class="bottom-nav">
-<a href="home.html">🏠<span>Home</span></a>
-<a href="find-us.html">📍<span>Pubs</span></a>
-<a href="booking.html">📅<span>Book</span></a>
-</nav>
-
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+ const y=document.getElementById("current-year"); if(y)y.textContent=new Date().getFullYear();
+ loadJournalPosts();
+});
+async function loadJournalPosts(){
+ const target=document.getElementById("blog-posts"); if(!target)return;
+ const feed="https://countryinnsnewforest.blogspot.com/feeds/posts/default?alt=json&max-results=3";
+ try{
+  const res=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent(feed));
+  if(!res.ok)throw new Error("Feed unavailable");
+  const data=await res.json();
+  const entries=data.feed?.entry||[];
+  if(!entries.length)throw new Error("No posts");
+  target.innerHTML=entries.slice(0,3).map(post=>{
+   const title=post.title?.$t||"Country Inns Journal";
+   const link=(post.link||[]).find(x=>x.rel==="alternate")?.href||"https://countryinnsnewforest.blogspot.com/";
+   const date=post.published?.$t?new Date(post.published.$t).toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}):"";
+   const html=post.content?.$t||post.summary?.$t||"";
+   const text=html.replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
+   return `<article class="blog-card"><div class="blog-date">${date}</div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text.slice(0,150))}${text.length>150?"…":""}</p><a href="${link}">Read Story →</a></article>`;
+  }).join("");
+ }catch(e){target.innerHTML=`<article class="blog-card"><h3>Country Inns Journal</h3><p>Discover food, pubs, people, places and the New Forest.</p><a href="https://countryinnsnewforest.blogspot.com/">Open the Journal →</a></article>`;}
+}
+function escapeHtml(str){return String(str).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+</script>
 <script>
 window.addEventListener("error", () => {
   document.body.classList.add("loaded");
@@ -1026,3 +337,5 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/countryinns-pwa/service-worker.js");
 }
 </script>
+</body>
+</html>
