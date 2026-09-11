@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -581,9 +582,6 @@ section{
   margin:auto
 }
 
-
-/* Main Journal card */
-
 .blog-card{
   background:#f7f8f5;
   border-radius:18px;
@@ -596,9 +594,7 @@ section{
   display:flex;
   flex-direction:column;
   min-height:100%;
-  transition:
-    transform .22s ease,
-    box-shadow .22s ease
+  transition:transform .22s ease,box-shadow .22s ease
 }
 
 .blog-card:hover{
@@ -606,24 +602,13 @@ section{
   box-shadow:0 14px 30px rgba(25,40,20,.15)
 }
 
-
-/* Journal image */
-
 .blog-image{
   width:100%;
   height:210px;
   object-fit:cover;
   display:block;
-  background:
-    linear-gradient(
-      135deg,
-      #dfe7d9,
-      #f3f5ef
-    )
+  background:linear-gradient(135deg,#dfe7d9,#f3f5ef)
 }
-
-
-/* Fallback when article has no image */
 
 .blog-image-placeholder{
   width:100%;
@@ -633,19 +618,11 @@ section{
   justify-content:center;
   text-align:center;
   padding:25px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #dfe7d9,
-      #f3f5ef
-    );
-
+  background:linear-gradient(135deg,#dfe7d9,#f3f5ef);
   color:var(--green);
   font-weight:700;
   font-size:1.05rem
 }
-
 
 .blog-content{
   padding:20px;
@@ -2146,21 +2123,43 @@ footer{
 
 <script>
 
+/* =========================================================
+   COUNTRY INNS PWA
+   MAIN JAVASCRIPT
+========================================================= */
 
-```html
+
 /* =========================
    JOURNAL FEED
 ========================= */
 
+document.addEventListener("DOMContentLoaded", function(){
+
+  const year =
+    document.getElementById("current-year");
+
+  if(year){
+
+    year.textContent =
+      new Date().getFullYear();
+
+  }
+
+  loadJournalPosts();
+
+});
+
+
 /*
- * Blogger JSONP feed
+ * Load the latest three Blogger posts.
  *
- * This avoids the AllOrigins proxy and uses Blogger's
- * own media$thumbnail field for the article image.
+ * IMPORTANT:
+ * We use Blogger's JSON-in-script feed rather
+ * than the AllOrigins proxy.
+ *
+ * Blogger also supplies media$thumbnail.url
+ * which gives us a reliable post image.
  */
-
-let journalFeedLoaded = false;
-
 
 function loadJournalPosts(){
 
@@ -2168,32 +2167,22 @@ function loadJournalPosts(){
     document.getElementById("blog-posts");
 
   if(!target){
+
     return;
+
   }
 
-
-  /*
-   * Prevent duplicate loading.
-   */
-
-  if(journalFeedLoaded){
-    return;
-  }
-
-  journalFeedLoaded = true;
-
-
-  /*
-   * Give the feed callback a unique name.
-   */
 
   const callbackName =
-    "countryInnsJournalCallback_" +
+    "countryInnsJournal_" +
     Date.now();
 
 
+  let script = null;
+
+
   /*
-   * Global callback used by Blogger JSONP.
+   * Blogger JSONP callback.
    */
 
   window[callbackName] =
@@ -2202,7 +2191,11 @@ function loadJournalPosts(){
       try{
 
         const entries =
-          data?.feed?.entry || [];
+          data &&
+          data.feed &&
+          data.feed.entry
+            ? data.feed.entry
+            : [];
 
 
         if(!entries.length){
@@ -2217,68 +2210,96 @@ function loadJournalPosts(){
         target.innerHTML =
           entries
             .slice(0,3)
-            .map(post => {
+            .map(function(post){
 
-
-              /* =========================
-                 TITLE
-              ========================= */
+              /*
+               * TITLE
+               */
 
               const title =
-                post.title?.$t
-                ||
-                "Country Inns Journal";
+                post.title &&
+                post.title.$t
+                  ? post.title.$t
+                  : "Country Inns Journal";
 
 
-              /* =========================
-                 POST LINK
-              ========================= */
+              /*
+               * LINK
+               */
+
+              const links =
+                post.link || [];
+
+
+              const alternate =
+                links.find(function(item){
+
+                  return item.rel === "alternate";
+
+                });
+
 
               const link =
-                (post.link || [])
-                  .find(
-                    item =>
-                      item.rel === "alternate"
-                  )
-                  ?.href
-                ||
-                "https://countryinnsnewforest.blogspot.com/";
+                alternate &&
+                alternate.href
+                  ? alternate.href
+                  : "https://countryinnsnewforest.blogspot.com/";
 
 
-              /* =========================
-                 DATE
-              ========================= */
+              /*
+               * DATE
+               */
 
-              const date =
-                post.published?.$t
-                  ? new Date(
-                      post.published.$t
-                    ).toLocaleDateString(
+              let date = "";
+
+
+              if(
+                post.published &&
+                post.published.$t
+              ){
+
+                const parsedDate =
+                  new Date(
+                    post.published.$t
+                  );
+
+
+                if(!isNaN(parsedDate.getTime())){
+
+                  date =
+                    parsedDate.toLocaleDateString(
                       "en-GB",
                       {
                         day:"numeric",
                         month:"long",
                         year:"numeric"
                       }
-                    )
-                  : "";
+                    );
+
+                }
+
+              }
 
 
-              /* =========================
-                 ARTICLE CONTENT
-              ========================= */
+              /*
+               * ARTICLE HTML
+               */
 
               const html =
-                post.content?.$t
-                ||
-                post.summary?.$t
-                ||
-                "";
+                post.content &&
+                post.content.$t
+                  ? post.content.$t
+                  : (
+                      post.summary &&
+                      post.summary.$t
+                        ? post.summary.$t
+                        : ""
+                    );
 
 
-              /* =========================
-                 ARTICLE IMAGE
-              ========================= */
+              /*
+               * IMAGE
+               */
 
               const image =
                 getBloggerImage(
@@ -2287,9 +2308,9 @@ function loadJournalPosts(){
                 );
 
 
-              /* =========================
-                 CLEAN EXCERPT
-              ========================= */
+              /*
+               * EXCERPT
+               */
 
               const text =
                 html
@@ -2310,10 +2331,6 @@ function loadJournalPosts(){
                     " "
                   )
                   .replace(
-                    /&amp;/gi,
-                    "&"
-                  )
-                  .replace(
                     /\s+/g,
                     " "
                   )
@@ -2326,9 +2343,9 @@ function loadJournalPosts(){
                   : text;
 
 
-              /* =========================
-                 IMAGE MARKUP
-              ========================= */
+              /*
+               * IMAGE HTML
+               */
 
               let imageMarkup;
 
@@ -2343,7 +2360,7 @@ function loadJournalPosts(){
                     alt="${escapeAttr(title)}"
                     loading="lazy"
                     decoding="async"
-                    onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex';"
+                    onerror="journalImageFailed(this)"
                   >
 
                   <div
@@ -2368,9 +2385,9 @@ function loadJournalPosts(){
               }
 
 
-              /* =========================
-                 COMPLETE CARD
-              ========================= */
+              /*
+               * WHOLE CARD IS CLICKABLE
+               */
 
               return `
 
@@ -2410,29 +2427,31 @@ function loadJournalPosts(){
             .join("");
 
 
-      /*
-       * Remove the JSONP script after it has loaded.
-       */
+      }catch(error){
+
+        console.log(
+          "Country Inns Journal error:",
+          error
+        );
+
+
+        showJournalFallback();
+
+      }
+
 
       cleanup();
 
-
-    };// end callback
+    };
 
 
   /*
-   * Load Blogger's JSONP feed.
+   * Blogger JSONP URL.
    *
-   * IMPORTANT:
-   * We deliberately use json-in-script here rather
-   * than the AllOrigins proxy.
+   * No AllOrigins proxy is required.
    */
 
-  const script =
-    document.createElement("script");
-
-
-  script.src =
+  const feedUrl =
     "https://countryinnsnewforest.blogspot.com/feeds/posts/default" +
     "?alt=json-in-script" +
     "&max-results=3" +
@@ -2440,54 +2459,41 @@ function loadJournalPosts(){
     encodeURIComponent(callbackName);
 
 
-  script.async = true;
+  script =
+    document.createElement("script");
+
+
+  script.src =
+    feedUrl;
+
+
+  script.async =
+    true;
 
 
   script.onerror =
     function(){
 
-      target.innerHTML = `
+      console.log(
+        "Country Inns Journal feed could not be loaded."
+      );
 
-        <a
-          class="blog-card"
-          href="https://countryinnsnewforest.blogspot.com/"
-        >
 
-          <div class="blog-image-placeholder">
-            Country Inns Journal
-          </div>
+      showJournalFallback();
 
-          <div class="blog-content">
-
-            <h3>
-              Country Inns Journal
-            </h3>
-
-            <p>
-              Discover food, pubs, people, places
-              and the New Forest.
-            </p>
-
-            <span class="blog-read">
-              Open the Journal →
-            </span>
-
-          </div>
-
-        </a>
-
-      `;
 
       cleanup();
 
     };
 
 
-  document.head.appendChild(script);
+  document.head.appendChild(
+    script
+  );
 
 
   /*
-   * Clean up global callback and script.
+   * Clean up JSONP script.
    */
 
   function cleanup(){
@@ -2503,7 +2509,11 @@ function loadJournalPosts(){
 
     }
 
-    if(script.parentNode){
+
+    if(
+      script &&
+      script.parentNode
+    ){
 
       script.parentNode.removeChild(
         script
@@ -2512,6 +2522,7 @@ function loadJournalPosts(){
     }
 
   }
+
 
 }
 
@@ -2527,19 +2538,17 @@ function getBloggerImage(
 
   /*
    * -------------------------------------------------
-   * 1. FIRST CHOICE:
-   * Blogger's own media$thumbnail
+   * FIRST CHOICE
+   * Blogger's official thumbnail field.
    * -------------------------------------------------
-   *
-   * This is normally the most reliable image because
-   * Blogger explicitly exposes the post thumbnail
-   * in the JSON feed.
    */
 
   let image =
-    post?.media$thumbnail?.url
-    ||
-    "";
+    post &&
+    post.media$thumbnail &&
+    post.media$thumbnail.url
+      ? post.media$thumbnail.url
+      : "";
 
 
   if(image){
@@ -2553,8 +2562,8 @@ function getBloggerImage(
 
   /*
    * -------------------------------------------------
-   * 2. FALLBACK:
-   * Search the actual article HTML.
+   * SECOND CHOICE
+   * Search article HTML.
    * -------------------------------------------------
    */
 
@@ -2590,8 +2599,7 @@ function getBloggerImage(
 
 
     /*
-     * Blogger / lazy-loading image
-     * attributes.
+     * Check all common image attributes.
      */
 
     image =
@@ -2607,7 +2615,7 @@ function getBloggerImage(
 
 
     /*
-     * If src isn't available, try srcset.
+     * Check srcset if necessary.
      */
 
     if(!image){
@@ -2625,10 +2633,11 @@ function getBloggerImage(
         const first =
           srcset
             .split(",")
-            .map(
-              item =>
-                item.trim()
-            )
+            .map(function(item){
+
+              return item.trim();
+
+            })
             .filter(Boolean)[0];
 
 
@@ -2646,7 +2655,7 @@ function getBloggerImage(
 
 
     /*
-     * Handle protocol-relative URLs.
+     * Protocol-relative URL.
      */
 
     if(
@@ -2667,9 +2676,10 @@ function getBloggerImage(
   }catch(error){
 
     console.log(
-      "Journal image extraction error:",
+      "Blogger image extraction error:",
       error
     );
+
 
     return "";
 
@@ -2679,7 +2689,7 @@ function getBloggerImage(
 
 
 /* =========================
-   IMPROVE BLOGGER IMAGE URL
+   BLOGGER IMAGE URL
 ========================= */
 
 function improveBloggerImageUrl(
@@ -2694,7 +2704,7 @@ function improveBloggerImageUrl(
 
 
   /*
-   * Make protocol-relative URLs HTTPS.
+   * Convert protocol-relative URL.
    */
 
   if(
@@ -2708,29 +2718,18 @@ function improveBloggerImageUrl(
 
 
   /*
-   * Blogger commonly supplies the
-   * thumbnail at /s72-c/.
+   * Blogger thumbnail sizes such as:
    *
-   * Replace it with a larger version
-   * so the Journal card doesn't use
-   * a tiny 72px image.
+   * /s72-c/
+   * /s320/
+   * /s400/
+   *
+   * are replaced with a larger image size.
    */
 
   url =
     url.replace(
-      /\/s\d+(?:-c)?(?=\/|$)/,
-      "/w800"
-    );
-
-
-  /*
-   * Older Blogger URLs can also contain
-   * /s72/ rather than /s72-c/.
-   */
-
-  url =
-    url.replace(
-      /\/s\d+(?=\/|$)/,
+      /\/s\d+(?:-[^/]+)?(?=\/|$)/,
       "/w800"
     );
 
@@ -2741,33 +2740,130 @@ function improveBloggerImageUrl(
 
 
 /* =========================
+   IMAGE ERROR HANDLER
+========================= */
+
+function journalImageFailed(
+  image
+){
+
+  if(!image){
+
+    return;
+
+  }
+
+
+  image.onerror =
+    null;
+
+
+  image.style.display =
+    "none";
+
+
+  const fallback =
+    image.nextElementSibling;
+
+
+  if(fallback){
+
+    fallback.style.display =
+      "flex";
+
+  }
+
+}
+
+
+/* =========================
+   JOURNAL FALLBACK
+========================= */
+
+function showJournalFallback(){
+
+  const target =
+    document.getElementById(
+      "blog-posts"
+    );
+
+
+  if(!target){
+
+    return;
+
+  }
+
+
+  target.innerHTML = `
+
+    <a
+      class="blog-card"
+      href="https://countryinnsnewforest.blogspot.com/"
+    >
+
+      <div class="blog-image-placeholder">
+        Country Inns Journal
+      </div>
+
+      <div class="blog-content">
+
+        <h3>
+          Country Inns Journal
+        </h3>
+
+        <p>
+          Discover food, pubs, people,
+          places and the New Forest.
+        </p>
+
+        <span class="blog-read">
+          Open the Journal →
+        </span>
+
+      </div>
+
+    </a>
+
+  `;
+
+}
+
+
+/* =========================
    HTML ESCAPING
 ========================= */
 
-function escapeHtml(str){
+function escapeHtml(
+  str
+){
 
   return String(str).replace(
     /[&<>'"]/g,
-    c =>
-      ({
+    function(c){
+
+      return {
         "&":"&amp;",
         "<":"&lt;",
         ">":"&gt;",
         "'":"&#39;",
         '"':"&quot;"
-      }[c])
+
+      }[c];
+
+    }
   );
 
 }
 
 
-function escapeAttr(str){
+function escapeAttr(
+  str
+){
 
   return escapeHtml(str);
 
 }
-```
-
 
 
 /* =========================
@@ -2776,7 +2872,7 @@ function escapeAttr(str){
 
 window.addEventListener(
   "error",
-  () => {
+  function(){
 
     document.body.classList.add(
       "loaded"
@@ -2794,7 +2890,9 @@ const API_URL =
   "https://script.google.com/macros/s/AKfycbz15g-BlmSiJFbsgFheceEEqz44izf-itYNQTefpg6z7eP_J3ufDTlsKhm5id0DG6Bg/exec";
 
 
-function getParam(name){
+function getParam(
+  name
+){
 
   return new URLSearchParams(
     window.location.search
@@ -2805,7 +2903,10 @@ function getParam(name){
 
 const Analytics = {
 
-  log(event,data={}){
+  log(
+    event,
+    data = {}
+  ){
 
     try{
 
@@ -2852,7 +2953,7 @@ const Analytics = {
 
         }
       ).catch(
-        () => {}
+        function(){}
       );
 
 
@@ -2876,7 +2977,7 @@ const Analytics = {
 
 document.addEventListener(
   "DOMContentLoaded",
-  () => {
+  function(){
 
     document.body.classList.add(
       "loaded"
@@ -2889,7 +2990,7 @@ document.addEventListener(
      */
 
     setTimeout(
-      () => {
+      function(){
 
         document
           .getElementById(
@@ -2905,10 +3006,13 @@ document.addEventListener(
 
 
     setTimeout(
-      () =>
+      function(){
+
         Analytics.log(
           "app_open"
-        ),
+        );
+
+      },
       100
     );
 
@@ -2934,11 +3038,11 @@ function setupTracking(){
       'a[href*="booking"]'
     )
     .forEach(
-      btn => {
+      function(btn){
 
         btn.addEventListener(
           "click",
-          () => {
+          function(){
 
             Analytics.log(
               "booking_click",
@@ -2962,11 +3066,11 @@ function setupTracking(){
       ".pub-tile"
     )
     .forEach(
-      pub => {
+      function(pub){
 
         pub.addEventListener(
           "click",
-          () => {
+          function(){
 
             Analytics.log(
               "pub_visit",
@@ -2998,7 +3102,6 @@ let deferredPrompt;
 
 
 function setupInstallPrompt(){
-
 
   /*
    * Don't show again if dismissed.
@@ -3052,16 +3155,20 @@ function setupInstallPrompt(){
   );
 
 
-  let hasInteracted = false;
+  let hasInteracted =
+    false;
 
-  let installShown = false;
 
-  let interactionTimer = null;
+  let installShown =
+    false;
+
+
+  let interactionTimer =
+    null;
 
 
   const showInstallPrompt =
-    () => {
-
+    function(){
 
       if(
         installShown
@@ -3085,7 +3192,8 @@ function setupInstallPrompt(){
       }
 
 
-      installShown = true;
+      installShown =
+        true;
 
 
       if(
@@ -3135,13 +3243,11 @@ function setupInstallPrompt(){
             ✕
           </button>
 
-
           <img
             src="/countryinns-pwa/icons/icon-192x192.png"
             alt="Country Inns"
             class="install-icon"
           >
-
 
           <div class="install-content">
 
@@ -3178,8 +3284,7 @@ function setupInstallPrompt(){
           "installBtn"
         )
         .onclick =
-        async () => {
-
+        async function(){
 
           Analytics.log(
             "install_click"
@@ -3189,14 +3294,12 @@ function setupInstallPrompt(){
           deferredPrompt.prompt();
 
 
-          const {
-            outcome
-          } =
+          const choice =
             await deferredPrompt.userChoice;
 
 
           if(
-            outcome ===
+            choice.outcome ===
             "accepted"
           ){
 
@@ -3216,9 +3319,10 @@ function setupInstallPrompt(){
           "closeInstall"
         )
         .onclick =
-        () => {
+        function(){
 
           card.remove();
+
 
           localStorage.setItem(
             "installDismissed",
@@ -3236,15 +3340,16 @@ function setupInstallPrompt(){
 
   window.addEventListener(
     "beforeinstallprompt",
-    e => {
+    function(e){
 
       e.preventDefault();
 
-      deferredPrompt = e;
+      deferredPrompt =
+        e;
 
 
       /*
-       * On the second page visit,
+       * On second visit,
        * allow the prompt after a short delay.
        */
 
@@ -3253,7 +3358,7 @@ function setupInstallPrompt(){
       ){
 
         setTimeout(
-          () => {
+          function(){
 
             showInstallPrompt();
 
@@ -3272,8 +3377,7 @@ function setupInstallPrompt(){
    */
 
   const registerInteraction =
-    () => {
-
+    function(){
 
       if(
         hasInteracted
@@ -3284,7 +3388,8 @@ function setupInstallPrompt(){
       }
 
 
-      hasInteracted = true;
+      hasInteracted =
+        true;
 
 
       /*
@@ -3294,7 +3399,7 @@ function setupInstallPrompt(){
 
       interactionTimer =
         setTimeout(
-          () => {
+          function(){
 
             showInstallPrompt();
 
@@ -3310,7 +3415,7 @@ function setupInstallPrompt(){
         "scroll"
       ]
       .forEach(
-        eventName => {
+        function(eventName){
 
           window.removeEventListener(
             eventName,
@@ -3333,7 +3438,7 @@ function setupInstallPrompt(){
     "scroll"
   ]
   .forEach(
-    eventName => {
+    function(eventName){
 
       window.addEventListener(
         eventName,
@@ -3360,11 +3465,11 @@ function setupPrefetch(){
       ".pub-tile"
     )
     .forEach(
-      el => {
+      function(el){
 
         el.addEventListener(
           "pointerenter",
-          () => {
+          function(){
 
             fetch(
               el.href
@@ -3376,7 +3481,7 @@ function setupPrefetch(){
 
         el.addEventListener(
           "touchstart",
-          () => {
+          function(){
 
             fetch(
               el.href
