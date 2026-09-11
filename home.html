@@ -2147,28 +2147,22 @@ footer{
 <script>
 
 
+```html
 /* =========================
    JOURNAL FEED
 ========================= */
 
-document.addEventListener("DOMContentLoaded",()=>{
+/*
+ * Blogger JSONP feed
+ *
+ * This avoids the AllOrigins proxy and uses Blogger's
+ * own media$thumbnail field for the article image.
+ */
 
-  const y =
-    document.getElementById("current-year");
-
-  if(y){
-
-    y.textContent =
-      new Date().getFullYear();
-
-  }
-
-  loadJournalPosts();
-
-});
+let journalFeedLoaded = false;
 
 
-async function loadJournalPosts(){
+function loadJournalPosts(){
 
   const target =
     document.getElementById("blog-posts");
@@ -2178,237 +2172,344 @@ async function loadJournalPosts(){
   }
 
 
-  const feed =
-    "https://countryinnsnewforest.blogspot.com/feeds/posts/default?alt=json&max-results=3";
+  /*
+   * Prevent duplicate loading.
+   */
+
+  if(journalFeedLoaded){
+    return;
+  }
+
+  journalFeedLoaded = true;
 
 
-  try{
+  /*
+   * Give the feed callback a unique name.
+   */
 
-    const res =
-      await fetch(
-        "https://api.allorigins.win/raw?url="
-        +
-        encodeURIComponent(feed)
-      );
-
-
-    if(!res.ok){
-
-      throw new Error(
-        "Feed unavailable"
-      );
-
-    }
+  const callbackName =
+    "countryInnsJournalCallback_" +
+    Date.now();
 
 
-    const data =
-      await res.json();
+  /*
+   * Global callback used by Blogger JSONP.
+   */
+
+  window[callbackName] =
+    function(data){
+
+      try{
+
+        const entries =
+          data?.feed?.entry || [];
 
 
-    const entries =
-      data.feed?.entry || [];
+        if(!entries.length){
+
+          throw new Error(
+            "No Journal posts found"
+          );
+
+        }
 
 
-    if(!entries.length){
-
-      throw new Error(
-        "No posts"
-      );
-
-    }
+        target.innerHTML =
+          entries
+            .slice(0,3)
+            .map(post => {
 
 
-    target.innerHTML =
-      entries
-        .slice(0,3)
-        .map(post => {
+              /* =========================
+                 TITLE
+              ========================= */
+
+              const title =
+                post.title?.$t
+                ||
+                "Country Inns Journal";
 
 
-          const title =
-            post.title?.$t
-            ||
-            "Country Inns Journal";
+              /* =========================
+                 POST LINK
+              ========================= */
+
+              const link =
+                (post.link || [])
+                  .find(
+                    item =>
+                      item.rel === "alternate"
+                  )
+                  ?.href
+                ||
+                "https://countryinnsnewforest.blogspot.com/";
 
 
-          const link =
-            (post.link || [])
-              .find(
-                x =>
-                  x.rel === "alternate"
-              )
-              ?.href
-            ||
-            "https://countryinnsnewforest.blogspot.com/";
+              /* =========================
+                 DATE
+              ========================= */
+
+              const date =
+                post.published?.$t
+                  ? new Date(
+                      post.published.$t
+                    ).toLocaleDateString(
+                      "en-GB",
+                      {
+                        day:"numeric",
+                        month:"long",
+                        year:"numeric"
+                      }
+                    )
+                  : "";
 
 
-          const date =
-            post.published?.$t
-              ? new Date(
-                  post.published.$t
-                ).toLocaleDateString(
-                  "en-GB",
-                  {
-                    day:"numeric",
-                    month:"long",
-                    year:"numeric"
-                  }
-                )
-              : "";
+              /* =========================
+                 ARTICLE CONTENT
+              ========================= */
+
+              const html =
+                post.content?.$t
+                ||
+                post.summary?.$t
+                ||
+                "";
 
 
-          const html =
-            post.content?.$t
-            ||
-            post.summary?.$t
-            ||
-            "";
+              /* =========================
+                 ARTICLE IMAGE
+              ========================= */
+
+              const image =
+                getBloggerImage(
+                  post,
+                  html
+                );
 
 
-          /*
-           * Extract the first image
-           * from the Blogger article.
-           */
+              /* =========================
+                 CLEAN EXCERPT
+              ========================= */
 
-          const image =
-            extractFirstImage(html);
-
-
-          /*
-           * Create clean article text
-           * for the card excerpt.
-           */
-
-          const text =
-            html
-              .replace(
-                /<script[\s\S]*?<\/script>/gi,
-                " "
-              )
-              .replace(
-                /<style[\s\S]*?<\/style>/gi,
-                " "
-              )
-              .replace(
-                /<[^>]*>/g,
-                " "
-              )
-              .replace(
-                /\s+/g,
-                " "
-              )
-              .trim();
+              const text =
+                html
+                  .replace(
+                    /<script[\s\S]*?<\/script>/gi,
+                    " "
+                  )
+                  .replace(
+                    /<style[\s\S]*?<\/style>/gi,
+                    " "
+                  )
+                  .replace(
+                    /<[^>]*>/g,
+                    " "
+                  )
+                  .replace(
+                    /&nbsp;/gi,
+                    " "
+                  )
+                  .replace(
+                    /&amp;/gi,
+                    "&"
+                  )
+                  .replace(
+                    /\s+/g,
+                    " "
+                  )
+                  .trim();
 
 
-          const excerpt =
-            text.length > 165
-              ? text.slice(0,165) + "…"
-              : text;
+              const excerpt =
+                text.length > 165
+                  ? text.slice(0,165) + "…"
+                  : text;
 
 
-          /*
-           * Image area.
-           */
+              /* =========================
+                 IMAGE MARKUP
+              ========================= */
 
-          const imageMarkup =
-            image
-              ? `
-                <img
-                  class="blog-image"
-                  src="${escapeAttr(image)}"
-                  alt="${escapeAttr(title)}"
-                  loading="lazy"
-                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+              let imageMarkup;
+
+
+              if(image){
+
+                imageMarkup = `
+
+                  <img
+                    class="blog-image"
+                    src="${escapeAttr(image)}"
+                    alt="${escapeAttr(title)}"
+                    loading="lazy"
+                    decoding="async"
+                    onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex';"
+                  >
+
+                  <div
+                    class="blog-image-placeholder"
+                    style="display:none"
+                  >
+                    Country Inns Journal
+                  </div>
+
+                `;
+
+              }else{
+
+                imageMarkup = `
+
+                  <div class="blog-image-placeholder">
+                    Country Inns Journal
+                  </div>
+
+                `;
+
+              }
+
+
+              /* =========================
+                 COMPLETE CARD
+              ========================= */
+
+              return `
+
+                <a
+                  class="blog-card"
+                  href="${escapeAttr(link)}"
+                  aria-label="Read ${escapeAttr(title)}"
                 >
 
-                <div
-                  class="blog-image-placeholder"
-                  style="display:none"
-                >
-                  Country Inns Journal
-                </div>
-              `
-              : `
-                <div class="blog-image-placeholder">
-                  Country Inns Journal
-                </div>
+                  ${imageMarkup}
+
+                  <div class="blog-content">
+
+                    <div class="blog-date">
+                      ${escapeHtml(date)}
+                    </div>
+
+                    <h3>
+                      ${escapeHtml(title)}
+                    </h3>
+
+                    <p>
+                      ${escapeHtml(excerpt)}
+                    </p>
+
+                    <span class="blog-read">
+                      Read Story →
+                    </span>
+
+                  </div>
+
+                </a>
+
               `;
 
-
-          /*
-           * Whole card is clickable.
-           */
-
-          return `
-
-            <a
-              class="blog-card"
-              href="${escapeAttr(link)}"
-              aria-label="Read ${escapeAttr(title)}"
-            >
-
-              ${imageMarkup}
-
-              <div class="blog-content">
-
-                <div class="blog-date">
-                  ${escapeHtml(date)}
-                </div>
-
-                <h3>
-                  ${escapeHtml(title)}
-                </h3>
-
-                <p>
-                  ${escapeHtml(excerpt)}
-                </p>
-
-                <span class="blog-read">
-                  Read Story →
-                </span>
-
-              </div>
-
-            </a>
-
-          `;
-
-        })
-        .join("");
+            })
+            .join("");
 
 
-  }catch(e){
+      /*
+       * Remove the JSONP script after it has loaded.
+       */
 
-    target.innerHTML = `
+      cleanup();
 
-      <a
-        class="blog-card"
-        href="https://countryinnsnewforest.blogspot.com/"
-      >
 
-        <div class="blog-image-placeholder">
-          Country Inns Journal
-        </div>
+    };// end callback
 
-        <div class="blog-content">
 
-          <h3>
+  /*
+   * Load Blogger's JSONP feed.
+   *
+   * IMPORTANT:
+   * We deliberately use json-in-script here rather
+   * than the AllOrigins proxy.
+   */
+
+  const script =
+    document.createElement("script");
+
+
+  script.src =
+    "https://countryinnsnewforest.blogspot.com/feeds/posts/default" +
+    "?alt=json-in-script" +
+    "&max-results=3" +
+    "&callback=" +
+    encodeURIComponent(callbackName);
+
+
+  script.async = true;
+
+
+  script.onerror =
+    function(){
+
+      target.innerHTML = `
+
+        <a
+          class="blog-card"
+          href="https://countryinnsnewforest.blogspot.com/"
+        >
+
+          <div class="blog-image-placeholder">
             Country Inns Journal
-          </h3>
+          </div>
 
-          <p>
-            Discover food, pubs, people, places
-            and the New Forest.
-          </p>
+          <div class="blog-content">
 
-          <span class="blog-read">
-            Open the Journal →
-          </span>
+            <h3>
+              Country Inns Journal
+            </h3>
 
-        </div>
+            <p>
+              Discover food, pubs, people, places
+              and the New Forest.
+            </p>
 
-      </a>
+            <span class="blog-read">
+              Open the Journal →
+            </span>
 
-    `;
+          </div>
+
+        </a>
+
+      `;
+
+      cleanup();
+
+    };
+
+
+  document.head.appendChild(script);
+
+
+  /*
+   * Clean up global callback and script.
+   */
+
+  function cleanup(){
+
+    try{
+
+      delete window[callbackName];
+
+    }catch(error){
+
+      window[callbackName] =
+        undefined;
+
+    }
+
+    if(script.parentNode){
+
+      script.parentNode.removeChild(
+        script
+      );
+
+    }
 
   }
 
@@ -2416,13 +2517,51 @@ async function loadJournalPosts(){
 
 
 /* =========================
-   EXTRACT FIRST BLOG IMAGE
+   BLOGGER IMAGE DETECTION
 ========================= */
 
-function extractFirstImage(html){
+function getBloggerImage(
+  post,
+  html
+){
+
+  /*
+   * -------------------------------------------------
+   * 1. FIRST CHOICE:
+   * Blogger's own media$thumbnail
+   * -------------------------------------------------
+   *
+   * This is normally the most reliable image because
+   * Blogger explicitly exposes the post thumbnail
+   * in the JSON feed.
+   */
+
+  let image =
+    post?.media$thumbnail?.url
+    ||
+    "";
+
+
+  if(image){
+
+    return improveBloggerImageUrl(
+      image
+    );
+
+  }
+
+
+  /*
+   * -------------------------------------------------
+   * 2. FALLBACK:
+   * Search the actual article HTML.
+   * -------------------------------------------------
+   */
 
   if(!html){
+
     return "";
+
   }
 
 
@@ -2444,37 +2583,62 @@ function extractFirstImage(html){
 
 
     if(!img){
+
       return "";
+
     }
 
 
-    let src =
+    /*
+     * Blogger / lazy-loading image
+     * attributes.
+     */
+
+    image =
       img.getAttribute("src")
       ||
       img.getAttribute("data-src")
+      ||
+      img.getAttribute("data-lazy-src")
+      ||
+      img.getAttribute("data-original")
       ||
       "";
 
 
     /*
-     * Some Blogger images may use
-     * srcset instead of src.
+     * If src isn't available, try srcset.
      */
 
-    if(!src){
+    if(!image){
 
       const srcset =
-        img.getAttribute(
-          "srcset"
-        );
+        img.getAttribute("srcset")
+        ||
+        img.getAttribute("data-srcset")
+        ||
+        "";
+
 
       if(srcset){
 
-        src =
+        const first =
           srcset
-            .split(",")[0]
-            .trim()
-            .split(/\s+/)[0];
+            .split(",")
+            .map(
+              item =>
+                item.trim()
+            )
+            .filter(Boolean)[0];
+
+
+        if(first){
+
+          image =
+            first
+              .split(/\s+/)[0];
+
+        }
 
       }
 
@@ -2486,22 +2650,92 @@ function extractFirstImage(html){
      */
 
     if(
-      src.startsWith("//")
+      image.startsWith("//")
     ){
 
-      src =
-        "https:" + src;
+      image =
+        "https:" + image;
 
     }
 
 
-    return src;
+    return improveBloggerImageUrl(
+      image
+    );
+
 
   }catch(error){
+
+    console.log(
+      "Journal image extraction error:",
+      error
+    );
 
     return "";
 
   }
+
+}
+
+
+/* =========================
+   IMPROVE BLOGGER IMAGE URL
+========================= */
+
+function improveBloggerImageUrl(
+  url
+){
+
+  if(!url){
+
+    return "";
+
+  }
+
+
+  /*
+   * Make protocol-relative URLs HTTPS.
+   */
+
+  if(
+    url.startsWith("//")
+  ){
+
+    url =
+      "https:" + url;
+
+  }
+
+
+  /*
+   * Blogger commonly supplies the
+   * thumbnail at /s72-c/.
+   *
+   * Replace it with a larger version
+   * so the Journal card doesn't use
+   * a tiny 72px image.
+   */
+
+  url =
+    url.replace(
+      /\/s\d+(?:-c)?(?=\/|$)/,
+      "/w800"
+    );
+
+
+  /*
+   * Older Blogger URLs can also contain
+   * /s72/ rather than /s72-c/.
+   */
+
+  url =
+    url.replace(
+      /\/s\d+(?=\/|$)/,
+      "/w800"
+    );
+
+
+  return url;
 
 }
 
@@ -2532,6 +2766,8 @@ function escapeAttr(str){
   return escapeHtml(str);
 
 }
+```
+
 
 
 /* =========================
