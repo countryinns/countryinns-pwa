@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Woolpack – Events</title>
   <link rel="stylesheet" href="style.css">
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -25,20 +26,25 @@
       font-size: 2rem;
     }
 
+    /* EVENT CARD CONTAINER */
     .card-grid {
       display: flex;
-      flex-direction: column; /* stacked vertically */
-      align-items: center;    /* centred horizontally */
+      flex-direction: column;
+      align-items: center;
       gap: 2rem;
-      margin: 2rem 0;
+      width: 100%;
+      margin: 2rem auto;
     }
 
+    /* INDIVIDUAL EVENT CARD */
     .card {
       background: #2e472e;
       border-radius: 12px;
       padding: 1.2rem;
       max-width: 420px;
       width: 90%;
+      box-sizing: border-box;
+      margin: 0 auto;
       text-align: center;
       transition: transform 0.2s ease;
     }
@@ -48,10 +54,11 @@
     }
 
     .card img {
+      display: block;
       max-width: 100%;
       height: auto;
+      margin: 0 auto 1rem auto;
       border-radius: 8px;
-      margin-bottom: 1rem;
     }
 
     .card h3 {
@@ -86,12 +93,14 @@
       background: #f2e6c8;
     }
 
+    /* NAVIGATION BUTTONS */
     .buttons {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       margin: 2rem auto;
       max-width: 300px;
+      width: 90%;
     }
 
     .buttons a {
@@ -110,53 +119,98 @@
     }
   </style>
 </head>
+
 <body>
+
   <header>
     <h1>Upcoming Events</h1>
   </header>
 
   <main>
-    <div class="card">
-  <img src="Woolpack-Quiz-night.jpg" alt="Quiz Nights at The Woolpack Sopley">
 
-  <h3>Quiz Nights</h3>
+    <div class="card-grid">
 
-  <p>
-    <strong>Starting Tuesday 22nd September</strong>
-  </p>
+      <!-- QUIZ NIGHT -->
+      <div class="card">
 
-  <p>
-    Gather your team, put your brains to the test and join us at
-    <strong>The Woolpack, Sopley</strong> for a fun night of trivia!
-  </p>
+        <img src="Woolpack-Quiz-night.jpg"
+             alt="Quiz Nights at The Woolpack Sopley">
 
-  <p>
-    <strong>Teams of up to 6</strong><br>
-    General Knowledge • Music • Pictures<br>
-    and much more!
-  </p>
+        <h3>Quiz Nights</h3>
 
-  <p>
-    <strong>Prizes for the winning team!</strong>
-  </p>
+        <p>
+          <strong>Starting Tuesday 22nd September</strong>
+        </p>
 
-  <p>
-    Book your table now at<br>
-    <a href="http://www.thewoolpacksopley.co.uk" target="_blank"
-       style="color:#e6d8b5; text-decoration:underline;">
-      www.thewoolpacksopley.co.uk
-    </a><br>
-    or call <strong>01425 672252</strong>.
-  </p>
-</div>
+        <p>
+          Gather your team, put your brains to the test and join us at
+          <strong>The Woolpack, Sopley</strong> for a fun night of trivia!
+        </p>
 
-  
+        <p>
+          <strong>Teams of up to 6</strong><br>
+          General Knowledge • Music • Pictures<br>
+          and much more!
+        </p>
+
+        <p>
+          <strong>Prizes for the winning team!</strong>
+        </p>
+
+        <p>
+          Book your table now at<br>
+
+          <a href="http://www.thewoolpacksopley.co.uk"
+             target="_blank"
+             style="color:#e6d8b5; text-decoration:underline;">
+            www.thewoolpacksopley.co.uk
+          </a>
+
+          <br>
+
+          or call <strong>01425 672252</strong>.
+        </p>
+
+      </div>
+
+      <!--
+        ADD MORE EVENT CARDS HERE
+
+        Example:
+
+        <div class="card">
+
+          <img src="another-event.jpg"
+               alt="Description of event">
+
+          <h3>Another Event</h3>
+
+          <p>
+            <strong>Event date and time</strong>
+          </p>
+
+          <p>
+            Event description goes here.
+          </p>
+
+        </div>
+      -->
+
     </div>
+
   </main>
 
   <div class="buttons">
-    <a href="../../woolpack.html">⬅ Back to Pub Page</a>
-    <a href="../../home.html">⬅ Back to Home</a>
+
+    <a href="../../woolpack.html">
+      ⬅ Back to Pub Page
+    </a>
+
+    <a href="../../home.html">
+      ⬅ Back to Home
+    </a>
+
   </div>
+
 </body>
 </html>
