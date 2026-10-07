@@ -8,232 +8,125 @@
 
 <link rel="stylesheet" href="style.css">
 
-<style>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #2e472e, #1e2b1e);
+      color: #f4f4f4;
+      text-align: center;
+    }
 
-body{
-    font-family:'Segoe UI',sans-serif;
-    margin:0;
-    background:linear-gradient(180deg,#2e472e,#1e2b1e);
-    color:#f4f4f4;
-    text-align:center;
-}
+    header {
+      padding: 1.5rem;
+      background: rgba(34, 49, 34, 0.9);
+      color: #e6d8b5;
+    }
 
-header{
-    padding:1.5rem;
-    background:rgba(34,49,34,.9);
-}
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
 
-h1{
-    margin:0;
-    color:#e6d8b5;
-    font-size:2rem;
-}
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
 
-/* ---------------- CARD GRID ---------------- */
+    .card {
+      background: #2e472e;
+      border-radius: 12px;
+      padding: 1.8rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
 
-.card-grid{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:1.75rem;
-    padding:2rem 1rem;
-}
+    .card:hover {
+      transform: translateY(-5px);
+    }
 
-.card{
-    background:#2e472e;
-    border-radius:12px;
-    max-width:420px;
-    width:100%;
-    padding:1rem;
-    box-sizing:border-box;
-    transition:.25s;
-}
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
 
-.card:hover{
-    transform:translateY(-5px);
-}
+    .card h3 {
+      margin: 0.5rem 0;
+      color: #e6d8b5;
+      font-size: 1.6rem;
+    }
 
-.card img{
-    width:100%;
-    border-radius:8px;
-    margin-bottom:1rem;
-}
+    .card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #f4f4f4;
+    }
 
-.card h3{
-    color:#e6d8b5;
-    margin:.5rem 0 1rem;
-}
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem auto;
+      max-width: 300px;
+    }
 
-.card p{
-    line-height:1.6;
-    font-size:.96rem;
-}
+    .buttons a {
+      display: block;
+      background: #3c5a3c;
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
 
-/* BOOK BUTTON */
-
-.card-link{
-    display:inline-block;
-    margin-top:1rem;
-    padding:0.75rem 1.3rem;
-    background:#e6d8b5;
-    color:#2e472e;
-    text-decoration:none;
-    border-radius:6px;
-    font-weight:bold;
-    transition:background .3s ease;
-}
-
-.card-link:hover{
-    background:#f2e6c8;
-}
-
-/* NAVIGATION BUTTONS */
-
-.buttons{
-    display:flex;
-    flex-direction:column;
-    gap:1rem;
-    max-width:320px;
-    margin:2rem auto 3rem;
-}
-
-.buttons a{
-    background:#3c5a3c;
-    color:#fff;
-    text-decoration:none;
-    padding:1rem;
-    border-radius:8px;
-    font-weight:bold;
-    transition:.25s;
-}
-
-.buttons a:hover{
-    background:#4f7c4f;
-}
-
-.smallprint{
-    font-size:.85rem;
-    color:#bcbcbc;
-}
-
-</style>
-
+    .buttons a:hover {
+      background: #4f7c4f;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Promotions</h1>
+  <h1>Promotions</h1>
 </header>
 
 <main>
 
 <div class="card-grid">
 
-    <!-- PIZZA MONDAYS -->
+<div class="card">
 
-    <div class="card">
+<img src="boldforestermain.jpg" alt="The Bold Forester">
 
-        <img src="Bold Pizza Mondays.png"
-             alt="Pizza Mondays at The Bold Forester">
+<h3>Exclusive Offers Coming Soon!</h3>
 
-        <h3>PIZZA MONDAYS</h3>
+<p>
+We're preparing some fantastic promotions exclusively for our guests at <strong>The Bold Forester</strong>.
+</p>
 
-        <p>
-            Mondays just got tastier! Start your week with one of our freshly made pizzas and enjoy another one on us.
-        </p>
+<p>
+From seasonal dining offers and midweek specials to food & drink deals and exclusive events, there's plenty to look forward to.
+</p>
 
-        <p>
-            <strong>🍕 Buy any pizza from our Main Menu and receive a second pizza FREE.</strong>
-        </p>
+<p>
+Keep checking back regularly or visit us in person to discover our latest offers.
+</p>
 
-        <p>
-            Whether you're catching up with friends, enjoying a family meal or simply treating yourself, Pizza Mondays are the perfect excuse to visit The Bold Forester.
-        </p>
+<p>
+We can't wait to share them with you!
+</p>
 
-        <p>
-            <strong>🕛 Every Monday</strong><br>
-            <strong>12:00pm – 9:30pm</strong>
-        </p>
-
-        <p>
-
-            <a href="https://www.theboldforesternewforest.co.uk/food/#_restaurant_form"
-               class="card-link">
-                Book Your Table
-            </a>
-
-        </p>
-
-        <p>
-            Or call <strong>02380 175588</strong>
-        </p>
-
-        <p class="smallprint">
-            <strong>*Offer valid on pizzas from the Main Menu only. Not available in conjunction with any other offer.<strong>
-        </p>
-
-    </div>
-
-
-
-    <!-- BURGER NIGHT -->
-
-    <div class="card">
-
-        <img src="Bold Burger Night Friday Night.png"
-             alt="Friday Night Burger Night">
-
-        <h3>FRIDAY NIGHT BURGER NIGHT</h3>
-
-        <p>
-            Kick off your weekend with our Friday Night Burger Night. Choose any burger from our Main Menu or Specials Board and enjoy a complimentary drink with your meal.
-        </p>
-
-        <p>
-            <strong>🍔 Buy any burger and receive a FREE selected drink.</strong>
-        </p>
-
-        <p>
-
-            <strong>Your free drink can be:</strong><br>
-
-            🍺 Meantime Lager<br>
-            🍎 Cornish Orchards Cider<br>
-            🍺 Any Real Ale<br>
-            🥤 Any Draught Soft Drink<br>
-            🍷 175ml House Wine
-
-        </p>
-
-        <p>
-
-            <strong>🕔 Every Friday from 5:00pm</strong>
-
-        </p>
-
-        <p>
-            Great burgers, great drinks and great company—the perfect way to start your weekend. We recommend booking your table in advance.
-        </p>
-
-        <p>
-
-            <a href="https://www.theboldforesternewforest.co.uk/food/#_restaurant_form"
-               class="card-link">
-                Book Your Table
-            </a>
-
-        </p>
-
-        <p>
-            Or call <strong>02380 175588</strong>
-        </p>
-
-        <p class="smallprint">
-            <strong>*Valid with the purchase of any burger from our Main Menu or Specials Board. ID may be required for alcoholic drinks.<strong>
-        </p>
-
-    </div>
+</div>
 
 </div>
 
