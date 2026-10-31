@@ -1,3 +1,4 @@
+
 {
   "name": "Country Inns",
   "short_name": "Country Inns",
@@ -11,7 +12,6 @@
   "theme_color": "#2e7d32",
   "categories": ["food", "drink", "lifestyle", "travel"],
   "prefer_related_applications": false,
-
   "icons": [
     {
       "src": "/countryinns-pwa/icons/icon-72x72.png",
@@ -75,3 +75,4 @@
   "launch_handler": {
     "client_mode": "navigate-existing"
   }
+}
