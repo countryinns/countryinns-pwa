@@ -79,7 +79,7 @@ self.addEventListener('fetch', event => {
         try {
           return await fetch(req);
         } catch (error) {
-          const cachedPage = await caches.match(req);
+          const cachedPage = await caches.match(req, { ignoreSearch: true });
 
           if (cachedPage) return cachedPage;
 
