@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2e7d32">
 <title>Country Inns - Offline</title>
 
 <style>
@@ -14,19 +16,42 @@
   --button-text: #2e8b57;
 }
 
+[data-theme="light"] {
+  --bg: linear-gradient(135deg, #f4f9f4, #d0e8d0);
+  --card: rgba(255,255,255,0.92);
+  --text: #013220;
+  --button: #2e8b57;
+  --button-text: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 20px;
   font-family: Arial, sans-serif;
-  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   background: var(--bg);
   color: var(--text);
   text-align: center;
 }
 
+.logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
 .container {
+  width: 100%;
   max-width: 420px;
   padding: 24px;
   background: var(--card);
@@ -35,6 +60,7 @@ body {
 }
 
 h1 {
+  margin-top: 0;
   margin-bottom: 10px;
 }
 
@@ -45,7 +71,7 @@ p {
 
 .button {
   display: inline-block;
-  margin-top: 18px;
+  margin-top: 12px;
   padding: 12px 18px;
   border-radius: 10px;
   background: var(--button);
@@ -54,6 +80,7 @@ p {
   text-decoration: none;
   cursor: pointer;
   border: none;
+  font-size: 1rem;
 }
 
 .button:active {
@@ -64,38 +91,40 @@ p {
 
 <body>
 
-<img src="icons/icon-192x192.png"
+<img class="logo"
+     src="/countryinns-pwa/icons/icon-192x192.png"
      width="90"
-     alt="Country Inns Logo">
-  
+     height="90"
+     alt="Country Inns">
+
 <div class="container">
   <h1>You're Offline</h1>
+
   <p>
     Looks like your signal has wandered off into the New Forest 🌲
-We’ll reconnect you as soon as you’re back online.<br>
+    We'll reconnect you as soon as you're back online.
   </p>
-  
+
   <button class="button" onclick="location.reload()">
     🔄 Try Again
   </button>
 
   <br>
 
-  <a class="button" href="home.html" style="display:inline-block;margin-top:10px;">
+  <a class="button" href="/countryinns-pwa/home.html">
     🏠 Go Home
   </a>
 </div>
 
 <script>
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-  document.body.setAttribute('data-theme', 'light');
-}
-  --bg: linear-gradient(135deg, #f4f9f4, #d0e8d0);
-  --card: rgba(255,255,255,0.92);
-  --text: #013220;
-  --button: #2e8b57;
-  --button-text: #ffffff;
+try {
+  const savedTheme = localStorage.getItem('theme');
+
+  if (savedTheme === 'light') {
+    document.body.setAttribute('data-theme', 'light');
+  }
+} catch (error) {
+  // The offline page still works if local storage is unavailable.
 }
 </script>
 
