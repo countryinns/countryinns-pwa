@@ -1,9 +1,10 @@
-const CACHE_VERSION = 'v9';
+
+const CACHE_VERSION = 'v10';
 const CACHE_NAME = `countryinns-cache-${CACHE_VERSION}`;
+const CACHE_PREFIX = 'countryinns-cache-';
 const APP_SCOPE = '/countryinns-pwa/';
 const OFFLINE_PAGE = `${APP_SCOPE}offline.html`;
 
-/* CORE APP SHELL */
 const STATIC_ASSETS = [
   `${APP_SCOPE}home.html`,
   `${APP_SCOPE}index.html`,
@@ -17,23 +18,42 @@ const STATIC_ASSETS = [
 /* INSTALL */
 self.addEventListener('install', event => {
   self.skipWaiting();
+
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+
+      // The offline page is essential for the fallback to work.
+      await cache.add(OFFLINE_PAGE);
+
+      // Cache other assets individually so one missing file
+      // doesn't prevent the service worker from installing.
+      await Promise.allSettled(
+        STATIC_ASSETS
+          .filter(url => url !== OFFLINE_PAGE)
+          .map(url => cache.add(url))
+      );
+    })()
   );
 });
 
 /* ACTIVATE */
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) return caches.delete(key);
-        })
-      )
-    )
+    (async () => {
+      const keys = await caches.keys();
+
+      await Promise.all(
+        keys
+          .filter(key =>
+            key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME
+          )
+          .map(key => caches.delete(key))
+      );
+
+      await self.clients.claim();
+    })()
   );
-  self.clients.claim();
 });
 
 /* FETCH */
@@ -44,45 +64,84 @@ self.addEventListener('fetch', event => {
 
   const url = new URL(req.url);
 
-  /* 1. HTML = network first (with offline fallback) */
-  if (req.headers.get('accept')?.includes('text/html')) {
-    event.respondWith(
-      fetch(req)
-        .then(res => res)
-        .catch(() => caches.match(OFFLINE_PAGE))
-    );
+  // Only manage requests belonging to this PWA.
+  if (
+    url.origin !== self.location.origin ||
+    !url.pathname.startsWith(APP_SCOPE)
+  ) {
     return;
   }
 
-  /* 2. IMAGES = cache-first (BIG performance win) */
-  if (url.pathname.match(/\.(png|jpg|jpeg|webp|svg)$/)) {
+  // HTML: network first, then cached page, then offline page.
+  if (req.headers.get('accept')?.includes('text/html')) {
+    event.respondWith(
+      (async () => {
+        try {
+          return await fetch(req);
+        } catch (error) {
+          const cachedPage = await caches.match(req);
+
+          if (cachedPage) return cachedPage;
+
+          const offlinePage = await caches.match(OFFLINE_PAGE);
+
+          if (offlinePage) return offlinePage;
+
+          return new Response('You are offline.', {
+            status: 503,
+            headers: { 'Content-Type': 'text/plain' }
+          });
+        }
+      })()
+    );
+
+    return;
+  }
+
+  // Images: cache first.
+  if (/\.(png|jpg|jpeg|webp|svg|ico)$/i.test(url.pathname)) {
     event.respondWith(cacheFirst(req));
     return;
   }
 
-  /* 3. STATIC ASSETS = stale-while-revalidate */
+  // Other app assets: stale while revalidating.
   event.respondWith(staleWhileRevalidate(req));
 });
 
-/* CACHE-FIRST (images, media) */
+/* CACHE FIRST */
 async function cacheFirst(req) {
   const cached = await caches.match(req);
+
   if (cached) return cached;
 
-  const res = await fetch(req);
-  const cache = await caches.open(CACHE_NAME);
-  cache.put(req, res.clone());
-  return res;
+  const response = await fetch(req);
+
+  if (response.ok) {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.put(req, response.clone());
+  }
+
+  return response;
 }
 
-/* STALE-WHILE-REVALIDATE (CSS/JS/etc) */
+/* STALE WHILE REVALIDATE */
 async function staleWhileRevalidate(req) {
   const cached = await caches.match(req);
 
-  const fetchPromise = fetch(req).then(res => {
-    caches.open(CACHE_NAME).then(cache => cache.put(req, res.clone()));
-    return res;
-  }).catch(() => cached);
+  const fetchPromise = fetch(req).then(async response => {
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.put(req, response.clone());
+    }
 
-  return cached || fetchPromise;
+    return response;
+  });
+
+  if (cached) {
+    // Refresh the cache in the background.
+    fetchPromise.catch(() => {});
+    return cached;
+  }
+
+  return fetchPromise;
 }
