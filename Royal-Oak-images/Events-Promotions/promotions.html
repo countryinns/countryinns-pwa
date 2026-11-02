@@ -1,11 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2e472e">
+  <meta name="description" content="Discover the latest promotions at The Royal Oak, Beaulieu Hilltop.">
   <title>The Royal Oak – Promotions</title>
-  
+
   <link rel="stylesheet" href="style.css">
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -17,7 +21,7 @@
 
     header {
       padding: 1.5rem;
-      background: rgba(34, 49, 34, 0.9);
+      background: rgba(34,49,34,0.9);
       color: #e6d8b5;
     }
 
@@ -30,18 +34,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 2rem;
       margin: 2rem 0;
     }
 
     .card {
       background: #2e472e;
       border-radius: 12px;
-      padding: 1.8rem;
-      max-width: 420px;
+      padding: 1.2rem;
+      max-width: 520px;
       width: 90%;
       text-align: center;
-      transition: transform 0.2s ease;
+      transition: transform .2s ease;
     }
 
     .card:hover {
@@ -49,22 +53,42 @@
     }
 
     .card img {
-      max-width: 100%;
+      width: 100%;
       height: auto;
       border-radius: 8px;
       margin-bottom: 1rem;
     }
 
     .card h3 {
-      margin: 0.5rem 0;
       color: #e6d8b5;
-      font-size: 1.6rem;
+      margin: .5rem 0;
     }
 
     .card p {
-      font-size: 1rem;
+      font-size: .95rem;
       line-height: 1.6;
-      color: #f4f4f4;
+      margin: .8rem 0;
+    }
+
+    .card-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: .75rem 1.3rem;
+      background: #e6d8b5;
+      color: #2e472e;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background .3s ease;
+    }
+
+    .card-link:hover {
+      background: #f2e6c8;
+    }
+
+    .smallprint {
+      font-size: .85rem;
+      color: #bcbcbc;
     }
 
     .buttons {
@@ -73,6 +97,7 @@
       gap: 1rem;
       margin: 2rem auto;
       max-width: 300px;
+      padding: 0 15px;
     }
 
     .buttons a {
@@ -83,53 +108,107 @@
       padding: 1rem;
       border-radius: 8px;
       font-weight: bold;
-      transition: background 0.3s;
+      transition: background .3s;
     }
 
     .buttons a:hover {
       background: #4f7c4f;
+    }
+
+    .pizza-choice {
+      text-align: left;
+      background: rgba(255,255,255,.07);
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin: 12px 0;
+    }
+
+    .pizza-choice strong {
+      color: #e6d8b5;
+    }
+
+    .offer-price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #e6d8b5;
+      margin: 1rem 0;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Promotions</h1>
-</header>
+  <header>
+    <h1>Promotions</h1>
+    <p>The Royal Oak · Beaulieu Hilltop</p>
+  </header>
 
-<main>
+  <main>
 
-<div class="card-grid">
+    <div class="card-grid">
 
-<div class="card">
+      <div class="card">
 
-<img src="The Royal Oak Pic.jpg" alt="The Royal Oak">
+        <img src="ROB Pizza Deal.png"
+             alt="The Royal Oak Pizza Deal – 2 pizzas for £25">
 
-<h3>Exclusive Offers Coming Soon!</h3>
+        <h3>PIZZA DEAL</h3>
 
-<p>
-We're preparing some fantastic promotions exclusively for our guests at <strong>The Royal Oak</strong>.
-</p>
+        <p>
+          Fancy a pizza? Join us at <strong>The Royal Oak</strong>
+          and enjoy our weekday pizza offer.
+        </p>
 
-<p>
-From seasonal dining offers and midweek specials to food & drink deals and exclusive events, there's plenty to look forward to.
-</p>
+        <p class="offer-price">
+          2 Pizzas for £25
+        </p>
 
-<p>
-Keep checking back regularly or visit us in person to discover our latest offers.
-</p>
+        <p>
+          <strong>Monday – Friday</strong>
+        </p>
 
-<p>
-We can't wait to share them with you!
-</p>
+        <p>
+          Choose from our delicious selection:
+        </p>
 
-</div>
+        <div class="pizza-choice">
+          <strong>Classic Margherita</strong>
+          <p>Herbed tomato sauce and house cheese blend.</p>
+        </div>
 
-</div>
+        <div class="pizza-choice">
+          <strong>Classic Pepperoni</strong>
+          <p>Herbed tomato sauce, house cheese blend and pepperoni.</p>
+        </div>
+
+        <div class="pizza-choice">
+          <strong>Vegan Wild Mushroom and Roasted Red Pepper</strong>
+          <p>With onion marmalade, vegan cheese and cherry tomatoes.</p>
+          <strong>(VG)</strong>
+        </div>
+
+        <p>
+          Whether you're catching up with friends or enjoying
+          a relaxed weekday meal, come and make the most of
+          our pizza deal at The Royal Oak.
+        </p>
+
+        <p>
+          <a href="../../royaloak.html" class="card-link">
+            Visit The Royal Oak
+          </a>
+        </p>
+
+      </div>
+
+    </div>
+
   </main>
 
-<div class="buttons">
-  <a href="../../royaloak.html">⬅ Back to Pub Page</a>
-  <a href="../../home.html">⬅ Back to Home</a>
-</div>
+  <div class="buttons">
+    <a href="../../royaloak.html">⬅ Back to Pub Page</a>
+    <a href="../../home.html">⬅ Back to Home</a>
+  </div>
+
+</body>
+</html>
