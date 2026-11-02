@@ -215,6 +215,29 @@ button,a{touch-action:manipulation}
 
 .btn:hover{background:var(--green2)}
 
+/* Two booking choices on event cards */
+.event-actions{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  margin-top:auto
+}
+
+.event-actions .btn{
+  margin-top:0
+}
+
+.btn-secondary{
+  background:#fff;
+  color:var(--green);
+  border:2px solid var(--green)
+}
+
+.btn-secondary:hover{
+  background:#edf2e8;
+  color:var(--green)
+}
+
 .empty-note{
   background:#fff;
   border:1px dashed #b9c5b2;
@@ -363,7 +386,7 @@ footer a{color:#fff}
   1. Copy an existing article.
   2. Change the data-date to the event's START DATE.
   3. Change the poster image path.
-  4. Change the date, title, pub, description and button.
+  4. Change the date, title, pub, description and buttons.
   5. Keep the image inside the Events folder.
 
   IMPORTANT:
@@ -395,7 +418,19 @@ footer a{color:#fff}
         <h3>Quiz Night</h3>
         <p class="event-pub">The New Forest Inn · Emery Down</p>
         <p>Join us for a fun-filled Quiz Night, raising money for Emery Down Almshouses. Just £3 per person, plus a raffle. Get your team together and come along to support a wonderful local cause!</p>
-        <a class="btn" href="tel:02380284690">Book Your Table · 02380 284690</a>
+
+        <div class="event-actions">
+          <a class="btn"
+             href="https://www.thenewforestinn.co.uk/food/#restaurant_form"
+             target="_blank"
+             rel="noopener">
+            Book Online
+          </a>
+
+          <a class="btn btn-secondary" href="tel:02380284690">
+            Call to Book · 02380 284690
+          </a>
+        </div>
       </div>
     </article>
 
@@ -443,7 +478,14 @@ footer a{color:#fff}
         <h3>Your event title</h3>
         <p class="event-pub">Pub name · Location</p>
         <p>Write a short description using confirmed event details.</p>
-        <a class="btn" href="your-link.html">Find out more</a>
+
+        <div class="event-actions">
+          <a class="btn" href="YOUR-ONLINE-BOOKING-LINK"
+             target="_blank" rel="noopener">Book Online</a>
+          <a class="btn btn-secondary" href="tel:YOUR-PHONE-NUMBER">
+            Call to Book
+          </a>
+        </div>
       </div>
     </article>
 
