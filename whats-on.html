@@ -1,14 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#2d5016">
-<meta name="description" content="See what's happening this month across the eight Country Inns pubs.">
+<meta name="description" content="Discover monthly events and regular weekly activities across the eight Country Inns pubs.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-192x192.png">
-<title>What's Happening This Month | Country Inns</title>
+<title>What's Happening | Country Inns</title>
 
 <style>
 :root{
@@ -124,7 +123,8 @@ button,a{touch-action:manipulation}
   max-width:680px
 }
 
-.month-section{
+.month-section,
+.weekly-section{
   padding:8px 0 12px
 }
 
@@ -238,6 +238,34 @@ button,a{touch-action:manipulation}
   color:var(--green)
 }
 
+/* Regular weekly events */
+.weekly-section{
+  margin:12px 0 28px;
+  padding:22px;
+  background:var(--cream);
+  border-radius:var(--radius)
+}
+
+.weekly-section .month-heading{
+  margin-top:0
+}
+
+.weekly-section .event-list{
+  padding-bottom:4px
+}
+
+.weekly-label{
+  display:inline-block;
+  align-self:flex-start;
+  background:#e5eee0;
+  color:var(--green);
+  font-weight:700;
+  font-size:.8rem;
+  padding:7px 11px;
+  border-radius:999px;
+  margin-bottom:12px
+}
+
 .empty-note{
   background:#fff;
   border:1px dashed #b9c5b2;
@@ -328,6 +356,7 @@ footer a{color:#fff}
   .event-list{grid-template-columns:1fr}
   .event-card img{height:205px}
   .hero{padding:40px 18px}
+  .weekly-section{padding:17px}
 }
 </style>
 </head>
@@ -350,7 +379,7 @@ footer a{color:#fff}
 
   <section class="intro">
     <h2>There's always something to look forward to</h2>
-    <p>Take a look at what's coming up across our pubs. Choose an event to find out more or make an enquiry.</p>
+    <p>Take a look at what's coming up across our pubs, from special events to regular weekly activities.</p>
   </section>
 
   <!-- CURRENT MONTH EVENTS -->
@@ -361,6 +390,35 @@ footer a{color:#fff}
     <div class="empty-note" id="current-empty" hidden>
       <strong>Nothing confirmed just yet.</strong>
       Keep checking back for upcoming events across our pubs.
+    </div>
+  </section>
+
+  <!-- REGULAR WEEKLY EVENTS -->
+  <section class="weekly-section" aria-label="Regular weekly events">
+    <h2 class="month-heading">Regular Weekly Events</h2>
+    <p class="month-description">Activities and get-togethers happening regularly at our pubs. Come along and join in!</p>
+
+    <div class="event-list" id="weekly-events">
+
+      <!-- THE TRUSTY SERVANT - STEP 'N STOMP LINE DANCING -->
+      <article class="event-card">
+        <img src="Events/Trusty-Servant-Step-n-Stomp-Line-Dancing.jpeg"
+             alt="Step 'n Stomp beginner line dancing at The Trusty Servant"
+             loading="lazy">
+
+        <div class="event-body">
+          <span class="weekly-label">Every Wednesday · 12 noon</span>
+
+          <h3>Beginner Line Dancing</h3>
+
+          <p class="event-pub">The Trusty Servant · Minstead</p>
+
+          <p>Come along and give line dancing a go with Clare from Step ’n Stomp Line Dancing. A fun, friendly beginner class – no previous experience needed.</p>
+
+          <p><strong>£7 per person</strong>, pay as you go. Loyalty scheme: your 10th class is free.</p>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -380,7 +438,7 @@ footer a{color:#fff}
   COUNTRY INNS EVENT LIST - MONTHLY UPDATE INSTRUCTIONS
   =====================================================
 
-  Add all confirmed events inside this event-source section.
+  Add one-off confirmed events inside this event-source section.
 
   For each event:
   1. Copy an existing article.
@@ -396,7 +454,11 @@ footer a{color:#fff}
   - Displays this month's events.
   - Displays next month's events under Looking Ahead.
   - Moves events into the correct section when the month changes.
-  - Sorts events by date.
+  - Sorts one-off events by date.
+
+  Regular weekly activities go in the separate
+  Regular Weekly Events section above. They do not need
+  a data-date and will remain visible every month.
 
   For multi-day events, use the first day as data-date.
   For example, Christmas 1–24 December uses 2026-12-01.
@@ -413,10 +475,14 @@ footer a{color:#fff}
       <img src="Events/NFI-November-Quiz-Night-2026.png"
            alt="Quiz Night at The New Forest Inn, raising money for Emery Down Almshouses"
            loading="lazy">
+
       <div class="event-body">
         <span class="event-date">Friday 20 November · 8pm</span>
+
         <h3>Quiz Night</h3>
+
         <p class="event-pub">The New Forest Inn · Emery Down</p>
+
         <p>Join us for a fun-filled Quiz Night, raising money for Emery Down Almshouses. Just £3 per person, plus a raffle. Get your team together and come along to support a wonderful local cause!</p>
 
         <div class="event-actions">
@@ -441,11 +507,16 @@ footer a{color:#fff}
       <img src="Christmas-2026.png"
            alt="Christmas at Country Inns"
            loading="lazy">
+
       <div class="event-body">
         <span class="event-date">1–24 December</span>
+
         <h3>Christmas at Country Inns</h3>
+
         <p class="event-pub">Across Country Inns</p>
+
         <p>Celebrate the festive season with food, drinks and a warm country pub welcome. Contact your preferred pub for details and reservations.</p>
+
         <a class="btn" href="booking.html">Explore Christmas bookings</a>
       </div>
     </article>
@@ -455,37 +526,42 @@ footer a{color:#fff}
       <img src="Events/NFI-Wreath-Making-Workshop-Poster-3rd-December-.png"
            alt="Christmas Wreath Making Workshop at The New Forest Inn"
            loading="lazy">
+
       <div class="event-body">
         <span class="event-date">Thursday 3 December · 6:30pm</span>
+
         <h3>Christmas Wreath Making Workshop</h3>
+
         <p class="event-pub">The New Forest Inn · Emery Down</p>
+
         <p>Get into the festive spirit with Green Oasis Florists and create your own beautiful Christmas wreath with the help of expert florists. Enjoy mulled wine and festive nibbles while you create, and take your wreath home afterwards.</p>
+
         <p><strong>£65 per person</strong></p>
+
         <p>Booking is essential as numbers are limited.</p>
-        <a class="btn" href="tel:02380284690">Call to Book Your Place · 02380 284690</a>
+
+        <a class="btn" href="tel:02380284690">Book Your Place · 02380 284690</a>
       </div>
     </article>
 
     <!--
-    COPY THIS TEMPLATE FOR EACH NEW EVENT:
+    COPY THIS TEMPLATE FOR EACH NEW ONE-OFF EVENT:
 
     <article class="event-card" data-date="2026-12-15">
       <img src="Events/YOUR-IMAGE.jpg"
            alt="Short image description"
            loading="lazy">
+
       <div class="event-body">
         <span class="event-date">Tuesday 15 December · 7pm</span>
+
         <h3>Your event title</h3>
+
         <p class="event-pub">Pub name · Location</p>
+
         <p>Write a short description using confirmed event details.</p>
 
-        <div class="event-actions">
-          <a class="btn" href="YOUR-ONLINE-BOOKING-LINK"
-             target="_blank" rel="noopener">Book Online</a>
-          <a class="btn btn-secondary" href="tel:YOUR-PHONE-NUMBER">
-            Call to Book
-          </a>
-        </div>
+        <a class="btn" href="your-link.html">Find out more</a>
       </div>
     </article>
 
@@ -502,6 +578,7 @@ footer a{color:#fff}
     <a href="booking.html">Book</a>
     <a href="https://countryinnsnewforest.blogspot.com/">Journal</a>
   </div>
+
   <p>© <span id="current-year">2026</span> Country Inns. Proudly serving the New Forest.</p>
 </footer>
 
@@ -550,12 +627,14 @@ footer a{color:#fff}
   yearLabel.textContent = currentYear;
 
   var source = document.getElementById("event-source");
+
   var events = Array.prototype.slice.call(
     source.querySelectorAll(".event-card[data-date]")
   );
 
   function getEventDate(card){
     var parts = card.getAttribute("data-date").split("-");
+
     return new Date(
       Number(parts[0]),
       Number(parts[1]) - 1,
