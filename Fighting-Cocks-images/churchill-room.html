@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2e7d32">
+  <meta name="description" content="Discover the Churchill Room at The Fighting Cocks. A private space for gatherings of up to 20 guests.">
+  <title>The Churchill Room | The Fighting Cocks</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --green: #2e7d32;
+      --dark-green: #1e3b25;
+      --cream: #f6f2e8;
+      --gold: #c5a15b;
+      --text: #263026;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f5f2;
+      color: var(--text);
+    }
+
+    header {
+      background: var(--dark-green);
+      color: var(--cream);
+      text-align: center;
+      padding: 25px 18px;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    header .eyebrow {
+      color: var(--gold);
+      font-size: .8rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+    }
+
+    header p {
+      margin: 9px 0 0;
+      color: #e7e1d3;
+      font-size: .95rem;
+    }
+
+    main {
+      width: min(100% - 28px, 950px);
+      margin: 28px auto;
+    }
+
+    .intro {
+      text-align: center;
+      padding: 12px 10px 25px;
+    }
+
+    .intro h2 {
+      color: var(--green);
+      font-family: Georgia, serif;
+      font-size: 1.65rem;
+      margin: 0 0 12px;
+    }
+
+    .intro p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.7;
+      color: #566052;
+    }
+
+    .poster-container {
+      background: white;
+      padding: 10px;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.12);
+      text-align: center;
+    }
+
+    .poster-container img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .contact-section {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 25px 20px;
+      margin-top: 25px;
+      text-align: center;
+      border: 1px solid #e3dccb;
+    }
+
+    .contact-section h2 {
+      color: var(--dark-green);
+      font-family: Georgia, serif;
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+    }
+
+    .contact-section p {
+      line-height: 1.6;
+      color: #596052;
+      margin: 0 0 18px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .contact-details a {
+      color: var(--dark-green);
+      text-decoration: none;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-details a:hover {
+      text-decoration: underline;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 340px;
+      margin: 22px auto 0;
+    }
+
+    .action-buttons a {
+      display: block;
+      padding: 14px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background .2s ease;
+    }
+
+    .primary-button {
+      background: var(--green);
+      color: white;
+    }
+
+    .primary-button:hover {
+      background: #256528;
+    }
+
+    .secondary-button {
+      background: var(--dark-green);
+      color: white;
+    }
+
+    .secondary-button:hover {
+      background: #315b39;
+    }
+
+    .back-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 340px;
+      margin: 28px auto;
+      padding: 0 12px;
+    }
+
+    .back-buttons a {
+      display: block;
+      background: var(--dark-green);
+      color: white;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .back-buttons a:hover {
+      background: var(--green);
+    }
+
+    footer {
+      background: var(--dark-green);
+      color: #e7e1d3;
+      text-align: center;
+      padding: 22px 15px;
+      font-size: .85rem;
+      border-top: 3px solid var(--gold);
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    @media (min-width: 650px) {
+      .action-buttons,
+      .back-buttons {
+        flex-direction: row;
+        max-width: 520px;
+      }
+
+      .action-buttons a,
+      .back-buttons a {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="eyebrow">The Fighting Cocks · Godshill</div>
+    <h1>The Churchill Room</h1>
+    <p>A private space for small gatherings · Up to 20 guests</p>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <h2>Your Own Space. Your Own Occasion.</h2>
+
+      <p>
+        Looking for somewhere a little more private for your next gathering?
+        The Churchill Room at The Fighting Cocks offers a relaxed and
+        characterful setting for bringing people together.
+        Perfect for family celebrations, birthdays, private lunches,
+        dinners, meetings and small events.
+      </p>
+    </section>
+
+    <section class="poster-container">
+      <img
+        src="Churchill-Room.png"
+        alt="The Churchill Room at The Fighting Cocks – private space for small gatherings of up to 20 guests. Contact 01425 655686 to enquire."
+      >
+    </section>
+
+    <section class="contact-section">
+      <h2>Planning Something Special?</h2>
+
+      <p>
+        Talk to our team about hiring the Churchill Room.
+        We'd be delighted to hear what you're planning.
+      </p>
+
+      <div class="contact-details">
+        <a href="tel:01425655686">☎ 01425 655686</a>
+
+        <a href="mailto:info@thefightingcockspub.co.uk">
+          ✉ info@thefightingcockspub.co.uk
+        </a>
+
+        <a href="https://www.thefightingcockspub.co.uk/"
+           target="_blank"
+           rel="noopener">
+          🌐 thefightingcockspub.co.uk
+        </a>
+      </div>
+
+      <div class="action-buttons">
+        <a class="primary-button" href="tel:01425655686">
+          Call to Enquire
+        </a>
+
+        <a class="secondary-button"
+           href="mailto:info@thefightingcockspub.co.uk?subject=Churchill%20Room%20Enquiry">
+          Email Us
+        </a>
+      </div>
+    </section>
+
+    <div class="back-buttons">
+      <a href="../../fightingcocks.html">⬅ Back to Pub Page</a>
+      <a href="../../home.html">⬅ Back to Home</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <p><strong>The Fighting Cocks</strong></p>
+    <p>Godshill · Fordingbridge · New Forest</p>
+    <p>© Country Inns</p>
+  </footer>
+
+</body>
+</html>
