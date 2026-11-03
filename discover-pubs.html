@@ -221,6 +221,131 @@ button,a{touch-action:manipulation}
   transform:scale(.97)
 }
 
+
+/* MY FAVOURITE PUBS */
+.favourites-section{
+  background:var(--cream);
+  border-radius:var(--radius);
+  padding:20px;
+  margin:0 0 24px
+}
+.favourites-heading-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:8px
+}
+.favourites-section h2{
+  font-size:1.25rem;
+  color:var(--green);
+  margin:0
+}
+.favourites-intro{
+  color:var(--muted);
+  line-height:1.5;
+  margin:0 0 14px
+}
+.favourites-empty{
+  background:rgba(255,255,255,.75);
+  border:1px dashed #b9c5b2;
+  border-radius:12px;
+  padding:16px;
+  color:var(--muted);
+  line-height:1.5;
+  text-align:center
+}
+.favourites-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px
+}
+.favourite-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#fff;
+  border-radius:12px;
+  padding:10px;
+  min-width:0
+}
+.favourite-item img{
+  width:66px;
+  height:66px;
+  object-fit:cover;
+  border-radius:9px;
+  flex:0 0 66px
+}
+.favourite-item-details{
+  min-width:0;
+  flex:1
+}
+.favourite-item-details strong{
+  display:block;
+  color:var(--green);
+  line-height:1.3;
+  margin-bottom:4px
+}
+.favourite-item-details a{
+  color:var(--green);
+  font-size:.85rem;
+  font-weight:700;
+  text-decoration:none
+}
+.favourite-remove{
+  border:0;
+  background:#f4f5f2;
+  color:#7a3028;
+  border-radius:50%;
+  width:36px;
+  height:36px;
+  flex:0 0 36px;
+  font-size:1.1rem;
+  cursor:pointer
+}
+.pub-card{
+  position:relative
+}
+.favourite-toggle{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-height:42px;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:999px;
+  background:rgba(255,255,255,.96);
+  color:var(--green);
+  font-weight:700;
+  font-size:.85rem;
+  box-shadow:0 3px 12px rgba(0,0,0,.18);
+  cursor:pointer
+}
+.favourite-toggle .heart{
+  font-size:1.15rem;
+  line-height:1
+}
+.favourite-toggle[aria-pressed="true"]{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green)
+}
+.favourite-toggle:focus-visible,
+.favourite-remove:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:3px
+}
+@media(max-width:650px){
+  .favourites-list{grid-template-columns:1fr}
+  .favourites-section{padding:16px}
+}
+
 .footer-note{
   background:var(--cream);
   border-radius:var(--radius);
@@ -334,9 +459,27 @@ footer a{color:#fff}
     <p>Every pub has its own character. Explore each location, discover its food and facilities, and find the details you need before visiting.</p>
   </section>
 
+  <!-- MY FAVOURITE PUBS -->
+  <section class="favourites-section" id="my-favourites" aria-labelledby="favourites-heading">
+    <div class="favourites-heading-row">
+      <h2 id="favourites-heading">♥ My Favourite Pubs</h2>
+      <span id="favourites-count" aria-live="polite">0 saved</span>
+    </div>
+    <p class="favourites-intro">Save the pubs you love by tapping the heart on any pub card. Your favourites are stored on this device.</p>
+    <div class="favourites-empty" id="favourites-empty">
+      You haven't saved any favourites yet. Tap <strong>♡ Add to favourites</strong> on a pub below to keep it here.
+    </div>
+    <div class="favourites-list" id="favourites-list" hidden></div>
+  </section>
+
   <section class="pub-grid" aria-label="All eight Country Inns pubs">
 
-    <article class="pub-card">
+    <article class="pub-card" data-pub-id="bold-forester">
+      <button class="favourite-toggle" type="button" aria-pressed="false"
+              aria-label="Add The Bold Forester to favourites">
+        <span class="heart" aria-hidden="true">♡</span>
+        <span class="favourite-button-text">Add to favourites</span>
+      </button>
       <img src="bold-forester-images/Restaurant Images/boldforestermain.jpg" alt="The Bold Forester" loading="lazy">
       <div class="pub-body">
         <div class="pub-location">Marchwood</div>
@@ -346,7 +489,12 @@ footer a{color:#fff}
       </div>
     </article>
 
-    <article class="pub-card">
+    <article class="pub-card" data-pub-id="lamb-inn">
+      <button class="favourite-toggle" type="button" aria-pressed="false"
+              aria-label="Add The Lamb Inn to favourites">
+        <span class="heart" aria-hidden="true">♡</span>
+        <span class="favourite-button-text">Add to favourites</span>
+      </button>
       <img src="Lamb-Inn-images/LambInn.jpg" alt="The Lamb Inn" loading="lazy">
       <div class="pub-body">
         <div class="pub-location">Nomansland</div>
@@ -356,7 +504,12 @@ footer a{color:#fff}
       </div>
     </article>
 
-    <article class="pub-card">
+    <article class="pub-card" data-pub-id="royal-oak">
+      <button class="favourite-toggle" type="button" aria-pressed="false"
+              aria-label="Add The Royal Oak to favourites">
+        <span class="heart" aria-hidden="true">♡</span>
+        <span class="favourite-button-text">Add to favourites</span>
+      </button>
       <img src="Royal-Oak-images/The Royal Oak.jpeg" alt="The Royal Oak" loading="lazy">
       <div class="pub-body">
         <div class="pub-location">Beaulieu Hilltop</div>
@@ -366,7 +519,12 @@ footer a{color:#fff}
       </div>
     </article>
 
-    <article class="pub-card">
+    <article class="pub-card" data-pub-id="woolpack">
+      <button class="favourite-toggle" type="button" aria-pressed="false"
+              aria-label="Add The Woolpack to favourites">
+        <span class="heart" aria-hidden="true">♡</span>
+        <span class="favourite-button-text">Add to favourites</span>
+      </button>
       <img src="Woolpack-images/Woolpack.jpg" alt="The Woolpack" loading="lazy">
       <div class="pub-body">
         <div class="pub-location">Sopley</div>
@@ -376,7 +534,12 @@ footer a{color:#fff}
       </div>
     </article>
 
-    <article class="pub-card">
+    <article class="pub-card" data-pub-id="fighting-cocks">
+      <button class="favourite-toggle" type="button" aria-pressed="false"
+              aria-label="Add The Fighting Cocks to favourites">
+        <span class="heart" aria-hidden="true">♡</span>
+        <span class="favourite-button-text">Add to favourites</span>
+      </button>
       <img src="Fighting-Cocks-images/fighting-coq-scaled.jpg" alt="The Fighting Cocks" loading="lazy">
       <div class="pub-body">
         <div class="pub-location">Godshill</div>
@@ -386,7 +549,12 @@ footer a{color:#fff}
       </div>
     </article>
 
-    <article class="pub-card">
+    <article class="pub-card" data-pub-id="trusty-servant">
+      <button class="favourite-toggle" type="button" aria-pressed="false"
+              aria-label="Add The Trusty Servant to favourites">
+        <span class="heart" aria-hidden="true">♡</span>
+        <span class="favourite-button-text">Add to favourites</span>
+      </button>
       <img src="Trusty-Servant-images/Trusty.jpg" alt="The Trusty Servant" loading="lazy">
       <div class="pub-body">
         <div class="pub-location">Minstead</div>
@@ -396,7 +564,12 @@ footer a{color:#fff}
       </div>
     </article>
 
-    <article class="pub-card">
+    <article class="pub-card" data-pub-id="new-forest-inn">
+      <button class="favourite-toggle" type="button" aria-pressed="false"
+              aria-label="Add The New Forest Inn to favourites">
+        <span class="heart" aria-hidden="true">♡</span>
+        <span class="favourite-button-text">Add to favourites</span>
+      </button>
       <img src="New-Forest-Inn-images/NFI.jpg" alt="The New Forest Inn" loading="lazy">
       <div class="pub-body">
         <div class="pub-location">Emery Down</div>
@@ -406,7 +579,12 @@ footer a{color:#fff}
       </div>
     </article>
 
-    <article class="pub-card">
+    <article class="pub-card" data-pub-id="rockingham-arms">
+      <button class="favourite-toggle" type="button" aria-pressed="false"
+              aria-label="Add The Rockingham Arms to favourites">
+        <span class="heart" aria-hidden="true">♡</span>
+        <span class="favourite-button-text">Add to favourites</span>
+      </button>
       <img src="Rockingham-Arms-images/Rockingham-Arms-1.jpg" alt="The Rockingham Arms" loading="lazy">
       <div class="pub-body">
         <div class="pub-location">West Wellow</div>
@@ -451,6 +629,169 @@ footer a{color:#fff}
   if(yearLabel){
     yearLabel.textContent = new Date().getFullYear();
   }
+
+  var storageKey = "countryInnsFavouritePubs";
+  var pubCards = Array.prototype.slice.call(
+    document.querySelectorAll(".pub-card[data-pub-id]")
+  );
+  var favouritesList = document.getElementById("favourites-list");
+  var favouritesEmpty = document.getElementById("favourites-empty");
+  var favouritesCount = document.getElementById("favourites-count");
+  var savedPubs = [];
+
+  function readSavedPubs(){
+    try{
+      var stored = window.localStorage.getItem(storageKey);
+      var parsed = stored ? JSON.parse(stored) : [];
+      if(Array.isArray(parsed)){
+        savedPubs = parsed;
+      }
+    }catch(error){
+      savedPubs = [];
+    }
+  }
+
+  function savePubs(){
+    try{
+      window.localStorage.setItem(storageKey, JSON.stringify(savedPubs));
+    }catch(error){
+      /* The feature still works for this visit if storage is unavailable. */
+    }
+  }
+
+  function isFavourite(pubId){
+    return savedPubs.indexOf(pubId) !== -1;
+  }
+
+  function updateCardButtons(){
+    pubCards.forEach(function(card){
+      var pubId = card.getAttribute("data-pub-id");
+      var button = card.querySelector(".favourite-toggle");
+      var heart = button.querySelector(".heart");
+      var buttonText = button.querySelector(".favourite-button-text");
+      var pubName = card.querySelector("h3").textContent;
+      var active = isFavourite(pubId);
+
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+      button.setAttribute(
+        "aria-label",
+        (active ? "Remove " : "Add ") + pubName + " " +
+        (active ? "from" : "to") + " favourites"
+      );
+      heart.textContent = active ? "♥" : "♡";
+      buttonText.textContent = active ? "Saved" : "Add to favourites";
+    });
+  }
+
+  function renderFavourites(){
+    favouritesList.innerHTML = "";
+
+    var validFavourites = [];
+    savedPubs.forEach(function(pubId){
+      var found = pubCards.some(function(card){
+        return card.getAttribute("data-pub-id") === pubId;
+      });
+      if(found){
+        validFavourites.push(pubId);
+      }
+    });
+    savedPubs = validFavourites;
+
+    savedPubs.forEach(function(pubId){
+      var sourceCard = null;
+      pubCards.forEach(function(card){
+        if(card.getAttribute("data-pub-id") === pubId){
+          sourceCard = card;
+        }
+      });
+
+      if(!sourceCard){return;}
+
+      var item = document.createElement("div");
+      item.className = "favourite-item";
+
+      var image = document.createElement("img");
+      image.src = sourceCard.querySelector("img").getAttribute("src");
+      image.alt = "";
+      image.loading = "lazy";
+
+      var details = document.createElement("div");
+      details.className = "favourite-item-details";
+
+      var name = document.createElement("strong");
+      name.textContent = sourceCard.querySelector("h3").textContent;
+
+      var location = document.createElement("div");
+      location.textContent = sourceCard.querySelector(".pub-location").textContent;
+      location.style.color = "#667064";
+      location.style.fontSize = ".82rem";
+      location.style.marginBottom = "5px";
+
+      var explore = document.createElement("a");
+      explore.href = sourceCard.querySelector(".pub-body .btn").getAttribute("href");
+      explore.textContent = "Explore pub";
+
+      var remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "favourite-remove";
+      remove.textContent = "×";
+      remove.setAttribute(
+        "aria-label",
+        "Remove " + sourceCard.querySelector("h3").textContent + " from favourites"
+      );
+      remove.addEventListener("click", function(){
+        removeFavourite(pubId);
+      });
+
+      details.appendChild(name);
+      details.appendChild(location);
+      details.appendChild(explore);
+      item.appendChild(image);
+      item.appendChild(details);
+      item.appendChild(remove);
+      favouritesList.appendChild(item);
+    });
+
+    var count = savedPubs.length;
+    favouritesCount.textContent = count + (count === 1 ? " saved" : " saved");
+    favouritesEmpty.hidden = count > 0;
+    favouritesList.hidden = count === 0;
+
+    savePubs();
+    updateCardButtons();
+  }
+
+  function addFavourite(pubId){
+    if(!isFavourite(pubId)){
+      savedPubs.push(pubId);
+      savePubs();
+      renderFavourites();
+    }
+  }
+
+  function removeFavourite(pubId){
+    savedPubs = savedPubs.filter(function(item){
+      return item !== pubId;
+    });
+    savePubs();
+    renderFavourites();
+  }
+
+  pubCards.forEach(function(card){
+    var button = card.querySelector(".favourite-toggle");
+    var pubId = card.getAttribute("data-pub-id");
+
+    button.addEventListener("click", function(){
+      if(isFavourite(pubId)){
+        removeFavourite(pubId);
+      }else{
+        addFavourite(pubId);
+      }
+    });
+  });
+
+  readSavedPubs();
+  renderFavourites();
 })();
 </script>
 
