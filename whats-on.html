@@ -23,6 +23,7 @@
 }
 
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html{scroll-behavior:smooth}
 
 body{
@@ -138,6 +139,37 @@ button,a{touch-action:manipulation}
   color:var(--muted);
   line-height:1.5;
   margin:0 0 12px
+}
+
+.pub-filter{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px;
+  margin:16px 0 8px;
+  padding:13px 15px;
+  background:#fff;
+  border:1px solid #e2e8dc;
+  border-radius:12px
+}
+.pub-filter label{
+  color:var(--green);
+  font-weight:700;
+  font-size:.92rem
+}
+.pub-filter select{
+  flex:1;
+  min-width:190px;
+  max-width:100%;
+  padding:11px 38px 11px 12px;
+  border:1px solid #b9c5b2;
+  border-radius:9px;
+  background:#fff;
+  color:var(--ink);
+  font:inherit
+}
+.filter-empty{
+  margin-top:10px
 }
 
 .event-list{
@@ -386,10 +418,24 @@ footer a{color:#fff}
   <section class="month-section" aria-label="Events this month">
     <h2 class="month-heading" id="current-heading">November 2026 Events</h2>
     <p class="month-description">What's happening across Country Inns this month.</p>
+    <div class="pub-filter">
+      <label for="monthly-pub-filter">Show events at:</label>
+      <select id="monthly-pub-filter">
+        <option value="all">All Pubs</option>
+        <option value="lamb-inn">The Lamb Inn</option>
+        <option value="fighting-cocks">The Fighting Cocks</option>
+        <option value="bold-forester">The Bold Forester</option>
+        <option value="royal-oak">The Royal Oak</option>
+        <option value="new-forest-inn">The New Forest Inn</option>
+        <option value="trusty-servant">The Trusty Servant</option>
+        <option value="woolpack">The Woolpack</option>
+        <option value="rockingham-arms">The Rockingham Arms</option>
+      </select>
+    </div>
     <div class="event-list" id="current-events"></div>
-    <div class="empty-note" id="current-empty" hidden>
-      <strong>Nothing confirmed just yet.</strong>
-      Keep checking back for upcoming events across our pubs.
+    <div class="empty-note filter-empty" id="current-empty" hidden>
+      <strong id="current-empty-title">Nothing confirmed just yet.</strong>
+      <span id="current-empty-message">Keep checking back for upcoming events across our pubs.</span>
     </div>
   </section>
 
@@ -398,10 +444,25 @@ footer a{color:#fff}
     <h2 class="month-heading">Regular Weekly Events</h2>
     <p class="month-description">Activities and get-togethers happening regularly at our pubs. Come along and join in!</p>
 
+    <div class="pub-filter">
+      <label for="weekly-pub-filter">Show weekly events at:</label>
+      <select id="weekly-pub-filter">
+        <option value="all">All Pubs</option>
+        <option value="lamb-inn">The Lamb Inn</option>
+        <option value="fighting-cocks">The Fighting Cocks</option>
+        <option value="bold-forester">The Bold Forester</option>
+        <option value="royal-oak">The Royal Oak</option>
+        <option value="new-forest-inn">The New Forest Inn</option>
+        <option value="trusty-servant">The Trusty Servant</option>
+        <option value="woolpack">The Woolpack</option>
+        <option value="rockingham-arms">The Rockingham Arms</option>
+      </select>
+    </div>
+
     <div class="event-list" id="weekly-events">
 
       <!-- THE TRUSTY SERVANT - STEP 'N STOMP LINE DANCING -->
-      <article class="event-card">
+      <article class="event-card" data-pub="trusty-servant">
         <img src="Events/Trusty step n stomp.jpeg"
              alt="Step 'n Stomp beginner line dancing at The Trusty Servant"
              loading="lazy">
@@ -420,10 +481,12 @@ footer a{color:#fff}
             Call to Book · 02380 812137
           </a>
         </div>
-      </div>
-        </div>
       </article>
 
+    </div>
+    <div class="empty-note filter-empty" id="weekly-empty" hidden>
+      <strong>No regular weekly events found for this pub.</strong>
+      Try selecting All Pubs or another pub.
     </div>
   </section>
 
@@ -433,8 +496,8 @@ footer a{color:#fff}
     <p id="next-description">Here's a little preview of what's coming up next month.</p>
     <div class="event-list" id="next-events"></div>
     <div class="empty-note" id="next-empty" hidden>
-      <strong>No events announced just yet.</strong>
-      Check back soon for more news and events.
+      <strong id="next-empty-title">No events announced just yet.</strong>
+      <span id="next-empty-message">Check back soon for more news and events.</span>
     </div>
   </section>
 
@@ -476,7 +539,7 @@ footer a{color:#fff}
     <!-- NOVEMBER 2026 -->
 
     <!-- THE NEW FOREST INN - QUIZ NIGHT -->
-    <article class="event-card" data-date="2026-11-20">
+    <article class="event-card" data-date="2026-11-20" data-pub="new-forest-inn">
       <img src="Events/NFI-November-Quiz-Night-2026.png"
            alt="Quiz Night at The New Forest Inn, raising money for Emery Down Almshouses"
            loading="lazy">
@@ -508,7 +571,7 @@ footer a{color:#fff}
     <!-- DECEMBER 2026 -->
 
     <!-- CHRISTMAS AT COUNTRY INNS -->
-    <article class="event-card" data-date="2026-12-01">
+    <article class="event-card" data-date="2026-12-01" data-pub="all">
       <img src="Christmas-2026.png"
            alt="Christmas at Country Inns"
            loading="lazy">
@@ -527,7 +590,7 @@ footer a{color:#fff}
     </article>
 
     <!-- THE NEW FOREST INN - CHRISTMAS WREATH MAKING WORKSHOP -->
-    <article class="event-card" data-date="2026-12-03">
+    <article class="event-card" data-date="2026-12-03" data-pub="new-forest-inn">
       <img src="Events/NFI-Wreath-Making-Workshop-Poster-3rd-December-.png"
            alt="Christmas Wreath Making Workshop at The New Forest Inn"
            loading="lazy">
@@ -552,7 +615,7 @@ footer a{color:#fff}
     <!--
     COPY THIS TEMPLATE FOR EACH NEW ONE-OFF EVENT:
 
-    <article class="event-card" data-date="2026-12-15">
+    <article class="event-card" data-date="2026-12-15" data-pub="new-forest-inn">
       <img src="Events/YOUR-IMAGE.jpg"
            alt="Short image description"
            loading="lazy">
@@ -672,13 +735,70 @@ footer a{color:#fff}
 
   });
 
-  currentEmpty.hidden = currentCount > 0;
-  nextEmpty.hidden = nextCount > 0;
-  nextSection.hidden = false;
+  var monthlyFilter = document.getElementById("monthly-pub-filter");
+  var weeklyFilter = document.getElementById("weekly-pub-filter");
+  var weeklyEvents = document.getElementById("weekly-events");
+  var weeklyEmpty = document.getElementById("weekly-empty");
 
-  if(nextCount === 0){
-    nextSection.querySelector(".event-list").hidden = true;
+  function filterEventCards(container, selectedPub){
+    var cards = container.querySelectorAll(".event-card");
+    var visibleCount = 0;
+
+    Array.prototype.forEach.call(cards, function(card){
+      var cardPub = card.getAttribute("data-pub") || "all";
+      var showCard = selectedPub === "all" || cardPub === "all" || cardPub === selectedPub;
+
+      card.hidden = !showCard;
+
+      if(showCard){
+        visibleCount++;
+      }
+    });
+
+    return visibleCount;
   }
+
+  function updateMonthlyEvents(){
+    var selectedPub = monthlyFilter.value;
+    var visibleCurrent = filterEventCards(currentEvents, selectedPub);
+    var visibleNext = filterEventCards(nextEvents, selectedPub);
+
+    currentEmpty.hidden = visibleCurrent > 0;
+    if(visibleCurrent === 0){
+      if(currentCount === 0){
+        document.getElementById("current-empty-title").textContent = "Nothing confirmed just yet.";
+        document.getElementById("current-empty-message").textContent = "Keep checking back for upcoming events across our pubs.";
+      } else {
+        document.getElementById("current-empty-title").textContent = "No events found for this pub.";
+        document.getElementById("current-empty-message").textContent = "Try selecting All Pubs or another pub.";
+      }
+    }
+
+    if(nextCount === 0){
+      nextEvents.hidden = true;
+      nextEmpty.hidden = false;
+      document.getElementById("next-empty-title").textContent = "No events announced just yet.";
+      document.getElementById("next-empty-message").textContent = "Check back soon for more news and events.";
+    } else {
+      nextEvents.hidden = visibleNext === 0;
+      nextEmpty.hidden = visibleNext > 0;
+      if(visibleNext === 0){
+        document.getElementById("next-empty-title").textContent = "No upcoming events found for this pub.";
+        document.getElementById("next-empty-message").textContent = "Try selecting All Pubs or another pub.";
+      }
+    }
+  }
+
+  function updateWeeklyEvents(){
+    var visibleWeekly = filterEventCards(weeklyEvents, weeklyFilter.value);
+    weeklyEmpty.hidden = visibleWeekly > 0;
+  }
+
+  monthlyFilter.addEventListener("change", updateMonthlyEvents);
+  weeklyFilter.addEventListener("change", updateWeeklyEvents);
+
+  updateMonthlyEvents();
+  updateWeeklyEvents();
 
 })();
 </script>
