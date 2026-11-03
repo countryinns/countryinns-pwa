@@ -1465,112 +1465,69 @@
   ========================= -->
 
   <script>
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      () => {
-
-        /*
-         * Show the page
-         */
-
+    (function () {
+      function showPage() {
         document.body.classList.add("loaded");
+        document.body.style.opacity = "1";
 
+        var splash = document.getElementById("app-splash");
+        if (splash) {
+          splash.classList.add("hidden");
+        }
+      }
 
-        /*
-         * Update footer year
-         */
+      function hideSplashAfterInitialLoad() {
+        var splash = document.getElementById("app-splash");
 
-        const year =
-          document.getElementById(
-            "current-year"
-          );
+        if (splash) {
+          window.setTimeout(function () {
+            splash.classList.add("hidden");
+          }, 700);
+        }
+      }
 
+      document.addEventListener("DOMContentLoaded", function () {
+        showPage();
+
+        var year = document.getElementById("current-year");
         if (year) {
-
-          year.textContent =
-            new Date().getFullYear();
-
+          year.textContent = new Date().getFullYear();
         }
 
+        hideSplashAfterInitialLoad();
+      });
 
-        /*
-         * Hide splash screen
-         */
+      /*
+       * Mobile browsers may restore this page from the
+       * back-forward cache when the customer presses Back.
+       * Make the page visible again whenever that happens.
+       */
+      window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+          showPage();
+        }
+      });
 
-        setTimeout(() => {
+      /*
+       * If a page error occurs, do not leave the customer
+       * looking at an invisible page.
+       */
+      window.addEventListener("error", function () {
+        showPage();
+      });
 
-          const splash =
-            document.getElementById(
-              "app-splash"
-            );
-
-          if (splash) {
-
-            splash.classList.add(
-              "hidden"
-            );
-
-          }
-
-        }, 700);
-
-
-        /*
-         * Small app-style transition
-         * when opening a pub
-         */
-
-        document
-          .querySelectorAll(".pub-tile")
-          .forEach(tile => {
-
-            tile.addEventListener(
-              "click",
-              () => {
-
-                document.body.style.opacity =
-                  "0";
-
-              }
-            );
-
-          });
-
+      /*
+       * Register the Country Inns service worker.
+       * The page remains usable if registration is unavailable.
+       */
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register(
+          "/countryinns-pwa/service-worker.js"
+        ).catch(function (error) {
+          console.log("Service worker registration was not completed:", error);
+        });
       }
-
-    );
-
-
-    /*
-     * Make sure the page is still
-     * visible if an error occurs.
-     */
-
-    window.addEventListener(
-      "error",
-      () => {
-
-        document.body.classList.add(
-          "loaded"
-        );
-
-      }
-    );
-
-
-    /*
-     * Register Country Inns service worker
-     */
-
-    if ("serviceWorker" in navigator) {
-
-      navigator.serviceWorker.register(
-        "/countryinns-pwa/service-worker.js"
-      );
-
-    }
-
+    }());
   </script>
 
 
