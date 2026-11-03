@@ -3,100 +3,483 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0f2f1f">
 
-  <title>Voucher Terms & Conditions | Country Inns</title>
+  <title>Country Inns Vouchers | Terms & Enquiries</title>
 
   <style>
-    :root { --bg:#0f2f1f }
-
-    html, body {
-      height:100%;
-      margin:0;
+    :root {
+      --bg: #0f2f1f;
+      --panel: #173d2a;
+      --panel-light: #204b34;
+      --accent: #d5b875;
+      --text: #fff;
+      --muted: #d6e1d9;
+      --border: rgba(255,255,255,.16);
     }
+
+    * { box-sizing: border-box; }
+
+    html { min-height: 100%; }
 
     body {
-      background: radial-gradient(
-        circle at 10% 10%,
-        rgba(255,255,255,0.02),
-        transparent 8%
-      ), var(--bg);
-
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      /* ❌ removed justify-content:center */
-      padding:24px;
-
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
-      color:#fff;
-
-      overflow-y:auto; /* ✅ allow scrolling */
+      min-height: 100vh;
+      margin: 0;
+      padding: 28px 16px 36px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.055), transparent 28rem),
+        linear-gradient(145deg, #0b2619, var(--bg) 55%, #102b1d);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.55;
     }
 
-    .card {
-      width:100%;
-      max-width:900px;
-      aspect-ratio:2/3;
-      margin-top:12px;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-
-      box-shadow:0 8px 30px rgba(0,0,0,0.45);
-      border-radius:8px;
-      overflow:hidden;
+    .page {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .card img {
-      width:100%;
-      height:100%;
-      object-fit:contain; /* ✅ full poster always visible */
-      display:block;
-      user-select:none;
+    .intro {
+      text-align: center;
+      margin: 0 auto 22px;
+      max-width: 720px;
     }
 
-    @media (max-width:420px) {
-      .card {
-        max-width:420px;
-        aspect-ratio:3/4;
-      }
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .15em;
+      text-transform: uppercase;
     }
 
-    .buttons {
-      margin:24px 0 12px;
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 5vw, 2.55rem);
+      line-height: 1.15;
+      letter-spacing: -.025em;
     }
 
-    .buttons a {
-      text-decoration:none;
-      color:#fff;
-      background:#2c5f3e;
-      padding:10px 18px;
-      border-radius:6px;
-      transition:background 0.3s;
-      display:inline-block;
+    .intro p:last-child {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
     }
 
-    .buttons a:hover {
-      background:#3d7f55;
+    .poster {
+      width: 100%;
+      margin: 0 auto 26px;
+      padding: 10px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 12px 34px rgba(0,0,0,.34);
+      text-align: center;
+    }
+
+    .poster img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 78vh;
+      object-fit: contain;
+      border-radius: 5px;
+      user-select: none;
+    }
+
+    .poster-fallback {
+      display: none;
+      padding: 28px 14px;
+      color: var(--muted);
+    }
+
+    .panel {
+      margin: 0 auto 22px;
+      padding: clamp(20px, 4vw, 30px);
+      background: linear-gradient(145deg, rgba(32,75,52,.96), rgba(23,61,42,.96));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.2);
+    }
+
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.25rem, 3.5vw, 1.65rem);
+      line-height: 1.25;
+    }
+
+    .panel-intro {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .notice {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin: 0 0 22px;
+      padding: 14px 16px;
+      background: rgba(213,184,117,.11);
+      border: 1px solid rgba(213,184,117,.35);
+      border-radius: 10px;
+    }
+
+    .notice-icon {
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .notice p {
+      margin: 0;
+      color: #fff8e8;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 7px;
+      font-weight: 700;
+    }
+
+    select, input, textarea {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 13px;
+      color: #17251c;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.2);
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      outline: 3px solid rgba(213,184,117,.55);
+      outline-offset: 2px;
+    }
+
+    .field { margin-bottom: 18px; }
+
+    .pub-contact {
+      display: none;
+      margin: 20px 0 22px;
+      padding: 17px;
+      background: rgba(7,29,18,.36);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .pub-contact.visible { display: block; }
+
+    .pub-contact h3 {
+      margin: 0 0 3px;
+      font-size: 1.15rem;
+    }
+
+    .pub-location {
+      margin: 0 0 13px;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 45px;
+      padding: 10px 17px;
+      color: #fff;
+      background: #2c6844;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 8px;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .button:hover { background: #397e54; }
+    .button:active { transform: translateY(1px); }
+
+    .button.primary {
+      color: #17251c;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .button.primary:hover { background: #e4ca8b; }
+
+    .button.secondary { background: transparent; }
+    .button.secondary:hover { background: rgba(255,255,255,.1); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 16px;
+    }
+
+    .form-grid .full { grid-column: 1 / -1; }
+
+    textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    .small-print {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .form-message {
+      display: none;
+      margin: 12px 0 0;
+      color: #ffe5a6;
+      font-size: .92rem;
+    }
+
+    .back {
+      margin: 26px 0 0;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 22px;
+      color: rgba(255,255,255,.62);
+      text-align: center;
+      font-size: .8rem;
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 20px 12px 28px; }
+      .poster { padding: 6px; margin-bottom: 18px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid .full { grid-column: auto; }
+      .contact-actions { flex-direction: column; }
+      .contact-actions .button { width: 100%; }
     }
   </style>
 </head>
 
 <body>
+  <main class="page">
+    <header class="intro">
+      <p class="eyebrow">Country Inns</p>
+      <h1>Give the gift of a great pub experience</h1>
+      <p>Find out about our gift vouchers and contact the Country Inns pub where you would like to purchase yours.</p>
+    </header>
 
-  <!-- Voucher T&Cs Poster -->
-  <div class="card">
-    <img
-      src="Voucher T&Cs.png"
-      alt="Voucher Terms and Conditions valid across all Country Inns pubs"
-    >
-  </div>
+    <section class="poster" aria-label="Voucher terms and conditions">
+      <img
+        src="Voucher T&amp;Cs.png"
+        alt="Country Inns voucher terms and conditions"
+        onerror="this.style.display='none'; document.getElementById('posterFallback').style.display='block';"
+      >
+      <p class="poster-fallback" id="posterFallback">
+        The voucher terms and conditions poster could not be displayed. Please contact your chosen pub if you need a copy.
+      </p>
+    </section>
 
-  <!-- Back Button -->
-  <div class="buttons">
-    <a href="home.html">⬅ Back to Home</a>
-  </div>
+    <section class="panel" aria-labelledby="purchase-heading">
+      <h2 id="purchase-heading">Where would you like to buy your voucher?</h2>
+      <p class="panel-intro">All eight Country Inns pubs stock our vouchers, and they can be purchased in person at the pub.</p>
 
+      <div class="notice">
+        <span class="notice-icon" aria-hidden="true">ℹ</span>
+        <p><strong>Please note:</strong> Vouchers are available to buy in-house only. They cannot currently be purchased or paid for online. Choose the pub you plan to visit below to contact its team directly.</p>
+      </div>
+
+      <div class="field">
+        <label for="pubSelect">Choose your Country Inns pub</label>
+        <select id="pubSelect" required>
+          <option value="">Select a pub…</option>
+          <option value="lamb">The Lamb Inn – Nomansland</option>
+          <option value="fighting">The Fighting Cocks – Godshill</option>
+          <option value="bold">The Bold Forester – Marchwood</option>
+          <option value="royal">The Royal Oak – Beaulieu Hilltop</option>
+          <option value="newforest">The New Forest Inn – Emery Down</option>
+          <option value="trusty">The Trusty Servant – Minstead</option>
+          <option value="woolpack">The Woolpack – Sopley</option>
+          <option value="rockingham">The Rockingham Arms – West Wellow</option>
+        </select>
+      </div>
+
+      <div class="pub-contact" id="pubContact" aria-live="polite">
+        <h3 id="pubName"></h3>
+        <p class="pub-location" id="pubLocation"></p>
+        <div class="contact-actions">
+          <a class="button" id="callPub" href="#">☎ Call the pub</a>
+          <a class="button secondary" id="emailPub" href="#">✉ Email the pub</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="enquiry-heading">
+      <h2 id="enquiry-heading">Send a voucher enquiry</h2>
+      <p class="panel-intro">Want to check something before visiting? Complete the short form and your email app will open with your enquiry addressed to the pub you selected.</p>
+
+      <form id="enquiryForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="customerName">Your name</label>
+            <input id="customerName" name="customerName" type="text" autocomplete="name" required>
+          </div>
+
+          <div class="field">
+            <label for="customerEmail">Your email address</label>
+            <input id="customerEmail" name="customerEmail" type="email" autocomplete="email" required>
+          </div>
+
+          <div class="field full">
+            <label for="customerPhone">Your phone number (optional)</label>
+            <input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel">
+          </div>
+
+          <div class="field full">
+            <label for="customerMessage">Your enquiry</label>
+            <textarea id="customerMessage" name="customerMessage" placeholder="For example, I would like to ask about the available voucher values…" required></textarea>
+          </div>
+        </div>
+
+        <button class="button primary" type="submit">Send voucher enquiry ✉</button>
+        <p class="small-print">This button opens your device's default email app; it does not make a payment or purchase a voucher. Your enquiry is not sent until you press Send in your email app.</p>
+        <p class="form-message" id="formMessage" role="status">Please choose a pub above before sending your enquiry.</p>
+      </form>
+    </section>
+
+    <div class="back">
+      <a class="button secondary" href="home.html">← Back to Home</a>
+    </div>
+
+    <footer>Country Inns · Eight pubs across Hampshire and the New Forest</footer>
+  </main>
+
+  <script>
+    (function () {
+      var pubs = {
+        lamb: {
+          name: "The Lamb Inn",
+          location: "Nomansland",
+          phone: "01794 331331",
+          email: "info@thelambnomansland.co.uk"
+        },
+        fighting: {
+          name: "The Fighting Cocks",
+          location: "Godshill",
+          phone: "01425 655686",
+          email: "info@thefightingcockspub.co.uk"
+        },
+        bold: {
+          name: "The Bold Forester",
+          location: "Marchwood",
+          phone: "023 8017 5588",
+          email: "info@theboldforesternewforest.co.uk"
+        },
+        royal: {
+          name: "The Royal Oak",
+          location: "Beaulieu Hilltop",
+          phone: "01590 612228",
+          email: "info@theroyaloakbeaulieu.com"
+        },
+        newforest: {
+          name: "The New Forest Inn",
+          location: "Emery Down",
+          phone: "023 8028 4690",
+          email: "info@thenewforestinn.co.uk"
+        },
+        trusty: {
+          name: "The Trusty Servant",
+          location: "Minstead",
+          phone: "023 8081 2137",
+          email: "info@thetrustyservant.co.uk"
+        },
+        woolpack: {
+          name: "The Woolpack",
+          location: "Sopley",
+          phone: "01425 672252",
+          email: "info@thewoolpacksopley.co.uk"
+        },
+        rockingham: {
+          name: "The Rockingham Arms",
+          location: "West Wellow",
+          phone: "01794 324798",
+          email: "info@rockinghamarms.co.uk"
+        }
+      };
+
+      var pubSelect = document.getElementById("pubSelect");
+      var pubContact = document.getElementById("pubContact");
+      var pubName = document.getElementById("pubName");
+      var pubLocation = document.getElementById("pubLocation");
+      var callPub = document.getElementById("callPub");
+      var emailPub = document.getElementById("emailPub");
+      var enquiryForm = document.getElementById("enquiryForm");
+      var formMessage = document.getElementById("formMessage");
+
+      function selectedPub() {
+        return pubs[pubSelect.value] || null;
+      }
+
+      function updatePub() {
+        var pub = selectedPub();
+
+        if (!pub) {
+          pubContact.classList.remove("visible");
+          return;
+        }
+
+        pubName.textContent = pub.name;
+        pubLocation.textContent = pub.location;
+        callPub.href = "tel:" + pub.phone.replace(/[^0-9+]/g, "");
+        callPub.textContent = "☎ Call " + pub.phone;
+        emailPub.href = "mailto:" + pub.email;
+        emailPub.textContent = "✉ Email " + pub.name;
+        pubContact.classList.add("visible");
+        formMessage.style.display = "none";
+      }
+
+      pubSelect.addEventListener("change", updatePub);
+
+      enquiryForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var pub = selectedPub();
+        if (!pub) {
+          formMessage.style.display = "block";
+          pubSelect.focus();
+          return;
+        }
+
+        var name = document.getElementById("customerName").value.trim();
+        var email = document.getElementById("customerEmail").value.trim();
+        var phone = document.getElementById("customerPhone").value.trim();
+        var message = document.getElementById("customerMessage").value.trim();
+
+        var subject = "Country Inns voucher enquiry - " + pub.name;
+        var body =
+          "Hello " + pub.name + " team,\n\n" +
+          "I have a question about purchasing a Country Inns voucher in person.\n\n" +
+          "Name: " + name + "\n" +
+          "Email: " + email + "\n" +
+          "Phone: " + (phone || "Not provided") + "\n\n" +
+          "Enquiry:\n" + message + "\n\n" +
+          "Thank you.";
+
+        window.location.href = "mailto:" + pub.email +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(body);
+      });
+    }());
+  </script>
 </body>
 </html>
