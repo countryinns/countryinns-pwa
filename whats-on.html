@@ -185,7 +185,20 @@ button,a{touch-action:manipulation}
   overflow:hidden;
   box-shadow:var(--shadow);
   display:flex;
-  flex-direction:column
+  flex-direction:column;
+  transition:transform .2s,box-shadow .2s
+}
+
+/* Match the gentle lift used by the cards on home.html */
+.event-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(25,40,20,.14)
+}
+
+@media (prefers-reduced-motion:reduce){
+  .event-card{
+    transition:none
+  }
 }
 
 .event-card img{
@@ -599,7 +612,7 @@ footer a{color:#fff}
 
     <!-- THE BOLD FORESTER - CURRY WEEK -->
     <article class="event-card" data-date="2026-11-16" data-pub="bold-forester">
-      <img class="poster-image" src="Events/Bold-Nov-2026-Curry-Week.png"
+      <img class="poster-image" src="Events/Bold-Forester-Curry-Week-November-2026.png"
            alt="Curry Week at The Bold Forester"
            loading="lazy">
 
@@ -611,24 +624,12 @@ footer a{color:#fff}
         <p class="event-pub">The Bold Forester · Marchwood</p>
 
         <p>Join us for Curry Week at The Bold Forester! Keep an eye on our social media for the menu and more details.</p>
-        <div class="event-actions">
-      <a class="btn"
-         href="theboldforesternewforest.co.uk/food/#_restaurant_form"
-         target="_blank"
-         rel="noopener">
-        Book Online
-      </a>
-
-      <a class="btn btn-secondary" href="tel:02380175588">
-        Call to Book · 02380 175588
-      </a>
-    </div>
-  </div>
+      </div>
     </article>
 
     <!-- THE ROYAL OAK - QUIZ NIGHT -->
     <article class="event-card" data-date="2026-11-19" data-pub="royal-oak">
-      <img class="poster-image" src="Events/ROB-Nov-Quiz-Night.png"
+      <img class="poster-image" src="Events/Royal-Oak-Quiz-Night-November-2026.png"
            alt="Quiz Night at The Royal Oak, Beaulieu"
            loading="lazy">
 
@@ -642,14 +643,11 @@ footer a{color:#fff}
         <p>Put your knowledge to the test at The Royal Oak's Quiz Night. Entry is £2 per person, with cash prizes for 1st, 2nd and 3rd place. Booking is advised.</p>
 
         <div class="event-actions">
-          <a class="btn"
-         href="https://www.theroyaloakbeaulieu.co.uk/food/#_restaurant_form"
-         target="_blank"
-         rel="noopener">
-        Book Online
-      </a>
           <a class="btn btn-secondary" href="tel:01590612228">
             Call to Book · 01590 612228
+          </a>
+          <a class="btn btn-secondary" href="mailto:info@theroyaloakbeaulieu.co.uk">
+            Email The Royal Oak
           </a>
         </div>
       </div>
@@ -657,7 +655,7 @@ footer a{color:#fff}
 
     <!-- THE TRUSTY SERVANT - CHRISTMAS WREATH MAKING CLASS -->
     <article class="event-card" data-date="2026-11-19" data-pub="trusty-servant">
-      <img class="poster-image" src="Events/Trusty-Xmas-wreath-class.png"
+      <img class="poster-image" src="Events/Trusty-Servant-Christmas-Wreath-Making-November-2026.png"
            alt="Christmas Wreath Making Class at The Trusty Servant"
            loading="lazy">
 
@@ -680,7 +678,7 @@ footer a{color:#fff}
 
     <!-- THE WOOLPACK - QUIZ NIGHT -->
     <article class="event-card" data-date="2026-11-24" data-pub="woolpack">
-      <img class="poster-image" src="Events/Woolpack-Nov-Quiz-Night.png"
+      <img class="poster-image" src="Events/Woolpack-Quiz-Night-November-2026.png"
            alt="Quiz Night at The Woolpack"
            loading="lazy">
 
@@ -692,18 +690,6 @@ footer a{color:#fff}
         <p class="event-pub">The Woolpack · Sopley</p>
 
         <p>Join us for Quiz Night at The Woolpack. Starts at 7pm and entry is £2 per person.</p>
-              <div class="event-actions">
-          <a class="btn"
-             href="https://www.thewoolpacksopley.co.uk/food/#_restaurant_form"
-             target="_blank"
-             rel="noopener">
-            Book Online
-          </a>
-
-          <a class="btn btn-secondary" href="tel:01425672252">
-            Call to Book · 01425 672252
-          </a>
-        </div>
       </div>
     </article>
 
@@ -711,7 +697,7 @@ footer a{color:#fff}
 
     <!-- THE WOOLPACK - CLAY CHRISTMAS TREES WORKSHOP -->
     <article class="event-card" data-date="2026-12-01" data-pub="woolpack">
-      <img class="poster-image" src="Events/Woolpack-Dec-Clay-Xmas-Trees.png"
+      <img class="poster-image" src="Events/Woolpack-Clay-Christmas-Trees-December-2026.png"
            alt="Clay Christmas Trees workshop at The Woolpack"
            loading="lazy">
 
