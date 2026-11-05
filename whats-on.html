@@ -185,20 +185,7 @@ button,a{touch-action:manipulation}
   overflow:hidden;
   box-shadow:var(--shadow);
   display:flex;
-  flex-direction:column;
-  transition:transform .2s,box-shadow .2s
-}
-
-/* Match the gentle lift used by the cards on home.html */
-.event-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 28px rgba(25,40,20,.14)
-}
-
-@media (prefers-reduced-motion:reduce){
-  .event-card{
-    transition:none
-  }
+  flex-direction:column
 }
 
 .event-card img{
