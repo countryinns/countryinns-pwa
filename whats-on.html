@@ -185,7 +185,26 @@ button,a{touch-action:manipulation}
   overflow:hidden;
   box-shadow:var(--shadow);
   display:flex;
-  flex-direction:column
+  flex-direction:column;
+  transition:transform .2s ease,box-shadow .2s ease
+}
+
+/* Gentle lift and shadow when hovering over event cards */
+@media (hover:hover) and (pointer:fine){
+  .event-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(25,40,20,.16)
+  }
+}
+
+/* Respect visitors who prefer reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .event-card{
+    transition:none
+  }
+  .event-card:hover{
+    transform:none
+  }
 }
 
 .event-card img{
