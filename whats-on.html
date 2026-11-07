@@ -214,6 +214,14 @@ button,a{touch-action:manipulation}
   background:#e7e9e3
 }
 
+/* Keep the Lamb Inn's full portrait curry menu visible */
+.event-card img.weekly-poster{
+  height:auto;
+  max-height:560px;
+  object-fit:contain;
+  background:#f7f0d8
+}
+
 .event-body{
   padding:18px;
   display:flex;
@@ -406,6 +414,7 @@ footer a{color:#fff}
 @media(max-width:650px){
   .event-list{grid-template-columns:1fr}
   .event-card img{height:205px}
+  .event-card img.weekly-poster{height:auto;max-height:560px}
   .hero{padding:40px 18px}
   .weekly-section{padding:17px}
 }
@@ -499,6 +508,39 @@ footer a{color:#fff}
           <a class="btn btn-secondary" href="tel:02380812137">
             Call to Book · 02380 812137
           </a>
+        </div>
+      </article>
+
+      <!-- THE LAMB INN - WEEKLY CURRY NIGHT -->
+      <article class="event-card" data-pub="lamb-inn">
+        <img class="weekly-poster"
+             src="Events/Lamb-Curry-Night-Thursdays.png"
+             alt="Curry Night Thursdays menu at The Lamb Inn, Nomansland"
+             loading="lazy">
+
+        <div class="event-body">
+          <span class="weekly-label">Every Thursday</span>
+
+          <h3>Curry Night Thursdays</h3>
+
+          <p class="event-pub">The Lamb Inn · Nomansland</p>
+
+          <p>Join us every Thursday for Curry Night. Choose from Korma, Madras, Tikka Masala or our Chickpea and Spinach Curry (VE). All main curries are served with basmati rice, mango chutney and popadom.</p>
+
+          <p><strong>Main curries from £17.99.</strong> Choose chicken at no extra cost, beef for £2.50 extra or prawns for £4 extra. Naan bread, onion bhaji and saag aloo are also available as extras.</p>
+
+          <div class="event-actions">
+            <a class="btn"
+               href="https://www.thelambnomansland.co.uk/food/#restaurant_form"
+               target="_blank"
+               rel="noopener">
+              Book Online
+            </a>
+
+            <a class="btn btn-secondary" href="tel:01794331331">
+              Call to Book · 01794 331331
+            </a>
+          </div>
         </div>
       </article>
 
