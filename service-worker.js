@@ -13,6 +13,7 @@ const STATIC_ASSETS = [
   `${APP_SCOPE}offline.html`,
   `${APP_SCOPE}manifest.webmanifest`,
   `${APP_SCOPE}favicon.ico`,
+  `${APP_SCOPE}stay-with-us.html,
 
   // Pub pages
   `${APP_SCOPE}boldforester.html`,
