@@ -1,4 +1,3 @@
-
 const CACHE_VERSION = 'v10';
 const CACHE_NAME = `countryinns-cache-${CACHE_VERSION}`;
 const CACHE_PREFIX = 'countryinns-cache-';
