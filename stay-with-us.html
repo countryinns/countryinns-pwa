@@ -613,8 +613,9 @@ section{
 }
 
 .seasonal-offers{
-  margin-top:34px;
-  padding:26px;
+  margin:38px auto 0;
+  max-width:1100px;
+  padding:30px;
   background:#fff;
   border:1px solid rgba(176,138,69,.35);
   border-radius:16px;
@@ -639,12 +640,12 @@ section{
 
 .seasonal-offers-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px
 }
 
 .seasonal-offer-card{
-  padding:20px;
+  padding:22px;
   background:#f8f6ef;
   border:1px solid rgba(176,138,69,.3);
   border-radius:12px;
@@ -654,7 +655,7 @@ section{
 .seasonal-offer-card img{
   display:block;
   width:100%;
-  height:165px;
+  height:240px;
   object-fit:cover;
   border-radius:9px;
   margin:0 0 16px
@@ -1037,6 +1038,10 @@ footer{
     grid-template-columns:1fr
   }
 
+  .seasonal-offer-card img{
+    height:220px
+  }
+
   .seasonal-offers{
     padding:20px 15px
   }
@@ -1235,6 +1240,8 @@ footer{
 
       </div>
 
+    </div><!-- end rooms-grid -->
+
       <div class="seasonal-offers">
         <div class="seasonal-offers-heading">
           <h3>Fancy Staying a Little Longer?</h3>
@@ -1293,8 +1300,6 @@ footer{
           Excludes all school holiday and bank holiday dates.
         </p>
       </div>
-
-    </div>
 
   </div>
 
