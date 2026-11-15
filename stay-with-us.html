@@ -577,6 +577,115 @@ section{
 
 
 /* =========================
+   ACCOMMODATION OFFERS
+========================= */
+
+.direct-offer{
+  margin:0 0 18px;
+  padding:16px 20px;
+  background:#fff;
+  border:1px solid rgba(45,80,22,.16);
+  border-left:5px solid var(--green);
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 4px 14px rgba(25,40,20,.06)
+}
+
+.direct-offer strong{
+  display:block;
+  color:var(--green);
+  font-size:1.15rem;
+  margin-bottom:5px
+}
+
+.direct-offer p{
+  margin:0;
+  color:#555;
+  line-height:1.5
+}
+
+.room-direct-note{
+  margin:0 0 15px!important;
+  padding:9px 10px;
+  background:#eef3ea;
+  border-radius:9px;
+  color:var(--green)!important;
+  font-size:.88rem!important;
+  font-weight:700
+}
+
+.seasonal-offers{
+  margin-top:34px;
+  padding:26px;
+  background:#fff;
+  border:1px solid rgba(176,138,69,.35);
+  border-radius:16px;
+  box-shadow:var(--shadow)
+}
+
+.seasonal-offers-heading{
+  text-align:center;
+  margin-bottom:20px
+}
+
+.seasonal-offers-heading h3{
+  margin:0 0 8px;
+  font-size:1.55rem
+}
+
+.seasonal-offers-heading p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.5
+}
+
+.seasonal-offers-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px
+}
+
+.seasonal-offer-card{
+  padding:20px;
+  background:#f8f6ef;
+  border:1px solid rgba(176,138,69,.3);
+  border-radius:12px;
+  text-align:center
+}
+
+.seasonal-offer-card h4{
+  margin:0 0 9px;
+  font-size:1.1rem
+}
+
+.seasonal-offer-card strong{
+  display:block;
+  color:var(--green);
+  font-size:1.35rem;
+  margin-bottom:8px
+}
+
+.seasonal-offer-card p{
+  margin:0 0 14px;
+  color:#555;
+  line-height:1.5;
+  font-size:.92rem
+}
+
+.seasonal-offer-card .rooms-btn{
+  display:inline-block
+}
+
+.seasonal-terms{
+  margin:17px 0 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.45
+}
+
+
+/* =========================
    JOURNAL
 ========================= */
 
@@ -917,6 +1026,14 @@ footer{
     grid-template-columns:1fr
   }
 
+  .seasonal-offers-grid{
+    grid-template-columns:1fr
+  }
+
+  .seasonal-offers{
+    padding:20px 15px
+  }
+
   .utility-row{
     grid-template-columns:1fr
   }
@@ -989,12 +1106,17 @@ footer{
         Make your New Forest visit even more special
         with comfortable accommodation, great food and
         a warm country pub welcome.
-       <p>
-       <p>
-        <strong>
-          Book direct and enjoy 10% off your stay.
-        </strong>
       </p>
+
+      <div class="direct-offer">
+        <strong>Book Direct &amp; Save 10%</strong>
+        <p>
+          Enjoy 10% off your stay when you book directly through
+          the individual pub's website. Whether you're planning
+          a one-night getaway or a longer break, you can still
+          enjoy this saving without booking a three-night stay.
+        </p>
+      </div>
 
     </div>
 
@@ -1022,6 +1144,8 @@ footer{
             Stay in the heart of the New Forest,
             with great food, drinks and comfortable accommodation.
           </p>
+
+          <p class="room-direct-note">Book direct and enjoy 10% off your stay.</p>
 
           <a
             href="https://web-bookings.hotels.uk.com/#/booking/46267/items/availability?k=Pz3vpXoBrwIroy0WsnQ3AMu2JNDYyNjc%3D&r=1788463933007?pub=NewForestInn#rooms"
@@ -1056,6 +1180,8 @@ footer{
             at this traditional country inn.
           </p>
 
+          <p class="room-direct-note">Book direct and enjoy 10% off your stay.</p>
+
           <a
             href="https://web-bookings.hotels.uk.com/#/booking/46270/items/availability?k=8NvS5v6pFtbqgO4xncljzOBc2NDYyNzA%3D&r=1788464084358&a=2&c=?pub=TrustyServant#rooms"
             class="rooms-btn"
@@ -1089,6 +1215,8 @@ footer{
             and enjoy a welcoming country pub.
           </p>
 
+          <p class="room-direct-note">Book direct and enjoy 10% off your stay.</p>
+
           <a
             href="https://web-bookings.hotels.uk.com/#/booking/51730/items/availability?k=XbkHpDevv1inahpI6xTpMVzFxNTE3MzA%3D&r=1788464130858&a=2&u=1?pub=FightingCocks#rooms"
             class="rooms-btn"
@@ -1100,6 +1228,54 @@ footer{
 
       </div>
 
+      <div class="seasonal-offers">
+        <div class="seasonal-offers-heading">
+          <h3>Fancy Staying a Little Longer?</h3>
+          <p>
+            There is an extra reason to enjoy a New Forest break at
+            selected Country Inns.
+          </p>
+        </div>
+
+        <div class="seasonal-offers-grid">
+
+          <div class="seasonal-offer-card">
+            <h4>The New Forest Inn</h4>
+            <strong>3 Nights for the Price of 2</strong>
+            <p>
+              Stay for three nights and pay for just two.
+              Enjoy an extra night in the New Forest, on us!
+            </p>
+            <a
+              href="https://web-bookings.hotels.uk.com/#/booking/46267/items/availability?k=Pz3vpXoBrwIroy0WsnQ3AMu2JNDYyNjc%3D&r=1788463933007?pub=NewForestInn#rooms"
+              class="rooms-btn"
+            >
+              🛏️ Book a Room
+            </a>
+          </div>
+
+          <div class="seasonal-offer-card">
+            <h4>The Trusty Servant Inn</h4>
+            <strong>3 Nights for the Price of 2</strong>
+            <p>
+              Stay for three nights and pay for just two.
+              Enjoy an extra night in the New Forest, on us!
+            </p>
+            <a
+              href="https://web-bookings.hotels.uk.com/#/booking/46270/items/availability?k=8NvS5v6pFtbqgO4xncljzOBc2NDYyNzA%3D&r=1788464084358&a=2&c=?pub=TrustyServant#rooms"
+              class="rooms-btn"
+            >
+              🛏️ Book a Room
+            </a>
+          </div>
+
+        </div>
+
+        <p class="seasonal-terms">
+          Available from 4 October until 28 March.
+          Excludes all school holiday and bank holiday dates.
+        </p>
+      </div>
 
     </div>
 
