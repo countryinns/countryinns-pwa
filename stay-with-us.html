@@ -59,10 +59,8 @@ body{
   font-family:Arial,sans-serif;
   background:#f4f5f2;
   color:var(--ink);
-body {
-    opacity: 1;
-    transition: opacity 0.4s ease;
-}
+  opacity:1;
+  transition:opacity .4s ease;
   padding-top:env(safe-area-inset-top);
   padding-bottom:calc(86px + env(safe-area-inset-bottom));
   -webkit-overflow-scrolling:touch
@@ -653,6 +651,15 @@ section{
   text-align:center
 }
 
+.seasonal-offer-card img{
+  display:block;
+  width:100%;
+  height:165px;
+  object-fit:cover;
+  border-radius:9px;
+  margin:0 0 16px
+}
+
 .seasonal-offer-card h4{
   margin:0 0 9px;
   font-size:1.1rem
@@ -1112,9 +1119,9 @@ footer{
         <strong>Book Direct &amp; Save 10%</strong>
         <p>
           Enjoy 10% off your stay when you book directly through
-          the individual pub's website. Whether you're planning
-          a one-night getaway or a longer break, you can still
-          enjoy this saving without booking a three-night stay.
+          the individual pub's website. This offer is available
+          whether you're staying for one night, two nights or longer.
+          You don't need to book a three-night stay to benefit.
         </p>
       </div>
 
@@ -1232,8 +1239,8 @@ footer{
         <div class="seasonal-offers-heading">
           <h3>Fancy Staying a Little Longer?</h3>
           <p>
-            There is an extra reason to enjoy a New Forest break at
-            selected Country Inns.
+            Looking for a longer break? The New Forest Inn and
+            The Trusty Servant are offering this separate seasonal deal.
           </p>
         </div>
 
